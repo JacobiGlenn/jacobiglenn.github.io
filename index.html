@@ -5,32 +5,312 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jacobi Glenn</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-      width: 100%;
-      background: white;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ========== SCREENS ========== */
+    .screen {
+      position: fixed;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      background: #000;
+      transition: opacity 0.6s ease;
+      z-index: 1;
+    }
+    .screen.hidden { opacity: 0; pointer-events: none; z-index: 0; }
+
+    /* ========== BINARY FLIP SCREEN ========== */
+    #binary-screen {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(1.2rem, 1fr));
+      grid-auto-rows: minmax(1.2rem, auto);
+      gap: 0;
+      padding: 1rem;
+      align-content: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    #binary-screen .cell {
+      font-size: 0.9rem;
+      color: #fff;
+      opacity: 0.7;
+      transition: none;
+      text-align: center;
     }
 
-    h1 {
+    /* ========== ENTER NAME SCREEN ========== */
+    #enter-name-screen {
+      background: #000;
+    }
+    #enter-name-screen .prompt {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    #enter-name-screen input {
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      width: 280px;
+    }
+    #enter-name-screen input:focus {
+      outline: none;
+      border-color: #fff;
+    }
+    #enter-name-screen input::placeholder {
+      color: #666;
+    }
+    #enter-name-screen input {
+      caret-color: #fff;
+    }
+
+    /* ========== LOADING BAR (before enter name transition) ========== */
+    .loading-bar-wrap {
+      width: 280px;
+      height: 6px;
+      background: #222;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .loading-bar {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      transition: width 0.5s ease;
+    }
+
+    /* ========== GUEST NUMBER SCREEN ========== */
+    #guest-number-screen .text {
+      font-size: 1.2rem;
+    }
+    #guest-number-screen .dots span {
+      opacity: 0;
+      animation: dot-appear 0.3s forwards;
+    }
+
+    /* ========== WELCOME SCREEN ========== */
+    #welcome-screen h1 {
+      font-size: 2.5rem;
+      font-weight: 400;
+    }
+
+    /* ========== MAIN PAGE ========== */
+    #main-screen {
+      flex-direction: column;
+      align-items: stretch;
+      background: #fff;
+      color: #111;
+    }
+    #main-screen .nav {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 2rem;
+      background: #000;
+      color: #fff;
+    }
+    #main-screen .nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    #main-screen .nav a:hover {
+      text-decoration: underline;
+    }
+    #main-screen .content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+    #main-screen .content h1 {
       font-family: Georgia, serif;
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 400;
       color: #111;
+    }
+
+    @keyframes dot-appear {
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <h1>Jacobi Glenn</h1>
+  <!-- 1. Binary flip screen -->
+  <div id="binary-screen" class="screen"></div>
+
+  <!-- 2. Enter name (fake terminal) -->
+  <div id="enter-name-screen" class="screen hidden">
+    <div class="prompt">Enter your name:</div>
+    <input type="text" id="name-input" placeholder="" autocomplete="off" maxlength="50">
+  </div>
+
+  <!-- 2b. Loading bar (center of screen, black bg) -->
+  <div id="loading-screen" class="screen hidden">
+    <div class="loading-bar-wrap">
+      <div class="loading-bar" id="loading-bar"></div>
+    </div>
+  </div>
+
+  <!-- 3. Guest number -->
+  <div id="guest-number-screen" class="screen hidden">
+    <div class="text">You are guest number<span class="dots"></span><span class="number"></span></div>
+  </div>
+
+  <!-- 4. Welcome -->
+  <div id="welcome-screen" class="screen hidden">
+    <h1 id="welcome-name"></h1>
+  </div>
+
+  <!-- 5. Main page -->
+  <div id="main-screen" class="screen hidden">
+    <nav class="nav">
+      <a href="#" data-page="home">Home</a>
+      <a href="#" data-page="page1">Page1</a>
+      <a href="#" data-page="page2">Page2</a>
+      <a href="#" data-page="page3">Page3</a>
+      <a href="#" data-page="page4">Page4</a>
+      <a href="#" data-page="about">About</a>
+    </nav>
+    <main class="content">
+      <h1 id="page-title">Home</h1>
+    </main>
+  </div>
+
+  <script>
+    // Guest counter
+    const GUEST_KEY = 'jacobiglenn_guest';
+    function getGuestNumber() {
+      let n = parseInt(localStorage.getItem(GUEST_KEY) || '0', 10);
+      n++;
+      localStorage.setItem(GUEST_KEY, String(n));
+      return n;
+    }
+
+    // Page titles
+    const PAGE_TITLES = {
+      home: 'Home',
+      page1: 'Page 1',
+      page2: 'Page 2',
+      page3: 'Page 3',
+      page4: 'Page 4',
+      about: 'About'
+    };
+
+    // Build binary grid
+    const binaryScreen = document.getElementById('binary-screen');
+    const cols = Math.floor(window.innerWidth / 18);
+    const rows = Math.floor(window.innerHeight / 18);
+    const total = cols * rows;
+
+    for (let i = 0; i < total; i++) {
+      const cell = document.createElement('span');
+      cell.className = 'cell';
+      cell.textContent = Math.random() > 0.5 ? '1' : '0';
+      binaryScreen.appendChild(cell);
+    }
+
+    const cells = binaryScreen.querySelectorAll('.cell');
+
+    function flipRandomCells() {
+      const count = Math.floor(total * 0.1) + 1;
+      for (let i = 0; i < count; i++) {
+        const idx = Math.floor(Math.random() * total);
+        cells[idx].textContent = cells[idx].textContent === '0' ? '1' : '0';
+      }
+    }
+
+    const flipInterval = setInterval(flipRandomCells, 80);
+
+    // After 3 seconds: fade to Enter name screen
+    setTimeout(() => {
+      clearInterval(flipInterval);
+      binaryScreen.classList.add('hidden');
+      document.getElementById('enter-name-screen').classList.remove('hidden');
+      document.getElementById('name-input').focus();
+    }, 3000);
+
+    // Name input + loading bar
+    const nameInput = document.getElementById('name-input');
+    const loadingBar = document.getElementById('loading-bar');
+
+    nameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const name = nameInput.value.trim() || 'Guest';
+        nameInput.disabled = true;
+
+        // Show loading screen (just bar, centered on black)
+        document.getElementById('enter-name-screen').classList.add('hidden');
+        document.getElementById('loading-screen').classList.remove('hidden');
+        loadingBar.style.width = '100%';
+
+        setTimeout(() => {
+          document.getElementById('loading-screen').classList.add('hidden');
+          showGuestNumber(name);
+        }, 600);
+      }
+    });
+
+    function showGuestNumber(name) {
+      const guestScreen = document.getElementById('guest-number-screen');
+      const dotsEl = guestScreen.querySelector('.dots');
+      const numberEl = guestScreen.querySelector('.number');
+
+      const guestNum = getGuestNumber();
+
+      guestScreen.classList.remove('hidden');
+      dotsEl.innerHTML = '';
+      numberEl.textContent = '';
+
+      // Add dots one by one (0.4s apart)
+      [1, 2, 3].forEach((_, i) => {
+        setTimeout(() => {
+          const dot = document.createElement('span');
+          dot.textContent = '.';
+          dotsEl.appendChild(dot);
+        }, 400 * (i + 1));
+      });
+
+      // Show number after dots
+      setTimeout(() => {
+        numberEl.textContent = guestNum;
+      }, 1600);
+
+      // Go to Welcome
+      setTimeout(() => {
+        guestScreen.classList.add('hidden');
+        document.getElementById('welcome-name').textContent = `Welcome, ${name}`;
+        document.getElementById('welcome-screen').classList.remove('hidden');
+
+        setTimeout(() => {
+          document.getElementById('welcome-screen').classList.add('hidden');
+          document.getElementById('main-screen').classList.remove('hidden');
+        }, 1500);
+      }, 2500);
+    }
+
+    // Nav
+    document.querySelectorAll('.nav a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = a.getAttribute('data-page');
+        document.getElementById('page-title').textContent = PAGE_TITLES[page];
+      });
+    });
+  </script>
 </body>
 </html>
