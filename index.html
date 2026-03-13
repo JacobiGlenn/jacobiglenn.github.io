@@ -70,7 +70,7 @@
       grid-template-columns: 2fr 1fr;
       grid-template-rows: 1fr 0.5fr 1.2fr; /* bottom right cut ~~~~~~ */
       grid-template-areas:
-        "main globe"
+        "main head"
         "main log"
         "main guide";
       gap: 0;
@@ -107,15 +107,15 @@
       50% { filter: brightness(1); }
     }
 
-    .panel-globe {
-      grid-area: globe;
+    .panel-head {
+      grid-area: head;
       position: relative;
       padding: 0; /* let ASCII touch the panel border */
       line-height: 1.0;
       color: #555;
       overflow: hidden;
     }
-    .panel-globe.active { color: #fff; }
+    .panel-head.active { color: #fff; }
 
     #head-art {
       position: absolute;
@@ -217,7 +217,7 @@
         </div>
       </div>
     </div>
-    <div class="panel panel-globe" id="globe-panel">
+    <div class="panel panel-head" id="head-panel">
       <pre id="head-art"></pre>
     </div>
     <div class="panel panel-log" id="bottom-panel">
@@ -319,10 +319,10 @@
       // drop completely empty lines
       .filter(line => line.trim().length > 0);
 
-    let globePhase = 0;
+    let headPhase = 0;
 
-    function resizeGlobeFont() {
-      const panel = document.getElementById('globe-panel');
+    function resizeHeadFont() {
+      const panel = document.getElementById('head-panel');
       if (!panel) return;
       const pre = document.getElementById('head-art');
       if (!pre) return;
@@ -345,7 +345,7 @@
         pre.style.transform = 'scale(' + scaleX + ',' + scaleY + ')';
       });
     }
-    function renderGlobe() {
+    function renderHead() {
       const el = document.getElementById('head-art');
       if (!el) return;
       const lines = HEAD_ASCII_BASE;
@@ -371,7 +371,7 @@
         const y = (row - mid) / mid; // -1 (bottom) .. +1 (top)
         const lat = y * (Math.PI / 2); // approximate latitude
         const bandFactor = Math.cos(lat); // 1 at equator, 0 at poles
-        const bandShift = Math.floor(globePhase * bandFactor) % width;
+        const bandShift = Math.floor(headPhase * bandFactor) % width;
         const rotated =
           bandShift >= 0
             ? line.slice(bandShift) + line.slice(0, bandShift)
@@ -381,21 +381,21 @@
       el.textContent = out;
     }
 
-    let globeYaw = 0; // kept for minimal changes, but unused for now
-    let globeSpinning = false;
-    function startGlobeSpin() {
+    let headYaw = 0; // kept for minimal changes, but unused for now
+    let headSpinning = false;
+    function startHeadSpin() {
       function frame() {
-        if (globeSpinning) {
-          globePhase += 0.04;
+        if (headSpinning) {
+          headPhase += 0.04;
         }
-        renderGlobe();
+        renderHead();
         requestAnimationFrame(frame);
       }
-      resizeGlobeFont();
-      renderGlobe();
+      resizeHeadFont();
+      renderHead();
       requestAnimationFrame(frame);
     }
-    // ---- END GLOBE ----
+    // ---- END HEAD ----
 
     // Guest counter (reused)
     const GUEST_KEY = 'jacobiglenn_guest';
@@ -410,7 +410,7 @@
     const termOutput = document.getElementById('term-output');
     const termInput = document.getElementById('term-input');
     const termPromptEl = document.getElementById('term-prompt');
-    const globePanel = document.getElementById('globe-panel');
+    const headPanel = document.getElementById('head-panel');
     const bottomPanel = document.getElementById('bottom-panel');
     const bottomLog = document.getElementById('bottom-log');
     const guidePanel = document.getElementById('guide-panel');
@@ -430,21 +430,21 @@
       // Head / side panels: blink + staged power-on
       setTimeout(() => {
         // first blink ON (no head yet)
-        globePanel.classList.add('active');
+        headPanel.classList.add('active');
       }, 150);
       setTimeout(() => {
         // blink OFF
-        globePanel.classList.remove('active');
+        headPanel.classList.remove('active');
       }, 450);
       setTimeout(() => {
         // second blink ON: head appears (static), spin not started yet
-        globePanel.classList.add('active');
-        globeSpinning = false;
-        startGlobeSpin();
+        headPanel.classList.add('active');
+        headSpinning = false;
+        startHeadSpin();
       }, 800);
       setTimeout(() => {
         // start spinning after blinks complete
-        globeSpinning = true;
+        headSpinning = true;
       }, 1200);
       // middle-right (log) quick blink, then stay on
       setTimeout(() => {
@@ -461,7 +461,7 @@
       setTimeout(() => {
         guidePanel.classList.add('active');
       }, 2300);
-      startGlobeSpin();
+      startHeadSpin();
 
       const lines = ['\n(Welcome Protocol....)', '', '(Loading...)', '', '(Enter your name:)'];
       let lineIdx = 0, charIdx = 0;
@@ -531,9 +531,9 @@
     termInput.placeholder = ' ';
     termInput.focus();
 
-    window.addEventListener('resize', resizeGlobeFont);
+    window.addEventListener('resize', resizeHeadFont);
     // initial sizing once layout is ready
-    window.setTimeout(resizeGlobeFont, 0);
+    window.setTimeout(resizeHeadFont, 0);
 
     function startBottomActivity() {
       const msgs = ['[SYS] Protocol initialized', '[NET] Connection: LOCAL', '[AUTH] Awaiting input', '[SYSTEM] Ready', '[CORE] Memory allocation complete', '[BOOT] Kernel loaded successfully', '[NET] Handshake established', '[AUTH] Token validated', '[SEC] Firewall active', '[CORE] Process queue initialized', '[SYS] Cache cleared', '[IO] Buffer ready', '[AUTH] Session opened', '[BOOT] Services mounted', '[SYS] Entropy pool seeded', '[SEC] Certificate verified', '[CORE] Thread pool spawned', '[IO] Stream open', '[AUTH] Permissions granted', '[SYS] Watchdog armed', '[CORE] Scheduler online', '[SEC] Intrusion scan: clean', '[NET] Gateway reachable', '[BOOT] Config loaded', '[IO] Device handoff complete', '[AUTH] Identity confirmed', '[CORE] Stack trace: null', '[SEC] Vault sealed', '[BOOT] Modules indexed', '[SYS] Signal stable', '[IO] Write buffer flushed', '[SEC] Audit log initialized', '[CORE] Interrupt handler ready', '[AUTH] Credentials cached', '[SYS] ASCII head rendered via STL-to-ASCII (Andrew Sink)'];      let i = 0;
