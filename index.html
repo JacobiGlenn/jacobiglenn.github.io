@@ -427,37 +427,48 @@
       document.body.classList.add('crt-on', 'crt-pulse');
       document.querySelector('.panel-terminal').classList.add('active');
 
-      // Globe: show static, then flicker -> spin -> steady on
-      renderGlobe(0);
+      // Head / side panels: blink + staged power-on
       setTimeout(() => {
+        // first blink ON (no head yet)
         globePanel.classList.add('active');
-        globeSpinning = true;
       }, 150);
       setTimeout(() => {
-        globeSpinning = false;
+        // blink OFF
         globePanel.classList.remove('active');
       }, 450);
       setTimeout(() => {
+        // second blink ON: head appears (static), spin not started yet
         globePanel.classList.add('active');
-        globeSpinning = true;
+        globeSpinning = false;
+        startGlobeSpin();
       }, 800);
       setTimeout(() => {
-        globeSpinning = false;
-      }, 1200);
-      setTimeout(() => {
+        // start spinning after blinks complete
         globeSpinning = true;
+      }, 1200);
+      // middle-right (log) quick blink, then stay on
+      setTimeout(() => {
         bottomPanel.classList.add('active');
-        guidePanel.classList.add('active');
+      }, 300); // blink ON shortly after top-right first blink
+      setTimeout(() => {
+        bottomPanel.classList.remove('active');
+      }, 650); // blink OFF
+      setTimeout(() => {
+        bottomPanel.classList.add('active');
         startBottomActivity();
-      }, 1500);
+      }, 1300); // log panel turns on for good ~0.5s after head starts spinning
+      // bottom-right (guidebook) comes on ~1s after middle-right is solid
+      setTimeout(() => {
+        guidePanel.classList.add('active');
+      }, 2300);
       startGlobeSpin();
 
-      const lines = ['(Welcome Protocol....)', '(Loading...)', '(Enter your name:)'];
+      const lines = ['\n(Welcome Protocol....)', '', '(Loading...)', '', '(Enter your name:)'];
       let lineIdx = 0, charIdx = 0;
 
       function typeNext() {
         if (lineIdx >= lines.length) {
-          termOutput.textContent += '\nEnter your name: ';
+          termOutput.textContent += '\n\nEnter your name: ';
           termInput.disabled = false;
           termInput.placeholder = '';
           termInput.focus();
@@ -545,7 +556,7 @@
       dotsEl.innerHTML = '';
       numEl.textContent = '';
       [1,2,3].forEach((_, i) => setTimeout(() => { const d = document.createElement('span'); d.textContent = '.'; dotsEl.appendChild(d); }, 400 * (i + 1)));
-      setTimeout(() => { numEl.textContent = getGuestNumber(); }, 1600);
+      setTimeout(() => { numEl.textContent = ' ' + getGuestNumber(); }, 1600);
       setTimeout(() => {
         gs.classList.add('hidden');
         document.getElementById('welcome-name').textContent = `Welcome, ${name}`;
