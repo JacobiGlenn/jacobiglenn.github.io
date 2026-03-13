@@ -30,9 +30,9 @@
       background: repeating-linear-gradient(
         0deg,
         transparent 0px,
-        transparent 1px,
-        rgba(0,0,0,0.15) 1px,
-        rgba(0,0,0,0.15) 2px
+        transparent 4px,
+        rgba(0,0,0,0.1) 4px,
+        rgba(0,0,0,0.1) 5px
       );
     }
     .crt-flicker {
@@ -46,9 +46,10 @@
     }
     .crt-vignette {
       background: radial-gradient(
-        ellipse at center,
-        transparent 50%,
-        rgba(0,0,0,0.4) 100%
+        ellipse 120% 120% at 50% 50%,
+        transparent 40%,
+        rgba(0,0,0,0.2) 70%,
+        rgba(0,0,0,0.35) 100%
       );
     }
     body.crt-pulse {
@@ -192,15 +193,110 @@
     .screen.hidden { opacity: 0; pointer-events: none; transition: opacity 0.6s; z-index: 0; }
     .loading-bar-wrap { width: 260px; height: 5px; background: #222; overflow: hidden; }
     .loading-bar { height: 100%; width: 0; background: #fff; transition: width 0.5s ease; }
-    #main-screen { flex-direction: column; align-items: stretch; background: #fff; color: #111; }
-    #main-screen .nav { display: flex; gap: 1.5rem; padding: 1rem 2rem; background: #000; color: #fff; }
+    #main-screen { flex-direction: column; align-items: stretch; background: #fff; color: #111; min-height: 100vh; }
+    #main-screen .nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; padding: 1rem 2rem; background: #000; color: #fff; flex-shrink: 0; }
+    #main-screen .nav-logo { width: 40px; height: 40px; background: #444; flex-shrink: 0; }
+    #main-screen .nav-links { flex: 1; display: flex; justify-content: center; gap: 1.5rem; }
     #main-screen .nav a { color: #fff; text-decoration: none; }
     #main-screen .nav a:hover { text-decoration: underline; }
-    #main-screen .content { flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; }
-    #main-screen .content h1 { font-family: Georgia, serif; font-size: 2.5rem; font-weight: 400; color: #111; }
+    #main-screen .content { flex: 1; display: flex; flex-direction: column; background: #fff; overflow-y: auto; min-height: 0; }
+    #main-screen .content h1 { font-family: Georgia, serif; font-size: 3.5rem; font-weight: 400; color: #111; }
+    /* skeleton phase */
+    #main-screen.skeleton .content { padding: 2rem; }
+    #main-screen.skeleton .content h1 { align-self: center; margin-bottom: 2rem; }
+    #main-screen.crs .content { flex-direction: column; }
+    #main-screen.crs .skeleton-grid { flex: 1; min-height: 200px; }
+    #main-screen.skeleton .skeleton-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; flex: 1; padding: 0 2rem 2rem; max-width: 900px; margin: 0 auto; width: 100%; overflow: visible; }
+    .skeleton-box { background: #e8e8e8; border-radius: 4px; min-height: 120px; padding: 1rem; font-family: monospace; font-size: 10px; line-height: 1.3; white-space: pre-wrap; overflow: auto; color: #333; }
+    .skeleton-box.hero { grid-column: 1 / -1; min-height: 180px; }
+    .skeleton-box.broken { background: #d8d0c8; border: 1px dashed #999; opacity: 0.9; }
+    #main-screen.skeleton .modernizing-wrap { display: none; }
+    /* modernizing popup + loading */
+    .modernizing-wrap { position: absolute; inset: 0; z-index: 60; }
+    .modernizing-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.75); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    .modernizing-popup { position: relative; background: #0d1117; color: #58a6ff; padding: 1.5rem 2.5rem 1.5rem 2.5rem; font-family: monospace; font-size: 13px; border: 1px solid #30363d; box-shadow: 0 0 0 1px #21262d, 0 12px 48px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03); border-radius: 8px; }
+    .modernizing-popup .popup-close { position: absolute; top: 0.75rem; right: 0.75rem; width: 24px; height: 24px; background: transparent; border: 1px solid #484f58; color: #8b949e; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 4px; line-height: 1; }
+    .modernizing-popup .popup-close:hover { background: #21262d; color: #fff; }
+    .modernizing-popup .popup-title { color: #8b949e; font-size: 11px; letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+    .modernizing-popup .popup-msg { color: #58a6ff; }
+    .modernizing-loading { width: 260px; }
+    .modernizing-loading .loading-bar { transition: width 2s ease; }
+    #main-screen:not(.skeleton) .skeleton-grid { display: none; }
+    /* CRS toast - bottom right */
+    .crs-toast { position: fixed; bottom: 2rem; right: 2rem; background: #161b22; color: #c9d1d9; padding: 1rem 1.5rem; font-family: monospace; font-size: 12px; border: 1px solid #30363d; border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); z-index: 70; display: flex; align-items: center; gap: 1rem; }
+    .crs-toast .toast-msg { color: #8b949e; }
+    .crs-toast .toast-btn { background: #238636; color: #fff; border: none; padding: 0.4rem 0.8rem; font-family: inherit; font-size: 11px; cursor: pointer; border-radius: 4px; }
+    .crs-toast .toast-btn:hover { background: #2ea043; }
+    /* CRS glitch - hole (clickable) */
+    .glitch-hole { position: fixed; width: 120px; height: 100px; background: #000; z-index: 55; cursor: pointer; animation: glitch-wiggle 1.5s ease-in-out; }
+    .glitch-hole.popped { animation: none; pointer-events: none; }
+    @keyframes glitch-wiggle {
+      0%, 100% { transform: translate(0, 0); }
+      15% { transform: translate(4px, -2px); }
+      30% { transform: translate(-3px, 3px); }
+      45% { transform: translate(2px, 2px); }
+      60% { transform: translate(-4px, -1px); }
+      75% { transform: translate(1px, -3px); }
+    }
+    .glitch-particle { position: fixed; width: 8px; height: 8px; background: #000; z-index: 56; pointer-events: none; transition: transform 0.1s, opacity 0.3s; }
+    /* CRS extra glitches */
+    body.crs-done .crt-overlay { display: none; }
+    body.crs-glitch-shake { animation: crs-shake 0.3s ease-in-out; }
+    @keyframes crs-shake {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-4px, 2px); }
+      50% { transform: translate(4px, -2px); }
+      75% { transform: translate(-2px, -4px); }
+    }
+    @keyframes glitch-bar { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+    body.hack-mode { animation: hack-dim 0.4s ease-in-out infinite; }
+    @keyframes hack-dim {
+      0%, 100% { filter: brightness(0.85); }
+      50% { filter: brightness(1.15); }
+    }
+    body.hack-mode #main-screen .nav a,
+    body.hack-mode #main-screen #page-title { animation: hack-wiggle 0.08s ease-in-out infinite; }
+    @keyframes hack-wiggle {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(4px, -3px); }
+      50% { transform: translate(-5px, 4px); }
+      75% { transform: translate(-3px, -4px); }
+    }
+    @keyframes glitch-fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+    @keyframes glitch-tear { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+    /* final layout: Home top, left-aligned */
+    #main-screen:not(.skeleton) .content { align-items: flex-start; justify-content: flex-start; padding: 2rem; }
+    #main-screen:not(.skeleton) .content h1 { align-self: flex-start; }
+    /* CRS: heading positions per page */
+    #main-screen.crs .content.content-home h1 { align-self: flex-start; }
+    #main-screen.crs .content.content-page1 h1 { align-self: center; }
+    #main-screen .content.content-page1 .skeleton-grid { display: none; }
+    #main-screen.crs .content.content-page1 { align-items: center; justify-content: center; }
+    #main-screen.crs .content.content-page2 h1 { align-self: flex-start; padding-left: 2em; }
+    #main-screen.crs .content.content-page3 { align-items: center; justify-content: center; }
+    #main-screen.crs .content.content-page3 h1 { align-self: center; padding-left: 0; }
+    #main-screen.crs .content.content-page4 h1 { align-self: flex-end; margin-right: 2rem; }
+    #main-screen.crs .content.content-about h1 { align-self: center; padding-left: 15ch; }
+    #page-content { flex: 1; overflow: visible; padding: 1rem 0; font-family: monospace; font-size: 11px; white-space: pre; line-height: 1.2; display: none; min-height: 100px; }
+    #main-screen.crs #page-content { order: 1; }
+    .recovery-box { overflow-y: auto; max-height: 180px; font-family: monospace; font-size: 10px; line-height: 1.4; }
+    .recovery-box .attempt { margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #ccc; }
+    #flappy-container { display: none; flex: 1; min-height: 300px; position: relative; align-items: center; justify-content: center; }
+    #main-screen.crs .content.content-page3 #flappy-container { display: flex; }
+    #main-screen .content.content-page3 .skeleton-grid { display: none; }
+    #flappy-canvas-wrap { position: relative; width: 320px; height: 480px; background: #1a1a1a; border-radius: 8px; overflow: hidden; box-shadow: inset 0 0 80px rgba(0,0,0,0.5); }
+    #flappy-canvas-wrap::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 4px); pointer-events: none; }
+    #flappy-canvas-wrap::before { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 60px 20px rgba(0,0,0,0.4); pointer-events: none; z-index: 1; }
+    #flappy-canvas-wrap.flipped { transform: scaleX(-1); }
+    @keyframes flappy-crt-flicker { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(0.94); } }
+    #flappy-canvas-wrap { animation: flappy-crt-flicker 0.2s steps(1) infinite; }
+    #flappy-canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
+    .flappy-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.75); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: #e0e0e0; font-family: monospace; z-index: 2; }
+    .flappy-overlay.show { display: flex; }
   </style>
 </head>
 <body>
+  <div id="crs-toast" class="crs-toast" style="display:none"></div>
   <div class="crt-overlay scanlines"></div>
   <div class="crt-overlay crt-flicker"></div>
   <div class="crt-overlay crt-vignette"></div>
@@ -239,16 +335,44 @@
     <div>You are guest number<span class="dots"></span><span class="number"></span></div>
   </div>
   <div id="welcome-screen" class="screen hidden"><h1 id="welcome-name"></h1></div>
-  <div id="main-screen" class="screen hidden">
+  <div id="main-screen" class="screen hidden skeleton">
     <nav class="nav">
-      <a href="#" data-page="home">Home</a>
-      <a href="#" data-page="page1">Page1</a>
-      <a href="#" data-page="page2">Page2</a>
-      <a href="#" data-page="page3">Page3</a>
-      <a href="#" data-page="page4">Page4</a>
-      <a href="#" data-page="about">About</a>
+      <div class="nav-logo"></div>
+      <div class="nav-links">
+        <a href="#" data-page="home">Home</a>
+        <a href="#" data-page="page1">Page1</a>
+        <a href="#" data-page="page2">Page2</a>
+        <a href="#" data-page="page3">Page3</a>
+        <a href="#" data-page="page4">Page4</a>
+        <a href="#" data-page="about">About</a>
+      </div>
     </nav>
-    <main class="content"><h1 id="page-title">Home</h1></main>
+    <main class="content content-home">
+      <h1 id="page-title">Home</h1>
+      <div id="page-content"></div>
+      <div id="flappy-container">
+        <div id="flappy-canvas-wrap">
+          <canvas id="flappy-canvas" width="320" height="480"></canvas>
+          <div class="flappy-overlay" id="flappy-overlay">
+            <div>Score: <span id="flappy-score">0</span></div>
+            <button id="flappy-retry" class="toast-btn">Retry</button>
+          </div>
+        </div>
+      </div>
+      <div class="skeleton-grid" id="skeleton-grid"></div>
+    </main>
+    <div class="modernizing-wrap" id="modernizing-wrap" style="display:none">
+      <div class="modernizing-backdrop">
+        <div class="modernizing-popup">
+          <button class="popup-close" id="popup-close" type="button" aria-label="Cancel">×</button>
+          <div class="popup-title">UPGRADE_IN_PROGRESS</div>
+          <div class="popup-msg">// applying contemporary UI patches</div>
+        </div>
+        <div class="modernizing-loading">
+          <div class="loading-bar-wrap"><div class="loading-bar" id="modernizing-bar"></div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -406,6 +530,53 @@
     }
 
     const PAGE_TITLES = { home: 'Home', page1: 'Page 1', page2: 'Page 2', page3: 'Page 3', page4: 'Page 4', about: 'About' };
+    const ENDLESS_HORSE_LEG = '\t       | | | |             || |  \n';
+    const BOX_CONTENT = {
+      home: [
+        { content: 'WELCOME_MODULE.exe\n[LOADING]...\n[OK] System online\n\n> Ready for input', hero: true },
+        { content: 'RECENT_ACTIVITY\n----------------\n• Session 0x7f3a\n• Last sync: ???\n• Status: UNKNOWN' },
+        { content: 'QUICK_LINKS\n• [  ] Initialize\n• [  ] Deploy\n• [  ] Exit' },
+        { content: 'NOTES\n-----\nThe void is\nwatching.\nAlways.' },
+        { content: 'CACHE: 0x00\nHITS: ???\nMISS: ???' },
+        { content: '[EMPTY]\n[EMPTY]\n[EMPTY]', broken: true }
+      ],
+      page2: [
+        { content: '>$ system.dump --errors\n[NULL POINTER]\n[STACK OVERFLOW]\n[404 NOT FOUND]\n[PIZZA DELIVERED]\n[CHAOS THEORY]', hero: true },
+        { content: '[RECURSION ERROR]\n[INFINITE LOOP]\n[BUFFER UNDERFLOW]\n[DIVIDE BY ZERO]' },
+        { content: '[SYS] the void stares back\n[NET] connection to nowhere\n[AUTH] you are who?' },
+        { content: 'kernel.log (corrupt)\n---\nsegfault at 0x??\ninvalid opcode\ntrace: [REDACTED]', broken: true },
+        { content: 'MEM_DUMP\n0x0000: ?? ?? ?? ??\n0x0004: ?? ?? ?? ??\n0x0008: DE AD BE EF\n[...]' },
+        { content: 'syscall_table\n[  ] 0x00\n[  ] 0x01\n[!!] 0x02 FAIL', broken: true },
+        { content: 'BUFFER: 0x7fff\nPOINTER: 0x????\nSTATUS: UNDEFINED' }
+      ],
+      page3: [
+        { content: 'Lorem ipsum dolor sit amet\n\n...except every 3rd word is gl1tch3d', hero: true },
+        { content: 'Lorem GLITCH dolor sit\nGLITCH consectetur GLITCH\nadipiscing GLITCH' },
+        { content: 'ERROR: vocabulary.exe\nhas stopped\n\n[RESTART] [IGNORE]' },
+        { content: 'R3nd3r f4ilur3\nd3t3ct3d\n0xDEADBEEF', broken: true }
+      ],
+      page4: [
+        { content: 'welcome to the 4th dimension\n\n  .\n . .\n. . .\n . .\n  .', hero: true },
+        { content: '(you are here)\n\ncoordinates:\nx: ???\ny: ???\nz: ???\nt: ???' },
+        { content: 'WARNING\nEuclidean\nspace\ncompromised' }
+      ],
+      about: [
+        { type: 'recovery', hero: true },
+        { content: 'checksum: 0xDEAD\nlast_modified: never\nowner: ???' },
+        { content: '[REDACTED]\n[REDACTED]\n[REDACTED]', broken: true }
+      ]
+    };
+    const PAGE_CONTENT = {
+      home: '',
+      page1: (() => {
+        const head = "   ,\n_,,)\\.~,,._\n(()`  ``\\))),,_\n |     \\ ''((\\)))),,_          ____\n |6`   |   ''((\\())) \"-.____.-\"    `-.-,\n |    .'\\    ''))))'                  \\)))\n |   |   `.     ''                     ((((\n \\, _)     \\/                          |))))\n  `'        |                          (((((\n            \\                  |       ))))))\n             `|    |           ,\\     /((((((\n              |   / `-.______.<  \\   |  )))))\n              |   |  /         `. \\  \\  ((((\n              |  / \\ |           `.\\  | (((\n              \\  | | |             )| |  ))\n               | | | |             || |  '\n";
+        return head + ENDLESS_HORSE_LEG.repeat(800) + '       ... (endless legs) ...';
+      })(),
+      page2: `[NULL POINTER]\n[STACK OVERFLOW]\n[404 NOT FOUND]\n[PIZZA DELIVERED]\n[CHAOS THEORY]\n[RECURSION ERROR]\n[INFINITE LOOP]\n[BUFFER UNDERFLOW]\n[SYS] the void stares back\n[NET] connection to nowhere\n[AUTH] you are who?`,
+      page3: `Lorem ipsum dolor sit amet\n\n...except every 3rd word is gl1tch3d\n\nLorem GLITCH dolor sit GLITCH consectetur GLITCH\n\nERROR: vocabulary.exe has stopped`,
+      page4: `welcome to the 4th dimension\n\n  .\n . .\n. . .\n . .\n  .\n\n(you are here)`,
+      about: `[ABOUT.TXT corrupted]\n\nAttempting recovery...\n\n█ 23%\n\n[FAILED]`
+    };
 
     const termOutput = document.getElementById('term-output');
     const termInput = document.getElementById('term-input');
@@ -506,19 +677,44 @@
           termInput.value = '';
           termInput.removeAttribute('data-mode');
           document.getElementById('terminal-phase').style.display = 'none';
-          document.getElementById('loading-screen').classList.remove('hidden');
-          document.getElementById('loading-bar').style.width = '100%';
-          setTimeout(() => {
-            document.getElementById('loading-screen').classList.add('hidden');
-            showGuest(name);
-          }, 600);
+          if (raw === 'cGG') {
+            document.getElementById('welcome-name').textContent = 'Welcome back Jacobi';
+            document.getElementById('welcome-screen').classList.remove('hidden');
+            setTimeout(() => {
+              document.getElementById('welcome-screen').classList.add('hidden');
+              const mainScreen = document.getElementById('main-screen');
+              mainScreen.classList.remove('hidden');
+              mainScreen.classList.add('skeleton');
+              runModernizingFlow(mainScreen);
+            }, 1200);
+          } else {
+            document.getElementById('loading-screen').classList.remove('hidden');
+            document.getElementById('loading-bar').style.width = '100%';
+            setTimeout(() => {
+              document.getElementById('loading-screen').classList.add('hidden');
+              showGuest(name);
+            }, 600);
+          }
           return;
         }
 
         termOutput.textContent += (termOutput.textContent ? '\n' : '') + PROMPT + ' ' + raw + '\n';
         termInput.value = '';
         if (!started) {
-          if (cmd === 'initialize' || cmd === 'i') {
+          if (raw === 'cGG') {
+            termInput.disabled = true;
+            document.body.classList.add('crt-on', 'crt-pulse');
+            document.getElementById('terminal-phase').style.display = 'none';
+            document.getElementById('welcome-name').textContent = 'Welcome back Jacobi';
+            document.getElementById('welcome-screen').classList.remove('hidden');
+            setTimeout(() => {
+              document.getElementById('welcome-screen').classList.add('hidden');
+              const mainScreen = document.getElementById('main-screen');
+              mainScreen.classList.remove('hidden');
+              mainScreen.classList.add('skeleton');
+              runModernizingFlow(mainScreen);
+            }, 1200);
+          } else if (cmd === 'initialize' || cmd === 'i') {
             termInput.disabled = true;
             runStartup();
           } else if (raw) {
@@ -548,6 +744,179 @@
       setInterval(add, 1500 + Math.random() * 1000);
     }
 
+    let crsMode = false;
+    let crsScrambleTimer = null, crsHoleTimer = null, crsShakeTimer = null, crsFloatTimer = null;
+    let crsRgbTimer = null, crsNoiseTimer = null, crsTearTimer = null;
+    let crsPerTextTimers = [];
+    let crsHackTimer = null;
+
+    function scrambleText(str) {
+      const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+      return str.split('').map(c => /[a-zA-Z]/.test(c) ? chars[Math.floor(Math.random() * chars.length)] : c).join('');
+    }
+    function explodeHole(hole) {
+      hole.classList.add('popped');
+      hole.style.pointerEvents = 'none';
+      const rect = hole.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      for (let i = 0; i < 12; i++) {
+        const p = document.createElement('div');
+        p.className = 'glitch-particle';
+        p.style.left = (cx - 4) + 'px';
+        p.style.top = (cy - 4) + 'px';
+        const angle = (i / 12) * Math.PI * 2 + Math.random() * 0.5;
+        const dist = 25 + Math.random() * 50;
+        const dx = Math.cos(angle) * dist;
+        const dy = Math.sin(angle) * dist;
+        p.style.transform = `translate(${dx}px, ${dy}px)`;
+        requestAnimationFrame(() => {
+          p.style.opacity = '0';
+        });
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 350);
+      }
+      setTimeout(() => hole.remove(), 50);
+    }
+    function doHoleGlitch() {
+      const hole = document.createElement('div');
+      hole.className = 'glitch-hole';
+      hole.style.top = (5 + Math.random() * 50) + 'vh';
+      hole.style.left = (10 + Math.random() * 70) + 'vw';
+      document.body.appendChild(hole);
+      hole.onclick = () => explodeHole(hole);
+      setTimeout(() => { if (hole.parentNode) hole.remove(); }, 1500);
+    }
+    function scrambleElement(el, original) {
+      el.dataset.original = original;
+      const interval = setInterval(() => {
+        el.textContent = scrambleText(el.dataset.original || el.textContent);
+      }, 80);
+      setTimeout(() => {
+        clearInterval(interval);
+        el.textContent = el.dataset.original || original;
+      }, 2000);
+    }
+    function triggerHackMode() {
+      const pageTitle = document.getElementById('page-title');
+      const navLinks = Array.from(document.querySelectorAll('.nav a'));
+      document.body.classList.add('hack-mode');
+      scrambleElement(pageTitle, pageTitle.dataset.original || pageTitle.textContent);
+      navLinks.forEach(a => scrambleElement(a, a.dataset.original || a.textContent));
+      setTimeout(() => document.body.classList.remove('hack-mode'), 3500);
+    }
+    function startCRSGlitches() {
+      const pageTitle = document.getElementById('page-title');
+      const navLinks = Array.from(document.querySelectorAll('.nav a'));
+      const allText = [pageTitle, ...navLinks];
+      allText.forEach(el => {
+        const t = setInterval(() => {
+          if (!crsMode) return;
+          if (Math.random() < 0.1) scrambleElement(el, el.dataset.original || el.textContent);
+        }, 2000);
+        crsPerTextTimers.push(t);
+      });
+      crsHackTimer = setInterval(() => {
+        if (!crsMode) return;
+        if (Math.random() < 0.25) triggerHackMode();
+      }, 10000);
+      doHoleGlitch();
+      crsHoleTimer = setInterval(doHoleGlitch, 2500 + Math.random() * 3000);
+      crsShakeTimer = setInterval(() => {
+        document.body.classList.add('crs-glitch-shake');
+        setTimeout(() => document.body.classList.remove('crs-glitch-shake'), 300);
+      }, 4000 + Math.random() * 4000);
+      crsFloatTimer = setInterval(() => {
+        const float = document.createElement('div');
+        float.textContent = '!@#$%^&*[]{}'[Math.floor(Math.random() * 12)];
+        float.style.cssText = 'position:fixed;font-size:' + (8 + Math.random() * 14) + 'px;color:rgba(128,128,128,' + (0.3 + Math.random() * 0.5) + ');pointer-events:none;z-index:54;left:' + (Math.random() * 100) + 'vw;top:' + (Math.random() * 100) + 'vh;';
+        document.body.appendChild(float);
+        setTimeout(() => float.remove(), 1500 + Math.random() * 1000);
+      }, 600 + Math.random() * 800);
+      crsRgbTimer = setInterval(() => {
+        const bar = document.createElement('div');
+        bar.className = 'glitch-rgb-bar';
+        bar.style.cssText = 'position:fixed;left:0;right:0;height:2px;top:' + (Math.random() * 100) + 'vh;background:linear-gradient(90deg,transparent,rgba(255,0,0,0.3),rgba(0,255,0,0.3),rgba(0,0,255,0.3),transparent);z-index:53;pointer-events:none;animation:glitch-bar 0.5s linear;';
+        document.body.appendChild(bar);
+        setTimeout(() => bar.remove(), 500);
+      }, 2000 + Math.random() * 3000);
+      crsNoiseTimer = setInterval(() => {
+        const n = document.createElement('div');
+        n.style.cssText = 'position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'.06\'/%3E%3C/svg%3E");pointer-events:none;z-index:54;animation:glitch-fade 0.3s;';
+        document.body.appendChild(n);
+        setTimeout(() => n.remove(), 300);
+      }, 3000 + Math.random() * 4000);
+      crsTearTimer = setInterval(() => {
+        const tear = document.createElement('div');
+        tear.style.cssText = 'position:fixed;left:' + (Math.random() * 80) + 'vw;top:0;width:2px;height:100vh;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.8),transparent);z-index:54;pointer-events:none;animation:glitch-tear 0.2s;';
+        document.body.appendChild(tear);
+        setTimeout(() => tear.remove(), 200);
+      }, 2500 + Math.random() * 3500);
+    }
+    function stopCRSGlitches() {
+      stopHorseTitleBlink();
+      crsPerTextTimers.forEach(t => clearInterval(t));
+      crsPerTextTimers = [];
+      if (crsHackTimer) { clearInterval(crsHackTimer); crsHackTimer = null; }
+      document.body.classList.remove('hack-mode');
+      if (crsScrambleTimer) { clearInterval(crsScrambleTimer); crsScrambleTimer = null; }
+      if (crsHoleTimer) { clearInterval(crsHoleTimer); crsHoleTimer = null; }
+      if (crsShakeTimer) { clearInterval(crsShakeTimer); crsShakeTimer = null; }
+      if (crsFloatTimer) { clearInterval(crsFloatTimer); crsFloatTimer = null; }
+      if (crsRgbTimer) { clearInterval(crsRgbTimer); crsRgbTimer = null; }
+      if (crsNoiseTimer) { clearInterval(crsNoiseTimer); crsNoiseTimer = null; }
+      if (crsTearTimer) { clearInterval(crsTearTimer); crsTearTimer = null; }
+    }
+    function showRepairToast(runRepair) {
+      const toast = document.getElementById('crs-toast');
+      toast.innerHTML = '<span class="toast-msg">Unstable build detected. Update recommended.</span><button class="toast-btn">Update</button>';
+      toast.style.display = 'flex';
+      toast.querySelector('.toast-btn').onclick = () => {
+        toast.style.display = 'none';
+        runRepair();
+      };
+    }
+
+    function runModernizingFlow(mainScreen) {
+      let upgradeComplete = false;
+      let upgradeTimerId = null;
+      const wrap = document.getElementById('modernizing-wrap');
+      const mBar = document.getElementById('modernizing-bar');
+      const finishUpgrade = () => {
+        if (upgradeComplete) return;
+        upgradeComplete = true;
+        if (upgradeTimerId) clearTimeout(upgradeTimerId);
+        wrap.style.display = 'none';
+        mainScreen.classList.remove('skeleton', 'crs');
+        mainScreen.classList.add('crs-done');
+        document.body.classList.add('crs-done');
+        document.body.classList.remove('crt-on', 'crt-pulse');
+        crsMode = false;
+        stopCRSGlitches();
+      };
+      wrap.style.display = 'flex';
+      mBar.style.width = '0';
+      requestAnimationFrame(() => { mBar.style.width = '100%'; });
+      upgradeTimerId = setTimeout(finishUpgrade, 2200);
+      document.getElementById('popup-close').onclick = () => {
+        if (upgradeTimerId) { clearTimeout(upgradeTimerId); upgradeTimerId = null; }
+        wrap.style.display = 'none';
+        mainScreen.classList.add('crs');
+        crsMode = true;
+        updatePageContent('home');
+        startCRSGlitches();
+        showRepairToast(() => {
+          stopCRSGlitches();
+          mainScreen.classList.remove('crs');
+          crsMode = false;
+          wrap.style.display = 'flex';
+          mBar.style.width = '0';
+          requestAnimationFrame(() => { mBar.style.width = '100%'; });
+          upgradeTimerId = setTimeout(finishUpgrade, 2200);
+        });
+      };
+    }
+
     function showGuest(name) {
       const gs = document.getElementById('guest-screen');
       const dotsEl = gs.querySelector('.dots');
@@ -563,15 +932,211 @@
         document.getElementById('welcome-screen').classList.remove('hidden');
         setTimeout(() => {
           document.getElementById('welcome-screen').classList.add('hidden');
-          document.getElementById('main-screen').classList.remove('hidden');
+          const mainScreen = document.getElementById('main-screen');
+          mainScreen.classList.remove('hidden');
+          mainScreen.classList.add('skeleton');
+          runModernizingFlow(mainScreen);
         }, 1500);
       }, 2500);
     }
 
+    let horseTitleTimer = null;
+    function startHorseTitleBlink() {
+      const titleEl = document.getElementById('page-title');
+      function blink() {
+        titleEl.textContent = 'H O R S E';
+        setTimeout(() => {
+          if (document.querySelector('#main-screen .content').classList.contains('content-page1')) {
+            titleEl.textContent = 'Page 1';
+          }
+        }, 500);
+      }
+      horseTitleTimer = setInterval(blink, 2500);
+    }
+    function stopHorseTitleBlink() {
+      if (horseTitleTimer) { clearInterval(horseTitleTimer); horseTitleTimer = null; }
+    }
+    let flappyId = null;
+    let flappyFlipId = null;
+    let flappyCharId = null;
+    let flappyKeyHandler = null;
+    function stopFlappy() {
+      if (flappyId) cancelAnimationFrame(flappyId);
+      if (flappyFlipId) clearInterval(flappyFlipId);
+      if (flappyCharId) clearInterval(flappyCharId);
+      if (flappyKeyHandler) document.removeEventListener('keydown', flappyKeyHandler);
+      flappyId = flappyFlipId = flappyCharId = null;
+      flappyKeyHandler = null;
+      const wrap = document.getElementById('flappy-canvas-wrap');
+      if (wrap) wrap.classList.remove('flipped');
+    }
+    function initFlappy() {
+      const canvas = document.getElementById('flappy-canvas');
+      const wrap = document.getElementById('flappy-canvas-wrap');
+      const overlay = document.getElementById('flappy-overlay');
+      const scoreEl = document.getElementById('flappy-score');
+      const retryBtn = document.getElementById('flappy-retry');
+      if (!canvas || !wrap) return;
+      stopFlappy();
+      overlay.classList.remove('show');
+      const ctx = canvas.getContext('2d');
+      const W = 320, H = 480;
+      let bird = { x: 60, y: H/2 - 15, vy: 0, r: 15 };
+      const CHARS = '?@#$%&*0O8QW';
+      let birdChar = CHARS[Math.floor(Math.random() * CHARS.length)];
+      flappyCharId = setInterval(() => {
+        if (dead) return;
+        birdChar = CHARS[Math.floor(Math.random() * CHARS.length)];
+      }, 500);
+      let pipes = [];
+      let score = 0;
+      let dead = false;
+      let flipped = false;
+      const G = 0.12, FLAP = -5;
+      const PIPE_W = 50, GAP = 140;
+      function makePipe() {
+        const topH = 80 + Math.random() * (H - GAP - 180);
+        return { x: W, topH, botY: topH + GAP, passed: false };
+      }
+      pipes.push(makePipe());
+      function flap() {
+        if (dead) return;
+        bird.vy = FLAP;
+      }
+      function handleFlap(e) {
+        if (e && e.target === retryBtn) return;
+        e && e.preventDefault();
+        flap();
+      }
+      wrap.onclick = handleFlap;
+      wrap.ontouchstart = (e) => { e.preventDefault(); handleFlap(e); };
+      flappyKeyHandler = (e) => { if (e.code === 'Space') { e.preventDefault(); flap(); } };
+      document.addEventListener('keydown', flappyKeyHandler);
+      retryBtn.onclick = () => {
+        overlay.classList.remove('show');
+        initFlappy();
+      };
+      flappyFlipId = setInterval(() => {
+        if (dead) return;
+        flipped = !flipped;
+        wrap.classList.toggle('flipped', flipped);
+      }, 2000 + Math.random() * 1000);
+      function gameLoop() {
+        if (dead) return;
+        bird.vy += G;
+        bird.y += bird.vy;
+        for (let p of pipes) {
+          p.x -= 1.1;
+          if (!p.passed && p.x + PIPE_W < bird.x) { score++; p.passed = true; }
+          const hitX = bird.x > p.x && bird.x < p.x + PIPE_W;
+          const hitTop = bird.y - bird.r < p.topH;
+          const hitBot = bird.y + bird.r > p.botY;
+          if (hitX && (hitTop || hitBot)) { dead = true; break; }
+        }
+        if (bird.y - bird.r < 0 || bird.y + bird.r > H) dead = true;
+        pipes = pipes.filter(p => p.x + PIPE_W > 0);
+        if (pipes.length > 0 && pipes[pipes.length-1].x < W - 180) pipes.push(makePipe());
+        ctx.fillStyle = '#e5e5e5';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#2a2a2a';
+        ctx.fillRect(0, H - 80, W, 80);
+        for (let p of pipes) {
+          ctx.fillStyle = '#0a0a0a';
+          ctx.fillRect(p.x, 0, PIPE_W, p.topH);
+          ctx.fillRect(p.x, p.botY, PIPE_W, H - p.botY);
+        }
+        ctx.fillStyle = '#0a0a0a';
+        ctx.font = '28px monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(birdChar, bird.x, bird.y);
+        if (dead) {
+          scoreEl.textContent = score;
+          overlay.classList.add('show');
+          return;
+        }
+        flappyId = requestAnimationFrame(gameLoop);
+      }
+      gameLoop();
+    }
+    function initRecoveryBox(container) {
+      function runAttempt() {
+        const duration = 2000 + Math.random() * 18000;
+        const start = Date.now();
+        const entry = document.createElement('div');
+        entry.className = 'attempt';
+        container.appendChild(entry);
+        const bar = document.createElement('div');
+        entry.innerHTML = '[ABOUT.TXT corrupted]<br><br>Attempting recovery...<br><br>';
+        entry.appendChild(bar);
+        const pct = document.createElement('span');
+        entry.appendChild(pct);
+        const id = setInterval(() => {
+          const elapsed = Date.now() - start;
+          const v = Math.min(100, (elapsed / duration) * 100);
+          const filled = Math.floor(v / 5);
+          bar.textContent = '[' + '█'.repeat(filled) + '░'.repeat(20 - filled) + '] ' + Math.floor(v) + '%';
+          if (v >= 100) {
+            clearInterval(id);
+            bar.textContent = '[' + '█'.repeat(20) + '] 100%';
+            entry.appendChild(document.createElement('br'));
+            entry.appendChild(document.createTextNode('[FAILED]'));
+            container.scrollTop = container.scrollHeight;
+            setTimeout(runAttempt, 500);
+          }
+        }, 50);
+      }
+      runAttempt();
+    }
+    function populateSkeletonBoxes(page) {
+      const grid = document.getElementById('skeleton-grid');
+      if (!grid) return;
+      const boxes = BOX_CONTENT[page];
+      if (!boxes) return;
+      grid.innerHTML = '';
+      boxes.forEach((b, i) => {
+        const box = document.createElement('div');
+        box.className = 'skeleton-box' + (b.hero ? ' hero' : '') + (b.broken ? ' broken' : '');
+        if (b.type === 'recovery') {
+          box.classList.add('recovery-box');
+          box.innerHTML = '';
+          initRecoveryBox(box);
+        } else {
+          box.textContent = b.content || '';
+        }
+        grid.appendChild(box);
+      });
+    }
+    function updatePageContent(page) {
+      const titleEl = document.getElementById('page-title');
+      const contentEl = document.getElementById('page-content');
+      const mainContent = document.querySelector('#main-screen .content');
+      const grid = document.getElementById('skeleton-grid');
+      const page1Link = document.querySelector('.nav a[data-page="page1"]');
+      stopHorseTitleBlink();
+      if (page1Link) {
+        const txt = page === 'page1' ? 'H O R S E' : 'Page1';
+        page1Link.textContent = txt;
+        page1Link.dataset.original = txt;
+      }
+      titleEl.textContent = PAGE_TITLES[page];
+      contentEl.textContent = crsMode ? (PAGE_CONTENT[page] || '') : '';
+      contentEl.style.display = crsMode && page === 'page1' ? 'block' : 'none';
+      if (page === 'page3' && crsMode) {
+        stopFlappy();
+        setTimeout(() => initFlappy(), 50);
+      } else stopFlappy();
+      if (mainContent) {
+        mainContent.classList.remove('content-home', 'content-page1', 'content-page2', 'content-page3', 'content-page4', 'content-about');
+        mainContent.classList.add('content-' + page);
+      }
+      if (page !== 'page1' && page !== 'page3' && grid) populateSkeletonBoxes(page);
+      if (page === 'page1' && crsMode) startHorseTitleBlink();
+    }
     document.querySelectorAll('.nav a').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
-        document.getElementById('page-title').textContent = PAGE_TITLES[a.getAttribute('data-page')];
+        updatePageContent(a.getAttribute('data-page'));
       });
     });
   </script>
