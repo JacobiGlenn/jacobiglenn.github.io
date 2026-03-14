@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--
+  #
+  #
+  #
+  #  Document head / meta
+  #
+  #
+  #
+  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jacobi Glenn</title>
+  <!--
+  #
+  #
+  #
+  #  CSS styles (CRT overlay, panels, skeleton boxes, Page4 ocean, etc.)
+  #
+  #
+  #
+  -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -407,6 +425,15 @@
   </style>
 </head>
 <body>
+  <!--
+  #
+  #
+  #
+  #  Terminal / start page (4-panel grid: terminal, head art, log, guidebook)
+  #
+  #
+  #
+  -->
   <div id="crs-toast" class="crs-toast" style="display:none"></div>
   <div class="crt-overlay scanlines"></div>
   <div class="crt-overlay crt-flicker"></div>
@@ -438,7 +465,16 @@
     </div>
   </div>
 
-  <!-- Loading / guest / welcome / main screens (unchanged behavior) -->
+  <!--
+  #
+  #
+  #
+  #  Loading / guest / welcome / main screens (after terminal flow)
+  #  (nav, content, flappy, skeleton grid, ocean, modernizing popup)
+  #
+  #
+  #
+  -->
   <div id="loading-screen" class="screen hidden">
     <div class="loading-bar-wrap"><div class="loading-bar" id="loading-bar"></div></div>
   </div>
@@ -505,6 +541,13 @@
   </div>
 
   <script>
+    //################################################################
+    //#
+    //#
+    //#  Constants: HEAD ASCII art, page config (BOX_CONFIG, PAGE_CONTENT, P2_AI_SCRIPT)
+    //#
+    //#
+    //################################################################
     // ---- HEAD: high-res ASCII frame with fake spin ----
     const HEAD_ASCII_RAW = `
                                         %=@@%=@####%@#@#####.                                        
@@ -770,6 +813,13 @@
     const bottomLog = document.getElementById('bottom-log');
     const guidePanel = document.getElementById('guide-panel');
 
+    //################################################################
+    //#
+    //#
+    //#  Terminal / start flow (trySkipToMain, runStartup, termInput, startBottomActivity)
+    //#
+    //#
+    //################################################################
     const PROMPT = 'PS C://Users/Unknown $';
     termPromptEl.textContent = PROMPT + ' ';
 
@@ -957,6 +1007,13 @@
       setInterval(add, 1500 + Math.random() * 1000);
     }
 
+    //################################################################
+    //#
+    //#
+    //#  CRS / corruption mode (scrambleText, glitch holes, runModernizingFlow, showRepairToast)
+    //#
+    //#
+    //################################################################
     let crsMode = false;
     let page4BgColor = null;
     let crsScrambleTimer = null, crsHoleTimer = null, crsShakeTimer = null, crsFloatTimer = null;
@@ -1143,6 +1200,13 @@
       };
     }
 
+    //################################################################
+    //#
+    //#
+    //#  Guest / welcome flow (showGuest)
+    //#
+    //#
+    //################################################################
     function showGuest(name) {
       const gs = document.getElementById('guest-screen');
       const dotsEl = gs.querySelector('.dots');
@@ -1166,6 +1230,13 @@
       }, 2500);
     }
 
+    //################################################################
+    //#
+    //#
+    //#  Page 1: Horse (initEndlessHorse, horse title blink)
+    //#
+    //#
+    //################################################################
     let horseTitleTimer = null;
     function startHorseTitleBlink() {
       const titleEl = document.getElementById('page-title');
@@ -1192,6 +1263,13 @@
       const horseBody = HORSE_HEAD + ENDLESS_HORSE_LEG.repeat(LEG_COUNT) + MIRRORED_HEAD;
       container.innerHTML = '<pre id="horse-body">' + horseBody + '</pre>';
     }
+    //################################################################
+    //#
+    //#
+    //#  Page 3: Flappy Bird
+    //#
+    //#
+    //################################################################
     let flappyId = null;
     let flappyFlipId = null;
     let flappyCharId = null;
@@ -1326,6 +1404,13 @@
       }
       gameLoop();
     }
+    //################################################################
+    //#
+    //#
+    //#  Skeleton box init functions (typing, flicker, glitch, corrupt, dimension, etc.)
+    //#
+    //#
+    //################################################################
     function initTypingBox(container) {
       const full = 'WELCOME_MODULE.exe\n[LOADING]';
       let i = 0;
@@ -1842,6 +1927,13 @@
       }
       draw();
     }
+    //################################################################
+    //#
+    //#
+    //#  Page 4: dimension corner, ocean/fish, Page 2: code rain, left stream, sketchpad
+    //#
+    //#
+    //################################################################
     const P4_FISH = [
       { chars: '><((((>', dir: 'lr', bob: false, facesLeft: false },
       { chars: "<'))))= ", dir: 'rl', bob: true, facesLeft: true },
@@ -2072,6 +2164,13 @@
       const el = document.getElementById('page2-left-stream');
       if (el) el.innerHTML = '';
     }
+    //################################################################
+    //#
+    //#
+    //#  populateSkeletonBoxes, updatePageContent, nav handlers
+    //#
+    //#
+    //################################################################
     function populateSkeletonBoxes(page) {
       const grid = document.getElementById('skeleton-grid');
       if (!grid) return;
