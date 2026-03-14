@@ -653,6 +653,8 @@
     // Guest counter (reused)
     const GUEST_KEY = 'jacobiglenn_guest';
     const NORMAL_VISIT_KEY = 'jacobiglenn_normal_visit';
+    const LAST_USER_KEY = 'jacobiglenn_last_user';
+    const TYPED_CGG_KEY = 'jacobiglenn_typed_cgg';
     const FLAPPY_HIGHSCORE_KEY = 'jacobiglenn_flappy_highscore';
     const NORMAL_VISIT_TTL = 24 * 60 * 60 * 1000;
     function getGuestNumber() {
@@ -777,6 +779,8 @@
 
     function trySkipToMain() {
       try {
+        const lastUser = (localStorage.getItem(LAST_USER_KEY) || '').trim();
+        if (lastUser.toLowerCase() === 'cgg') return false;
         const raw = localStorage.getItem(NORMAL_VISIT_KEY);
         if (!raw) return false;
         const ts = parseInt(raw, 10);
@@ -881,7 +885,7 @@
           termInput.removeAttribute('data-mode');
           document.getElementById('terminal-phase').style.display = 'none';
           if (raw === 'cGG') {
-            try { window.__crxUserName = 'Jacobi'; } catch(_) {}
+            try { window.__crxUserName = 'Jacobi'; localStorage.setItem(TYPED_CGG_KEY, '1'); } catch(_) {}
             document.getElementById('welcome-name').textContent = 'Welcome back Jacobi';
             document.getElementById('welcome-screen').classList.remove('hidden');
             setTimeout(() => {
@@ -910,7 +914,7 @@
         termInput.value = '';
         if (!started) {
           if (raw === 'cGG') {
-            try { window.__crxUserName = 'Jacobi'; } catch(_) {}
+            try { window.__crxUserName = 'Jacobi'; localStorage.setItem(TYPED_CGG_KEY, '1'); } catch(_) {}
             termInput.disabled = true;
             document.body.classList.add('crt-on', 'crt-pulse');
             document.getElementById('terminal-phase').style.display = 'none';
@@ -1103,7 +1107,18 @@
         document.body.classList.remove('crt-on', 'crt-pulse');
         crsMode = false;
         stopCRSGlitches();
-        try { localStorage.setItem(NORMAL_VISIT_KEY, String(Date.now())); } catch (_) {}
+        try {
+          localStorage.setItem(NORMAL_VISIT_KEY, String(Date.now()));
+          const typedCGG = localStorage.getItem(TYPED_CGG_KEY);
+          if (typedCGG) {
+            localStorage.setItem(LAST_USER_KEY, 'cGG');
+            localStorage.removeItem(TYPED_CGG_KEY);
+          } else {
+            const u = (typeof window !== 'undefined' && window.__crxUserName) ? String(window.__crxUserName).trim() : '';
+            if (u) localStorage.setItem(LAST_USER_KEY, u);
+          }
+        } catch (_) {}
+        updatePageContent('home');
       };
       wrap.style.display = 'flex';
       mBar.style.width = '0';
@@ -2168,7 +2183,7 @@
       stopHorseTitleBlink();
       if (page !== 'page1' && horseObserver) { horseObserver.disconnect(); horseObserver = null; }
       if (page1Link) {
-        const txt = page === 'page1' ? 'H O R S E' : 'Page1';
+        const txt = (crsMode && page === 'page1') ? 'H O R S E' : 'Page1';
         page1Link.textContent = txt;
         page1Link.dataset.original = txt;
       }
