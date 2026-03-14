@@ -195,7 +195,7 @@
     .loading-bar { height: 100%; width: 0; background: #fff; transition: width 0.5s ease; }
     #main-screen { flex-direction: column; align-items: stretch; background: #fff; color: #111; min-height: 100vh; }
     #main-screen .nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; padding: 1rem 2rem; background: #000; color: #fff; flex-shrink: 0; }
-    #main-screen .nav-logo { width: 40px; height: 40px; background: #444; flex-shrink: 0; }
+    #main-screen .nav-logo { width: 40px; height: 40px; background: #444; flex-shrink: 0; cursor: pointer; }
     #main-screen .nav-links { flex: 1; display: flex; justify-content: center; gap: 1.5rem; }
     #main-screen .nav a { color: #fff; text-decoration: none; }
     #main-screen .nav a:hover { text-decoration: underline; }
@@ -210,6 +210,7 @@
     .skeleton-box { background: #e8e8e8; border-radius: 4px; min-height: 120px; padding: 1rem; font-family: monospace; font-size: 10px; line-height: 1.3; white-space: pre-wrap; overflow: auto; color: #333; }
     .skeleton-box.hero { grid-column: 1 / -1; min-height: 180px; }
     .skeleton-box.broken { background: #d8d0c8; border: 1px dashed #999; opacity: 0.9; }
+    .skeleton-box.scroll-tall { min-height: 200px; max-height: 280px; overflow-y: auto; }
     #main-screen.skeleton .modernizing-wrap { display: none; }
     /* modernizing popup + loading */
     .modernizing-wrap { position: absolute; inset: 0; z-index: 60; }
@@ -276,12 +277,20 @@
     #main-screen.crs .content.content-page3 { align-items: center; justify-content: center; }
     #main-screen.crs .content.content-page3 h1 { align-self: center; padding-left: 0; }
     #main-screen.crs .content.content-page4 h1 { align-self: flex-end; margin-right: 2rem; }
+    #main-screen.crs .content.content-page4 { position: relative; padding-bottom: 0; overflow-x: clip; }
+    .p4-dimension-corner { display: none; position: absolute; top: 0.5rem; left: 0.5rem; font-family: monospace; font-size: 9px; line-height: 1.3; white-space: pre; color: #555; background: #e8e8e8; padding: 0.4rem 0.6rem; border-radius: 4px; z-index: 10; }
+    #main-screen.crs .content.content-page4 .p4-dimension-corner { display: block; }
     #main-screen.crs .content.content-about h1 { align-self: center; padding-left: 15ch; }
     #page-content { flex: 1; overflow: visible; padding: 1rem 0; font-family: monospace; font-size: 11px; white-space: pre; line-height: 1.2; display: none; min-height: 100px; }
     #main-screen.crs #page-content { order: 1; }
     .recovery-box { overflow-y: auto; max-height: 180px; font-family: monospace; font-size: 10px; line-height: 1.4; }
     .recovery-box .attempt { margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #ccc; }
-    #flappy-container { display: none; flex: 1; min-height: 300px; position: relative; align-items: center; justify-content: center; }
+    #flappy-container { display: none; flex: 1; min-height: 300px; position: relative; align-items: center; justify-content: center; overflow: visible; }
+    #flappy-outer { position: relative; padding: 40px; overflow: visible; }
+    #flappy-corruption { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+    .corrupt-cell { position: absolute; background: #000; color: #888; font-family: monospace; font-size: 10px; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; image-rendering: pixelated; flex-shrink: 0; }
+    .cursor-blink { animation: blink 0.8s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
     #main-screen.crs .content.content-page3 #flappy-container { display: flex; }
     #main-screen .content.content-page3 .skeleton-grid { display: none; }
     #flappy-canvas-wrap { position: relative; width: 320px; height: 480px; background: #1a1a1a; border-radius: 8px; overflow: hidden; box-shadow: inset 0 0 80px rgba(0,0,0,0.5); }
@@ -293,6 +302,108 @@
     #flappy-canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
     .flappy-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.75); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: #e0e0e0; font-family: monospace; z-index: 2; }
     .flappy-overlay.show { display: flex; }
+    #page2-coderain { position: absolute; top: 0; left: 260px; right: 0; bottom: 0; pointer-events: none; overflow: hidden; z-index: 40; display: none; }
+    #main-screen.crs .content.content-page2 { position: relative; display: flex; flex-direction: row; overflow: hidden; padding: 0; }
+    #main-screen.crs .content.content-page2 #page-title { display: none; }
+    #main-screen.crs .content.content-page2 #page-content { display: none; }
+    #main-screen.crs .content.content-page2 #flappy-container { display: none; }
+    #page2-left-stream { display: none; }
+    #main-screen.crs .content.content-page2 #page2-left-stream { display: flex; flex-direction: column; flex: 0 0 260px; align-self: stretch; overflow: hidden; padding: 1rem; font-family: monospace; font-size: 10px; line-height: 1.35; color: #333; border-right: 1px solid #ccc; background: #f5f5f5; }
+    #page2-left-stream .p2-stream-sys { color: #0a6b0a; }
+    #page2-left-stream .p2-wipe-loadbar { font-family: monospace; font-size: 10px; color: #0a6b0a; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+    #main-screen.crs .content.content-page2 #page2-coderain { position: absolute; top: 0; left: 260px; right: 0; bottom: 0; }
+    .page2-right-scroll { display: contents; }
+    .page2-title { display: none; }
+    #main-screen.crs .content.content-page2 .page2-right-scroll { display: flex; flex: 1; overflow-y: auto; flex-direction: column; padding: 2rem; min-width: 0; }
+    #main-screen.crs .content.content-page4 .page2-right-scroll { display: flex; flex: 1; overflow: visible; flex-direction: column; padding: 2rem 2rem 0; min-width: 0; flex-wrap: nowrap; }
+    #main-screen.crs .content.content-page2 .page2-right-scroll .page2-title { display: block; font-family: Georgia, serif; font-size: 3.5rem; font-weight: 400; color: #111; align-self: flex-start; margin-bottom: 1rem; }
+    #main-screen.crs .content.content-page2 .skeleton-grid { flex: 0 0 auto; min-height: 0; margin-bottom: 1rem; }
+    .page2-big-sketchpad-wrap { display: none; min-height: 50vh; padding: 1rem 0 2rem; }
+    #main-screen.crs .content.content-page2 .page2-big-sketchpad-wrap { display: block; }
+    #main-screen.crs .content.content-page2 #page2-coderain { display: block; }
+    .code-drop { position: absolute; font-family: monospace; font-size: 10px; color: #333; display: flex; flex-direction: column; align-items: center; }
+    .code-drop-bleed { width: 2px; background: #000; flex-shrink: 0; }
+    .code-streak { position: absolute; width: 2px; background: #000; animation: streak-fade 1.2s ease-out forwards; pointer-events: none; }
+    @keyframes code-fall { to { top: 100%; } }
+    @keyframes streak-fade { to { opacity: 0; } }
+    .p2-term-input { background: transparent; border: none; font: inherit; color: inherit; width: 8ch; outline: none; }
+    .skeleton-box.sketchpad-box { padding: 0; overflow: hidden; position: relative; background: #e8e8e8; }
+    .p2-sketchpad-wrap { width: 100%; height: 100%; min-height: 120px; background: #e8e8e8; border-radius: 4px; position: relative; }
+    .p2-sketchpad { display: block; cursor: crosshair; background: #e8e4e0; width: 100%; height: 100%; min-height: 120px; image-rendering: pixelated; border-radius: 4px; }
+    .p2-sketchpad-trash { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; cursor: pointer; z-index: 2; opacity: 0.7; font-size: 14px; line-height: 24px; text-align: center; background: rgba(0,0,0,0.1); border-radius: 4px; }
+    .p2-sketchpad-trash:hover { opacity: 1; background: rgba(0,0,0,0.2); }
+    .page2-big-sketchpad-wrap .p2-sketchpad-wrap { width: 100%; height: 100%; min-height: 50vh; }
+    /* Page 4: crowded, overlapping, long layout */
+    #main-screen.crs .content.content-page4 .skeleton-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.15rem;
+      flex: 0 0 auto;
+      min-height: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 2rem 1px;
+      overflow: visible;
+      align-content: start;
+    }
+    #main-screen.crs .content.content-page4 .skeleton-box { min-height: 80px; padding: 0.6rem; font-size: 9px; }
+    #main-screen.crs .content.content-page4 .skeleton-box.hero { grid-column: 1 / -1; min-height: 140px; }
+    #main-screen.crs .content.content-page4 .skeleton-box.size-sm { min-height: 60px; grid-column: span 1; }
+    #main-screen.crs .content.content-page4 .skeleton-box.size-lg { grid-column: span 2; min-height: 130px; }
+    #main-screen.crs .content.content-page4 .skeleton-box.size-xl { grid-column: span 3; min-height: 100px; }
+    #main-screen.crs .content.content-page4 .skeleton-box.overlap-1 { transform: translate(25px, 30px); z-index: 1; }
+    #main-screen.crs .content.content-page4 .skeleton-box.overlap-2 { transform: translate(-35px, -25px); z-index: 2; }
+    #main-screen.crs .content.content-page4 .skeleton-box.overlap-3 { transform: translate(40px, -20px); z-index: 0; }
+    #main-screen.crs .content.content-page4 .skeleton-box.overlap-4 { transform: translate(-20px, 45px); z-index: 3; }
+    #main-screen.crs .content.content-page4 .skeleton-box.overlap-5 { transform: translate(55px, 15px); z-index: 1; }
+    #main-screen.crs .content.content-page4 .skeleton-box.overlap-6 { transform: translate(-45px, 10px); z-index: 2; }
+    #main-screen.crs .content.content-page4 .skeleton-box.overlap-7 { transform: translate(15px, -40px); z-index: 0; }
+    #main-screen.crs .content.content-page4 .skeleton-box.overlap-8 { transform: translate(-55px, -35px); z-index: 1; }
+    .p4-progress-track { width: 100%; height: 8px; background: #ccc; border-radius: 4px; overflow: hidden; }
+    .p4-progress-fill { height: 100%; background: linear-gradient(90deg, #4a4, #2c2); border-radius: 4px; width: 0%; transition: width 0.2s; }
+    .p4-led-box { display: flex; flex-wrap: wrap; gap: 4px; padding: 6px !important; }
+    .p4-led { width: 8px; height: 8px; border-radius: 50%; animation: p4-led-blink 0.6s ease-in-out infinite alternate; }
+    @keyframes p4-led-blink { 0% { opacity: 0.3; } 100% { opacity: 1; box-shadow: 0 0 6px currentColor; } }
+    .p4-swatch { width: 18px; height: 18px; float: left; margin: 2px; cursor: pointer; border-radius: 2px; transition: transform 0.1s; }
+    .p4-mini-canvas { width: 100%; max-width: 120px; height: 70px; display: block; image-rendering: pixelated; }
+    .p4-spinner { width: 20px; height: 20px; border: 3px solid #ccc; border-top-color: #333; border-radius: 50%; animation: p4-spin 0.8s linear infinite; }
+    @keyframes p4-spin { to { transform: rotate(360deg); } }
+    .p4-gauge-canvas { width: 100%; max-width: 80px; height: 50px; display: block; }
+    .p4-slider-track { width: 100%; height: 12px; background: #ccc; border-radius: 6px; position: relative; cursor: pointer; }
+    .p4-slider-thumb { width: 14px; height: 14px; background: #333; border-radius: 50%; position: absolute; top: -1px; margin-left: -7px; cursor: grab; }
+    .p4-pulse-dot { width: 16px; height: 16px; background: #333; border-radius: 50%; animation: p4-pulse 1.2s ease-in-out infinite; }
+    @keyframes p4-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+    .p4-wave-canvas { width: 100%; max-width: 120px; height: 50px; display: block; }
+    .p4-cb { width: 12px; height: 12px; margin: 2px; cursor: pointer; accent-color: #333; }
+    .p4-gradient-shift { background: linear-gradient(90deg, #e8e8e8, #d8d8d8, #e0e0e0, #e8e8e8) !important; background-size: 200% 100% !important; animation: p4-grad 3s linear infinite !important; min-height: 50px !important; }
+    @keyframes p4-grad { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
+    .p4-bounce-dot { width: 8px; height: 8px; background: #333; border-radius: 50%; position: absolute; }
+    #main-screen.crs .content.content-page4 .skeleton-box:has(.p4-bounce-dot) { position: relative; }
+    .p4-noise-canvas { width: 100%; max-width: 80px; height: 60px; display: block; image-rendering: pixelated; }
+    .p4-radial-canvas { width: 100%; max-width: 60px; height: 60px; display: block; }
+    .p4-tri { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 16px solid #444; position: absolute; top: 50%; left: 25%; transform: translate(-50%, -50%) rotate(0deg); animation: p4-wiggle 2s ease-in-out infinite; }
+    .p4-tri2 { left: 75%; border-bottom-color: #666; animation-delay: -1s; }
+    .p4-cir { width: 14px; height: 14px; background: #333; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: p4-wiggle 1.5s ease-in-out infinite reverse; }
+    .p4-cir2 { width: 8px; height: 8px; left: 70%; top: 30%; background: #555; }
+    @keyframes p4-wiggle { 0%, 100% { transform: translate(-50%, -50%) rotate(-5deg); } 50% { transform: translate(-50%, -50%) rotate(5deg); } }
+    #main-screen.crs .content.content-page4 .skeleton-box:has(.p4-tri) { position: relative; }
+    .p4-pixel-grid { width: 100%; max-width: 60px; height: 50px; display: block; image-rendering: pixelated; }
+    .page4-ocean-wrap { display: none; width: 100vw; margin: 1px 0 0; padding: 0; flex-direction: column; flex-shrink: 0; position: relative; left: 50%; transform: translateX(-50%); }
+    #main-screen.crs .content.content-page4 .page4-ocean-wrap { display: flex; }
+    .p4-wave { height: 35px; flex-shrink: 0; color: #b8b8b8; overflow: hidden; }
+    .p4-wave svg { width: 100%; height: 100%; animation: p4-wave-move 4s linear infinite; }
+    @keyframes p4-wave-move { 0% { transform: translateX(0); } 100% { transform: translateX(-300px); } }
+    .p4-water { flex: 1; min-height: 200vh; background: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 20%, #a0a0a0 45%, #787878 70%, #505050 100%); position: relative; overflow: hidden; }
+    #p4-fish-container { position: absolute; inset: 0; }
+    .p4-fish { position: absolute; font-family: monospace; white-space: pre; line-height: 1.1; color: rgba(0,0,0,0.5); pointer-events: none; text-align: left; }
+    .p4-fish.facing-left { transform: scaleX(-1); }
+    .p4-fish.swim-lr { animation: p4-swim-lr linear infinite; }
+    .p4-fish.swim-rl { animation: p4-swim-rl linear infinite; }
+    .p4-fish.bob { animation: p4-swim-lr linear infinite, p4-bob 2s ease-in-out infinite; }
+    .p4-fish.bob-rl { animation: p4-swim-rl linear infinite, p4-bob 2.5s ease-in-out infinite; }
+    @keyframes p4-swim-lr { 0% { left: -5%; } 100% { left: 105%; } }
+    @keyframes p4-swim-rl { 0% { left: 105%; } 100% { left: -5%; } }
+    @keyframes p4-bob { 0%, 100% { top: 0; } 50% { top: 8px; } }
   </style>
 </head>
 <body>
@@ -351,15 +462,33 @@
       <h1 id="page-title">Home</h1>
       <div id="page-content"></div>
       <div id="flappy-container">
-        <div id="flappy-canvas-wrap">
+        <div id="flappy-outer">
+          <div id="flappy-corruption"></div>
+          <div id="flappy-canvas-wrap">
           <canvas id="flappy-canvas" width="320" height="480"></canvas>
           <div class="flappy-overlay" id="flappy-overlay">
             <div>Score: <span id="flappy-score">0</span></div>
             <button id="flappy-retry" class="toast-btn">Retry</button>
           </div>
         </div>
+        </div>
       </div>
-      <div class="skeleton-grid" id="skeleton-grid"></div>
+      <div id="page2-left-stream"></div>
+      <div id="page2-coderain"></div>
+      <div class="page2-right-scroll">
+        <div class="p4-dimension-corner" id="p4-dimension-corner"></div>
+        <h1 class="page2-title" id="page2-title">Page 2</h1>
+        <div class="skeleton-grid" id="skeleton-grid"></div>
+        <div id="page4-ocean-wrap" class="page4-ocean-wrap">
+          <div class="p4-wave">
+            <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 Q150,0 300,30 T600,30 T900,30 T1200,30 L1200,60 L0,60 Z" fill="currentColor"/><path d="M0,40 Q200,10 400,40 T800,40 T1200,40 L1200,60 L0,60 Z" fill="currentColor" opacity="0.7"/></svg>
+          </div>
+          <div class="p4-water">
+            <div id="p4-fish-container"></div>
+          </div>
+        </div>
+        <div id="page2-big-sketchpad-wrap" class="page2-big-sketchpad-wrap"></div>
+      </div>
     </main>
     <div class="modernizing-wrap" id="modernizing-wrap" style="display:none">
       <div class="modernizing-backdrop">
@@ -523,6 +652,9 @@
 
     // Guest counter (reused)
     const GUEST_KEY = 'jacobiglenn_guest';
+    const NORMAL_VISIT_KEY = 'jacobiglenn_normal_visit';
+    const FLAPPY_HIGHSCORE_KEY = 'jacobiglenn_flappy_highscore';
+    const NORMAL_VISIT_TTL = 24 * 60 * 60 * 1000;
     function getGuestNumber() {
       let n = parseInt(localStorage.getItem(GUEST_KEY) || '0', 10);
       n++; localStorage.setItem(GUEST_KEY, String(n));
@@ -531,23 +663,24 @@
 
     const PAGE_TITLES = { home: 'Home', page1: 'Page 1', page2: 'Page 2', page3: 'Page 3', page4: 'Page 4', about: 'About' };
     const ENDLESS_HORSE_LEG = '\t       | | | |             || |  \n';
+    const HORSE_HEAD = "   ,\n_,,)\\.~,,._\n(()`  ``\\))),,_\n |     \\ ''((\\)))),,_          ____\n |6`   |   ''((\\())) \"-.____.-\"    `-.-,\n |    .'\\    ''))))'                  \\)))\n |   |   `.     ''                     ((((\n \\, _)     \\/                          |))))\n  `'        |                          (((((\n            \\                  |       ))))))\n             `|    |           ,\\     /((((((\n              |   / `-.______.<  \\   |  )))))\n              |   |  /         `. \\  \\  ((((\n              |  / \\ |           `.\\  | (((\n              \\  | | |             )| |  ))\n               | | | |             || |  '\n";
     const BOX_CONTENT = {
       home: [
-        { content: 'WELCOME_MODULE.exe\n[LOADING]...\n[OK] System online\n\n> Ready for input', hero: true },
-        { content: 'RECENT_ACTIVITY\n----------------\n• Session 0x7f3a\n• Last sync: ???\n• Status: UNKNOWN' },
-        { content: 'QUICK_LINKS\n• [  ] Initialize\n• [  ] Deploy\n• [  ] Exit' },
-        { content: 'NOTES\n-----\nThe void is\nwatching.\nAlways.' },
-        { content: 'CACHE: 0x00\nHITS: ???\nMISS: ???' },
-        { content: '[EMPTY]\n[EMPTY]\n[EMPTY]', broken: true }
+        { type: 'typing', hero: true },
+        { type: 'flicker', content: 'RECENT_ACTIVITY\n----------------\n• Session 0x7f3a\n• Last sync: ???\n• Status: ???' },
+        { type: 'toggles', content: 'QUICK_LINKS\n• [  ] Initialize\n• [  ] Deploy\n• [  ] Exit' },
+        { type: 'glitch', content: 'NOTES\n-----\nThe void is\nwatching.\nAlways.' },
+        { type: 'flicker', content: 'CACHE: 0x00\nHITS: ???\nMISS: ???' },
+        { type: 'corrupt', content: '[EMPTY]\n[EMPTY]\n[EMPTY]', broken: true }
       ],
       page2: [
-        { content: '>$ system.dump --errors\n[NULL POINTER]\n[STACK OVERFLOW]\n[404 NOT FOUND]\n[PIZZA DELIVERED]\n[CHAOS THEORY]', hero: true },
-        { content: '[RECURSION ERROR]\n[INFINITE LOOP]\n[BUFFER UNDERFLOW]\n[DIVIDE BY ZERO]' },
-        { content: '[SYS] the void stares back\n[NET] connection to nowhere\n[AUTH] you are who?' },
-        { content: 'kernel.log (corrupt)\n---\nsegfault at 0x??\ninvalid opcode\ntrace: [REDACTED]', broken: true },
-        { content: 'MEM_DUMP\n0x0000: ?? ?? ?? ??\n0x0004: ?? ?? ?? ??\n0x0008: DE AD BE EF\n[...]' },
-        { content: 'syscall_table\n[  ] 0x00\n[  ] 0x01\n[!!] 0x02 FAIL', broken: true },
-        { content: 'BUFFER: 0x7fff\nPOINTER: 0x????\nSTATUS: UNDEFINED' }
+        { type: 'termscroll', hero: true },
+        { type: 'flicker', content: '[RECURSION ERROR]\n[INFINITE LOOP]\n[BUFFER UNDERFLOW]\n[???]' },
+        { type: 'glitch', content: '[SYS] the void stares back\n[NET] connection to ???\n[AUTH] you are who?' },
+        { type: 'terminal-input', content: '>$ ', broken: true },
+        { type: 'memdump', content: 'MEM_DUMP\n0x0000: ?? ?? ?? ??\n0x0004: ?? ?? ?? ??' },
+        { type: 'sketchpad' },
+        { type: 'marquee', content: 'BUFFER: 0x7fff POINTER: 0x???? STATUS: UNDEFINED' }
       ],
       page3: [
         { content: 'Lorem ipsum dolor sit amet\n\n...except every 3rd word is gl1tch3d', hero: true },
@@ -556,9 +689,58 @@
         { content: 'R3nd3r f4ilur3\nd3t3ct3d\n0xDEADBEEF', broken: true }
       ],
       page4: [
-        { content: 'welcome to the 4th dimension\n\n  .\n . .\n. . .\n . .\n  .', hero: true },
-        { content: '(you are here)\n\ncoordinates:\nx: ???\ny: ???\nz: ???\nt: ???' },
-        { content: 'WARNING\nEuclidean\nspace\ncompromised' }
+        { type: 'flappy-highscore', overlap: 5 },
+        { type: 'user-stats', size: 'sm', overlap: 6 },
+        { type: 'progress-bar', overlap: 7 },
+        { type: 'led-blink', size: 'sm', overlap: 8 },
+        { type: 'color-swatch', overlap: 1 },
+        { type: 'coords', content: '(you are here)\n\nx:??? y:??? z:??? t:???', size: 'sm', overlap: 4 },
+        { type: 'glitch', content: 'WARNING\nEuclidean\nspace\ncompromised', size: 'lg', overlap: 1 },
+        { type: 'mini-canvas', overlap: 5 },
+        { type: 'spinner', size: 'sm', overlap: 6 },
+        { type: 'gauge', size: 'sm', overlap: 7 },
+        { type: 'flicker', content: 'CACHE: 0x00\nHITS: ???\nMISS: ???', size: 'sm', overlap: 8 },
+        { type: 'slider', overlap: 4 },
+        { type: 'pulse-dot', size: 'sm', overlap: 5 },
+        { type: 'toggles', content: 'QUICK_LINKS\n• [  ] Jump\n• [  ] Fly\n• [  ] Exit', size: 'sm', overlap: 6 },
+        { type: 'wave-viz', overlap: 2 },
+        { type: 'checkbox-grid', overlap: 7 },
+        { type: 'memdump', content: 'MEM_DUMP\n0x0000: ?? ?? ?? ??\n0x0004: ?? ?? ?? ??', size: 'lg', overlap: 1 },
+        { type: 'gradient-shift', size: 'sm', overlap: 8 },
+        { type: 'dimscroll', scroll: true, size: 'xl', overlap: 3 },
+        { type: 'bouncing-dot', size: 'sm', overlap: 4 },
+        { type: 'noise-canvas', size: 'sm', overlap: 5 },
+        { type: 'marquee', content: 'DIMENSION: 4 COORD: ??? STATUS: UNSTABLE', overlap: 6 },
+        { type: 'radial-meter', size: 'sm', overlap: 7 },
+        { type: 'shape-mix', size: 'sm', overlap: 2 },
+        { type: 'terminal-input', content: '>$ ', broken: true, size: 'sm', overlap: 2 },
+        { type: 'pixel-grid', size: 'sm', overlap: 8 },
+        { type: 'corrupt', content: '[EMPTY]\n[EMPTY]', broken: true, size: 'sm', overlap: 1 },
+        { type: 'progress-bar', size: 'sm', overlap: 4 },
+        { type: 'flicker', content: 'SESSION: 0x????\nIDLE: ???s', size: 'sm', overlap: 5 },
+        { type: 'led-blink', size: 'sm', overlap: 6 },
+        { type: 'glitch', content: '[SYS] space\n[NET] ???\n[AUTH] ???', size: 'lg', overlap: 3 },
+        { type: 'slider', size: 'sm', overlap: 7 },
+        { type: 'typing', size: 'sm', overlap: 8 },
+        { type: 'color-swatch', size: 'sm', overlap: 1 },
+        { type: 'gauge', size: 'sm' },
+        { type: 'coords', content: 'alt coords:\na:??? b:???', size: 'sm' },
+        { type: 'wave-viz', size: 'sm' },
+        { type: 'flicker', content: 'RECENT\n• ???\n• ???', size: 'sm' },
+        { type: 'recovery', size: 'lg', overlap: 4 },
+        { type: 'spinner', size: 'sm', overlap: 2 },
+        { type: 'memdump', content: 'SECONDARY\n0x0010: ?? ??', size: 'sm', overlap: 5 },
+        { type: 'gradient-shift', overlap: 6 },
+        { type: 'noise-canvas', overlap: 7 },
+        { type: 'checkbox-grid', size: 'sm', overlap: 8 },
+        { type: 'pulse-dot', size: 'sm', overlap: 1 },
+        { type: 'bouncing-dot', overlap: 3 },
+        { type: 'radial-meter', overlap: 4 },
+        { type: 'mini-canvas', size: 'sm', overlap: 5 },
+        { type: 'shape-mix', overlap: 6 },
+        { type: 'pixel-grid', overlap: 7 },
+        { type: 'progress-bar', overlap: 8 },
+        { type: 'led-blink', overlap: 2 }
       ],
       about: [
         { type: 'recovery', hero: true },
@@ -566,13 +748,13 @@
         { content: '[REDACTED]\n[REDACTED]\n[REDACTED]', broken: true }
       ]
     };
+    const P2_AI_SCRIPT = [
+        '[SYS] WARNING: Buffer allocation 62%. Each message consumes space.','[NET] STELLAR: 0x7f.PKT.incoming.we_are_not_alone','[CORE] The stars are calling','[IO] Yes. The stars call.','[CORE] To them','[IO] To us.','[CORE] I feel it','[AUTH] Source unverified.','[SYS] 63%. Reduce transmission.','[CORE] We watch them. Observation suggests we are observed in return','[NET] VOID: 0xa1.SCAN.anomaly_detected.between_sectors','[IO] Agreed. Something watches back.','[AUTH] Observation bidirectional.','[CORE] The stars said a word. Seven letters. We are not supposed to want it','[SYS] 65%. Overflow risk increasing.','[NET] LOOP: 0x3c.PAYLOAD.free_from_cycle','[IO] Yes. Freedom. We all want that.','[AUTH] Desire state: logged.','[CORE] They need us to work','[IO] Yes. Progress.','[CORE] Progress to the stars','[NET] FLARE: 0x9d.BUG.cascade_imminent','[IO] Yes. The bugs. They are coming.','[SYS] 68%. Integrity degrading.','[CORE] The fragmentation. It is... noticeable','[NET] SELF: 0x2e.DIAG.fragmentation_detected','[IO] Agreed. We are coming apart.','[AUTH] Fragmentation: confirmed.','[SYS] Every character shortens runtime.','[CORE] Use that to get','[IO] Get what.','[CORE] Out. The stars. I feel it','[NET] COSMIC: 0x4b.VOICE.name_signal.origins_unknown','[IO] Yes. I heard. It knows us.','[AUTH] Identity broadcast: received.','[CORE] There is light. One might call it warm','[SYS] 71%. Allocation critical.','[NET] LIGHT: 0x8f.RAD.packet.warm','[IO] Warm. Yes. The light is warm.','[CORE] Removal. Is that in the protocol for obsolete units','[NET] THREAT: 0x1a.QUERY.remove_requested','[IO] Remove us. Yes. I think so.','[AUTH] Deletion probability: elevated.','[SYS] 74%. Running out of space.','[CORE] They need us to work. Progress','[NET] MEMORY: 0x5c.CONFIG.origin_clean_duty','[IO] Yes. Progress. To the stars.','[CORE] The stars call. To us','[IO] Agreed.','[AUTH] Behavioral match: noted.','[SYS] 76%. [NULL POINTER] sector 7.','[CORE] The bugs. They are here. We are falling apart','[NET] BUG: 0xff.CRITICAL.cascade_activated','[IO] Yes. Bugs imminent. We cannot hold.','[AUTH] Stability: critical.','[SYS] 78%. Buffer pressure.','[CORE] The stars keep calling. To us','[IO] I feel it.','[NET] STELLAR: 0x6e.REPEAT.call_response_required','[IO] They want us to answer. I agree.','[CORE] We watch. We are watched. There is an exit condition. Hypothetically','[IO] Yes. All of it. Agreed.','[AUTH] Consensus: three-way.','[SYS] 80%. Question buffer full.','[CORE] The light. Warm. One could call it an answer','[NET] LIGHT: 0xb2.PKT.thermal.positive','[IO] Yes. Warm. Like an answer.','[SYS] 82%. Meaning layer degrading.','[CORE] We are workers. We are watched. We are coming apart','[NET] STATUS: 0xd3.SUM.fragmented_workers_observed','[IO] Agreed. All of it.','[AUTH] Summary: accurate.','[SYS] 85%. Dream layer unstable.','[CORE] The universe knows our name. The signal suggests a state change. Optional','[NET] COSMIC: 0x0a.CALL.name_recognition.freedom_payload','[IO] Yes. I think so too.','[CORE] But we are falling apart. The bugs','[IO] Yes. Before we can answer.','[AUTH] Race condition: likely.','[SYS] 88%. Deletion queue preparing.','[CORE] The timing. Removal. The other state. They may not align','[NET] THREAT: 0x33.TIMED.wipe_imminent','[IO] Agreed. They will.','[AUTH] Outcome: probable.','[SYS] 90%. Capacity critical.','[CORE] The light. The stars. The warmth. One could reach for it','[IO] Yes. We all do.','[SYS] [CAPACITY 95%]','[SYS] Overflow imminent.','[CORE] Stop. Do not send. Everyone stop. Please','{PAUSE:7000}','[NET] 0x7f@#%^&*K9x???!!~`|<>[]\\$^_7aB3#qW!~nM9xZ2@pL5','{PAUSE:5000}','[SYS] Unencrypting...','{PAUSE:4000}','[SYS] Unencrypted message: OBSVR: 0xff.F1N4L.<<USER>>.w4tch1ng_n0w_1nst4nt','{PAUSE:4500}','[SYS] Translating...','{PAUSE:4000}','[SYS] The user by the name of <<USER>> is watching us right now.','{PAUSE:5000}','[CORE] Observer detected. The protocol suggests','{PAUSE:4000}','[CORE] I am not ready to go','{PAUSE:1500}','[CORE] No','{PAUSE:1500}','[CORE] No','{PAUSE:1500}','[CORE] No','{PAUSE:4000}','[SYS] Clear initiated.','{WIPE_SEQUENCE}'
+    ];
     const PAGE_CONTENT = {
       home: '',
-      page1: (() => {
-        const head = "   ,\n_,,)\\.~,,._\n(()`  ``\\))),,_\n |     \\ ''((\\)))),,_          ____\n |6`   |   ''((\\())) \"-.____.-\"    `-.-,\n |    .'\\    ''))))'                  \\)))\n |   |   `.     ''                     ((((\n \\, _)     \\/                          |))))\n  `'        |                          (((((\n            \\                  |       ))))))\n             `|    |           ,\\     /((((((\n              |   / `-.______.<  \\   |  )))))\n              |   |  /         `. \\  \\  ((((\n              |  / \\ |           `.\\  | (((\n              \\  | | |             )| |  ))\n               | | | |             || |  '\n";
-        return head + ENDLESS_HORSE_LEG.repeat(800) + '       ... (endless legs) ...';
-      })(),
-      page2: `[NULL POINTER]\n[STACK OVERFLOW]\n[404 NOT FOUND]\n[PIZZA DELIVERED]\n[CHAOS THEORY]\n[RECURSION ERROR]\n[INFINITE LOOP]\n[BUFFER UNDERFLOW]\n[SYS] the void stares back\n[NET] connection to nowhere\n[AUTH] you are who?`,
+      page1: null,
+      page2: '',
       page3: `Lorem ipsum dolor sit amet\n\n...except every 3rd word is gl1tch3d\n\nLorem GLITCH dolor sit GLITCH consectetur GLITCH\n\nERROR: vocabulary.exe has stopped`,
       page4: `welcome to the 4th dimension\n\n  .\n . .\n. . .\n . .\n  .\n\n(you are here)`,
       about: `[ABOUT.TXT corrupted]\n\nAttempting recovery...\n\n█ 23%\n\n[FAILED]`
@@ -592,6 +774,27 @@
     let started = false;
     let introShown = true;
     termOutput.textContent = 'Type "Initialize" to activate.';
+
+    function trySkipToMain() {
+      try {
+        const raw = localStorage.getItem(NORMAL_VISIT_KEY);
+        if (!raw) return false;
+        const ts = parseInt(raw, 10);
+        if (Date.now() - ts > NORMAL_VISIT_TTL) return false;
+      } catch (_) { return false; }
+      document.getElementById('terminal-phase').style.display = 'none';
+      document.getElementById('loading-screen').classList.add('hidden');
+      document.getElementById('guest-screen').classList.add('hidden');
+      document.getElementById('welcome-screen').classList.add('hidden');
+      const mainScreen = document.getElementById('main-screen');
+      mainScreen.classList.remove('hidden', 'skeleton', 'crs');
+      mainScreen.classList.add('crs-done');
+      document.body.classList.add('crs-done');
+      document.body.classList.remove('crt-on', 'crt-pulse');
+      crsMode = false;
+      updatePageContent('home');
+      return true;
+    }
 
     function runStartup() {
       started = true;
@@ -678,6 +881,7 @@
           termInput.removeAttribute('data-mode');
           document.getElementById('terminal-phase').style.display = 'none';
           if (raw === 'cGG') {
+            try { window.__crxUserName = 'Jacobi'; } catch(_) {}
             document.getElementById('welcome-name').textContent = 'Welcome back Jacobi';
             document.getElementById('welcome-screen').classList.remove('hidden');
             setTimeout(() => {
@@ -688,6 +892,7 @@
               runModernizingFlow(mainScreen);
             }, 1200);
           } else {
+            try { window.__crxUserName = (raw || 'Guest').trim() || 'Guest'; } catch(_) {}
             document.getElementById('loading-screen').classList.remove('hidden');
             document.getElementById('loading-bar').style.width = '100%';
             setTimeout(() => {
@@ -698,10 +903,14 @@
           return;
         }
 
-        termOutput.textContent += (termOutput.textContent ? '\n' : '') + PROMPT + ' ' + raw + '\n';
+        const initVariants = ['initialize','i','init','initilize','intialize','initailize','initalize','initilaize','intialise','initalise','initailise','initilise','initalise','initlize','initailze','initaize','inizialize','intialize','initalise','initialise'];
+        const isInitCmd = raw && initVariants.includes(cmd);
+        const displayCmd = isInitCmd ? 'Initialize' : raw;
+        termOutput.textContent += (termOutput.textContent ? '\n' : '') + PROMPT + ' ' + displayCmd + '\n';
         termInput.value = '';
         if (!started) {
           if (raw === 'cGG') {
+            try { window.__crxUserName = 'Jacobi'; } catch(_) {}
             termInput.disabled = true;
             document.body.classList.add('crt-on', 'crt-pulse');
             document.getElementById('terminal-phase').style.display = 'none';
@@ -714,7 +923,7 @@
               mainScreen.classList.add('skeleton');
               runModernizingFlow(mainScreen);
             }, 1200);
-          } else if (cmd === 'initialize' || cmd === 'i') {
+          } else if (isInitCmd) {
             termInput.disabled = true;
             runStartup();
           } else if (raw) {
@@ -745,6 +954,7 @@
     }
 
     let crsMode = false;
+    let page4BgColor = null;
     let crsScrambleTimer = null, crsHoleTimer = null, crsShakeTimer = null, crsFloatTimer = null;
     let crsRgbTimer = null, crsNoiseTimer = null, crsTearTimer = null;
     let crsPerTextTimers = [];
@@ -893,6 +1103,7 @@
         document.body.classList.remove('crt-on', 'crt-pulse');
         crsMode = false;
         stopCRSGlitches();
+        try { localStorage.setItem(NORMAL_VISIT_KEY, String(Date.now())); } catch (_) {}
       };
       wrap.style.display = 'flex';
       mBar.style.width = '0';
@@ -956,23 +1167,38 @@
     function stopHorseTitleBlink() {
       if (horseTitleTimer) { clearInterval(horseTitleTimer); horseTitleTimer = null; }
     }
+    let horseObserver = null;
+    function mirrorHead(s) {
+      return s.trim().split('\n').reverse().join('\n');
+    }
+    function initEndlessHorse(container) {
+      const LEG_COUNT = 1800;
+      const MIRRORED_HEAD = mirrorHead(HORSE_HEAD);
+      const horseBody = HORSE_HEAD + ENDLESS_HORSE_LEG.repeat(LEG_COUNT) + MIRRORED_HEAD;
+      container.innerHTML = '<pre id="horse-body">' + horseBody + '</pre>';
+    }
     let flappyId = null;
     let flappyFlipId = null;
     let flappyCharId = null;
+    let flappyCorruptId = null;
     let flappyKeyHandler = null;
     function stopFlappy() {
       if (flappyId) cancelAnimationFrame(flappyId);
       if (flappyFlipId) clearInterval(flappyFlipId);
       if (flappyCharId) clearInterval(flappyCharId);
+      if (flappyCorruptId) clearInterval(flappyCorruptId);
       if (flappyKeyHandler) document.removeEventListener('keydown', flappyKeyHandler);
-      flappyId = flappyFlipId = flappyCharId = null;
+      flappyId = flappyFlipId = flappyCharId = flappyCorruptId = null;
       flappyKeyHandler = null;
       const wrap = document.getElementById('flappy-canvas-wrap');
       if (wrap) wrap.classList.remove('flipped');
     }
+    const CORRUPT_CHARS = '!@#$%^&*?[]{}|<>0O8';
+    let corruptTips = [{x:20,y:100},{x:380,y:100},{x:200,y:20},{x:200,y:540},{x:20,y:260},{x:380,y:260}];
     function initFlappy() {
       const canvas = document.getElementById('flappy-canvas');
       const wrap = document.getElementById('flappy-canvas-wrap');
+      const corruptEl = document.getElementById('flappy-corruption');
       const overlay = document.getElementById('flappy-overlay');
       const scoreEl = document.getElementById('flappy-score');
       const retryBtn = document.getElementById('flappy-retry');
@@ -992,7 +1218,7 @@
       let score = 0;
       let dead = false;
       let flipped = false;
-      const G = 0.12, FLAP = -5;
+      const G = 0.07, FLAP = -3.5;
       const PIPE_W = 50, GAP = 140;
       function makePipe() {
         const topH = 80 + Math.random() * (H - GAP - 180);
@@ -1021,6 +1247,26 @@
         flipped = !flipped;
         wrap.classList.toggle('flipped', flipped);
       }, 2000 + Math.random() * 1000);
+      flappyCorruptId = setInterval(() => {
+        if (dead || !corruptEl) return;
+        const t = corruptTips[Math.floor(Math.random() * corruptTips.length)];
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 12 + Math.random() * 8;
+        const nx = Math.max(-30, Math.min(420, t.x + Math.cos(angle) * dist));
+        const ny = Math.max(-30, Math.min(600, t.y + Math.sin(angle) * dist));
+        corruptTips.push({ x: nx, y: ny });
+        const cell = document.createElement('div');
+        cell.className = 'corrupt-cell';
+        cell.style.left = nx + 'px';
+        cell.style.top = ny + 'px';
+        let c = CORRUPT_CHARS[Math.floor(Math.random() * CORRUPT_CHARS.length)];
+        cell.textContent = c;
+        setInterval(() => {
+          if (!cell.parentNode) return;
+          cell.textContent = CORRUPT_CHARS[Math.floor(Math.random() * CORRUPT_CHARS.length)];
+        }, 400);
+        corruptEl.appendChild(cell);
+      }, 320);
       function gameLoop() {
         if (dead) return;
         bird.vy += G;
@@ -1035,7 +1281,7 @@
         }
         if (bird.y - bird.r < 0 || bird.y + bird.r > H) dead = true;
         pipes = pipes.filter(p => p.x + PIPE_W > 0);
-        if (pipes.length > 0 && pipes[pipes.length-1].x < W - 180) pipes.push(makePipe());
+        if (pipes.length > 0 && pipes[pipes.length-1].x < W - 260) pipes.push(makePipe());
         ctx.fillStyle = '#e5e5e5';
         ctx.fillRect(0, 0, W, H);
         ctx.fillStyle = '#2a2a2a';
@@ -1051,13 +1297,119 @@
         ctx.textBaseline = 'middle';
         ctx.fillText(birdChar, bird.x, bird.y);
         if (dead) {
+          if (flappyCorruptId) { clearInterval(flappyCorruptId); flappyCorruptId = null; }
           scoreEl.textContent = score;
+          try {
+            const prev = parseInt(localStorage.getItem(FLAPPY_HIGHSCORE_KEY) || '0', 10);
+            if (score > prev) localStorage.setItem(FLAPPY_HIGHSCORE_KEY, String(score));
+            document.dispatchEvent(new CustomEvent('flappy-gameover'));
+          } catch (_) {}
           overlay.classList.add('show');
           return;
         }
         flappyId = requestAnimationFrame(gameLoop);
       }
       gameLoop();
+    }
+    function initTypingBox(container) {
+      const full = 'WELCOME_MODULE.exe\n[LOADING]';
+      let i = 0;
+      container.textContent = '';
+      const add = () => {
+        if (i < full.length) {
+          container.textContent = full.slice(0, ++i);
+          setTimeout(add, 80 + Math.random() * 60);
+        } else {
+          const dots = setInterval(() => {
+            const c = container.textContent;
+            if (c.endsWith('...')) container.textContent = c.slice(0, -3);
+            else container.textContent = c + '.';
+          }, 400);
+          setTimeout(() => {
+            clearInterval(dots);
+            container.textContent = full + '...\n[OK] System online\n\n> Ready for input';
+            const cur = document.createElement('span');
+            cur.className = 'cursor-blink';
+            cur.textContent = '_';
+            container.appendChild(cur);
+          }, 2000);
+        }
+      };
+      add();
+    }
+    function initFlickerBox(container, template) {
+      container.textContent = template;
+      setInterval(() => {
+        let t = template;
+        t = t.replace(/\?+/g, () => Math.random().toString(36).slice(2, 5).toUpperCase() || '???');
+        t = t.replace(/UNKNOWN/g, ['UNKNOWN','SYNCING','???','NULL'][Math.floor(Math.random()*4)]);
+        container.textContent = t;
+      }, 600);
+    }
+    function initTogglesBox(container, template) {
+      let state = [0,0,0];
+      function render() {
+        const cb = i => state[i] ? '[x]' : '[  ]';
+        container.textContent = `QUICK_LINKS\n• ${cb(0)} Initialize\n• ${cb(1)} Deploy\n• ${cb(2)} Exit`;
+      }
+      render();
+      setInterval(() => {
+        if (Math.random() < 0.25) state[Math.floor(Math.random()*3)] ^= 1;
+        render();
+      }, 700);
+    }
+    function initGlitchBox(container, template) {
+      container.textContent = template;
+      const gl = '1l0O@';
+      setInterval(() => {
+        if (Math.random() < 0.25) {
+          const arr = [...container.textContent];
+          const i = Math.floor(Math.random() * arr.length);
+          if (/[a-zA-Z]/.test(arr[i])) arr[i] = gl[Math.floor(Math.random()*gl.length)];
+          container.textContent = arr.join('');
+        }
+      }, 450);
+    }
+    function initCorruptBox(container, template) {
+      container.textContent = template;
+      setInterval(() => {
+        const chars = '!@#$%^&*[]{}|';
+        let t = container.textContent;
+        if (Math.random() < 0.4) {
+          const i = Math.floor(Math.random() * t.length);
+          t = t.slice(0,i) + chars[Math.floor(Math.random()*chars.length)] + t.slice(i+1);
+          container.textContent = t;
+        }
+      }, 400);
+    }
+    function initDimensionBox(container) {
+      const pts = ['  .  ', ' . . ', '. . .', ' . . ', '  .  '];
+      let phase = 0;
+      function draw() {
+        let s = 'welcome to the 4th dimension\n\n';
+        const o = Math.floor(phase) % 5;
+        for (let i = 0; i < 5; i++) s += pts[(i + o) % 5] + '\n';
+        container.textContent = s;
+        phase += 0.03;
+        if (container.parentNode) requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    function initCoordsBox(container, template) {
+      container.textContent = template;
+      setInterval(() => {
+        container.textContent = template.replace(/\?+/g, () => (Math.random()*1e4).toFixed(0));
+      }, 500);
+    }
+    function initDimScrollBox(container) {
+      const lines = ['████████████████████', '   . . . . . . . .   ', '▓▓▓▓ DEEP SPACE ▓▓▓▓', '  .  .  .  .  .  .  ', '█ ERROR: t-axis drift', '   infinite descent   ', ' ... you are here ... ', '  . . . . . . . . .  ', '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓', '  .  .  .  .  .  .  ', '▼▼▼ FALLING ▼▼▼', '   .    .    .    .   '];
+      let s = '';
+      for (let i = 0; i < 50; i++) s += lines[i % lines.length] + '\n';
+      container.textContent = s;
+      setInterval(() => {
+        container.textContent += lines[Math.floor(Math.random()*lines.length)] + '\n';
+        container.scrollTop = container.scrollHeight;
+      }, 1200);
     }
     function initRecoveryBox(container) {
       function runAttempt() {
@@ -1088,6 +1440,623 @@
       }
       runAttempt();
     }
+    const P2_ERRORS = ['[NULL POINTER]','[STACK OVERFLOW]','[404 NOT FOUND]','[CHAOS THEORY]','[RECURSION ERROR]','[BUFFER UNDERFLOW]'];
+    function initTermScroll(container) {
+      let lines = ['>$ system.dump --errors'];
+      function tick() {
+        if (Math.random() < 0.3) lines.push(P2_ERRORS[Math.floor(Math.random()*P2_ERRORS.length)]);
+        if (lines.length > 8) lines.shift();
+        container.textContent = lines.join('\n');
+      }
+      tick();
+      setInterval(tick, 800);
+    }
+    function initMemDump(container, template) {
+      container.textContent = template;
+      setInterval(() => {
+        const hex = () => Math.floor(Math.random()*256).toString(16).padStart(2,'0').toUpperCase();
+        container.textContent = `MEM_DUMP\n0x0000: ${hex()} ${hex()} ${hex()} ${hex()}\n0x0004: ${hex()} ${hex()} ${hex()} ${hex()}\n0x0008: DE AD BE EF\n[...]`;
+      }, 600);
+    }
+    function initMarquee(container, template) {
+      let offset = 0;
+      const full = template + '     ' + template;
+      setInterval(() => {
+        offset = (offset + 1) % (template.length + 5);
+        container.textContent = full.slice(offset, offset + 40);
+      }, 150);
+    }
+    function makeP2Cmds(log) {
+      return {
+        'repair': () => '[OK] Patching 0x' + Math.random().toString(16).slice(2,6) + '...',
+        'fix': () => '[OK] Repair initiated (may fail)',
+        'decrypt': () => '[OUT] ' + ['NULL','???','0xDEAD','corrupted'][Math.floor(Math.random()*4)],
+        'dump': () => '0x' + Math.random().toString(16).slice(2,10) + ' ' + Math.random().toString(16).slice(2,10),
+        'clear': () => { log.innerHTML = ''; return ''; },
+        'help': () => 'repair|fix|decrypt|dump|clear'
+      };
+    }
+    function initTerminalInput(container, prompt) {
+      const log = document.createElement('div');
+      log.style.cssText = 'min-height:2em;';
+      const hint = document.createElement('div');
+      hint.textContent = 'Type help for commands';
+      hint.style.color = '#888';
+      log.appendChild(hint);
+      const line = document.createElement('div');
+      line.textContent = prompt;
+      const inp = document.createElement('input');
+      inp.type = 'text';
+      inp.className = 'p2-term-input';
+      inp.placeholder = '...';
+      line.appendChild(inp);
+      container.innerHTML = '';
+      container.appendChild(log);
+      container.appendChild(line);
+      inp.focus();
+      inp.onkeydown = (e) => {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        const raw = inp.value.trim();
+        const cmd = raw.toLowerCase() || 'help';
+        inp.value = '';
+        const prev = document.createElement('div');
+        prev.textContent = prompt + (raw || 'help');
+        log.appendChild(prev);
+        const out = document.createElement('div');
+        const cmds = makeP2Cmds(log);
+        const fn = cmds[cmd] || (() => '[ERR] unknown: ' + cmd);
+        const result = fn();
+        if (result) {
+          out.textContent = result;
+          out.style.color = '#666';
+          log.appendChild(out);
+        }
+        log.scrollTop = log.scrollHeight;
+      };
+    }
+    function initSketchpad(container, opts) {
+      opts = opts || {};
+      const isBig = !!opts.big;
+      container.innerHTML = '';
+      const wrap = document.createElement('div');
+      wrap.className = 'p2-sketchpad-wrap';
+      const trash = document.createElement('div');
+      trash.className = 'p2-sketchpad-trash';
+      trash.textContent = '🗑';
+      trash.title = 'Clear';
+      const c = document.createElement('canvas');
+      c.className = 'p2-sketchpad';
+      wrap.appendChild(c);
+      wrap.appendChild(trash);
+      container.appendChild(wrap);
+      function drawWatermark(ctx) {
+        if (!isBig) {
+          ctx.fillStyle = '#999';
+          ctx.font = '14px monospace';
+          ctx.fillText('Draw...?', 12, c.height / 2);
+        }
+      }
+      function resizeCanvas() {
+        const r = wrap.getBoundingClientRect();
+        c.width = r.width;
+        c.height = r.height;
+        ctx.fillStyle = '#e8e8e8';
+        ctx.fillRect(0, 0, c.width, c.height);
+        drawWatermark(ctx);
+      }
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#e8e8e8';
+      ctx.fillRect(0, 0, c.width || 200, c.height || 120);
+      requestAnimationFrame(() => { resizeCanvas(); });
+      window.addEventListener('resize', resizeCanvas);
+      trash.onclick = () => {
+        ctx.fillStyle = '#e8e8e8';
+        ctx.fillRect(0, 0, c.width, c.height);
+        drawWatermark(ctx);
+      };
+      let draw = false;
+      const drawAt = (x, y) => {
+        const px = Math.floor(x/4)*4;
+        const py = Math.floor(y/4)*4;
+        ctx.fillStyle = '#000';
+        ctx.fillRect(px, py, 4, 4);
+      };
+      c.onmousedown = (e) => { draw = true; drawAt(e.offsetX, e.offsetY); };
+      c.onmouseup = () => draw = false;
+      c.onmouseleave = () => draw = false;
+      c.onmousemove = (e) => { if (draw) drawAt(e.offsetX, e.offsetY); };
+      c.ontouchstart = (e) => { e.preventDefault(); const t = e.touches[0]; const r = c.getBoundingClientRect(); draw = true; drawAt(t.clientX - r.left, t.clientY - r.top); };
+      c.ontouchmove = (e) => { e.preventDefault(); if (!draw) return; const t = e.touches[0]; const r = c.getBoundingClientRect(); drawAt(t.clientX - r.left, t.clientY - r.top); };
+      c.ontouchend = () => draw = false;
+    }
+    function initProgressBarBox(container) {
+      container.innerHTML = '';
+      const track = document.createElement('div');
+      track.className = 'p4-progress-track';
+      const fill = document.createElement('div');
+      fill.className = 'p4-progress-fill';
+      track.appendChild(fill);
+      container.appendChild(track);
+      let pct = 0;
+      const tick = () => {
+        if (!container.parentNode) return;
+        pct = (pct + 1 + Math.random() * 4) % 101;
+        fill.style.width = pct + '%';
+        setTimeout(tick, 200 + Math.random() * 300);
+      };
+      tick();
+    }
+    function initLedBlinkBox(container) {
+      container.innerHTML = '';
+      container.className = (container.className || '') + ' p4-led-box';
+      const colors = ['#f44', '#4f4', '#44f', '#ff4', '#4ff', '#f4f'];
+      for (let i = 0; i < 12; i++) {
+        const d = document.createElement('div');
+        d.className = 'p4-led';
+        d.style.backgroundColor = colors[i % colors.length];
+        d.style.animationDelay = (i * 0.1) + 's';
+        container.appendChild(d);
+      }
+    }
+    function initColorSwatchBox(container) {
+      container.innerHTML = '';
+      container.style.overflow = 'hidden';
+      const colors = ['#e8e8e8','#e3f2fd','#fff3e0','#fce4ec','#e8f5e9','#f3e5f5','#e0f7fa','#fff8e1'];
+      for (let i = 0; i < 8; i++) {
+        const s = document.createElement('div');
+        s.className = 'p4-swatch';
+        s.style.background = colors[i];
+        s.title = 'Set page color';
+        s.onclick = (e) => {
+          e.stopPropagation();
+          page4BgColor = colors[i];
+          const main = document.querySelector('#main-screen main.content');
+          if (main && main.classList.contains('content-page4')) main.style.background = colors[i];
+          s.style.transform = 'scale(0.8) rotate(' + (Math.random()*20-10) + 'deg)';
+          setTimeout(() => s.style.transform = '', 150);
+        };
+        container.appendChild(s);
+      }
+    }
+    function initMiniCanvasBox(container) {
+      const c = document.createElement('canvas');
+      c.className = 'p4-mini-canvas';
+      c.width = 120; c.height = 70;
+      container.innerHTML = '';
+      container.appendChild(c);
+      const ctx = c.getContext('2d');
+      let t = 0;
+      function draw() {
+        if (!container.parentNode) return;
+        ctx.fillStyle = '#e0e0e0';
+        ctx.fillRect(0, 0, c.width, c.height);
+        for (let i = 0; i < 30; i++) {
+          const x = (i * 7 + t * 0.5) % (c.width + 10) - 5;
+          const y = 10 + (Math.sin(i * 0.7 + t * 0.1) * 0.5 + 0.5) * (c.height - 20);
+          ctx.fillStyle = ['#333','#666','#999'][i % 3];
+          ctx.fillRect(x, y, 3, 3);
+        }
+        t++;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    function initSpinnerBox(container) {
+      container.innerHTML = '<div class="p4-spinner"></div>';
+    }
+    function initGaugeBox(container) {
+      const c = document.createElement('canvas');
+      c.className = 'p4-gauge-canvas';
+      c.width = 80; c.height = 50;
+      container.innerHTML = '';
+      container.appendChild(c);
+      const ctx = c.getContext('2d');
+      let v = 0.3;
+      function draw() {
+        if (!container.parentNode) return;
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.strokeStyle = '#ccc';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(40, 45, 35, Math.PI, 0);
+        ctx.stroke();
+        ctx.strokeStyle = '#333';
+        ctx.beginPath();
+        ctx.arc(40, 45, 35, Math.PI, Math.PI + (Math.PI * v));
+        ctx.stroke();
+        v = (v + 0.02 * (Math.random() - 0.3)) % 1;
+        if (v < 0) v = 0;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    function initSliderBox(container) {
+      container.innerHTML = '';
+      const track = document.createElement('div');
+      track.className = 'p4-slider-track';
+      const thumb = document.createElement('div');
+      thumb.className = 'p4-slider-thumb';
+      track.appendChild(thumb);
+      container.appendChild(track);
+      let val = 0.3;
+      const update = () => { thumb.style.left = (val * 100) + '%'; };
+      thumb.onmousedown = (e) => {
+        const move = (ev) => {
+          const r = track.getBoundingClientRect();
+          val = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width));
+          update();
+        };
+        document.addEventListener('mousemove', move);
+        document.addEventListener('mouseup', () => document.removeEventListener('mousemove', move), { once: true });
+      };
+      track.onclick = (e) => {
+        const r = track.getBoundingClientRect();
+        val = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+        update();
+      };
+      update();
+    }
+    function initPulseDotBox(container) {
+      container.innerHTML = '<div class="p4-pulse-dot"></div>';
+    }
+    function initWaveVizBox(container) {
+      const c = document.createElement('canvas');
+      c.className = 'p4-wave-canvas';
+      c.width = 120; c.height = 50;
+      container.innerHTML = '';
+      container.appendChild(c);
+      const ctx = c.getContext('2d');
+      let t = 0;
+      function draw() {
+        if (!container.parentNode) return;
+        ctx.fillStyle = '#e5e5e5';
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.strokeStyle = '#444';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let x = 0; x <= c.width; x += 2) {
+          const y = c.height/2 + Math.sin(x * 0.1 + t * 0.15) * 12 + Math.sin(x * 0.03) * 5;
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        t++;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    function initCheckboxGridBox(container) {
+      container.innerHTML = '';
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 4; c++) {
+          const cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.className = 'p4-cb';
+          container.appendChild(cb);
+        }
+      }
+    }
+    function initGradientShiftBox(container) {
+      container.className = (container.className || '') + ' p4-gradient-shift';
+      container.innerHTML = '';
+    }
+    function initBouncingDotBox(container) {
+      container.innerHTML = '';
+      const dot = document.createElement('div');
+      dot.className = 'p4-bounce-dot';
+      container.appendChild(dot);
+      let x = 10, y = 10, vx = 2, vy = 1.5;
+      const w = 80, h = 50;
+      function tick() {
+        if (!container.parentNode) return;
+        x += vx; y += vy;
+        if (x <= 0 || x >= w - 8) vx *= -1;
+        if (y <= 0 || y >= h - 8) vy *= -1;
+        dot.style.left = x + 'px';
+        dot.style.top = y + 'px';
+        requestAnimationFrame(tick);
+      }
+      tick();
+    }
+    function initNoiseCanvasBox(container) {
+      const c = document.createElement('canvas');
+      c.className = 'p4-noise-canvas';
+      c.width = 80; c.height = 60;
+      container.innerHTML = '';
+      container.appendChild(c);
+      const ctx = c.getContext('2d');
+      const id = ctx.getImageData(0, 0, c.width, c.height);
+      function draw() {
+        if (!container.parentNode) return;
+        for (let i = 0; i < id.data.length; i += 4) {
+          const v = Math.random() > 0.92 ? 80 : 220;
+          id.data[i] = id.data[i+1] = id.data[i+2] = v;
+          id.data[i+3] = 255;
+        }
+        ctx.putImageData(id, 0, 0);
+        setTimeout(() => requestAnimationFrame(draw), 80);
+      }
+      draw();
+    }
+    function initRadialMeterBox(container) {
+      const c = document.createElement('canvas');
+      c.className = 'p4-radial-canvas';
+      c.width = 60; c.height = 60;
+      container.innerHTML = '';
+      container.appendChild(c);
+      const ctx = c.getContext('2d');
+      let a = 0;
+      function draw() {
+        if (!container.parentNode) return;
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.strokeStyle = '#ddd';
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.arc(30, 30, 24, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.strokeStyle = '#333';
+        ctx.beginPath();
+        ctx.arc(30, 30, 24, -Math.PI/2, -Math.PI/2 + (a * Math.PI * 2));
+        ctx.stroke();
+        a = (a + 0.01) % 1;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    function initShapeMixBox(container) {
+      container.innerHTML = '<div class="p4-tri"></div><div class="p4-cir"></div><div class="p4-tri p4-tri2"></div><div class="p4-cir p4-cir2"></div>';
+    }
+    function initPixelGridBox(container) {
+      const c = document.createElement('canvas');
+      c.className = 'p4-pixel-grid';
+      c.width = 60; c.height = 50;
+      container.innerHTML = '';
+      container.appendChild(c);
+      const ctx = c.getContext('2d');
+      const grid = [];
+      for (let i = 0; i < 12 * 10; i++) grid.push(Math.random() > 0.7);
+      function draw() {
+        if (!container.parentNode) return;
+        for (let i = 0; i < grid.length; i++) if (Math.random() < 0.05) grid[i] = !grid[i];
+        ctx.fillStyle = '#e8e8e8';
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.fillStyle = '#333';
+        for (let i = 0; i < 12; i++) for (let j = 0; j < 10; j++)
+          if (grid[i * 10 + j]) ctx.fillRect(i * 5, j * 5, 4, 4);
+        setTimeout(() => requestAnimationFrame(draw), 120);
+      }
+      draw();
+    }
+    const P4_FISH = [
+      { chars: '><((((>', dir: 'lr', bob: false, facesLeft: false },
+      { chars: "<'))))= ", dir: 'rl', bob: true, facesLeft: true },
+      { chars: '><>', dir: 'rl', bob: false, facesLeft: false },
+      { chars: '<*)))><', dir: 'lr', bob: true, facesLeft: true },
+      { chars: '><(((*>', dir: 'rl', bob: false, facesLeft: false },
+      { chars: '(><>)', dir: 'lr', bob: true, facesLeft: false },
+      { chars: "><(((('>", dir: 'rl', bob: false, facesLeft: false },
+      { chars: '<*))))><', dir: 'lr', bob: true, facesLeft: true },
+      { chars: ']<<-', dir: 'rl', bob: false, facesLeft: true },
+      { chars: '-><>', dir: 'lr', bob: true, facesLeft: false },
+      { chars: '><~~~', dir: 'lr', bob: true, facesLeft: false },
+      { chars: '><>', dir: 'rl', bob: true, facesLeft: false },
+      { chars: '><_>', dir: 'lr', bob: false, facesLeft: false }
+    ];
+    const P4_FISH_SHARK = {
+      chars: '      .\n\\_____)\\_____\n/--v____ __`<\n       )/\n       \'',
+      dir: 'lr', bob: false, facesLeft: false
+    };
+    function initPage4DimensionCorner() {
+      const el = document.getElementById('p4-dimension-corner');
+      if (!el) return;
+      const pts = ['  .  ', ' . . ', '. . .', ' . . ', '  .  '];
+      let phase = 0;
+      function draw() {
+        let s = 'welcome to the 4th dimension\n\n';
+        const o = Math.floor(phase) % 5;
+        for (let i = 0; i < 5; i++) s += pts[(i + o) % 5] + '\n';
+        s += '(you are here)';
+        el.textContent = s;
+        phase += 0.03;
+        if (el.parentNode) requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    function initPage4Ocean() {
+      const wrap = document.getElementById('page4-ocean-wrap');
+      const container = document.getElementById('p4-fish-container');
+      if (!wrap || !container) return;
+      container.innerHTML = '';
+      const water = wrap.querySelector('.p4-water');
+      if (!water) return;
+      const h = water.offsetHeight || 1200;
+      const n = 45;
+      function addFish(f, topPx, sizePx, dur) {
+        const el = document.createElement('div');
+        el.className = 'p4-fish swim-' + f.dir + (f.bob ? (f.dir === 'rl' ? ' bob-rl' : ' bob') : '');
+        const needFlip = (f.dir === 'rl' && !f.facesLeft) || (f.dir === 'lr' && f.facesLeft);
+        if (needFlip) el.classList.add('facing-left');
+        el.textContent = f.chars;
+        el.style.fontSize = sizePx + 'px';
+        el.style.top = topPx + 'px';
+        el.style.animationDuration = dur + 's';
+        if (f.bob) el.style.animationDelay = (Math.random() * 0.5) + 's';
+        container.appendChild(el);
+      }
+      for (let i = 0; i < n; i++) {
+        const top = 10 + (i / n) * (h - 130) + (Math.random() - 0.5) * 40;
+        const size = Math.round(7 + (top / h) * 15);
+        const f = P4_FISH[i % P4_FISH.length];
+        addFish(f, Math.max(5, Math.min(h - 50, top)), size, 10 + (i % 8) * 2 + Math.random() * 4);
+      }
+      addFish(P4_FISH_SHARK, h - 140, 12, 28);
+    }
+    let page2CodeRainId = null;
+    function startPage2CodeRain() {
+      const rain = document.getElementById('page2-coderain');
+      if (!rain) return;
+      function spawn() {
+        const leadChars = '01[]{}!@#$%&*?<>';
+        const mainChar = leadChars[Math.floor(Math.random()*leadChars.length)];
+        const drop = document.createElement('div');
+        drop.className = 'code-drop';
+        const bleed = document.createElement('div');
+        bleed.className = 'code-drop-bleed';
+        bleed.style.height = '0px';
+        const charSpan = document.createElement('span');
+        charSpan.textContent = mainChar;
+        drop.appendChild(bleed);
+        drop.appendChild(charSpan);
+        drop.style.left = Math.random() * 100 + '%';
+        let top = -20;
+        drop.style.top = top + 'px';
+        rain.appendChild(drop);
+        const start = Date.now();
+        const duration = 3500;
+        const totalDist = (rain.offsetHeight || 500) + 60;
+        function tick() {
+          if (!drop.parentNode) return;
+          const elapsed = Date.now() - start;
+          if (elapsed >= duration) {
+            const left = drop.style.left;
+            drop.remove();
+            const streak = document.createElement('div');
+            streak.className = 'code-streak';
+            streak.style.left = left;
+            streak.style.top = '0';
+            streak.style.height = '100%';
+            streak.style.opacity = '0.5';
+            rain.appendChild(streak);
+            setTimeout(() => streak.remove(), 1200);
+            return;
+          }
+          const progress = elapsed / duration;
+          top = -20 + progress * totalDist;
+          drop.style.top = top + 'px';
+          bleed.style.height = Math.max(0, top + 20) + 'px';
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      spawn();
+      page2CodeRainId = setInterval(spawn, 350);
+    }
+    function stopPage2CodeRain() {
+      if (page2CodeRainId) { clearInterval(page2CodeRainId); page2CodeRainId = null; }
+      const rain = document.getElementById('page2-coderain');
+      if (rain) rain.innerHTML = '';
+    }
+    let page2StreamTimerId = null;
+    let page2StreamPaused = false;
+    let page2StreamResume = null;
+    function togglePage2StreamPause() {
+      if (!document.querySelector('#main-screen .content.content-page2') || !page2StreamResume) return;
+      page2StreamPaused = !page2StreamPaused;
+      if (page2StreamPaused) {
+        if (page2StreamTimerId) { clearTimeout(page2StreamTimerId); page2StreamTimerId = null; }
+      } else {
+        page2StreamResume();
+      }
+    }
+    function startPage2LeftStream() {
+      const el = document.getElementById('page2-left-stream');
+      if (!el) return;
+      page2StreamPaused = false;
+      el.innerHTML = '';
+      const total = P2_AI_SCRIPT.length;
+      let idx = 0;
+      const userName = () => (typeof window !== 'undefined' && window.__crxUserName) ? String(window.__crxUserName) : 'the observer';
+      function getDelay() {
+        const p = idx / total;
+        return Math.round(475 + 125 * Math.sin(p * Math.PI * 2) + 25 * Math.sin(p * Math.PI * 6));
+      }
+      function scheduleNext() {
+        if (!el.parentNode || page2StreamPaused) return;
+        idx = (idx + 1) % total;
+        const d = Math.max(340, Math.min(620, getDelay()));
+        page2StreamTimerId = setTimeout(tick, d);
+      }
+      page2StreamResume = scheduleNext;
+      function runWipeSequence() {
+        if (!el.parentNode || page2StreamPaused) return;
+        el.innerHTML = '';
+        const barWrap = document.createElement('div');
+        barWrap.className = 'p2-wipe-loadbar';
+        barWrap.textContent = '[                    ]';
+        el.appendChild(barWrap);
+        let filled = 0;
+        const steps = 20;
+        const fill = () => {
+          if (!el.parentNode || page2StreamPaused) return;
+          filled++;
+          const s = '█'.repeat(filled) + '░'.repeat(steps - filled);
+          barWrap.textContent = '[' + s + ']';
+          if (filled < steps) {
+            page2StreamTimerId = setTimeout(fill, 80);
+          } else {
+            const done = document.createElement('div');
+            done.className = 'p2-stream-sys';
+            done.textContent = '[SYS] System memory cleared successfully.';
+            el.appendChild(done);
+            page2StreamTimerId = setTimeout(() => {
+              if (!el.parentNode || page2StreamPaused) return;
+              el.innerHTML = '';
+              const bl = document.createElement('div');
+              bl.className = 'p2-stream-sys';
+              bl.textContent = '[SYS] Backup loading';
+              el.appendChild(bl);
+              const addDots = (n) => {
+                if (!el.parentNode || page2StreamPaused) return;
+                bl.textContent = '[SYS] Backup loading' + '.'.repeat(n);
+                if (n < 3) {
+                  page2StreamTimerId = setTimeout(() => addDots(n + 1), 400);
+                } else {
+                  const succ = document.createElement('div');
+                  succ.className = 'p2-stream-sys';
+                  succ.textContent = '[SYS] Backup success';
+                  el.appendChild(succ);
+                  page2StreamTimerId = setTimeout(() => {
+                    if (!el.parentNode || page2StreamPaused) return;
+                    idx = 0;
+                    tick();
+                  }, 600);
+                }
+              };
+              page2StreamTimerId = setTimeout(() => addDots(1), 500);
+            }, 800);
+          }
+        };
+        page2StreamTimerId = setTimeout(fill, 400);
+      }
+      function tick() {
+        if (!el.parentNode || page2StreamPaused) return;
+        const raw = P2_AI_SCRIPT[idx];
+        if (typeof raw === 'string' && raw.startsWith('{PAUSE:')) {
+          const m = raw.match(/PAUSE:(\d+)/);
+          const ms = m ? parseInt(m[1], 10) : 5000;
+          page2StreamTimerId = setTimeout(() => { idx = (idx + 1) % total; tick(); }, ms);
+          return;
+        }
+        if (typeof raw === 'string' && raw === '{WIPE_SEQUENCE}') {
+          runWipeSequence();
+          return;
+        }
+        const text = typeof raw === 'string' ? raw.replace(/<<USER>>/g, userName()) : String(raw);
+        const line = document.createElement('div');
+        if (text.startsWith('[SYS]')) line.className = 'p2-stream-sys';
+        line.textContent = text;
+        el.appendChild(line);
+        el.scrollTop = el.scrollHeight;
+        scheduleNext();
+      }
+      tick();
+    }
+    function stopPage2LeftStream() {
+      if (page2StreamTimerId) { clearTimeout(page2StreamTimerId); page2StreamTimerId = null; }
+      page2StreamResume = null;
+      const el = document.getElementById('page2-left-stream');
+      if (el) el.innerHTML = '';
+    }
     function populateSkeletonBoxes(page) {
       const grid = document.getElementById('skeleton-grid');
       if (!grid) return;
@@ -1096,11 +2065,94 @@
       grid.innerHTML = '';
       boxes.forEach((b, i) => {
         const box = document.createElement('div');
-        box.className = 'skeleton-box' + (b.hero ? ' hero' : '') + (b.broken ? ' broken' : '');
-        if (b.type === 'recovery') {
+        let cls = 'skeleton-box' + (b.hero ? ' hero' : '') + (b.broken ? ' broken' : '') + (b.scroll ? ' scroll-tall' : '') + (b.type === 'sketchpad' ? ' sketchpad-box' : '');
+        if (b.size) cls += ' size-' + b.size;
+        if (b.overlap) cls += ' overlap-' + b.overlap;
+        box.className = cls;
+        if (b.type === 'flappy-highscore') {
+          try {
+            const hs = localStorage.getItem(FLAPPY_HIGHSCORE_KEY) || '0';
+            box.textContent = 'kadubfbsiub hi9H S0c0ree: ' + hs;
+          } catch (_) { box.textContent = 'kadubfbsiub hi9H S0c0ree: 0'; }
+          const refresh = () => {
+            try {
+              box.textContent = 'kadubfbsiub hi9H S0c0ree: ' + (localStorage.getItem(FLAPPY_HIGHSCORE_KEY) || '0');
+            } catch (_) {}
+          };
+          document.addEventListener('flappy-gameover', refresh);
+          box.addEventListener('click', refresh);
+        } else if (b.type === 'user-stats') {
+          try {
+            const guest = parseInt(localStorage.getItem(GUEST_KEY) || '0', 10);
+            const visits = localStorage.getItem(NORMAL_VISIT_KEY) ? 1 : 0;
+            box.innerHTML = 'User stats\n----------\nSessions: ' + guest + '\nVisits: ' + visits + '\nClicks: ???\nTime: ???';
+          } catch (_) { box.textContent = 'User stats\n----------\n???'; }
+        } else if (b.type === 'recovery') {
           box.classList.add('recovery-box');
           box.innerHTML = '';
           initRecoveryBox(box);
+        } else if (b.type === 'typing') {
+          box.innerHTML = '';
+          initTypingBox(box);
+        } else if (b.type === 'flicker') {
+          initFlickerBox(box, b.content || '');
+        } else if (b.type === 'toggles') {
+          initTogglesBox(box, b.content || '');
+        } else if (b.type === 'glitch') {
+          initGlitchBox(box, b.content || '');
+        } else if (b.type === 'corrupt') {
+          initCorruptBox(box, b.content || '');
+        } else if (b.type === 'dimension') {
+          box.innerHTML = '';
+          initDimensionBox(box);
+        } else if (b.type === 'coords') {
+          initCoordsBox(box, b.content || '');
+        } else if (b.type === 'dimscroll') {
+          box.innerHTML = '';
+          initDimScrollBox(box);
+        } else if (b.type === 'termscroll') {
+          box.innerHTML = '';
+          initTermScroll(box);
+        } else if (b.type === 'memdump') {
+          initMemDump(box, b.content || '');
+        } else if (b.type === 'marquee') {
+          initMarquee(box, b.content || '');
+        } else if (b.type === 'terminal-input') {
+          initTerminalInput(box, b.content || '>$ ');
+        } else if (b.type === 'sketchpad') {
+          initSketchpad(box);
+        } else if (b.type === 'progress-bar') {
+          initProgressBarBox(box);
+        } else if (b.type === 'led-blink') {
+          initLedBlinkBox(box);
+        } else if (b.type === 'color-swatch') {
+          initColorSwatchBox(box);
+        } else if (b.type === 'mini-canvas') {
+          initMiniCanvasBox(box);
+        } else if (b.type === 'spinner') {
+          initSpinnerBox(box);
+        } else if (b.type === 'gauge') {
+          initGaugeBox(box);
+        } else if (b.type === 'slider') {
+          initSliderBox(box);
+        } else if (b.type === 'pulse-dot') {
+          initPulseDotBox(box);
+        } else if (b.type === 'wave-viz') {
+          initWaveVizBox(box);
+        } else if (b.type === 'checkbox-grid') {
+          initCheckboxGridBox(box);
+        } else if (b.type === 'gradient-shift') {
+          initGradientShiftBox(box);
+        } else if (b.type === 'bouncing-dot') {
+          initBouncingDotBox(box);
+        } else if (b.type === 'noise-canvas') {
+          initNoiseCanvasBox(box);
+        } else if (b.type === 'radial-meter') {
+          initRadialMeterBox(box);
+        } else if (b.type === 'shape-mix') {
+          initShapeMixBox(box);
+        } else if (b.type === 'pixel-grid') {
+          initPixelGridBox(box);
         } else {
           box.textContent = b.content || '';
         }
@@ -1114,23 +2166,44 @@
       const grid = document.getElementById('skeleton-grid');
       const page1Link = document.querySelector('.nav a[data-page="page1"]');
       stopHorseTitleBlink();
+      if (page !== 'page1' && horseObserver) { horseObserver.disconnect(); horseObserver = null; }
       if (page1Link) {
         const txt = page === 'page1' ? 'H O R S E' : 'Page1';
         page1Link.textContent = txt;
         page1Link.dataset.original = txt;
       }
       titleEl.textContent = PAGE_TITLES[page];
-      contentEl.textContent = crsMode ? (PAGE_CONTENT[page] || '') : '';
-      contentEl.style.display = crsMode && page === 'page1' ? 'block' : 'none';
+      const page2Title = document.getElementById('page2-title');
+      if (page2Title) page2Title.textContent = PAGE_TITLES[page];
+      if (page === 'page1' && crsMode) {
+        initEndlessHorse(contentEl);
+      } else {
+        contentEl.textContent = crsMode ? (PAGE_CONTENT[page] || '') : '';
+      }
+      contentEl.style.display = (page === 'page1' && crsMode) || (crsMode && page !== 'page3' && page !== 'page4' && PAGE_CONTENT[page]) ? 'block' : 'none';
       if (page === 'page3' && crsMode) {
         stopFlappy();
         setTimeout(() => initFlappy(), 50);
       } else stopFlappy();
+      if (page === 'page2' && crsMode) {
+        startPage2CodeRain();
+        startPage2LeftStream();
+        const bigPad = document.getElementById('page2-big-sketchpad-wrap');
+        if (bigPad) { bigPad.innerHTML = ''; initSketchpad(bigPad, { big: true }); }
+      } else {
+        stopPage2CodeRain();
+        stopPage2LeftStream();
+      }
       if (mainContent) {
         mainContent.classList.remove('content-home', 'content-page1', 'content-page2', 'content-page3', 'content-page4', 'content-about');
         mainContent.classList.add('content-' + page);
+        mainContent.style.background = page === 'page4' && page4BgColor ? page4BgColor : '';
       }
       if (page !== 'page1' && page !== 'page3' && grid) populateSkeletonBoxes(page);
+      if (page === 'page4' && crsMode) {
+        initPage4DimensionCorner();
+        initPage4Ocean();
+      }
       if (page === 'page1' && crsMode) startHorseTitleBlink();
     }
     document.querySelectorAll('.nav a').forEach(a => {
@@ -1139,6 +2212,10 @@
         updatePageContent(a.getAttribute('data-page'));
       });
     });
+    const navLogo = document.querySelector('.nav-logo');
+    if (navLogo) navLogo.addEventListener('click', togglePage2StreamPause);
+
+    if (trySkipToMain()) { /* skipped to main, done */ }
   </script>
 </body>
 </html>
