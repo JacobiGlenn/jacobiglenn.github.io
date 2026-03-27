@@ -211,7 +211,7 @@
     .screen.hidden { opacity: 0; pointer-events: none; transition: opacity 0.6s; z-index: 0; }
     .loading-bar-wrap { width: 260px; height: 5px; background: #222; overflow: hidden; }
     .loading-bar { height: 100%; width: 0; background: #fff; transition: width 0.5s ease; }
-    #main-screen { flex-direction: column; align-items: stretch; background: #fff; color: #111; min-height: 100vh; }
+    #main-screen { flex-direction: column; align-items: stretch; justify-content: flex-start; background: #fff; color: #111; min-height: 100vh; height: 100%; }
     #main-screen .nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; padding: 1rem 2rem; background: #000; color: #fff; flex-shrink: 0; }
     #main-screen .nav-logo { width: 40px; height: 40px; background: #444; flex-shrink: 0; cursor: pointer; }
     #main-screen .nav-links { flex: 1; display: flex; justify-content: center; gap: calc(1.5rem + 4px); align-items: center; }
@@ -292,6 +292,7 @@
     @keyframes glitch-tear { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
     /* final layout: Home top, left-aligned */
     #main-screen:not(.skeleton) .content { align-items: flex-start; justify-content: flex-start; padding: 2rem; }
+    #main-screen:not(.skeleton) .content.show-project-detail { padding: 0; align-items: stretch; }
     /* clean mode: hide CRS elements, show page-content */
     #main-screen.crs-done .skeleton-grid,
     #main-screen.crs-done .page2-right-scroll > .p4-dimension-corner,
@@ -313,6 +314,68 @@
     .project-card-github:hover { opacity: 1; }
     .project-card-github svg { width: 28px; height: 28px; }
     .project-card-desc { padding: 1rem 1.25rem; font-size: 0.9rem; color: #555; line-height: 1.5; }
+    .portfolio-cards { display: flex; flex-direction: column; gap: 1.5rem; max-width: 360px; }
+    .design-gallery-trigger { display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0; cursor: pointer; color: #fff; opacity: 0.95; transition: opacity 0.2s, transform 0.15s; }
+    .design-gallery-trigger:hover { opacity: 1; transform: scale(1.05); }
+    .design-gallery-trigger:focus-visible { outline: 2px solid #fff; outline-offset: 2px; border-radius: 4px; }
+    .design-stack { position: relative; width: 36px; height: 32px; display: block; }
+    .design-stack-layer { position: absolute; width: 28px; height: 22px; border: 2px solid rgba(255,255,255,0.95); border-radius: 3px; background: rgba(255,255,255,0.15); box-shadow: 0 2px 6px rgba(0,0,0,0.35); }
+    .design-stack-layer:nth-child(1) { top: 0; right: 0; z-index: 3; }
+    .design-stack-layer:nth-child(2) { top: 4px; right: 4px; z-index: 2; opacity: 0.85; }
+    .design-stack-layer:nth-child(3) { top: 8px; right: 8px; z-index: 1; opacity: 0.7; }
+    #design-gallery-modal { position: fixed; inset: 0; z-index: 3000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    #design-gallery-modal.is-open { display: flex; }
+    .design-gallery-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); cursor: pointer; }
+    .design-gallery-dialog { display: flex; align-items: center; gap: 0.5rem; width: 100%; }
+    .design-gallery-slide-wrap { flex: 1; min-height: 280px; border-radius: 8px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
+    .design-gallery-slide { width: 100%; min-height: 280px; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 600; color: rgba(255,255,255,0.95); text-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: opacity 0.2s; }
+    .design-gallery-prev, .design-gallery-next { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: none; background: #fff; color: #111; font-size: 1.5rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .design-gallery-prev:hover, .design-gallery-next:hover { background: #f0f0f0; }
+    .design-gallery-inner { position: relative; z-index: 1; max-width: min(90vw, 600px); width: 100%; padding-top: 0.5rem; }
+    .design-gallery-close { position: absolute; top: 0; right: 0; width: 36px; height: 36px; border: none; background: #fff; border-radius: 50%; font-size: 1.25rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 2; }
+    .design-gallery-close:hover { background: #f0f0f0; }
+    .design-gallery-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 2.5rem; }
+    .project-card[data-project] { cursor: pointer; }
+    .project-card[data-project] .project-card-desc,
+    .project-card[data-project] .project-card-header { cursor: pointer; }
+    .project-card[data-project] .design-gallery-trigger,
+    .project-card[data-project] .project-card-github { cursor: pointer; }
+    #standard-content-wrap { flex: 1; display: flex; flex-direction: column; min-height: 0; align-self: stretch; width: 100%; }
+    #main-screen.crs .content #standard-content-wrap { display: contents; }
+    #main-screen .content #project-detail-view { display: none; flex: 1; flex-direction: column; align-items: stretch; width: 100%; min-height: 0; overflow: visible; align-self: stretch; }
+    #main-screen .content.show-project-detail #standard-content-wrap { display: none !important; }
+    #main-screen .content.show-project-detail #project-detail-view { display: flex !important; }
+    .project-detail-hero { width: 100%; height: 160px; position: relative; border-radius: 0; overflow: hidden; margin: 0; flex-shrink: 0; background: linear-gradient(135deg, #6b7280 0%, #9ca3af 50%, #6b7280 100%); }
+    .project-detail-hero::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.45); pointer-events: none; }
+    .project-detail-title { font-family: Georgia, serif; font-size: 2.25rem; font-weight: 400; color: #111; width: 100%; box-sizing: border-box; padding: 1.25rem 2rem 0; margin: 0 0 0.75rem; text-align: left; align-self: flex-start; }
+    .project-detail-body { width: 100%; max-width: none; box-sizing: border-box; padding: 0 2rem 2.5rem; color: #444; line-height: 1.65; }
+    .project-detail-body p { margin: 0 0 1rem; }
+    .project-detail-lead { font-size: 1.05rem; color: #333; }
+    .project-detail-reader-note { font-style: italic; color: #555; border-left: 3px solid #c5c5c5; padding: 0.35rem 0 0.35rem 1rem; margin: 0 0 1.35rem; line-height: 1.55; }
+    .project-detail-h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.35rem; font-weight: 500; color: #1a1a1a; margin: 1.85rem 0 0.6rem; line-height: 1.3; }
+    .project-detail-h2:first-of-type { margin-top: 0.25rem; }
+    .project-detail-timeline { list-style: none; margin: 1.25rem 0 1.5rem; padding: 0 0 0 0.5rem; border-left: 3px solid #ccc; }
+    .project-detail-timeline li { position: relative; padding: 0 0 1.15rem 1.15rem; margin: 0; }
+    .project-detail-timeline li::before { content: ''; position: absolute; left: -0.45rem; top: 0.4rem; width: 11px; height: 11px; background: #fff; border: 2px solid #333; border-radius: 50%; box-sizing: border-box; }
+    .project-detail-timeline .tl-date { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 0.35rem; }
+    .project-detail-code-wrap { margin: 1.25rem auto; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; max-width: min(100%, 720px); width: 100%; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .project-detail-code-caption { margin: 0.5rem 0 0; font-size: 0.85rem; color: #666; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
+    .project-detail-code-label { background: #3a3a3a; color: #c8c8c8; font-size: 0.72rem; padding: 0.45rem 0.85rem; letter-spacing: 0.04em; }
+    .project-detail-pre { margin: 0; padding: 1rem 1.15rem; background: #1e1e1e; color: #d4d4d4; font-family: Consolas, Monaco, 'Courier New', monospace; font-size: 0.78rem; line-height: 1.5; overflow-x: auto; white-space: pre; tab-size: 2; }
+    .project-detail-fig { margin: 1.25rem auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #f5f5f5; max-width: min(100%, 560px); width: 100%; display: block; }
+    .project-detail-fig.tall-img { max-width: min(100%, 960px); }
+    .project-detail-fig img { width: 100%; height: auto; display: block; }
+    .project-detail-fig .ph-img { height: 180px; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #e0e0e0, #d0d0d0); color: #888; font-size: 0.95rem; letter-spacing: 0.05em; }
+    .project-detail-fig.tall-img .ph-img { min-height: 300px; height: 340px; }
+    .project-detail-fig figcaption { padding: 0.6rem 0.85rem; font-size: 0.85rem; color: #666; border-top: 1px solid #ddd; background: #fafafa; text-align: center; }
+    .project-detail-fig.project-detail-fig--left { margin-left: 0; margin-right: auto; }
+    .smiley-face-demo { display: flex; justify-content: center; align-items: center; margin: 1.25rem 0 1.75rem; }
+    .smiley-circle { width: 132px; height: 132px; border: 3px solid #2a2a2a; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #fafafa; font-family: Georgia, 'Times New Roman', serif; font-size: 1.65rem; font-weight: 500; color: #1a1a1a; white-space: nowrap; letter-spacing: normal; }
+    .shape-study { display: flex; justify-content: center; align-items: flex-end; gap: 1.5rem; padding: 1.25rem 1rem; flex-wrap: wrap; min-height: 120px; }
+    .shape-oval { width: 76px; height: 48px; border: 3px solid #2a2a2a; border-radius: 50%; background: #fff; flex-shrink: 0; }
+    .shape-tri { width: 0; height: 0; border-left: 26px solid transparent; border-right: 26px solid transparent; border-bottom: 45px solid #2a2a2a; flex-shrink: 0; }
+    .shape-sq { width: 46px; height: 46px; border: 3px solid #2a2a2a; background: #fff; flex-shrink: 0; }
+    .smiley-wide-oval { width: min(100%, 340px); height: 88px; border: 3px solid #2a2a2a; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #fafafa; font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; font-weight: 500; color: #1a1a1a; white-space: nowrap; }
     #main-screen:not(.skeleton) .content h1 { align-self: flex-start; }
     /* CRS: heading positions per page */
     #main-screen.crs .content.content-home h1 { align-self: flex-start; }
@@ -528,6 +591,7 @@
       </div>
     </nav>
     <main class="content content-home">
+      <div id="standard-content-wrap">
       <h1 id="page-title">Home</h1>
       <div id="page-content"></div>
       <div id="flappy-container">
@@ -558,6 +622,12 @@
         </div>
         <div id="page2-big-sketchpad-wrap" class="page2-big-sketchpad-wrap"></div>
       </div>
+      </div>
+      <div id="project-detail-view" class="project-detail-view" aria-hidden="true">
+        <div class="project-detail-hero" aria-hidden="true"></div>
+        <h1 class="project-detail-title" id="project-detail-title">Project</h1>
+        <div id="project-detail-body" class="project-detail-body"></div>
+      </div>
     </main>
     <div class="modernizing-wrap" id="modernizing-wrap" style="display:none">
       <div class="modernizing-backdrop">
@@ -568,6 +638,22 @@
         </div>
         <div class="modernizing-loading">
           <div class="loading-bar-wrap"><div class="loading-bar" id="modernizing-bar"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="design-gallery-modal" class="design-gallery-modal" role="dialog" aria-modal="true" aria-label="Image gallery">
+    <div class="design-gallery-backdrop" tabindex="-1" aria-hidden="true"></div>
+    <div class="design-gallery-inner">
+      <button type="button" class="design-gallery-close" id="design-gallery-close" aria-label="Close gallery">×</button>
+      <div class="design-gallery-row">
+        <div class="design-gallery-dialog">
+          <button type="button" class="design-gallery-prev" id="design-gallery-prev" aria-label="Previous image">‹</button>
+          <div class="design-gallery-slide-wrap">
+            <div class="design-gallery-slide" id="design-gallery-slide"></div>
+          </div>
+          <button type="button" class="design-gallery-next" id="design-gallery-next" aria-label="Next image">›</button>
         </div>
       </div>
     </div>
@@ -837,10 +923,22 @@
       page4: `welcome to the 4th dimension\n\n  .\n . .\n. . .\n . .\n  .\n\n(you are here)`,
       about: `[ABOUT.TXT corrupted]\n\nAttempting recovery...\n\n█ 23%\n\n[FAILED]`
     };
+    /** Per card: set data-project to match a key here. For design cards, data-gallery must match DESIGN_GALLERY_DATA key (or omit gallery). */
+    const PROJECT_PAGES = {
+      'design-example': { title: 'Design Project Example', kind: 'design', galleryId: 'design-example' },
+      'dev-example': { title: 'This portfolio site', kind: 'dev', githubUrl: 'https://github.com/JacobiGlenn/jacobiglenn.github.io' }
+    };
+    const DESIGN_GALLERY_DATA = {
+      'design-example': [
+        { color: '#c62828', label: '1' },
+        { color: '#1565c0', label: '2' },
+        { color: '#2e7d32', label: '3' }
+      ]
+    };
     const CLEAN_CONTENT = {
       home: '<p class="clean-message">This is still a work in progress, thank you for understanding!</p>',
-      page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Under construction — coming soon.</p>',
-      page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Under construction — coming soon.</p><div class="project-card"><div class="project-card-header"><div class="project-card-header-inner"><span class="project-card-name">Project Name</span><a href="https://github.com/JacobiGlenn" target="_blank" rel="noopener noreferrer" class="project-card-github" aria-label="View on GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div><div class="project-card-desc">Brief description of the project. Links to full case study or demo.</div></div>',
+      page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Under construction — coming soon.</p><div class="portfolio-cards"><article class="project-card" data-project="design-example"><div class="project-card-header"><div class="project-card-header-inner"><span class="project-card-name">Design Project Example</span><button type="button" class="design-gallery-trigger" data-gallery="design-example" aria-label="View featured images"><span class="design-stack" aria-hidden="true"><span class="design-stack-layer"></span><span class="design-stack-layer"></span><span class="design-stack-layer"></span></span></button></div></div><div class="project-card-desc">Sample case study: a smiley face.</div></article></div>',
+      page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Under construction — coming soon.</p><div class="portfolio-cards"><article class="project-card" data-project="dev-example"><div class="project-card-header"><div class="project-card-header-inner"><span class="project-card-name">This portfolio site</span><a href="https://github.com/JacobiGlenn/jacobiglenn.github.io" target="_blank" rel="noopener noreferrer" class="project-card-github" aria-label="View on GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div><div class="project-card-desc">The site you are on: one HTML file, GitHub Pages, and the write-up with real screenshots lives here.</div></article></div>',
       page3: '<p class="clean-uc">View my professional experience on LinkedIn.</p><a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">linkedin.com/in/jacobiglenn</a>',
       page4: '<p class="clean-uc">Under construction — coming soon.</p>',
       about: '<p class="clean-sub">Contact me</p><p class="clean-contact">971-300-5659</p><p class="clean-contact"><a href="mailto:jacobiglenn@gmail.com" class="clean-link">jacobiglenn@gmail.com</a></p>'
@@ -2314,7 +2412,97 @@
         grid.appendChild(box);
       });
     }
+    function exitProjectDetail() {
+      const main = document.querySelector('#main-screen .content');
+      if (main) main.classList.remove('show-project-detail');
+      const pv = document.getElementById('project-detail-view');
+      const sw = document.getElementById('standard-content-wrap');
+      if (pv) pv.setAttribute('aria-hidden', 'true');
+      if (sw) sw.removeAttribute('aria-hidden');
+    }
+    function buildProjectDetailBody(meta) {
+      if (meta.kind === 'design') {
+        return (
+          '<p class="project-detail-reader-note">Other design entries on this site follow the same beats: intro, visuals with captions, how it was made, and a closing note. This one keeps the subject tiny on purpose.</p>' +
+          '<p class="project-detail-lead">The whole assignment: draw a friendly smiley as a <strong>circle</strong> with <strong>: )</strong> inside (colon, space, paren) on <strong>one horizontal line</strong>, not stacked upright.</p>' +
+          '<div class="smiley-face-demo" aria-hidden="true"><div class="smiley-circle" title=": )"><span>: )</span></div></div>' +
+          '<p>Padding between the smiley and the inside edge of the circle mattered as much as the characters. Too little and the face felt crowded. Too much and it stopped feeling warm or friendly. The sweet spot was enough air so nothing touched the ring, but still read as one tight, happy mark.</p>' +
+          '<h2 class="project-detail-h2">Early passes</h2>' +
+          '<p>First tries were too oval, or the ring sat too heavy. Grayscale comps focused on a single stroke weight for the circle and monospace-adjacent punctuation so <code>: )</code> didn&rsquo;t fight the curve.</p>' +
+          '<figure class="project-detail-fig"><div class="ph-img" style="padding:0;"><div class="shape-study" aria-hidden="true"><div class="shape-oval"></div><div class="shape-tri"></div><div class="shape-sq"></div></div></div><figcaption>Oval, then triangle, then square. Finding a genuinely perfect circle was the hardest part, and it took way longer than drawing these three. The compass tool started as a mystery and turned into something I leaned on every session.</figcaption></figure>' +
+          '<h2 class="project-detail-h2">How the face settled</h2>' +
+          '<p>Iteration was mostly optical: nudging the pair so the smile lines up with the implied baseline of the circle, checking at small sizes, and making sure the colon doesn&rsquo;t read like eyes stacked vertically when someone scans quickly.</p>' +
+          '<h2 class="project-detail-h2">Timeline</h2>' +
+          '<ul class="project-detail-timeline">' +
+          '<li><span class="tl-date">Week 1 &mdash; Circle</span>Perfecting a perfect circle: compass tool, pixel snapping, and killing the slight egg shape that kept creeping in.</li>' +
+          '<li><span class="tl-date">Week 2 &mdash; : )</span>Locking <code>: )</code> on one line with deliberate space, never upright or cramped, so it still reads as a smile from arm&rsquo;s length.</li>' +
+          '<li><span class="tl-date">Week 3 &mdash; Balance</span>Centering the pair inside the ring so the negative space feels even; adjusting letter-spacing instead of stretching glyphs.</li>' +
+          '<li><span class="tl-date">Week 4 &mdash; Finish</span>Final stroke weight, export at 1x and 2x, and a tiny one-line spec so the mark reproduces the same in slides and on the site.</li>' +
+          '</ul>' +
+          '<figure class="project-detail-fig"><div class="ph-img" style="padding:1rem;display:flex;align-items:center;justify-content:center;background:#e8e8e8;"><div class="smiley-wide-oval"><span>: )</span></div></div><figcaption>Almost perfect. The smile sits in a wide oval while the last tweaks land (before committing to the round frame above).</figcaption></figure>' +
+          '<h2 class="project-detail-h2">Takeaway</h2>' +
+          '<p>building the perfect smiley face was hard and left me figuring out how to use a compass tool in ways i never knew possible!</p>'
+        );
+      }
+      const gh = meta.githubUrl ? '<p><strong>Repository:</strong> <a href="' + meta.githubUrl + '" target="_blank" rel="noopener noreferrer" class="clean-link">github.com/JacobiGlenn/jacobiglenn.github.io</a> — same site you are reading; fork or browse <code>index.html</code> on GitHub.</p>' : '';
+      const prePages =
+        'const PROJECT_PAGES = {\n' +
+        "  'design-example': { title: 'Design Project Example', kind: 'design', galleryId: 'design-example' },\n" +
+        "  'dev-example': { title: 'This portfolio site', kind: 'dev', githubUrl: 'https://github.com/JacobiGlenn/jacobiglenn.github.io' }\n" +
+        '};';
+      return (
+        '<p class="project-detail-reader-note">This dev write-up is a little unusual: the &ldquo;project&rdquo; is the portfolio itself—the single page you are on right now. The screenshots below were captured from a local run so you can see the same UI in context.</p>' +
+        '<p class="project-detail-lead"><strong>jacobiglenn.github.io</strong> is a static personal site hosted on <strong>GitHub Pages</strong> (<code>.nojekyll</code>, optional <code>CNAME</code>). Almost everything lives in one <code>index.html</code>: terminal intro, optional &ldquo;CRS&rdquo; glitch mode, portfolio navigation, design/dev case studies, and the project-detail view you are reading.</p>' +
+        '<h2 class="project-detail-h2">Landing: four-panel terminal</h2>' +
+        '<p>First visit (or after clearing site data) you get a retro terminal layout: prompt, ASCII art panel, log stream, and guide text. Type <code>Initialize</code> to start the flow; returning visitors within 24 hours can skip straight to the main shell unless the special <code>cGG</code> path runs.</p>' +
+        '<figure class="project-detail-fig tall-img"><img src="assets/dev-site-terminal.png" width="1280" height="800" alt="Screenshot of the four-panel terminal landing screen" loading="lazy" decoding="async"><figcaption>Captured from local <code>npx serve</code> — the boot experience before the main portfolio.</figcaption></figure>' +
+        '<h2 class="project-detail-h2">Main portfolio shell</h2>' +
+        '<p>After the intro, the top bar stays fixed while you scroll: Home, Portfolios (Designer / Developer), Work Experience, Blog, About. The light content area below is where list pages and project cards render.</p>' +
+        '<figure class="project-detail-fig tall-img"><img src="assets/dev-site-home.png" width="1280" height="800" alt="Screenshot of the Home page with navigation" loading="lazy" decoding="async"><figcaption>Home view with the shared nav — scroll stays under the bar.</figcaption></figure>' +
+        '<h2 class="project-detail-h2">Developer tab and this card</h2>' +
+        '<p>The Developer section lists projects as cards with a header strip (placeholder art), title, short blurb, and a GitHub icon. You opened this write-up from the card that points at this repository.</p>' +
+        '<figure class="project-detail-fig tall-img"><img src="assets/dev-site-developer.png" width="1280" height="800" alt="Screenshot of the Developer portfolio page with project card" loading="lazy" decoding="async"><figcaption>Projects list — the card you clicked is the one describing this site.</figcaption></figure>' +
+        '<h2 class="project-detail-h2">Actual code from this file</h2>' +
+        '<p>Routing for project pages is plain JavaScript: IDs in <code>PROJECT_PAGES</code>, HTML injected into <code>#project-detail-body</code>, and the nav always exits detail view when you change sections. Below is a real excerpt from <code>index.html</code> (trimmed to the registry that includes this page).</p>' +
+        '<div class="project-detail-code-wrap"><div class="project-detail-code-label">index.html</div><pre class="project-detail-pre">' +
+        prePages.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') +
+        '</pre></div>' +
+        '<p class="project-detail-code-caption">Those keys line up with <code>data-project</code> on each card and drive <code>openProjectDetail(id)</code>.</p>' +
+        '<h2 class="project-detail-h2">This article, full-page</h2>' +
+        '<p>Project detail uses the gray hero strip, left-aligned title, full-width body, and centered figures—same layout you see scrolling here. The capture below is the long page including reader note, screenshots, and code block.</p>' +
+        '<figure class="project-detail-fig tall-img"><img src="assets/dev-site-project-detail.png" width="1280" alt="Full-page screenshot of this portfolio project write-up" loading="lazy" decoding="async"><figcaption>Full-page capture of this write-up (scrollable in the browser).</figcaption></figure>' +
+        '<h2 class="project-detail-h2">Shipping &amp; refresh</h2>' +
+        '<p>Pushing to <code>main</code> updates GitHub Pages. To regenerate the PNGs in <code>assets/</code> after layout changes, run <code>npx serve</code> then <code>npm run screenshots</code> (Playwright loads the local site and saves captures).</p>' +
+        gh
+      );
+    }
+    function openProjectDetail(id) {
+      const meta = PROJECT_PAGES[id];
+      const ms = document.getElementById('main-screen');
+      if (!meta || !ms || !ms.classList.contains('crs-done')) return;
+      const main = document.querySelector('#main-screen .content');
+      document.getElementById('project-detail-title').textContent = meta.title;
+      document.getElementById('project-detail-body').innerHTML = buildProjectDetailBody(meta);
+      document.getElementById('project-detail-view').setAttribute('aria-hidden', 'false');
+      document.getElementById('standard-content-wrap').setAttribute('aria-hidden', 'true');
+      main.classList.add('show-project-detail');
+    }
+    (function initPortfolioProjectClicks() {
+      const wrap = document.getElementById('standard-content-wrap');
+      if (!wrap) return;
+      wrap.addEventListener('click', function(e) {
+        if (!document.getElementById('main-screen').classList.contains('crs-done')) return;
+        if (e.target.closest('.design-gallery-trigger')) return;
+        if (e.target.closest('.project-card-github')) return;
+        const card = e.target.closest('.project-card[data-project]');
+        if (!card) return;
+        const pid = card.getAttribute('data-project');
+        if (pid && PROJECT_PAGES[pid]) openProjectDetail(pid);
+      });
+    })();
+
     function updatePageContent(page) {
+      exitProjectDetail();
       const titleEl = document.getElementById('page-title');
       const contentEl = document.getElementById('page-content');
       const mainContent = document.querySelector('#main-screen .content');
@@ -2363,7 +2551,64 @@
         initPage4Ocean();
       }
       if (page === 'page1' && crsMode) startHorseTitleBlink();
+      if (!crsMode && page === 'page1') initDesignPortfolioGalleries();
     }
+
+    let designGalleryState = { id: null, index: 0 };
+    function renderDesignGallerySlide() {
+      const slide = document.getElementById('design-gallery-slide');
+      if (!slide || !designGalleryState.id) return;
+      const items = DESIGN_GALLERY_DATA[designGalleryState.id];
+      if (!items || !items.length) return;
+      const n = items.length;
+      const i = ((designGalleryState.index % n) + n) % n;
+      const item = items[i];
+      slide.style.backgroundColor = item.color;
+      slide.textContent = item.label;
+    }
+    function openDesignGallery(id) {
+      if (!DESIGN_GALLERY_DATA[id]) return;
+      designGalleryState = { id, index: 0 };
+      renderDesignGallerySlide();
+      document.getElementById('design-gallery-modal').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDesignGallery() {
+      document.getElementById('design-gallery-modal').classList.remove('is-open');
+      document.body.style.overflow = '';
+      designGalleryState.id = null;
+    }
+    function stepDesignGallery(delta) {
+      const items = DESIGN_GALLERY_DATA[designGalleryState.id];
+      if (!items) return;
+      designGalleryState.index = (designGalleryState.index + delta + items.length) % items.length;
+      renderDesignGallerySlide();
+    }
+    function initDesignPortfolioGalleries() {
+      document.querySelectorAll('.design-gallery-trigger').forEach(btn => {
+        btn.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const id = btn.getAttribute('data-gallery');
+          if (id) openDesignGallery(id);
+        };
+      });
+    }
+    (function setupDesignGalleryModal() {
+      const modal = document.getElementById('design-gallery-modal');
+      if (!modal) return;
+      modal.querySelector('.design-gallery-backdrop').onclick = () => closeDesignGallery();
+      document.getElementById('design-gallery-close').onclick = () => closeDesignGallery();
+      document.getElementById('design-gallery-prev').onclick = () => stepDesignGallery(-1);
+      document.getElementById('design-gallery-next').onclick = () => stepDesignGallery(1);
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { closeDesignGallery(); e.preventDefault(); }
+        if (e.key === 'ArrowLeft') { stepDesignGallery(-1); e.preventDefault(); }
+        if (e.key === 'ArrowRight') { stepDesignGallery(1); e.preventDefault(); }
+      });
+    })();
+
     document.querySelectorAll('.nav a').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
