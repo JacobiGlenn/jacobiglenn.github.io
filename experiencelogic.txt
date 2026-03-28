@@ -1,0 +1,132 @@
+WORK EXPERIENCE PAGE — HOW IT WORKS
+=====================================
+
+All experience content lives in index.html inside the CLEAN_CONTENT.page3 string.
+No build step needed — just edit index.html and push.
+
+
+── ADDING A NEW JOB ENTRY ──────────────────────────────────────────────────
+
+Each entry follows this structure:
+
+  <div class="exp-entry" data-category="CATEGORY">
+    <div class="exp-accent"></div>
+    <div class="exp-logo" style="background:COLOR">
+      <span class="exp-logo-letter" style="color:TEXT_COLOR;font-size:SIZE">INITIALS</span>
+    </div>
+    <div class="exp-body">
+      <div class="exp-top">
+        <div>
+          <p class="exp-role">Job Title</p>
+          <p class="exp-company">Company Name</p>
+        </div>
+        <div class="exp-right">
+          <p class="exp-date">Start – End</p>
+          <p class="exp-loc">City, State</p>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Bullet point</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag">Skill</span>
+      </div>
+    </div>
+  </div>
+
+CATEGORIES (controls the colored left accent bar):
+  edu      → green   (#3c873a)
+  design   → orange  (#f24e1e)
+  creative → amber   (#f59e0b)
+  tech     → blue    (#3178c6)
+  ai       → purple  (#7c3aed)
+  service  → teal    (#0891b2)
+
+LOGO: colored square with initials. Adjust font-size for longer initials:
+  1 char  → ~1.2rem
+  2 chars → ~0.65rem
+  3 chars → ~0.6rem
+
+
+── GROUPED ROLES (multiple positions at same company) ──────────────────────
+
+Use exp-subroles instead of exp-bullets directly:
+
+  <div class="exp-subroles">
+    <div class="exp-subrole">
+      <p class="exp-subrole-role">Sub-Role Title</p>
+      <p class="exp-subrole-date">Date range</p>
+      <ul class="exp-bullets"><li>...</li></ul>
+    </div>
+    <div class="exp-subrole">...</div>
+  </div>
+
+
+── PHOTO STACK (click-to-open image carousel) ──────────────────────────────
+
+To add a photo stack to a job entry:
+
+STEP 1 — Register the gallery in DESIGN_GALLERY_DATA (search for it in index.html):
+
+  'your-gallery-id': [
+    { kind: 'solid', color: '#hex', caption: 'Caption text' },
+    { kind: 'solid', color: '#hex', caption: 'Caption text' },
+    { kind: 'solid', color: '#hex', caption: 'Caption text' }
+  ],
+
+  Use kind: 'solid' for colored placeholder squares while you don't have photos.
+  Use kind: 'img' with a src: 'path/to/image.jpg' for real photos (not yet implemented).
+
+STEP 2 — Add the stack HTML inside the job's <div class="exp-body">:
+
+  Place it AFTER </div></div> (closing exp-top) and BEFORE <ul class="exp-bullets">:
+
+  <div class="exp-photo-stack" onclick="openDesignGallery('your-gallery-id')">
+    <div class="exp-photo-card exp-photo-card--back2" style="background:#COLOR3"></div>
+    <div class="exp-photo-card exp-photo-card--back1" style="background:#COLOR2"></div>
+    <div class="exp-photo-card exp-photo-card--front"  style="background:#COLOR1"></div>
+  </div>
+
+  The stack is position: absolute so it floats in the dead space on the right
+  side of the entry without affecting the text layout at all.
+
+POSITIONING:
+  top: 4.5rem   → current value, sits nicely below the date/location
+  right: 0      → pinned to the right edge of the entry
+  Adjust top if the entry has more/less content above.
+
+NOTE: Since the stack is in the JS string, apostrophes in onclick must be escaped:
+  onclick="openDesignGallery(\'your-gallery-id\')"
+
+
+── SUMMARY CARD ────────────────────────────────────────────────────────────
+
+The summary card at the top of the page is:
+
+  <div class="exp-summary"><p>Your summary text here.</p></div>
+
+Styled as a light blue-tinted card (#f5f7ff background, #dde2f5 border).
+Edit the text directly in the CLEAN_CONTENT.page3 string.
+
+
+── EDUCATION CARDS ─────────────────────────────────────────────────────────
+
+At the bottom of page3, two side-by-side cards:
+
+  <div class="exp-edu-grid">
+    <div class="exp-edu-card">
+      <p class="exp-edu-school">School Name</p>
+      <p class="exp-edu-degree">Degree / Program</p>
+      <p class="exp-edu-minor">Specialization or notes</p>
+      <p class="exp-edu-date">Year range</p>
+    </div>
+  </div>
+
+
+── ADDING REAL IMAGES TO THE CAROUSEL ──────────────────────────────────────
+
+Currently the gallery slides only support kind: 'solid' (colored squares).
+To add real image support:
+  1. Add kind: 'img' handling to renderDesignGallerySlide() in index.html
+  2. Drop your image files into assets/ or a subfolder
+  3. Use { kind: 'img', src: 'assets/photo.jpg', caption: '...' } in DESIGN_GALLERY_DATA
