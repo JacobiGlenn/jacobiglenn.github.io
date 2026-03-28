@@ -212,8 +212,8 @@
     .loading-bar-wrap { width: 260px; height: 5px; background: #222; overflow: hidden; }
     .loading-bar { height: 100%; width: 0; background: #fff; transition: width 0.5s ease; }
     #main-screen { flex-direction: column; align-items: stretch; justify-content: flex-start; background: #fff; color: #111; min-height: 100vh; height: 100%; }
-    #main-screen .nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; padding: 1rem 2rem; background: #000; color: #fff; flex-shrink: 0; }
-    #main-screen .nav-logo { width: 40px; height: 40px; background: #444; flex-shrink: 0; cursor: pointer; }
+    #main-screen .nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; padding: 1rem 2rem; min-height: calc(40px + 2rem); background: #000; color: #fff; flex-shrink: 0; }
+    #main-screen .nav-logo { position: absolute; height: 4rem; width: auto; cursor: pointer; object-fit: contain; filter: invert(1); top: 50%; transform: translateY(-50%); left: 2rem; }
     #main-screen .nav-links { flex: 1; display: flex; justify-content: center; gap: calc(1.5rem + 4px); align-items: center; }
     #main-screen .nav a { color: #fff; text-decoration: none; }
     .nav-dropdown { position: relative; }
@@ -612,7 +612,7 @@
   <div id="welcome-screen" class="screen hidden"><h1 id="welcome-name"></h1></div>
   <div id="main-screen" class="screen hidden skeleton">
     <nav class="nav">
-      <div class="nav-logo"></div>
+      <img src="assets/logo.svg" class="nav-logo" alt="Jacobi Glenn logo">
       <div class="nav-links">
         <a href="#" data-page="home">Home</a>
         <div class="nav-dropdown">
@@ -1110,16 +1110,17 @@
           termInput.removeAttribute('data-mode');
           document.getElementById('terminal-phase').style.display = 'none';
           if (raw === 'cGG') {
-            try { window.__crxUserName = 'Jacobi'; localStorage.setItem(TYPED_CGG_KEY, '1'); } catch(_) {}
-            document.getElementById('welcome-name').textContent = 'Welcome back Jacobi';
-            document.getElementById('welcome-screen').classList.remove('hidden');
-            setTimeout(() => {
-              document.getElementById('welcome-screen').classList.add('hidden');
-              const mainScreen = document.getElementById('main-screen');
-              mainScreen.classList.remove('hidden');
-              mainScreen.classList.add('skeleton');
-              runModernizingFlow(mainScreen);
-            }, 1200);
+            try { window.__crxUserName = 'Jacobi'; localStorage.setItem(TYPED_CGG_KEY, '1'); localStorage.setItem(LAST_USER_KEY, 'cGG'); } catch(_) {}
+            const mainScreen = document.getElementById('main-screen');
+            document.getElementById('loading-screen').classList.add('hidden');
+            document.getElementById('guest-screen').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.add('hidden');
+            mainScreen.classList.remove('hidden', 'skeleton', 'crs');
+            mainScreen.classList.add('crs-done');
+            document.body.classList.add('crs-done');
+            document.body.classList.remove('crt-on', 'crt-pulse');
+            crsMode = false;
+            updatePageContent('home');
           } else {
             try { window.__crxUserName = (raw || 'Guest').trim() || 'Guest'; } catch(_) {}
             document.getElementById('loading-screen').classList.remove('hidden');
@@ -1139,19 +1140,19 @@
         termInput.value = '';
         if (!started) {
           if (raw === 'cGG') {
-            try { window.__crxUserName = 'Jacobi'; localStorage.setItem(TYPED_CGG_KEY, '1'); } catch(_) {}
+            try { window.__crxUserName = 'Jacobi'; localStorage.setItem(TYPED_CGG_KEY, '1'); localStorage.setItem(LAST_USER_KEY, 'cGG'); } catch(_) {}
             termInput.disabled = true;
-            document.body.classList.add('crt-on', 'crt-pulse');
             document.getElementById('terminal-phase').style.display = 'none';
-            document.getElementById('welcome-name').textContent = 'Welcome back Jacobi';
-            document.getElementById('welcome-screen').classList.remove('hidden');
-            setTimeout(() => {
-              document.getElementById('welcome-screen').classList.add('hidden');
-              const mainScreen = document.getElementById('main-screen');
-              mainScreen.classList.remove('hidden');
-              mainScreen.classList.add('skeleton');
-              runModernizingFlow(mainScreen);
-            }, 1200);
+            const mainScreen = document.getElementById('main-screen');
+            document.getElementById('loading-screen').classList.add('hidden');
+            document.getElementById('guest-screen').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.add('hidden');
+            mainScreen.classList.remove('hidden', 'skeleton', 'crs');
+            mainScreen.classList.add('crs-done');
+            document.body.classList.add('crs-done');
+            document.body.classList.remove('crt-on', 'crt-pulse');
+            crsMode = false;
+            updatePageContent('home');
           } else if (isInitCmd) {
             termInput.disabled = true;
             runStartup();
