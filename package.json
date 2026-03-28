@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:projects": "node scripts/build-projects.cjs",
     "screenshots": "node scripts/capture-portfolio-screens.cjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/JacobiGlenn/jacobiglenn.github.io#readme",
   "devDependencies": {
+    "gray-matter": "^4.0.3",
     "playwright": "^1.58.2"
   }
 }

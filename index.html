@@ -307,6 +307,12 @@
     .clean-link:hover { text-decoration: underline; }
     .project-card { margin-top: 1.5rem; max-width: 360px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; }
     .project-card-header { position: relative; height: 140px; background: linear-gradient(135deg, #6b7280 0%, #9ca3af 50%, #6b7280 100%); }
+    .project-card[data-project="dev-example"] .project-card-header {
+      background: #0a0a0a url('devProjects/dev-example/COVER.png') center / cover no-repeat;
+    }
+    .project-card[data-project="design-example"] .project-card-header {
+      background: #ececec url('designProjects/design-example/COVER.svg') center / cover no-repeat;
+    }
     .project-card-header::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.45); }
     .project-card-header-inner { position: relative; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; }
     .project-card-name { font-weight: 600; font-size: 1rem; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
@@ -328,7 +334,12 @@
     .design-gallery-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); cursor: pointer; }
     .design-gallery-dialog { display: flex; align-items: center; gap: 0.5rem; width: 100%; }
     .design-gallery-slide-wrap { flex: 1; min-height: 280px; border-radius: 8px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
-    .design-gallery-slide { width: 100%; min-height: 280px; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 600; color: rgba(255,255,255,0.95); text-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: opacity 0.2s; }
+    .design-gallery-slide { width: 100%; min-height: 280px; display: flex; flex-direction: column; align-items: stretch; justify-content: stretch; transition: opacity 0.2s; }
+    .design-gallery-slide-inner { flex: 1; display: flex; flex-direction: column; min-height: 280px; background: #333; }
+    .design-gallery-slide-main { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 200px; padding: 1rem; box-sizing: border-box; }
+    .design-gallery-caption { margin: 0; padding: 0.7rem 1rem; text-align: center; font-size: 0.88rem; font-weight: 500; line-height: 1.35; color: #f5f5f5; background: rgba(0,0,0,0.58); flex-shrink: 0; }
+    #design-gallery-slide .smiley-circle { width: 150px; height: 150px; font-size: 1.85rem; }
+    #design-gallery-slide .shape-study { min-height: 0; padding: 0.5rem; }
     .design-gallery-prev, .design-gallery-next { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: none; background: #fff; color: #111; font-size: 1.5rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
     .design-gallery-prev:hover, .design-gallery-next:hover { background: #f0f0f0; }
     .design-gallery-inner { position: relative; z-index: 1; max-width: min(90vw, 600px); width: 100%; padding-top: 0.5rem; }
@@ -659,6 +670,7 @@
     </div>
   </div>
 
+  <script src="generated/projects-data.js"></script>
   <script>
     //################################################################
     //#
@@ -923,22 +935,20 @@
       page4: `welcome to the 4th dimension\n\n  .\n . .\n. . .\n . .\n  .\n\n(you are here)`,
       about: `[ABOUT.TXT corrupted]\n\nAttempting recovery...\n\n█ 23%\n\n[FAILED]`
     };
-    /** Per card: set data-project to match a key here. For design cards, data-gallery must match DESIGN_GALLERY_DATA key (or omit gallery). */
-    const PROJECT_PAGES = {
-      'design-example': { title: 'Design Project Example', kind: 'design', galleryId: 'design-example' },
-      'dev-example': { title: 'This portfolio site', kind: 'dev', githubUrl: 'https://github.com/JacobiGlenn/jacobiglenn.github.io' }
-    };
+    /** Populated by scripts/build-projects.cjs into generated/projects-data.js; edit each project folder's project.md, then npm run build:projects. */
+    const GP = window.__GENERATED_PROJECTS || { PROJECT_PAGES: {}, cardsHtml: { design: '', dev: '' } };
+    const PROJECT_PAGES = GP.PROJECT_PAGES || {};
     const DESIGN_GALLERY_DATA = {
       'design-example': [
-        { color: '#c62828', label: '1' },
-        { color: '#1565c0', label: '2' },
-        { color: '#2e7d32', label: '3' }
+        { kind: 'solid', color: '#c62828', caption: 'This is an example of an image: a solid color fill.' },
+        { kind: 'smiley', caption: 'This is an example of an image: the finished smiley mark.' },
+        { kind: 'shapes', caption: 'This is an example of an image: oval, triangle, and square (from the case study).' }
       ]
     };
     const CLEAN_CONTENT = {
       home: '<p class="clean-message">This is still a work in progress, thank you for understanding!</p>',
-      page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Under construction — coming soon.</p><div class="portfolio-cards"><article class="project-card" data-project="design-example"><div class="project-card-header"><div class="project-card-header-inner"><span class="project-card-name">Design Project Example</span><button type="button" class="design-gallery-trigger" data-gallery="design-example" aria-label="View featured images"><span class="design-stack" aria-hidden="true"><span class="design-stack-layer"></span><span class="design-stack-layer"></span><span class="design-stack-layer"></span></span></button></div></div><div class="project-card-desc">Sample case study: a smiley face.</div></article></div>',
-      page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Under construction — coming soon.</p><div class="portfolio-cards"><article class="project-card" data-project="dev-example"><div class="project-card-header"><div class="project-card-header-inner"><span class="project-card-name">This portfolio site</span><a href="https://github.com/JacobiGlenn/jacobiglenn.github.io" target="_blank" rel="noopener noreferrer" class="project-card-github" aria-label="View on GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div><div class="project-card-desc">The site you are on: one HTML file, GitHub Pages, and the write-up with real screenshots lives here.</div></article></div>',
+      page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Under construction — coming soon.</p><div class="portfolio-cards">' + (GP.cardsHtml.design || '') + '</div>',
+      page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Under construction — coming soon.</p><div class="portfolio-cards">' + (GP.cardsHtml.dev || '') + '</div>',
       page3: '<p class="clean-uc">View my professional experience on LinkedIn.</p><a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">linkedin.com/in/jacobiglenn</a>',
       page4: '<p class="clean-uc">Under construction — coming soon.</p>',
       about: '<p class="clean-sub">Contact me</p><p class="clean-contact">971-300-5659</p><p class="clean-contact"><a href="mailto:jacobiglenn@gmail.com" class="clean-link">jacobiglenn@gmail.com</a></p>'
@@ -2419,68 +2429,38 @@
       const sw = document.getElementById('standard-content-wrap');
       if (pv) pv.setAttribute('aria-hidden', 'true');
       if (sw) sw.removeAttribute('aria-hidden');
+      const hero = document.querySelector('.project-detail-hero');
+      if (hero) {
+        hero.style.backgroundImage = '';
+        hero.style.backgroundSize = '';
+        hero.style.backgroundPosition = '';
+        hero.style.backgroundRepeat = '';
+      }
     }
     function buildProjectDetailBody(meta) {
-      if (meta.kind === 'design') {
-        return (
-          '<p class="project-detail-reader-note">Other design entries on this site follow the same beats: intro, visuals with captions, how it was made, and a closing note. This one keeps the subject tiny on purpose.</p>' +
-          '<p class="project-detail-lead">The whole assignment: draw a friendly smiley as a <strong>circle</strong> with <strong>: )</strong> inside (colon, space, paren) on <strong>one horizontal line</strong>, not stacked upright.</p>' +
-          '<div class="smiley-face-demo" aria-hidden="true"><div class="smiley-circle" title=": )"><span>: )</span></div></div>' +
-          '<p>Padding between the smiley and the inside edge of the circle mattered as much as the characters. Too little and the face felt crowded. Too much and it stopped feeling warm or friendly. The sweet spot was enough air so nothing touched the ring, but still read as one tight, happy mark.</p>' +
-          '<h2 class="project-detail-h2">Early passes</h2>' +
-          '<p>First tries were too oval, or the ring sat too heavy. Grayscale comps focused on a single stroke weight for the circle and monospace-adjacent punctuation so <code>: )</code> didn&rsquo;t fight the curve.</p>' +
-          '<figure class="project-detail-fig"><div class="ph-img" style="padding:0;"><div class="shape-study" aria-hidden="true"><div class="shape-oval"></div><div class="shape-tri"></div><div class="shape-sq"></div></div></div><figcaption>Oval, then triangle, then square. Finding a genuinely perfect circle was the hardest part, and it took way longer than drawing these three. The compass tool started as a mystery and turned into something I leaned on every session.</figcaption></figure>' +
-          '<h2 class="project-detail-h2">How the face settled</h2>' +
-          '<p>Iteration was mostly optical: nudging the pair so the smile lines up with the implied baseline of the circle, checking at small sizes, and making sure the colon doesn&rsquo;t read like eyes stacked vertically when someone scans quickly.</p>' +
-          '<h2 class="project-detail-h2">Timeline</h2>' +
-          '<ul class="project-detail-timeline">' +
-          '<li><span class="tl-date">Week 1 &mdash; Circle</span>Perfecting a perfect circle: compass tool, pixel snapping, and killing the slight egg shape that kept creeping in.</li>' +
-          '<li><span class="tl-date">Week 2 &mdash; : )</span>Locking <code>: )</code> on one line with deliberate space, never upright or cramped, so it still reads as a smile from arm&rsquo;s length.</li>' +
-          '<li><span class="tl-date">Week 3 &mdash; Balance</span>Centering the pair inside the ring so the negative space feels even; adjusting letter-spacing instead of stretching glyphs.</li>' +
-          '<li><span class="tl-date">Week 4 &mdash; Finish</span>Final stroke weight, export at 1x and 2x, and a tiny one-line spec so the mark reproduces the same in slides and on the site.</li>' +
-          '</ul>' +
-          '<figure class="project-detail-fig"><div class="ph-img" style="padding:1rem;display:flex;align-items:center;justify-content:center;background:#e8e8e8;"><div class="smiley-wide-oval"><span>: )</span></div></div><figcaption>Almost perfect. The smile sits in a wide oval while the last tweaks land (before committing to the round frame above).</figcaption></figure>' +
-          '<h2 class="project-detail-h2">Takeaway</h2>' +
-          '<p>building the perfect smiley face was hard and left me figuring out how to use a compass tool in ways i never knew possible!</p>'
-        );
-      }
-      const gh = meta.githubUrl ? '<p><strong>Repository:</strong> <a href="' + meta.githubUrl + '" target="_blank" rel="noopener noreferrer" class="clean-link">github.com/JacobiGlenn/jacobiglenn.github.io</a> — same site you are reading; fork or browse <code>index.html</code> on GitHub.</p>' : '';
-      const prePages =
-        'const PROJECT_PAGES = {\n' +
-        "  'design-example': { title: 'Design Project Example', kind: 'design', galleryId: 'design-example' },\n" +
-        "  'dev-example': { title: 'This portfolio site', kind: 'dev', githubUrl: 'https://github.com/JacobiGlenn/jacobiglenn.github.io' }\n" +
-        '};';
-      return (
-        '<p class="project-detail-reader-note">This dev write-up is a little unusual: the &ldquo;project&rdquo; is the portfolio itself—the single page you are on right now. The screenshots below were captured from a local run so you can see the same UI in context.</p>' +
-        '<p class="project-detail-lead"><strong>jacobiglenn.github.io</strong> is a static personal site hosted on <strong>GitHub Pages</strong> (<code>.nojekyll</code>, optional <code>CNAME</code>). Almost everything lives in one <code>index.html</code>: terminal intro, optional &ldquo;CRS&rdquo; glitch mode, portfolio navigation, design/dev case studies, and the project-detail view you are reading.</p>' +
-        '<h2 class="project-detail-h2">Landing: four-panel terminal</h2>' +
-        '<p>First visit (or after clearing site data) you get a retro terminal layout: prompt, ASCII art panel, log stream, and guide text. Type <code>Initialize</code> to start the flow; returning visitors within 24 hours can skip straight to the main shell unless the special <code>cGG</code> path runs.</p>' +
-        '<figure class="project-detail-fig tall-img"><img src="assets/dev-site-terminal.png" width="1280" height="800" alt="Screenshot of the four-panel terminal landing screen" loading="lazy" decoding="async"><figcaption>Captured from local <code>npx serve</code> — the boot experience before the main portfolio.</figcaption></figure>' +
-        '<h2 class="project-detail-h2">Main portfolio shell</h2>' +
-        '<p>After the intro, the top bar stays fixed while you scroll: Home, Portfolios (Designer / Developer), Work Experience, Blog, About. The light content area below is where list pages and project cards render.</p>' +
-        '<figure class="project-detail-fig tall-img"><img src="assets/dev-site-home.png" width="1280" height="800" alt="Screenshot of the Home page with navigation" loading="lazy" decoding="async"><figcaption>Home view with the shared nav — scroll stays under the bar.</figcaption></figure>' +
-        '<h2 class="project-detail-h2">Developer tab and this card</h2>' +
-        '<p>The Developer section lists projects as cards with a header strip (placeholder art), title, short blurb, and a GitHub icon. You opened this write-up from the card that points at this repository.</p>' +
-        '<figure class="project-detail-fig tall-img"><img src="assets/dev-site-developer.png" width="1280" height="800" alt="Screenshot of the Developer portfolio page with project card" loading="lazy" decoding="async"><figcaption>Projects list — the card you clicked is the one describing this site.</figcaption></figure>' +
-        '<h2 class="project-detail-h2">Actual code from this file</h2>' +
-        '<p>Routing for project pages is plain JavaScript: IDs in <code>PROJECT_PAGES</code>, HTML injected into <code>#project-detail-body</code>, and the nav always exits detail view when you change sections. Below is a real excerpt from <code>index.html</code> (trimmed to the registry that includes this page).</p>' +
-        '<div class="project-detail-code-wrap"><div class="project-detail-code-label">index.html</div><pre class="project-detail-pre">' +
-        prePages.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') +
-        '</pre></div>' +
-        '<p class="project-detail-code-caption">Those keys line up with <code>data-project</code> on each card and drive <code>openProjectDetail(id)</code>.</p>' +
-        '<h2 class="project-detail-h2">This article, full-page</h2>' +
-        '<p>Project detail uses the gray hero strip, left-aligned title, full-width body, and centered figures—same layout you see scrolling here. The capture below is the long page including reader note, screenshots, and code block.</p>' +
-        '<figure class="project-detail-fig tall-img"><img src="assets/dev-site-project-detail.png" width="1280" alt="Full-page screenshot of this portfolio project write-up" loading="lazy" decoding="async"><figcaption>Full-page capture of this write-up (scrollable in the browser).</figcaption></figure>' +
-        '<h2 class="project-detail-h2">Shipping &amp; refresh</h2>' +
-        '<p>Pushing to <code>main</code> updates GitHub Pages. To regenerate the PNGs in <code>assets/</code> after layout changes, run <code>npx serve</code> then <code>npm run screenshots</code> (Playwright loads the local site and saves captures).</p>' +
-        gh
-      );
+      if (meta.bodyHtml) return meta.bodyHtml;
+      return '<p class="project-detail-lead">This project has no content yet. Run <code>npm run build:projects</code> after adding <code>project.md</code> files.</p>';
     }
     function openProjectDetail(id) {
       const meta = PROJECT_PAGES[id];
       const ms = document.getElementById('main-screen');
       if (!meta || !ms || !ms.classList.contains('crs-done')) return;
       const main = document.querySelector('#main-screen .content');
+      const hero = document.querySelector('.project-detail-hero');
+      if (hero) {
+        if (meta.coverUrl) {
+          const u = meta.coverUrl.replace(/"/g, '\\"');
+          hero.style.backgroundImage = 'url("' + u + '")';
+          hero.style.backgroundSize = 'cover';
+          hero.style.backgroundPosition = 'center';
+          hero.style.backgroundRepeat = 'no-repeat';
+        } else {
+          hero.style.backgroundImage = '';
+          hero.style.backgroundSize = '';
+          hero.style.backgroundPosition = '';
+          hero.style.backgroundRepeat = '';
+        }
+      }
       document.getElementById('project-detail-title').textContent = meta.title;
       document.getElementById('project-detail-body').innerHTML = buildProjectDetailBody(meta);
       document.getElementById('project-detail-view').setAttribute('aria-hidden', 'false');
@@ -2563,8 +2543,35 @@
       const n = items.length;
       const i = ((designGalleryState.index % n) + n) % n;
       const item = items[i];
-      slide.style.backgroundColor = item.color;
-      slide.textContent = item.label;
+      slide.textContent = '';
+      slide.style.backgroundColor = '';
+      const inner = document.createElement('div');
+      inner.className = 'design-gallery-slide-inner';
+      const main = document.createElement('div');
+      main.className = 'design-gallery-slide-main';
+      if (item.kind === 'solid') {
+        inner.style.background = item.color;
+      } else if (item.kind === 'smiley') {
+        inner.style.background = '#e8e8e8';
+        const sc = document.createElement('div');
+        sc.className = 'smiley-circle';
+        sc.setAttribute('title', ': )');
+        sc.innerHTML = '<span>: )</span>';
+        main.appendChild(sc);
+      } else if (item.kind === 'shapes') {
+        inner.style.background = '#f0f0f0';
+        const row = document.createElement('div');
+        row.className = 'shape-study';
+        row.setAttribute('aria-hidden', 'true');
+        row.innerHTML = '<div class="shape-oval"></div><div class="shape-tri"></div><div class="shape-sq"></div>';
+        main.appendChild(row);
+      }
+      const cap = document.createElement('p');
+      cap.className = 'design-gallery-caption';
+      cap.textContent = item.caption || '';
+      inner.appendChild(main);
+      inner.appendChild(cap);
+      slide.appendChild(inner);
     }
     function openDesignGallery(id) {
       if (!DESIGN_GALLERY_DATA[id]) return;

@@ -1,0 +1,45 @@
+FOLDER-BASED PROJECTS (FUTURE REFERENCE)
+=====================================
+
+IDEA (SHORT)
+- Keep one folder per project under devProjects/ or designProjects/.
+- Each folder has a small config file (e.g. project.md) at the top: title, description, GitHub link, cover image.
+- The rest of the file is the long write-up (Markdown).
+- A build script reads those folders and generates a data file the site loads.
+
+FOLDER LAYOUT (EXAMPLE)
+  devProjects/
+    my-app/
+      project.md
+      COVER.png
+  designProjects/
+    my-poster/
+      project.md
+      COVER.jpg
+
+COVER IMAGE
+- Name it COVER with a normal extension (COVER.png, COVER.jpg).
+
+WHAT project.md LOOKS LIKE (TOP = SETTINGS, BELOW = WRITE-UP)
+---
+title: Display name (overrides folder name if you want)
+description: One line for the project card.
+github: https://github.com/you/repo
+cover: COVER.png
+kind: dev
+---
+
+## Section heading
+Paragraph text. **Bold** and links work after the build step converts Markdown to HTML.
+
+STEP-BY-STEP: ADDING A NEW PROJECT
+1. Create a new folder under devProjects/ or designProjects/. Use a short URL-style name (lowercase, hyphens), e.g. my-photo-app.
+2. Add COVER.png or COVER.jpg (or add the image later and set cover: filename.ext in project.md).
+3. Create project.md in that folder. Fill in the --- block: title, description, github (if any), cover, kind (dev or design).
+4. Write the case study below the --- block in Markdown (headings, paragraphs, lists).
+5. Run the project build script (e.g. npm run build:projects — exact name depends on what you add later). This regenerates the file the site reads.
+6. Commit the new folder, the generated file, and push to GitHub. Wait for GitHub Pages to update (usually a minute or two).
+
+NOTES
+- The folder name becomes the project id/slug unless your build maps it differently.
+- If something looks wrong on the site, check: frontmatter typos, cover path, and that you ran the build after editing.
