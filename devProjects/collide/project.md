@@ -1,6 +1,6 @@
 ---
 title: "[CollIDE]"
-description: "An AI-powered collaborative IDE for teams — shared AI context, real-time multiplayer presence, and conflict prevention built in."
+description: "An AI-powered collaborative IDE for teams. Shared AI awareness, real-time multiplayer presence, and conflict prevention built in from day one."
 github: https://github.com/JacobiGlenn/collide
 kind: dev
 cover: CARD.svg
@@ -13,14 +13,14 @@ ongoing: true
   <img src="devProjects/collide/LOGO.svg" alt="CollIDE logo" style="width:100%; height:auto; display:block;">
 </figure>
 
-<p class="project-detail-lead"><strong>CollIDE</strong> is an AI-powered collaborative IDE built for teams. The core idea is simple: every AI coding tool today is built for a single developer. CollIDE is built for the whole team — where each person's AI assistant has shared awareness of what everyone else is working on, so it can prevent conflicts before they happen instead of after.</p>
+<p class="project-detail-lead"><strong>CollIDE</strong> is a collaborative, AI-powered code editor designed for teams. Every AI coding tool out there is built around a single developer. CollIDE is built around the whole team, where each person's AI assistant understands what everyone else is working on and can prevent conflicts before they ever happen.</p>
 
-<p>This is early. Right now it is a README and a design document. I am still figuring out the right form factor — it might ship as a standalone VS Code fork (similar to how Cursor is built), or it might make more sense as a Cursor extension. Both are on the table.</p>
+<p>This is early. Right now it lives as a README and a design document while I figure out the right form factor. A standalone editor or an extension are both on the table. I am still thinking through the best path forward.</p>
 
 <h2 class="project-detail-h2">The problem</h2>
-<p>At a hackathon, an AI assistant renamed a file for readability. A teammate had unpushed changes referencing the old filename. When they pushed, everything broke. This is not an edge case — it happens constantly on teams using AI coding tools. The AI has no idea what anyone else is doing.</p>
+<p>At a hackathon, an AI assistant renamed a file for readability. A teammate had unpushed changes referencing the old filename and when they pushed, everything broke. This is not an edge case. It happens constantly on teams using AI tools because the AI has no idea what anyone else is doing.</p>
 
-<p>CollIDE fixes this at the architecture level. Each developer's AI assistant has read-only access to a shared context: what files each person has open, what they are editing, and what changes are in flight. Before the AI renames a file, it checks whether a teammate has uncommitted changes that reference it. If so, it warns instead of acting.</p>
+<p>CollIDE is designed so that scenario never plays out. Each developer's AI has a shared, read-only view of the team's active work. Before taking any action, it knows what files are open, what changes are in flight, and who is working on what. It warns instead of guessing.</p>
 
 <h2 class="project-detail-h2">Planned tech stack</h2>
 <div class="tech-stack">
@@ -34,14 +34,14 @@ ongoing: true
 </div>
 
 <h2 class="project-detail-h2">Key ideas</h2>
-<p>Real-time multiplayer presence (live cursors, live typing, cursor follow mode) gives teams a Figma-like experience in their code editor. Combined with per-file threaded chat, an embedded task system, and in-app voice calls, the goal is to eliminate the context-switching tax of using Zoom, Slack, Jira, and an IDE all at the same time.</p>
+<p>Live cursors, real-time typing, and a cursor follow mode give teams a Figma-like presence layer inside their code editor. Layered on top of that is per-file threaded chat, an embedded task board, and in-app voice calls. The goal is to keep everything in one place so engineers stop bouncing between Zoom, Slack, Jira, and their IDE just to stay in sync.</p>
 
-<p>The team-aware AI context is the part I find technically most interesting. Every AI prompt is prefaced with a structured read-only block describing what each teammate has open, what they are editing, and what tasks they are assigned. This is what lets the AI say "Steven is already building that — I'll stub this and wire it up once his branch lands" instead of silently creating a duplicate.</p>
+<p>The team-aware AI context is the part I find most compelling. Rather than each assistant operating in isolation, every prompt includes a structured snapshot of what the team is actively doing. That context is what allows the AI to say something like "your teammate is already handling that, I will stub this and connect it once their work lands" instead of quietly creating a duplicate or breaking something downstream.</p>
 
 <h2 class="project-detail-h2">Where it is now</h2>
-<p>Concept and architecture stage. I have a detailed technical blueprint covering the collaboration layer (Yjs/CRDT), AI context system, auto-branching conflict resolution, and the task system. The GitHub repo is a placeholder while I decide on the build approach. Active development has not started yet — this is the project I am thinking about the most right now.</p>
+<p>Concept and architecture stage. I have a detailed design document covering all the major systems and have been thinking hard about what the first shippable version looks like. The GitHub repo is a placeholder for now. Active development has not started yet, but this is the project I am thinking about the most.</p>
 
 <h2 class="project-detail-h2">Reflection</h2>
-<p>This idea came out of a real frustration I had at a hackathon where an AI refactor silently broke a teammate's work. I kept thinking about why no existing tool solves this and I could not find a good reason. The technical pieces all exist — CRDT libraries, WebRTC, large-context AI models — they just have not been assembled with team-aware AI as the primary goal. That is what CollIDE is trying to be.</p>
+<p>This started from a real moment of frustration. At a hackathon, an AI refactor silently broke a teammate's work and I kept thinking about why no tool was designed to prevent that. The more I looked into it, the more I realized the pieces already exist. They just have not been put together with team-aware AI as the central goal. That is the gap CollIDE is trying to fill.</p>
 
 <p><strong>Repository:</strong> <a href="https://github.com/JacobiGlenn/collide" target="_blank" rel="noopener noreferrer" class="clean-link">github.com/JacobiGlenn/collide</a></p>
