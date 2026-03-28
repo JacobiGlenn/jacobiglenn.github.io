@@ -66,6 +66,8 @@ function formatDateLabel(dateStr, ongoing) {
   if (!dateStr) return '';
   return ongoing ? dateStr + ' – Present' : dateStr;
 }
+
+function escapeHtml(s) {
   return String(s)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
