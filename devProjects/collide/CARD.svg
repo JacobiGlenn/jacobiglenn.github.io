@@ -23,12 +23,12 @@
   <!-- BLUE cursor -->
   <polygon points="420,130 420,175 433,162 440,178 447,175 439,158 453,155" fill="#60a5fa" opacity="0.9"/>
 
-  <!-- GREEN cursor — moved right 45px, down 15px -->
-  <polygon points="600,225 600,270 613,257 620,273 627,270 619,253 633,250" fill="#34d399" opacity="0.9"/>
+  <!-- GREEN cursor -->
+  <polygon points="640,250 640,295 653,282 660,298 667,295 659,278 673,275" fill="#34d399" opacity="0.9"/>
   <!-- comment bubble: above and to the left -->
   <rect x="430" y="163" width="155" height="52" rx="12" fill="none" stroke="#34d399" stroke-width="2" opacity="0.8"/>
   <!-- tail from bottom-right of bubble to cursor tip -->
-  <path d="M 580,215 L 599,224 L 565,215" fill="none" stroke="#34d399" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
+  <path d="M 585,215 L 640,249 L 610,216" fill="none" stroke="#34d399" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
   <!-- text lines inside bubble -->
   <line x1="445" y1="183" x2="570" y2="183" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
   <line x1="445" y1="198" x2="551" y2="198" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
