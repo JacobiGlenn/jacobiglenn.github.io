@@ -162,7 +162,13 @@ function main() {
     dev: devProjects.map(buildDevCard).join('')
   };
 
-  const payload = { PROJECT_PAGES, cardsHtml };
+  // Runtime-sortable card data so index.html can re-sort by current date
+  const cardsData = {
+    design: designProjects.map((p) => ({ id: p.id, dateSort: p.dateSort, ongoing: !!p.ongoing, html: buildDesignCard(p) })),
+    dev:    devProjects.map((p)    => ({ id: p.id, dateSort: p.dateSort, ongoing: !!p.ongoing, html: buildDevCard(p) }))
+  };
+
+  const payload = { PROJECT_PAGES, cardsHtml, cardsData };
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, 'window.__GENERATED_PROJECTS=' + JSON.stringify(payload) + ';', 'utf8');
   console.log('Wrote', path.relative(ROOT, OUT));

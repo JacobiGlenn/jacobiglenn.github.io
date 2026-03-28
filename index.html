@@ -973,8 +973,24 @@
       about: `[ABOUT.TXT corrupted]\n\nAttempting recovery...\n\n█ 23%\n\n[FAILED]`
     };
     /** Populated by scripts/build-projects.cjs into generated/projects-data.js; edit each project folder's project.md, then npm run build:projects. */
-    const GP = window.__GENERATED_PROJECTS || { PROJECT_PAGES: {}, cardsHtml: { design: '', dev: '' } };
+    const GP = window.__GENERATED_PROJECTS || { PROJECT_PAGES: {}, cardsHtml: { design: '', dev: '' }, cardsData: { design: [], dev: [] } };
     const PROJECT_PAGES = GP.PROJECT_PAGES || {};
+
+    function renderCards(kind) {
+      const cards = (GP.cardsData && GP.cardsData[kind]) || [];
+      if (!cards.length) return GP.cardsHtml[kind] || '';
+      const now = new Date();
+      const nowYM = now.getFullYear() * 100 + (now.getMonth() + 1);
+      function tier(c) {
+        if (c.id.includes('example')) return 0;          // examples always first
+        if (c.dateSort >= nowYM) return 1;               // current or future month
+        if (c.ongoing) return 2;                         // ongoing from a past month
+        return 3;                                        // finished past projects
+      }
+      return [...cards]
+        .sort((a, b) => tier(a) - tier(b) || b.dateSort - a.dateSort)
+        .map(c => c.html).join('');
+    }
     const DESIGN_GALLERY_DATA = {
       'design-example': [
         { kind: 'solid', color: '#c62828', caption: 'This is an example of an image: a solid color fill.' },
@@ -984,8 +1000,8 @@
     };
     const CLEAN_CONTENT = {
       home: '<p class="clean-message">This is still a work in progress, thank you for understanding!</p>',
-      page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Nothing here yet — the project listed below is a placeholder example while I build this out. Real design work coming soon.</p><div class="portfolio-cards">' + (GP.cardsHtml.design || '') + '</div>',
-      page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Still in progress — I\'ve only added a couple projects so far. More to come as I continue building this out.</p><div class="portfolio-cards">' + (GP.cardsHtml.dev || '') + '</div>',
+      page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Nothing here yet — the project listed below is a placeholder example while I build this out. Real design work coming soon.</p><div class="portfolio-cards">' + renderCards('design') + '</div>',
+      page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Still in progress — I\'ve only added a couple projects so far. More to come as I continue building this out.</p><div class="portfolio-cards">' + renderCards('dev') + '</div>',
       page3: '<p class="clean-uc">View my professional experience on LinkedIn.</p><a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">linkedin.com/in/jacobiglenn</a>',
       page4: '<p class="clean-uc">Under construction — coming soon.</p>',
       about: '<p class="clean-sub">Contact me</p><p class="clean-contact">971-300-5659</p><p class="clean-contact"><a href="mailto:jacobiglenn@gmail.com" class="clean-link">jacobiglenn@gmail.com</a></p>'
