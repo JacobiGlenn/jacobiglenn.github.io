@@ -1,5 +1,5 @@
 ---
-title: CollIDE
+title: "[CollIDE]"
 description: "An AI-powered collaborative IDE for teams — shared AI context, real-time multiplayer presence, and conflict prevention built in."
 github: https://github.com/JacobiGlenn/collide
 kind: dev
