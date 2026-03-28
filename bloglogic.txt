@@ -36,6 +36,14 @@ HOW TO ADD A POST:
   4. Run: npm run build:blog
   5. Git add, commit, push — it will show on the site
 
+WELCOME POST — GOOGLE DOC FRAGMENT (optional):
+  The welcome post can include <!--BLOG_GDOC_FRAGMENT--> in post.md. At build time,
+  scripts/build-blog.cjs replaces that marker with the contents of
+  blog/welcome/_inject-fragment.html if the file exists.
+  To regenerate after editing blog/welcome/gdoc-raw.txt:
+    node scripts/wrap-gdoc-fragment.cjs
+    npm run build:blog
+
 HOW TO DELETE A POST:
   1. Delete the folder: blog/my-post/
   2. Run: npm run build:blog
@@ -74,16 +82,30 @@ FORMAT (each post is one object in the array):
   - For videos: use YouTube embed URL format (https://www.youtube.com/embed/ID)
   - If no media, set media: [] and thumb: ''
 
-HOW TO ADD A POST:
+HOW TO ADD A POST (fast way — CLI):
+  1. Open PowerShell in the project folder
+  2. Run:  npm run add:linkedin
+  3. Answer the prompts:
+       - Date       : press Enter for current month, or type e.g. "Jan 2026"
+       - Text       : paste your full LinkedIn post text (all on one line)
+       - Media type : type "none", "image", or "video"
+           image    : enter the file path  (e.g. assets/linkedin/mypost.jpg)
+           video    : enter the YouTube URL, the script converts it to embed URL
+  4. A new entry is prepended to data/linkedin-posts.js
+  5. If you have images: drop them in assets/linkedin/ first, then run the script
+     (or edit the src path in the file afterwards — search for the id to find it)
+  6. git add . && git commit -m "add linkedin post" && git push
+
+HOW TO ADD A POST (manual way):
   1. Open data/linkedin-posts.js
-  2. Add a new object at the TOP of the array (newest first = leftmost card)
-  3. (Optional) Add any image to assets/linkedin/ and reference it in src/thumb
-  4. Git add, commit, push — NO BUILD STEP NEEDED (file is loaded directly)
+  2. Copy an existing entry and paste it at the TOP of the array
+  3. Update id, date, text, media, thumb
+  4. git add . && git commit -m "add linkedin post" && git push
 
 HOW TO DELETE A POST:
   1. Open data/linkedin-posts.js
-  2. Remove the object with that id
-  3. Git add, commit, push
+  2. Remove the entire object block with that id
+  3. git add . && git commit -m "remove linkedin post" && git push
 
 CAROUSEL BEHAVIOUR:
   - Shows all posts in a horizontal scroll
@@ -92,7 +114,7 @@ CAROUSEL BEHAVIOUR:
   - Click backdrop or press Escape to close
 
 ----------------------------------------------------------------------
-PART 3: YOUTUBE VIDEOS (carousel, manual data file)
+PART 3: YOUTUBE VIDEOS (carousel + CLI helper)
 ----------------------------------------------------------------------
 
 Location: data/youtube-videos.js
@@ -115,16 +137,24 @@ VIEW/LIKE COUNTS (optional):
   4. Paste it into: window.YOUTUBE_API_KEY = 'YOUR_KEY_HERE'; in data/youtube-videos.js
   Stats will appear in the modal automatically. Leave the key empty to skip.
 
-HOW TO ADD A VIDEO:
+HOW TO ADD A VIDEO (fast way — CLI):
+  1. Open PowerShell in the project folder
+  2. Run:  npm run add:youtube https://youtu.be/VIDEO_ID
+       or  npm run add:youtube "https://www.youtube.com/watch?v=VIDEO_ID"
+  3. The script fetches the real title automatically and prepends a new entry
+  4. Open data/youtube-videos.js and fill in the description field
+  5. git add . && git commit -m "add video: title" && git push
+
+HOW TO ADD A VIDEO (manual way):
   1. Open data/youtube-videos.js
-  2. Add a new object at the TOP of the array (newest first)
-  3. Set the videoId from the YouTube URL
-  4. Git add, commit, push — NO BUILD STEP NEEDED
+  2. Copy an existing entry and paste it at the TOP of the array (newest first)
+  3. Update id (unique string), videoId, date, title, description
+  4. git add . && git commit -m "add video" && git push
 
 HOW TO DELETE A VIDEO:
   1. Open data/youtube-videos.js
   2. Remove the object with that id
-  3. Git add, commit, push
+  3. git add . && git commit -m "remove video" && git push
 
 MODAL BEHAVIOUR:
   - 16:9 embedded player, nearly full-width
@@ -132,15 +162,85 @@ MODAL BEHAVIOUR:
   - View count + like count shown if API key is set
   - "Watch on YouTube" red button to open the full video
 
+LIKE COUNTER (shared across all visitors via JSONBin.io):
+  - Lives at data/api-config.js (gitignored locally, injected by GitHub Actions in prod)
+  - window.JSONBIN_BIN_ID = 'YOUR_BIN_ID';
+  - window.JSONBIN_KEY    = 'YOUR_MASTER_KEY';
+  - The site reads/writes a JSON object: { "likes": { "VIDEO_ID": COUNT } }
+  - Locally: likes won't save (no valid key). That's fine — test on the live site.
+
 ----------------------------------------------------------------------
-BUILD COMMANDS
+BUILD COMMANDS (summary)
 ----------------------------------------------------------------------
 
-  npm run build:blog      ← rebuild blog-data.js from blog/ folder
-  npm run build:projects  ← rebuild projects-data.js from devProjects/ + designProjects/
+  npm run build:projects  ← rebuild generated/projects-data.js (run after changing devProjects/ or designProjects/)
+  npm run build:blog      ← rebuild generated/blog-data.js     (run after changing blog/ folder)
   npm run build           ← runs both of the above
 
-After any blog/ folder change, always run npm run build:blog before pushing.
-LinkedIn posts (data/linkedin-posts.js) do NOT require a build step.
+  npm run add:youtube <url>  ← auto-add a YouTube entry (fetches title, prepends to data/youtube-videos.js)
+  npm run add:linkedin       ← interactive prompt to add a LinkedIn post to data/linkedin-posts.js
+
+After any blog/ or project folder change, run the matching build before pushing.
+LinkedIn posts and YouTube videos do NOT require a build step — they are loaded from JS data files directly.
+
+----------------------------------------------------------------------
+QUICK REFERENCE: WHAT NEEDS A BUILD?
+----------------------------------------------------------------------
+
+  blog posts         → npm run build:blog        (folder: blog/<slug>/post.md)
+  dev projects       → npm run build:projects    (folder: devProjects/<name>/project.md)
+  design projects    → npm run build:projects    (folder: designProjects/<name>/project.md)
+  linkedin posts     → NO BUILD                  (file: data/linkedin-posts.js)
+  youtube videos     → NO BUILD                  (file: data/youtube-videos.js)
+  work experience    → NO BUILD                  (inline in index.html CLEAN_CONTENT.page3)
+
+----------------------------------------------------------------------
+BOOT TERMINAL (first screen, index.html)
+----------------------------------------------------------------------
+
+  Flow:
+    1. Visitor types Initialize (or init, etc.).
+    2. After the boot animation, the terminal enters a "post-init" phase.
+    3. They can run commands (see below) OR type their name and press Enter.
+    4. Typing a name opens the normal loading screen and guest welcome. Anything that
+       is not a reserved command is treated as a name.
+
+  Commands (case-insensitive; also listed in the GUIDEBOOK panel on the boot screen):
+    HELP, GUIDE, ?, COMMANDS  — print the command list
+    ABOUT, BIO                — stable blurb: who/where from, what the site is, pointers to blog,
+                                Work Experience, LinkedIn, and nav About for goals/contact
+                                (termPrintAbout() in index.html)
+    PROJECTS, PORTFOLIO      — dev + design project titles + descriptions (from
+                                generated/projects-data.js cardsData; run build:projects after edits)
+    EXP, EXPERIENCE           — step through work experience blurbs; then N / P / Q
+    SPIN, FASTER              — speed up the ASCII portrait ~10 seconds
+    TIME, DATE                — print local date/time
+    WISDOM                    — random one-liner (handler also accepts fun, joke)
+    ROLL, D20                 — roll a twenty-sided die
+    8BALL, EIGHTBALL, MAGIC8, MAGIC8BALL — Magic 8-Ball (TERMINAL_8BALL_ANSWERS)
+    CLS, CLEAR                — clear the transcript
+
+  To add a new command: edit the termInput keydown handler in index.html (search for
+  termInput.dataset.mode === 'postinit') and mirror the behavior in the GUIDEBOOK HTML
+  so the panel stays accurate.
+
+  Experience order for EXP is defined in TERMINAL_EXP_SNIPPETS in index.html — keep it
+  aligned with the Work Experience section (CLEAN_CONTENT.page3) when you reorder jobs.
+
+----------------------------------------------------------------------
+API KEYS (where they live)
+----------------------------------------------------------------------
+
+  LOCAL DEVELOPMENT:
+    data/api-config.js  ← gitignored, never committed
+    window.YOUTUBE_API_KEY = 'YOUR_KEY';
+    window.JSONBIN_BIN_ID  = 'YOUR_BIN_ID';
+    window.JSONBIN_KEY     = 'YOUR_MASTER_KEY';
+
+  PRODUCTION (GitHub Actions):
+    Stored as GitHub repository secrets:
+      YOUTUBE_API_KEY, JSONBIN_BIN_ID, JSONBIN_KEY
+    The deploy workflow writes them to data/api-config.js at deploy time.
+    To update a key: go to GitHub → Settings → Secrets and Variables → Actions
 
 ----------------------------------------------------------------------

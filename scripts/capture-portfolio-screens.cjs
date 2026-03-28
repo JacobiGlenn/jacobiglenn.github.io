@@ -55,6 +55,21 @@ async function main() {
     await page.waitForTimeout(500);
     await page.locator('.content.show-project-detail').waitFor({ state: 'visible', timeout: 5000 });
     await page.screenshot({ path: path.join(assets, 'dev-site-project-detail.png'), type: 'png', fullPage: true });
+
+    await page.locator('.project-detail-back').click();
+    await page.waitForTimeout(350);
+    await page.locator('a[data-page="page3"]').click();
+    await page.waitForTimeout(450);
+    await page.screenshot({ path: path.join(assets, 'dev-site-experience.png'), type: 'png', fullPage: true });
+
+    await page.locator('a[data-page="page4"]').click();
+    await page.waitForTimeout(450);
+    await page.screenshot({ path: path.join(assets, 'dev-site-blog.png'), type: 'png', fullPage: true });
+
+    await page.locator('a[data-page="about"]').click();
+    await page.waitForTimeout(350);
+    await page.screenshot({ path: path.join(assets, 'dev-site-about.png'), type: 'png', fullPage: true });
+
     await page.close();
   }
 

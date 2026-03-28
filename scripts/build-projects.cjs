@@ -165,8 +165,22 @@ function main() {
 
   // Runtime-sortable card data so index.html can re-sort by current date
   const cardsData = {
-    design: designProjects.map((p) => ({ id: p.id, dateSort: p.dateSort, ongoing: !!p.ongoing, html: buildDesignCard(p) })),
-    dev:    devProjects.map((p)    => ({ id: p.id, dateSort: p.dateSort, ongoing: !!p.ongoing, html: buildDevCard(p) }))
+    design: designProjects.map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description || '',
+      dateSort: p.dateSort,
+      ongoing: !!p.ongoing,
+      html: buildDesignCard(p)
+    })),
+    dev: devProjects.map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description || '',
+      dateSort: p.dateSort,
+      ongoing: !!p.ongoing,
+      html: buildDevCard(p)
+    }))
   };
 
   const payload = { PROJECT_PAGES, cardsHtml, cardsData };

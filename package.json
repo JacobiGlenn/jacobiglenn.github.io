@@ -7,6 +7,8 @@
     "build:projects": "node scripts/build-projects.cjs",
     "build:blog": "node scripts/build-blog.cjs",
     "build": "node scripts/build-projects.cjs && node scripts/build-blog.cjs",
+    "add:youtube": "node scripts/add-youtube.cjs",
+    "add:linkedin": "node scripts/add-linkedin.cjs",
     "screenshots": "node scripts/capture-portfolio-screens.cjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

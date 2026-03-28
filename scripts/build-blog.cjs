@@ -63,7 +63,14 @@ function loadPost(slug) {
   }
   const raw = fs.readFileSync(mdPath, 'utf8');
   const { data, content } = matter(raw);
-  const bodyHtml = content.trim();
+  let bodyHtml = content.trim();
+  const gdocInject = path.join(postDir, '_inject-fragment.html');
+  if (bodyHtml.includes('<!--BLOG_GDOC_FRAGMENT-->') && fs.existsSync(gdocInject)) {
+    bodyHtml = bodyHtml.replace(
+      '<!--BLOG_GDOC_FRAGMENT-->',
+      fs.readFileSync(gdocInject, 'utf8')
+    );
+  }
 
   const coverUrl = data.cover
     ? `blog/${slug}/${data.cover}`
@@ -78,6 +85,7 @@ function loadPost(slug) {
     date:        data.date  || '',
     dateDisplay: formatDateDisplay(data.date),
     dateSort:    parseDateSort(data.date),
+    banner:      data.banner || '',   // e.g. 'ascii-face' for special animated banners
     coverUrl,
     excerpt,
     bodyHtml

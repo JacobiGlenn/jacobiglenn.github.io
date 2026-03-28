@@ -36,34 +36,6 @@ window.__YOUTUBE_VIDEOS = [
     videoId: 'puTp9szMQqE',
     date: 'Mar 2026',
     title: 'How I Coded Anime in Minecraft (With Python)',
-    description: 'A video about coding anime into Minecraft using Python.'
+    description: 'A deep dive into using Python to render anime-style visuals inside Minecraft. Built with creative use of the Pillow library and block-rendering tricks.'
   },
-  {
-    id: 'yt-filler-2',
-    videoId: 'dQw4w9WgXcQ',
-    date: 'Feb 2026',
-    title: 'Filler Video 2 — Replace This',
-    description: 'This is a filler entry. Replace videoId, title, date, and description with your real video info.'
-  },
-  {
-    id: 'yt-filler-3',
-    videoId: 'dQw4w9WgXcQ',
-    date: 'Jan 2026',
-    title: 'Filler Video 3 — Replace This',
-    description: 'This is a filler entry. Replace videoId, title, date, and description with your real video info.'
-  },
-  {
-    id: 'yt-filler-4',
-    videoId: 'dQw4w9WgXcQ',
-    date: 'Dec 2025',
-    title: 'Filler Video 4 — Replace This',
-    description: 'This is a filler entry. Replace videoId, title, date, and description with your real video info.'
-  },
-  {
-    id: 'yt-filler-5',
-    videoId: 'dQw4w9WgXcQ',
-    date: 'Nov 2025',
-    title: 'Filler Video 5 — Replace This',
-    description: 'This is a filler entry. Replace videoId, title, date, and description with your real video info.'
-  }
 ];
