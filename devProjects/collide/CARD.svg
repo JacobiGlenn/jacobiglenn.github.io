@@ -6,18 +6,33 @@
     </linearGradient>
   </defs>
   <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- subtle grid -->
   <line x1="0" y1="150" x2="800" y2="150" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
   <line x1="0" y1="300" x2="800" y2="300" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
   <line x1="200" y1="0" x2="200" y2="450" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
   <line x1="400" y1="0" x2="400" y2="450" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
   <line x1="600" y1="0" x2="600" y2="450" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
-  <!-- cursors nudged up slightly -->
-  <polygon points="130,135 130,180 143,167 150,183 157,180 149,163 163,160" fill="#f87171" opacity="0.9"/>
-  <polygon points="290,110 290,155 303,142 310,158 317,155 309,138 323,135" fill="#60a5fa" opacity="0.9"/>
-  <polygon points="460,140 460,185 473,172 480,188 487,185 479,168 493,165" fill="#34d399" opacity="0.9"/>
-  <polygon points="610,120 610,165 623,152 630,168 637,165 629,148 643,145" fill="#fbbf24" opacity="0.9"/>
-  <!-- wordmark -->
-  <text x="400" y="275" font-family="'Courier New', Courier, monospace" font-size="80" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="central" letter-spacing="8">CollIDE</text>
-  <!-- tagline -->
-  <text x="400" y="330" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#818cf8" text-anchor="middle" dominant-baseline="central" letter-spacing="4" opacity="0.9">AI-POWERED COLLABORATIVE IDE</text>
+
+  <!-- RED cursor — with drawing swirl coming off the tip -->
+  <polygon points="110,145 110,190 123,177 130,193 137,190 129,173 143,170" fill="#f87171" opacity="0.9"/>
+  <!-- swirl / drawing trail from red cursor tip -->
+  <path d="M 110,145 C 130,120 170,115 190,135 C 215,158 200,185 230,195 C 265,207 295,185 310,205 C 330,230 305,255 330,265" stroke="#f87171" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+  <!-- little dot at end of trail -->
+  <circle cx="332" cy="267" r="3" fill="#f87171" opacity="0.75"/>
+
+  <!-- BLUE cursor -->
+  <polygon points="420,130 420,175 433,162 440,178 447,175 439,158 453,155" fill="#60a5fa" opacity="0.9"/>
+
+  <!-- GREEN cursor — with comment oval nearby -->
+  <polygon points="570,155 570,200 583,187 590,203 597,200 589,183 603,180" fill="#34d399" opacity="0.9"/>
+  <!-- comment bubble oval -->
+  <ellipse cx="640" cy="255" rx="72" ry="34" fill="none" stroke="#34d399" stroke-width="2" opacity="0.8"/>
+  <!-- tail on bubble pointing up-left toward green cursor -->
+  <path d="M 600,247 L 582,223 L 618,242" fill="none" stroke="#34d399" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
+  <!-- text lines inside bubble -->
+  <line x1="590" y1="248" x2="688" y2="248" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+  <line x1="600" y1="262" x2="678" y2="262" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- YELLOW cursor -->
+  <polygon points="690,135 690,180 703,167 710,183 717,180 709,163 723,160" fill="#fbbf24" opacity="0.9"/>
 </svg>
