@@ -9,6 +9,10 @@ date: "03/2026"
 ongoing: true
 ---
 
+<figure style="margin:0 0 1.5rem; max-width:420px;">
+  <img src="devProjects/collide/LOGO.svg" alt="CollIDE logo" style="width:100%; height:auto; display:block;">
+</figure>
+
 <p class="project-detail-lead"><strong>CollIDE</strong> is an AI-powered collaborative IDE built for teams. The core idea is simple: every AI coding tool today is built for a single developer. CollIDE is built for the whole team — where each person's AI assistant has shared awareness of what everyone else is working on, so it can prevent conflicts before they happen instead of after.</p>
 
 <p>This is early. Right now it is a README and a design document. I am still figuring out the right form factor — it might ship as a standalone VS Code fork (similar to how Cursor is built), or it might make more sense as a Cursor extension. Both are on the table.</p>

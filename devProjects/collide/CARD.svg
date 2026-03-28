@@ -1,24 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#0d0d1f"/>
       <stop offset="100%" style="stop-color:#13132e"/>
     </linearGradient>
   </defs>
-  <rect width="800" height="450" fill="url(#bg)"/>
-  <!-- scan line texture -->
-  <line x1="0" y1="150" x2="800" y2="150" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
-  <line x1="0" y1="300" x2="800" y2="300" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
-  <line x1="200" y1="0" x2="200" y2="450" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
-  <line x1="400" y1="0" x2="400" y2="450" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
-  <line x1="600" y1="0" x2="600" y2="450" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
-  <!-- multi-user cursors -->
-  <polygon points="130,130 130,175 143,162 150,178 157,175 149,158 163,155" fill="#f87171" opacity="0.9"/>
-  <polygon points="290,100 290,145 303,132 310,148 317,145 309,128 323,125" fill="#60a5fa" opacity="0.9"/>
-  <polygon points="460,140 460,185 473,172 480,188 487,185 479,168 493,165" fill="#34d399" opacity="0.9"/>
-  <polygon points="610,115 610,160 623,147 630,163 637,160 629,143 643,140" fill="#fbbf24" opacity="0.9"/>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <!-- grid lines -->
+  <line x1="0" y1="166" x2="800" y2="166" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
+  <line x1="0" y1="333" x2="800" y2="333" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
+  <line x1="200" y1="0" x2="200" y2="500" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
+  <line x1="400" y1="0" x2="400" y2="500" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
+  <line x1="600" y1="0" x2="600" y2="500" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
+  <!-- multi-user cursors — spread across top third, safely inset from edges -->
+  <polygon points="100,80 100,125 113,112 120,128 127,125 119,108 133,105" fill="#f87171" opacity="0.9"/>
+  <polygon points="270,65 270,110 283,97 290,113 297,110 289,93 303,90" fill="#60a5fa" opacity="0.9"/>
+  <polygon points="450,75 450,120 463,107 470,123 477,120 469,103 483,100" fill="#34d399" opacity="0.9"/>
+  <polygon points="630,60 630,105 643,92 650,108 657,105 649,88 663,85" fill="#fbbf24" opacity="0.9"/>
   <!-- wordmark -->
-  <text x="400" y="295" font-family="'Courier New', Courier, monospace" font-size="80" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="central" letter-spacing="8">CollIDE</text>
+  <text x="400" y="310" font-family="'Courier New', Courier, monospace" font-size="80" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="central" letter-spacing="8">CollIDE</text>
   <!-- tagline -->
-  <text x="400" y="345" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#818cf8" text-anchor="middle" dominant-baseline="central" letter-spacing="4" opacity="0.9">AI-POWERED COLLABORATIVE IDE</text>
+  <text x="400" y="370" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#818cf8" text-anchor="middle" dominant-baseline="central" letter-spacing="4" opacity="0.9">AI-POWERED COLLABORATIVE IDE</text>
 </svg>

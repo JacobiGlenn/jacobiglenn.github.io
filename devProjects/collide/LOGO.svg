@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="160" viewBox="0 0 520 160">
+  <!-- top rule  spans IDE portion -->
+  <line x1="220" y1="24" x2="510" y2="24" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <!-- bottom rule  full width -->
+  <line x1="10" y1="138" x2="510" y2="138" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <!-- "Coll"  rounded, lighter weight -->
+  <text x="14" y="112" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="400" fill="#ffffff" dominant-baseline="auto">Coll</text>
+  <!-- "IDE"  monospace, heavier -->
+  <text x="225" y="112" font-family="'Courier New', Courier, monospace" font-size="90" font-weight="700" fill="#ffffff" dominant-baseline="auto">IDE</text>
+</svg>
