@@ -360,6 +360,8 @@
     #main-screen .content.show-project-detail #project-detail-view { display: flex !important; }
     .project-detail-hero { width: 100%; height: 220px; position: relative; border-radius: 0; overflow: hidden; margin: 0; flex-shrink: 0; background: linear-gradient(135deg, #6b7280 0%, #9ca3af 50%, #6b7280 100%); }
     .project-detail-hero::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.25); pointer-events: none; }
+    .project-detail-back { position: absolute; top: 1rem; left: 1rem; z-index: 1; background: rgba(0,0,0,0.45); color: #fff; border: none; border-radius: 6px; padding: 0.45rem 1rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: background 0.15s; }
+    .project-detail-back:hover { background: rgba(0,0,0,0.7); }
     .project-detail-title { font-family: Georgia, serif; font-size: 2.25rem; font-weight: 400; color: #111; width: 100%; box-sizing: border-box; padding: 1.25rem 2rem 0; margin: 0 0 0.75rem; text-align: left; align-self: flex-start; }
     .project-detail-body { width: 100%; max-width: none; box-sizing: border-box; padding: 0 2rem 2.5rem; color: #444; line-height: 1.65; }
     .project-detail-body p { margin: 0 0 1rem; }
@@ -467,6 +469,88 @@
     .exp-photo-card--front  { top: 0;   left: 0;    z-index: 3; }
     .exp-photo-stack:hover .exp-photo-card--back2 { transform: rotate(10deg) translate(6px, 3px); }
     .exp-photo-stack:hover .exp-photo-card--back1 { transform: rotate(5deg)  translate(3px, 1px); }
+    /* ── Blog page ─────────────────────────────────────── */
+    .blog-list { display: flex; flex-direction: column; gap: 1.25rem; margin: 0.75rem 0 1.5rem; }
+    .blog-card { display: flex; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.18s, box-shadow 0.18s; height: 210px; }
+    .blog-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.11); }
+    .blog-card-banner { width: 38%; flex-shrink: 0; background: linear-gradient(135deg,#6b7280,#9ca3af); background-size: cover; background-position: center; }
+    .blog-card-body { flex: 1; padding: 1.4rem 1.6rem; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+    .blog-card-date { font-size: 0.73rem; color: #999; margin: 0 0 0.35rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .blog-card-title { font-size: 1.08rem; font-weight: 700; color: #1a1a1a; margin: 0 0 0.55rem; line-height: 1.35; }
+    .blog-card-excerpt { font-size: 0.85rem; color: #666; line-height: 1.6; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .blog-show-more { display: block; margin: 0.25rem auto 0; padding: 0.55rem 2.2rem; border: 1.5px solid #555; border-radius: 7px; background: none; cursor: pointer; font-size: 0.88rem; font-weight: 600; color: #333; transition: all 0.18s; letter-spacing: 0.02em; }
+    .blog-show-more:hover { background: #333; color: #fff; }
+    /* Blog detail overlay */
+    #blog-detail { display: none; position: fixed; inset: 0; z-index: 3000; background: #fff; overflow-y: auto; }
+    #blog-detail.visible { display: block; }
+    .blog-detail-hero { width: 100%; height: 280px; background: linear-gradient(135deg,#6b7280,#9ca3af); background-size: cover; background-position: center; position: relative; }
+    .blog-detail-hero-back { position: absolute; top: 1rem; left: 1rem; background: rgba(0,0,0,0.45); color: #fff; border: none; border-radius: 6px; padding: 0.45rem 1rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; z-index: 1; transition: background 0.15s; }
+    .blog-detail-hero-back:hover { background: rgba(0,0,0,0.7); }
+    .blog-detail-inner { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .blog-detail-date { font-size: 0.75rem; color: #999; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 0.4rem; }
+    .blog-detail-title { font-size: 1.6rem; font-weight: 800; color: #1a1a1a; margin: 0 0 1.5rem; line-height: 1.25; }
+    .blog-detail-body { font-size: 0.95rem; line-height: 1.8; color: #333; }
+    .blog-detail-body p { margin: 0 0 1rem; }
+    .blog-detail-body h2 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; }
+    .blog-detail-body h3 { font-size: 1rem; font-weight: 700; margin: 1.25rem 0 0.4rem; }
+    /* ── LinkedIn carousel ─────────────────────────────── */
+    .li-section-divider { display: flex; align-items: center; gap: 1rem; margin: 2rem 0 1.25rem; }
+    .li-section-divider::before, .li-section-divider::after { content: ''; flex: 1; border-top: 1px solid #e0e0e0; }
+    .li-section-label { font-size: 0.72rem; color: #aaa; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+    .li-carousel-wrap { position: relative; }
+    .li-carousel-viewport { overflow: hidden; border-radius: 4px; }
+    .li-carousel-track { display: flex; gap: 1.25rem; transition: transform 0.42s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .li-card { flex: 0 0 calc((100% - 2.5rem) / 3); min-width: 0; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.18s, box-shadow 0.18s; }
+    .li-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+    .li-card-thumb { height: 130px; background: linear-gradient(135deg,#6b7280,#9ca3af); background-size: cover; background-position: center; position: relative; }
+    .li-card-thumb-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .li-card-thumb-play svg { width: 36px; height: 36px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
+    .li-card-body { padding: 0.8rem 1rem; }
+    .li-card-date { font-size: 0.7rem; color: #aaa; margin: 0 0 0.25rem; letter-spacing: 0.04em; }
+    .li-card-text { font-size: 0.82rem; color: #444; line-height: 1.5; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .li-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: #fff; border: 1px solid #ddd; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: box-shadow 0.15s, background 0.15s; }
+    .li-arrow:hover { background: #f5f5f5; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+    .li-arrow--prev { left: -17px; }
+    .li-arrow--next { right: -17px; }
+    .li-arrow svg { width: 16px; height: 16px; color: #555; }
+    /* LinkedIn post modal */
+    #li-modal { display: none; position: fixed; inset: 0; z-index: 4000; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; padding: 1.5rem; }
+    #li-modal.visible { display: flex; }
+    .li-modal-box { background: #fff; border-radius: 12px; width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .li-modal-media { width: 100%; background: #111; }
+    .li-modal-media img { width: 100%; display: block; max-height: 340px; object-fit: contain; }
+    .li-modal-media iframe { width: 100%; height: 310px; border: none; display: block; }
+    .li-modal-media-empty { height: 0; }
+    .li-modal-body { padding: 1.4rem 1.6rem 1.8rem; }
+    .li-modal-date { font-size: 0.72rem; color: #aaa; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 0.6rem; }
+    .li-modal-text { font-size: 0.92rem; color: #333; line-height: 1.75; margin: 0; }
+    .li-modal-close { position: sticky; top: 0; display: flex; justify-content: flex-end; padding: 0.75rem 0.75rem 0; background: #fff; }
+    .li-modal-close button { background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #888; line-height: 1; padding: 0.25rem; border-radius: 4px; transition: color 0.15s; }
+    .li-modal-close button:hover { color: #111; }
+    /* ── YouTube modal ─────────────────────────────────── */
+    #yt-modal { display: none; position: fixed; inset: 0; z-index: 4000; background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 1.5rem; }
+    #yt-modal.visible { display: flex; }
+    .yt-modal-box { background: #111; border-radius: 12px; width: min(90vw, 960px); max-height: 92vh; overflow-y: auto; box-shadow: 0 24px 70px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
+    .yt-modal-top { position: sticky; top: 0; display: flex; justify-content: flex-end; padding: 0.6rem 0.75rem 0; background: #111; z-index: 1; }
+    .yt-modal-top button { background: none; border: none; cursor: pointer; color: #888; font-size: 1.2rem; padding: 0.25rem; border-radius: 4px; transition: color 0.15s; }
+    .yt-modal-top button:hover { color: #fff; }
+    .yt-modal-embed { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
+    .yt-modal-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .yt-modal-body { padding: 1.2rem 1.5rem 1.6rem; background: #fff; border-radius: 0 0 12px 12px; }
+    .yt-modal-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .yt-modal-title { font-size: 1rem; font-weight: 700; color: #1a1a1a; margin: 0; flex: 1; line-height: 1.35; }
+    .yt-modal-date { font-size: 0.72rem; color: #aaa; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 0.75rem; }
+    .yt-modal-stats { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+    .yt-stat { font-size: 0.78rem; color: #666; display: flex; align-items: center; gap: 0.3rem; }
+    .yt-stat svg { width: 14px; height: 14px; }
+    .yt-modal-desc { font-size: 0.88rem; color: #555; line-height: 1.7; margin: 0 0 1rem; }
+    .yt-modal-watch { display: inline-flex; align-items: center; gap: 0.4rem; background: #ff0000; color: #fff; border: none; border-radius: 6px; padding: 0.5rem 1.1rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+    .yt-modal-watch:hover { background: #cc0000; }
+    .yt-like-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: none; border: 1.5px solid #ddd; border-radius: 6px; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600; color: #888; cursor: pointer; transition: all 0.15s; margin-left: auto; }
+    .yt-like-btn.liked { border-color: #e53e3e; color: #e53e3e; }
+    .yt-like-btn svg { width: 16px; height: 16px; transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+    .yt-like-btn.pop svg { transform: scale(1.4); }
+    .yt-modal-actions { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
     .project-detail-code-label { background: #3a3a3a; color: #c8c8c8; font-size: 0.72rem; padding: 0.45rem 0.85rem; letter-spacing: 0.04em; }
     .project-detail-pre { margin: 0; padding: 1rem 1.15rem; background: #1e1e1e; color: #d4d4d4; font-family: Consolas, Monaco, 'Courier New', monospace; font-size: 0.78rem; line-height: 1.5; overflow-x: auto; white-space: pre; tab-size: 2; }
     .project-detail-fig { margin: 1.25rem auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #f5f5f5; max-width: min(100%, 560px); width: 100%; display: block; }
@@ -731,7 +815,9 @@
       </div>
       </div>
       <div id="project-detail-view" class="project-detail-view" aria-hidden="true">
-        <div class="project-detail-hero" aria-hidden="true"></div>
+        <div class="project-detail-hero" aria-hidden="true">
+          <button class="project-detail-back" onclick="exitProjectDetail()" aria-label="Back">← Back</button>
+        </div>
         <h1 class="project-detail-title" id="project-detail-title">Project</h1>
         <div id="project-detail-body" class="project-detail-body"></div>
       </div>
@@ -745,6 +831,56 @@
         </div>
         <div class="modernizing-loading">
           <div class="loading-bar-wrap"><div class="loading-bar" id="modernizing-bar"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog detail overlay -->
+  <div id="blog-detail" role="dialog" aria-modal="true" aria-label="Blog post">
+    <div class="blog-detail-hero" id="blog-detail-hero">
+      <button class="blog-detail-hero-back" onclick="closeBlogDetail()">← Back</button>
+    </div>
+    <div class="blog-detail-inner">
+      <p class="blog-detail-date" id="blog-detail-date"></p>
+      <h1 class="blog-detail-title" id="blog-detail-title"></h1>
+      <div class="blog-detail-body" id="blog-detail-body"></div>
+    </div>
+  </div>
+
+  <!-- LinkedIn post modal -->
+  <div id="li-modal" role="dialog" aria-modal="true" aria-label="LinkedIn post">
+    <div class="li-modal-box">
+      <div class="li-modal-close"><button onclick="closeLiModal()" aria-label="Close">✕</button></div>
+      <div class="li-modal-media" id="li-modal-media"></div>
+      <div class="li-modal-body">
+        <p class="li-modal-date" id="li-modal-date"></p>
+        <p class="li-modal-text" id="li-modal-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- YouTube video modal -->
+  <div id="yt-modal" role="dialog" aria-modal="true" aria-label="YouTube video">
+    <div class="yt-modal-box">
+      <div class="yt-modal-top"><button onclick="closeYtModal()" aria-label="Close">✕</button></div>
+      <div class="yt-modal-embed"><iframe id="yt-modal-iframe" allowfullscreen allow="autoplay; encrypted-media"></iframe></div>
+      <div class="yt-modal-body">
+        <div class="yt-modal-meta">
+          <p class="yt-modal-title" id="yt-modal-title"></p>
+          <div class="yt-modal-stats" id="yt-modal-stats"></div>
+        </div>
+        <p class="yt-modal-date" id="yt-modal-date"></p>
+        <p class="yt-modal-desc" id="yt-modal-desc"></p>
+        <div class="yt-modal-actions">
+          <a class="yt-modal-watch" id="yt-modal-link" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5V8.5l6.25 3.5-6.25 3.5z"/></svg>
+            Watch on YouTube
+          </a>
+          <button class="yt-like-btn" id="yt-like-btn" onclick="toggleYtLike()">
+            <svg viewBox="0 0 24 24" fill="currentColor" id="yt-like-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span id="yt-like-label">Like</span>
+          </button>
         </div>
       </div>
     </div>
@@ -767,6 +903,10 @@
   </div>
 
   <script src="generated/projects-data.js"></script>
+  <script src="generated/blog-data.js"></script>
+  <script src="data/api-config.js"></script>
+  <script src="data/linkedin-posts.js"></script>
+  <script src="data/youtube-videos.js"></script>
   <script>
     //################################################################
     //#
@@ -1069,6 +1209,326 @@
         { kind: 'shapes', caption: 'This is an example of an image: oval, triangle, and square (from the case study).' }
       ]
     };
+    // ── Blog + LinkedIn helpers ──────────────────────────────────────────────
+    const BLOG_POSTS    = (window.__GENERATED_BLOG    || []);
+    const LINKEDIN_POSTS = (window.__LINKEDIN_POSTS   || []);
+    const BLOG_PAGE_SIZE = 3;
+    let blogShown = BLOG_PAGE_SIZE;
+
+    function renderBlogPage() {
+      let html = '<p class="clean-sub">Blog</p>';
+      html += '<div class="blog-list" id="blog-list">';
+      html += renderBlogCards(0, BLOG_PAGE_SIZE);
+      html += '</div>';
+      if (BLOG_POSTS.length > BLOG_PAGE_SIZE) {
+        html += '<button class="blog-show-more" id="blog-show-more" onclick="blogShowMore()">Show more</button>';
+      }
+      html += renderLinkedInSection();
+      html += renderYouTubeSection();
+      return html;
+    }
+
+    function renderBlogCards(start, end) {
+      const slice = BLOG_POSTS.slice(start, end);
+      return slice.map(p => {
+        const bannerStyle = p.coverUrl
+          ? `background-image:url('${p.coverUrl}');background-color:#9ca3af`
+          : '';
+        return `<div class="blog-card" onclick="openBlogDetail('${p.id}')">`
+          + `<div class="blog-card-banner" style="${bannerStyle}"></div>`
+          + `<div class="blog-card-body">`
+          + `<p class="blog-card-date">${p.dateDisplay || ''}</p>`
+          + `<p class="blog-card-title">${escHtml(p.title)}</p>`
+          + `<p class="blog-card-excerpt">${escHtml(p.excerpt)}</p>`
+          + `</div></div>`;
+      }).join('');
+    }
+
+    function blogShowMore() {
+      const list = document.getElementById('blog-list');
+      const btn  = document.getElementById('blog-show-more');
+      if (!list) return;
+      const next = blogShown + BLOG_PAGE_SIZE;
+      list.insertAdjacentHTML('beforeend', renderBlogCards(blogShown, next));
+      blogShown = next;
+      if (blogShown >= BLOG_POSTS.length && btn) btn.remove();
+    }
+
+    function escHtml(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function openBlogDetail(id) {
+      const post = BLOG_POSTS.find(p => p.id === id);
+      if (!post) return;
+      document.getElementById('blog-detail-date').textContent = post.dateDisplay || '';
+      document.getElementById('blog-detail-title').textContent = post.title;
+      document.getElementById('blog-detail-body').innerHTML = post.bodyHtml;
+      const hero = document.getElementById('blog-detail-hero');
+      if (post.coverUrl) {
+        hero.style.backgroundImage = `url('${post.coverUrl}')`;
+        hero.style.backgroundColor = '#9ca3af';
+      } else {
+        hero.style.backgroundImage = '';
+        hero.style.backgroundColor = '';
+      }
+      const el = document.getElementById('blog-detail');
+      el.classList.add('visible');
+      el.scrollTop = 0;
+    }
+
+    function closeBlogDetail() {
+      document.getElementById('blog-detail').classList.remove('visible');
+    }
+
+    // ── LinkedIn carousel ────────────────────────────────────────────────────
+    let liCarouselIndex = 0;
+    const LI_CARDS_VISIBLE = 3;
+
+    function renderLinkedInSection() {
+      if (!LINKEDIN_POSTS.length) return '';
+      let html = '<div class="li-section-divider"><span class="li-section-label">Posts</span></div>';
+      html += '<div class="li-carousel-wrap">';
+      html += '<button class="li-arrow li-arrow--prev" onclick="liCarouselMove(-1)" aria-label="Previous">';
+      html += '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,2 4,8 10,14"/></svg></button>';
+      html += '<div class="li-carousel-viewport"><div class="li-carousel-track" id="li-track">';
+      LINKEDIN_POSTS.forEach((p, i) => {
+        const hasMedia = p.media && p.media.length;
+        const firstMedia = hasMedia ? p.media[0] : null;
+        const isVideo = firstMedia && firstMedia.type === 'video';
+        const thumbSrc = p.thumb || (firstMedia && firstMedia.type === 'image' ? firstMedia.src : '');
+        const thumbStyle = thumbSrc ? `background-image:url('${thumbSrc}');background-color:#6b7280` : '';
+        html += `<div class="li-card" onclick="openLiModal(${i})">`;
+        html += `<div class="li-card-thumb" style="${thumbStyle}">`;
+        if (isVideo) {
+          html += `<div class="li-card-thumb-play"><svg viewBox="0 0 36 36" fill="white"><circle cx="18" cy="18" r="18" fill="rgba(0,0,0,0.45)"/><polygon points="14,11 28,18 14,25"/></svg></div>`;
+        }
+        html += `</div><div class="li-card-body">`;
+        html += `<p class="li-card-date">${escHtml(p.date)}</p>`;
+        html += `<p class="li-card-text">${p.text.replace(/<[^>]+>/g,'')}</p>`;
+        html += `</div></div>`;
+      });
+      html += '</div></div>';
+      html += '<button class="li-arrow li-arrow--next" onclick="liCarouselMove(1)" aria-label="Next">';
+      html += '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,2 12,8 6,14"/></svg></button>';
+      html += '</div>';
+      return html;
+    }
+
+    function liCarouselMove(dir) {
+      const track = document.getElementById('li-track');
+      if (!track) return;
+      const total = LINKEDIN_POSTS.length;
+      const maxIndex = Math.max(0, total - LI_CARDS_VISIBLE);
+      liCarouselIndex = Math.max(0, Math.min(liCarouselIndex + dir * 2, maxIndex));
+      const cardWidth = track.children[0] ? track.children[0].offsetWidth : 0;
+      const gap = 20; // 1.25rem ≈ 20px
+      track.style.transform = `translateX(-${liCarouselIndex * (cardWidth + gap)}px)`;
+    }
+
+    function openLiModal(idx) {
+      const post = LINKEDIN_POSTS[idx];
+      if (!post) return;
+      document.getElementById('li-modal-date').textContent = post.date || '';
+      document.getElementById('li-modal-text').innerHTML = post.text;
+      const mediaEl = document.getElementById('li-modal-media');
+      if (post.media && post.media.length) {
+        const m = post.media[0];
+        if (m.type === 'video') {
+          mediaEl.innerHTML = `<iframe src="${m.src}" allowfullscreen></iframe>`;
+          mediaEl.className = 'li-modal-media';
+        } else {
+          mediaEl.innerHTML = `<img src="${m.src}" alt="${m.alt||''}">`;
+          mediaEl.className = 'li-modal-media';
+        }
+      } else {
+        mediaEl.innerHTML = '';
+        mediaEl.className = 'li-modal-media-empty';
+      }
+      const modal = document.getElementById('li-modal');
+      modal.classList.add('visible');
+    }
+
+    function closeLiModal() {
+      document.getElementById('li-modal').classList.remove('visible');
+      document.getElementById('li-modal-media').innerHTML = '';
+    }
+
+    // close LinkedIn modal on backdrop click
+    document.getElementById('li-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeLiModal();
+    });
+
+    // ── YouTube section ──────────────────────────────────────────────────────
+    const YT_VIDEOS = (window.__YOUTUBE_VIDEOS || []);
+    let ytCarouselIndex = 0;
+    const YT_CARDS_VISIBLE = 3;
+
+    function renderYouTubeSection() {
+      if (!YT_VIDEOS.length) return '';
+      let html = '<div class="li-section-divider"><span class="li-section-label">Videos</span></div>';
+      html += '<div class="li-carousel-wrap">';
+      html += '<button class="li-arrow li-arrow--prev" onclick="ytCarouselMove(-1)" aria-label="Previous">';
+      html += '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,2 4,8 10,14"/></svg></button>';
+      html += '<div class="li-carousel-viewport"><div class="li-carousel-track" id="yt-track">';
+      YT_VIDEOS.forEach((v, i) => {
+        const thumb = `https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg`;
+        html += `<div class="li-card" onclick="openYtModal(${i})">`;
+        html += `<div class="li-card-thumb" style="background-image:url('${thumb}');background-color:#111">`;
+        html += `<div class="li-card-thumb-play"><svg viewBox="0 0 36 36" fill="white"><circle cx="18" cy="18" r="18" fill="rgba(0,0,0,0.45)"/><polygon points="14,11 28,18 14,25"/></svg></div>`;
+        html += `</div><div class="li-card-body">`;
+        html += `<p class="li-card-date">${escHtml(v.date)}</p>`;
+        html += `<p class="li-card-text" style="-webkit-line-clamp:2">${escHtml(v.title)}</p>`;
+        html += `</div></div>`;
+      });
+      html += '</div></div>';
+      html += '<button class="li-arrow li-arrow--next" onclick="ytCarouselMove(1)" aria-label="Next">';
+      html += '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,2 12,8 6,14"/></svg></button>';
+      html += '</div>';
+      return html;
+    }
+
+    function ytCarouselMove(dir) {
+      const track = document.getElementById('yt-track');
+      if (!track) return;
+      const maxIndex = Math.max(0, YT_VIDEOS.length - YT_CARDS_VISIBLE);
+      ytCarouselIndex = Math.max(0, Math.min(ytCarouselIndex + dir * 2, maxIndex));
+      const cardWidth = track.children[0] ? track.children[0].offsetWidth : 0;
+      track.style.transform = `translateX(-${ytCarouselIndex * (cardWidth + 20)}px)`;
+    }
+
+    let _ytCurrentId    = '';
+    let _ytCurrentCount = 0;
+    const _ytLikedThisSession = new Set();
+
+    // ── JSONBin like-counter helpers ─────────────────────────────────────────
+    // Reads/writes a shared { likes: { key: count } } object in JSONBin.
+    // Credentials come from data/api-config.js (gitignored locally, injected by
+    // .github/workflows/deploy.yml from GitHub secrets in production).
+    function _jbHeaders() {
+      return { 'Content-Type': 'application/json', 'X-Master-Key': window.JSONBIN_KEY || '' };
+    }
+    function _jbUrl() {
+      return window.JSONBIN_BIN_ID
+        ? `https://api.jsonbin.io/v3/b/${window.JSONBIN_BIN_ID}`
+        : null;
+    }
+    async function fbGetCount(key) {
+      const url = _jbUrl();
+      if (!url) return 0;
+      try {
+        const r = await fetch(`${url}/latest`, { headers: _jbHeaders() });
+        const d = await r.json();
+        const v = d.record && d.record.likes && d.record.likes[key];
+        return (typeof v === 'number' && v > 0) ? v : 0;
+      } catch { return 0; }
+    }
+    async function fbSetCount(key, count) {
+      const url = _jbUrl();
+      if (!url) return;
+      try {
+        const r = await fetch(`${url}/latest`, { headers: _jbHeaders() });
+        const d = await r.json();
+        const likes = (d.record && d.record.likes) ? { ...d.record.likes } : {};
+        likes[key] = Math.max(0, count);
+        await fetch(url, {
+          method: 'PUT',
+          headers: _jbHeaders(),
+          body: JSON.stringify({ likes })
+        });
+      } catch {}
+    }
+
+    function renderLikeBtn(liked, count) {
+      const btn = document.getElementById('yt-like-btn');
+      btn.classList.toggle('liked', liked);
+      const countStr = count > 0 ? ` ${count}` : '';
+      document.getElementById('yt-like-label').textContent = liked ? `Liked${countStr}` : `Like${countStr}`;
+    }
+
+    function openYtModal(idx) {
+      const v = YT_VIDEOS[idx];
+      if (!v) return;
+      _ytCurrentId = v.videoId;
+      document.getElementById('yt-modal-iframe').src = `https://www.youtube.com/embed/${v.videoId}?autoplay=1`;
+      // Set fallback values from data file immediately
+      document.getElementById('yt-modal-title').textContent = v.title || '';
+      document.getElementById('yt-modal-date').textContent = v.date || '';
+      document.getElementById('yt-modal-desc').textContent = v.description || '';
+      document.getElementById('yt-modal-link').href = `https://www.youtube.com/watch?v=${v.videoId}`;
+      document.getElementById('yt-modal-stats').innerHTML = '';
+      document.getElementById('yt-modal').classList.add('visible');
+
+      // Load like count from Firebase
+      const liked = _ytLikedThisSession.has(v.videoId);
+      fbGetCount('yt_' + v.videoId).then(count => {
+        _ytCurrentCount = count;
+        renderLikeBtn(liked, count);
+      });
+
+      // Pull real title for free via oEmbed (no API key needed)
+      fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${v.videoId}&format=json`)
+        .then(r => r.json())
+        .then(d => { if (d.title) document.getElementById('yt-modal-title').textContent = d.title; })
+        .catch(() => {});
+
+      // Pull description, real date, and view/like counts if API key available
+      const apiKey = window.YOUTUBE_API_KEY;
+      if (apiKey) {
+        fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${v.videoId}&key=${apiKey}`)
+          .then(r => r.json())
+          .then(data => {
+            const item = data.items && data.items[0];
+            if (!item) return;
+            const sn = item.snippet, st = item.statistics;
+            if (sn.description) {
+              const d = sn.description;
+              document.getElementById('yt-modal-desc').textContent = d.length > 600 ? d.slice(0, 600) + '…' : d;
+            }
+            if (sn.publishedAt) {
+              const d = new Date(sn.publishedAt);
+              document.getElementById('yt-modal-date').textContent = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            }
+            const views = parseInt(st.viewCount || 0).toLocaleString();
+            const ytLikes = parseInt(st.likeCount || 0).toLocaleString();
+            document.getElementById('yt-modal-stats').innerHTML =
+              `<span class="yt-stat"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5C21.3 7.6 17 4.5 12 4.5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>${views} views</span>`
+              + `<span class="yt-stat"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.3l.9-4.6.03-.3c0-.4-.16-.77-.43-1.04L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>${ytLikes} YT likes</span>`;
+          }).catch(() => {});
+      }
+    }
+
+    function toggleYtLike() {
+      const vid = _ytCurrentId;
+      if (!vid) return;
+      const btn = document.getElementById('yt-like-btn');
+      const wasLiked = _ytLikedThisSession.has(vid);
+      const newCount = wasLiked ? Math.max(0, _ytCurrentCount - 1) : _ytCurrentCount + 1;
+      _ytCurrentCount = newCount;
+      if (wasLiked) { _ytLikedThisSession.delete(vid); }
+      else {
+        _ytLikedThisSession.add(vid);
+        btn.classList.add('pop');
+        setTimeout(() => btn.classList.remove('pop'), 300);
+      }
+      renderLikeBtn(!wasLiked, newCount);
+      fbSetCount('yt_' + vid, newCount);
+    }
+
+    function closeYtModal() {
+      document.getElementById('yt-modal').classList.remove('visible');
+      document.getElementById('yt-modal-iframe').src = '';
+    }
+
+    document.getElementById('yt-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeYtModal();
+    });
+
+    // close blog detail on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeBlogDetail(); closeLiModal(); closeYtModal(); }
+    });
+
     const CLEAN_CONTENT = {
       home: '<p class="clean-message">This is still a work in progress, thank you for understanding!</p>',
       page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Nothing here yet — the project listed below is a placeholder example while I build this out. Real design work coming soon.</p><div class="portfolio-cards">' + renderCards('design') + '</div>',
@@ -1088,7 +1548,7 @@
         + '</div>'
         + '<p class="clean-sub" style="margin-top:2rem">Education</p>'
         + '<div class="exp-edu-grid">'
-        + '<div class="exp-edu-card"><div class="exp-edu-card-text"><p class="exp-edu-school">UC Irvine</p><p class="exp-edu-degree">B.S. Software Engineering &amp; Computer Science (Double Major)</p><p class="exp-edu-minor">CS Specialization: Networked Systems &nbsp;·&nbsp; Activities: Commit the Change</p><p class="exp-edu-date">2025 – 2029</p></div><div class="exp-photo-stack" style="position:relative;top:0;right:0;flex-shrink:0;" onclick=""><div class="exp-photo-card exp-photo-card--back2" style="background:#93c5fd"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#60a5fa"></div><div class="exp-photo-card exp-photo-card--front" style="background:#3b82f6"></div></div></div>'
+        + '<div class="exp-edu-card"><div class="exp-edu-card-text"><p class="exp-edu-school">UC Irvine</p><p class="exp-edu-degree">B.S. Software Engineering &amp; Computer Science (Double Major)</p><p class="exp-edu-minor">CS Specialization: Networked Systems &nbsp;·&nbsp; Activities: Commit the Change</p><p class="exp-edu-date">2025 – Present</p></div><div class="exp-photo-stack" style="position:relative;top:0;right:0;flex-shrink:0;" onclick=""><div class="exp-photo-card exp-photo-card--back2" style="background:#93c5fd"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#60a5fa"></div><div class="exp-photo-card exp-photo-card--front" style="background:#3b82f6"></div></div></div>'
         + '<div class="exp-edu-card"><div class="exp-edu-card-text"><p class="exp-edu-school">Tualatin High School</p><p class="exp-edu-degree">High School Diploma, Graduated With Honors</p><p class="exp-edu-minor">4.16 Weighted GPA &nbsp;·&nbsp; IB Program: English, Math, History, Physics</p><p class="exp-edu-date">Graduated 2025</p></div><div class="exp-photo-stack" style="position:relative;top:0;right:0;flex-shrink:0;" onclick=""><div class="exp-photo-card exp-photo-card--back2" style="background:#93c5fd"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#60a5fa"></div><div class="exp-photo-card exp-photo-card--front" style="background:#3b82f6"></div></div></div>'
         + '</div>'
         + '<p class="clean-sub" style="margin-top:2rem">Honors &amp; Awards</p>'
@@ -1098,7 +1558,7 @@
         + '<div class="exp-award-card"><span class="exp-award-badge">🏆</span><p class="exp-award-title">Best Presentation</p><p class="exp-award-issuer">codeORcreate 2024 &nbsp;·&nbsp; Sep 2024</p><p class="exp-award-desc">Oregon\'s regional programming challenge. Built an accessibility-focused public transit app with a routing algorithm that adapts to the user\'s disability — judged by a panel of 4 and awarded Best Presentation.</p></div>'
         + '</div>'
         + '<p style="font-size:0.8rem;color:#999;margin-top:0.25rem">Full profile: <a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">linkedin.com/in/jacobiglenn</a></p>',
-      page4: '<p class="clean-uc">Under construction — coming soon.</p>',
+      page4: renderBlogPage(),
       about: '<p class="clean-sub">Contact me</p><p class="clean-contact">971-300-5659</p><p class="clean-contact"><a href="mailto:jacobiglenn@gmail.com" class="clean-link">jacobiglenn@gmail.com</a></p>'
     };
 
@@ -2670,6 +3130,11 @@
       if (page === 'page4' && crsMode) {
         initPage4DimensionCorner();
         initPage4Ocean();
+      }
+      if (page === 'page4' && !crsMode) {
+        blogShown = BLOG_PAGE_SIZE;
+        liCarouselIndex = 0;
+        ytCarouselIndex = 0;
       }
       if (page === 'page1' && crsMode) startHorseTitleBlink();
       if (!crsMode && page === 'page1') initDesignPortfolioGalleries();

@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build:projects": "node scripts/build-projects.cjs",
+    "build:blog": "node scripts/build-blog.cjs",
+    "build": "node scripts/build-projects.cjs && node scripts/build-blog.cjs",
     "screenshots": "node scripts/capture-portfolio-screens.cjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

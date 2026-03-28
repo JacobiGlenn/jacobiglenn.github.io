@@ -1,1 +1,6 @@
 node_modules/
+
+# API keys — never commit real keys
+# The workflow injects them from GitHub secrets at deploy time
+# For local dev, create this file manually from data/api-config.js.example
+data/api-config.js

@@ -1,0 +1,146 @@
+BLOG & LINKEDIN POSTS — HOW IT WORKS
+=====================================
+
+There are two content areas on the Blog page:
+  1. Blog posts  — full-width cards, built from the blog/ folder system
+  2. LinkedIn posts — horizontal carousel, managed via a single JS data file
+
+----------------------------------------------------------------------
+PART 1: BLOG POSTS (folder system)
+----------------------------------------------------------------------
+
+Location: blog/<post-slug>/post.md
+
+FRONTMATTER (top of post.md):
+  ---
+  title: "Your Post Title"
+  date: "MM/YYYY"        ← used for sorting and the date pill (e.g. 03/2026)
+  cover: "COVER.jpg"     ← optional; image file in the same folder
+  excerpt: "One sentence teaser shown on the card."  ← optional; auto-generated from body if absent
+  ---
+
+BODY:
+  Write the post body below the frontmatter in plain HTML paragraphs.
+  Example:
+    <p>First paragraph here.</p>
+    <p>Second paragraph here.</p>
+    <h2>A subheading</h2>
+    <p>More text.</p>
+
+  You can also use <a>, <strong>, <em>, <ul>, <li>, etc.
+
+HOW TO ADD A POST:
+  1. Create a new folder inside blog/, e.g. blog/my-new-post/
+  2. Create post.md inside it with the frontmatter + body above
+  3. (Optional) Drop a COVER.jpg inside the folder for a banner image
+  4. Run: npm run build:blog
+  5. Git add, commit, push — it will show on the site
+
+HOW TO DELETE A POST:
+  1. Delete the folder: blog/my-post/
+  2. Run: npm run build:blog
+  3. Git add, commit, push
+
+CARD BEHAVIOUR:
+  - Shows 3 posts at a time; "Show more" reveals 3 more each click
+  - Clicking a card opens a full-screen detail overlay with the full body
+  - Posts sort newest first by date
+
+----------------------------------------------------------------------
+PART 2: LINKEDIN POSTS (carousel, manual data file)
+----------------------------------------------------------------------
+
+WHY NOT A FOLDER SYSTEM:
+  LinkedIn posts are short snippets — they don't need separate HTML files.
+  A single JS array is faster to edit and easier to delete entries from.
+  The carousel format also doesn't open a sub-page, just a modal popup.
+
+Location: data/linkedin-posts.js
+
+FORMAT (each post is one object in the array):
+  {
+    id: 'unique-id',          ← any unique string, no spaces
+    date: 'Mar 2026',         ← display string, shown on the card
+    text: 'Post text here. Can include <a href="...">links</a>.',
+    media: [
+      { type: 'image', src: 'assets/linkedin/filename.jpg', alt: 'description' }
+      // OR
+      { type: 'video', src: 'https://www.youtube.com/embed/VIDEO_ID' }
+    ],
+    thumb: 'assets/linkedin/filename.jpg'  ← optional card thumbnail (defaults to first image)
+  }
+
+  - media is an array but only the FIRST item is shown in the modal
+  - For videos: use YouTube embed URL format (https://www.youtube.com/embed/ID)
+  - If no media, set media: [] and thumb: ''
+
+HOW TO ADD A POST:
+  1. Open data/linkedin-posts.js
+  2. Add a new object at the TOP of the array (newest first = leftmost card)
+  3. (Optional) Add any image to assets/linkedin/ and reference it in src/thumb
+  4. Git add, commit, push — NO BUILD STEP NEEDED (file is loaded directly)
+
+HOW TO DELETE A POST:
+  1. Open data/linkedin-posts.js
+  2. Remove the object with that id
+  3. Git add, commit, push
+
+CAROUSEL BEHAVIOUR:
+  - Shows all posts in a horizontal scroll
+  - Left/right arrows move by 2 cards at a time with smooth animation
+  - Clicking a card opens a centered modal with the full text + media
+  - Click backdrop or press Escape to close
+
+----------------------------------------------------------------------
+PART 3: YOUTUBE VIDEOS (carousel, manual data file)
+----------------------------------------------------------------------
+
+Location: data/youtube-videos.js
+
+FORMAT:
+  {
+    id: 'unique-id',
+    videoId: 'puTp9szMQqE',       ← the ID from youtube.com/watch?v=ID or youtu.be/ID
+    date: 'Mar 2026',
+    title: 'Your Video Title',
+    description: 'Description shown in the modal below the embed.'
+  }
+
+THUMBNAILS: Auto-loaded from YouTube for free — no API needed.
+
+VIEW/LIKE COUNTS (optional):
+  1. Get a free YouTube Data API v3 key from console.cloud.google.com
+  2. Enable "YouTube Data API v3" on your project
+  3. Restrict the key to your site URL
+  4. Paste it into: window.YOUTUBE_API_KEY = 'YOUR_KEY_HERE'; in data/youtube-videos.js
+  Stats will appear in the modal automatically. Leave the key empty to skip.
+
+HOW TO ADD A VIDEO:
+  1. Open data/youtube-videos.js
+  2. Add a new object at the TOP of the array (newest first)
+  3. Set the videoId from the YouTube URL
+  4. Git add, commit, push — NO BUILD STEP NEEDED
+
+HOW TO DELETE A VIDEO:
+  1. Open data/youtube-videos.js
+  2. Remove the object with that id
+  3. Git add, commit, push
+
+MODAL BEHAVIOUR:
+  - 16:9 embedded player, nearly full-width
+  - Title, date, description below the embed
+  - View count + like count shown if API key is set
+  - "Watch on YouTube" red button to open the full video
+
+----------------------------------------------------------------------
+BUILD COMMANDS
+----------------------------------------------------------------------
+
+  npm run build:blog      ← rebuild blog-data.js from blog/ folder
+  npm run build:projects  ← rebuild projects-data.js from devProjects/ + designProjects/
+  npm run build           ← runs both of the above
+
+After any blog/ folder change, always run npm run build:blog before pushing.
+LinkedIn posts (data/linkedin-posts.js) do NOT require a build step.
+
+----------------------------------------------------------------------
