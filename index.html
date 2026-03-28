@@ -1385,8 +1385,6 @@
       html += '<button class="li-arrow li-arrow--next" onclick="ytCarouselMove(1)" aria-label="Next">';
       html += '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,2 12,8 6,14"/></svg></button>';
       html += '</div>';
-      // Fetch real titles + dates after render
-      setTimeout(loadYtCardMeta, 0);
       return html;
     }
 
@@ -3164,6 +3162,7 @@
         blogShown = BLOG_PAGE_SIZE;
         liCarouselIndex = 0;
         ytCarouselIndex = 0;
+        setTimeout(loadYtCardMeta, 50);
       }
       if (page === 'page1' && crsMode) startHorseTitleBlink();
       if (!crsMode && page === 'page1') initDesignPortfolioGalleries();
