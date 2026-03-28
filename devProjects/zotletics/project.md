@@ -47,3 +47,14 @@ header: COVER.svg
 <p>This is the first project I have owned end-to-end from initial Figma design through a full architectural plan. Writing the technical blueprint before touching the rebuild forced me to think seriously about schema design, auth flows, and what it actually takes to make something maintainable at scale. That habit of planning before coding is something I picked up from the hackathon experience, where we had too many ideas and not enough structure, and it has changed how I approach every project since.</p>
 
 <p>The AI integration is the part I am most interested in building. Getting a model to return structured JSON consistently, handling edge cases, and writing prompts that account for full user context is a real engineering problem worth solving well. I am taking my time with this one.</p>
+
+<div class="project-link-row">
+  <a href="https://github.com/JacobiGlenn/Zotletics" target="_blank" rel="noopener noreferrer" class="project-link project-link--github">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+    GitHub
+  </a>
+  <a href="https://devpost.com/software/anteater-gym-service" target="_blank" rel="noopener noreferrer" class="project-link project-link--devpost">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.002 1.61L0 12.004 6.002 22.39h11.996L24 12.004 17.998 1.61zm1.593 4.084h3.947c3.605 0 6.276 1.695 6.276 6.31 0 4.436-3.21 6.302-6.456 6.302H7.595zm2.517 2.449v7.714h1.241c2.646 0 3.862-1.55 3.862-3.861.009-2.569-1.096-3.853-3.767-3.853z"/></svg>
+    Devpost (WebJam 2025)
+  </a>
+</div>
