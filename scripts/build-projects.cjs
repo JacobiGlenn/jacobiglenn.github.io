@@ -29,6 +29,12 @@ function findDefaultCover(projectDir) {
   return null;
 }
 
+function svgToDataUri(absPath) {
+  const raw = fs.readFileSync(absPath, 'utf8');
+  // URL-encode the SVG so it can be used directly in url() without base64 bloat
+  return 'data:image/svg+xml,' + encodeURIComponent(raw);
+}
+
 function resolveUrl({ folderName, slug, projectDir, value, fallback }) {
   let rel = value;
   if (!rel && fallback) rel = fallback;
@@ -36,7 +42,13 @@ function resolveUrl({ folderName, slug, projectDir, value, fallback }) {
   if (!rel) return '';
   if (/^https?:\/\//i.test(rel)) return rel;
   if (rel.startsWith('assets/')) return rel;
-  return `${folderName}/${slug}/${rel}`.replace(/\\/g, '/');
+  const relPath = `${folderName}/${slug}/${rel}`.replace(/\\/g, '/');
+  // Inline SVG files as data URIs so they always render as CSS background-image
+  if (rel.toLowerCase().endsWith('.svg')) {
+    const absPath = path.join(ROOT, relPath);
+    if (fs.existsSync(absPath)) return svgToDataUri(absPath);
+  }
+  return relPath;
 }
 
 function resolveCoverUrl({ folderName, slug, projectDir, cover }) {
