@@ -408,6 +408,37 @@
     .tech-badge--clerk { background: #6c47ff; color: #fff; }
     .tech-badge--supabase { background: #3ecf8e; color: #1a1a1a; }
     .tech-badge--vercel { background: #000; color: #fff; border: 1px solid #444; }
+
+    /* ── Work Experience Timeline ── */
+    .exp-timeline { display: flex; flex-direction: column; gap: 0; margin: 0.75rem 0 0; }
+    .exp-entry { display: flex; gap: 0; padding: 1.25rem 0; border-bottom: 1px solid #eee; }
+    .exp-entry:last-child { border-bottom: none; }
+    .exp-accent { width: 3px; border-radius: 2px; flex-shrink: 0; margin-right: 1rem; align-self: stretch; min-height: 1rem; }
+    .exp-entry[data-category="edu"]      .exp-accent { background: #3c873a; }
+    .exp-entry[data-category="design"]   .exp-accent { background: #f24e1e; }
+    .exp-entry[data-category="mil"]      .exp-accent { background: #4b5563; }
+    .exp-entry[data-category="tech"]     .exp-accent { background: #3178c6; }
+    .exp-entry[data-category="creative"] .exp-accent { background: #f59e0b; }
+    .exp-body { flex: 1; min-width: 0; }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+    .exp-role { font-size: 1rem; font-weight: 700; color: #1a1a1a; font-family: Georgia, 'Times New Roman', serif; }
+    .exp-company { font-size: 0.85rem; color: #555; margin-top: 0.1rem; }
+    .exp-right { text-align: right; flex-shrink: 0; }
+    .exp-date { font-size: 0.8rem; font-weight: 600; color: #333; }
+    .exp-loc  { font-size: 0.75rem; color: #888; margin-top: 0.1rem; }
+    .exp-bullets { list-style: none; padding: 0; margin: 0 0 0.75rem; display: flex; flex-direction: column; gap: 0.3rem; }
+    .exp-bullets li { font-size: 0.88rem; color: #444; padding-left: 1.1rem; position: relative; line-height: 1.55; }
+    .exp-bullets li::before { content: "–"; position: absolute; left: 0; color: #bbb; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .exp-tag { font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; background: #f0f0f0; color: #555; border: 1px solid #ddd; }
+    /* Education cards */
+    .exp-edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.75rem 0 1.5rem; }
+    @media (max-width: 600px) { .exp-edu-grid { grid-template-columns: 1fr; } }
+    .exp-edu-card { background: #f9f9f9; border: 1px solid #e5e5e5; border-radius: 8px; padding: 1rem 1.1rem; }
+    .exp-edu-school { font-size: 1rem; font-weight: 700; color: #1a1a1a; font-family: Georgia, 'Times New Roman', serif; }
+    .exp-edu-degree { font-size: 0.83rem; color: #444; margin-top: 0.25rem; line-height: 1.4; }
+    .exp-edu-minor  { font-size: 0.77rem; color: #777; margin-top: 0.2rem; line-height: 1.4; }
+    .exp-edu-date   { font-size: 0.75rem; color: #999; margin-top: 0.5rem; font-weight: 600; }
     .project-detail-code-label { background: #3a3a3a; color: #c8c8c8; font-size: 0.72rem; padding: 0.45rem 0.85rem; letter-spacing: 0.04em; }
     .project-detail-pre { margin: 0; padding: 1rem 1.15rem; background: #1e1e1e; color: #d4d4d4; font-family: Consolas, Monaco, 'Courier New', monospace; font-size: 0.78rem; line-height: 1.5; overflow-x: auto; white-space: pre; tab-size: 2; }
     .project-detail-fig { margin: 1.25rem auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #f5f5f5; max-width: min(100%, 560px); width: 100%; display: block; }
@@ -1002,7 +1033,19 @@
       home: '<p class="clean-message">This is still a work in progress, thank you for understanding!</p>',
       page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Nothing here yet — the project listed below is a placeholder example while I build this out. Real design work coming soon.</p><div class="portfolio-cards">' + renderCards('design') + '</div>',
       page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Still in progress — I\'ve only added a couple projects so far. More to come as I continue building this out.</p><div class="portfolio-cards">' + renderCards('dev') + '</div>',
-      page3: '<p class="clean-uc">View my professional experience on LinkedIn.</p><a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">linkedin.com/in/jacobiglenn</a>',
+      page3: '<p class="clean-sub">Experience</p><div class="exp-timeline">'
+        + '<div class="exp-entry" data-category="edu"><div class="exp-accent"></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Code Sensei &amp; Robotics Instructor</p><p class="exp-company">Code Ninjas</p></div><div class="exp-right"><p class="exp-date">Nov 2025 – Present</p><p class="exp-loc">Irvine, CA</p></div></div><ul class="exp-bullets"><li>Tutored students aged 5–14 on programming fundamentals through the IMPACT curriculum, LEGO SPIKE, and Unity</li><li>Resolved logic and syntax errors in student projects, emphasizing debugging skills and conceptual understanding over quick fixes</li><li>Managed front desk operations weekly, including scheduling, phone support, and lesson planning</li><li>Designed event graphics and social media content to support local outreach and enrollment</li></ul><div class="exp-tags"><span class="exp-tag">JavaScript</span><span class="exp-tag">Python</span><span class="exp-tag">Unity C#</span><span class="exp-tag">Teaching</span><span class="exp-tag">Graphic Design</span></div></div></div>'
+        + '<div class="exp-entry" data-category="design"><div class="exp-accent"></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">UI/UX Designer</p><p class="exp-company">Commit The Change, UCI</p></div><div class="exp-right"><p class="exp-date">Oct 2025 – Present</p><p class="exp-loc">Irvine, CA</p></div></div><ul class="exp-bullets"><li>Designed feature wireframes and clickable prototypes in Figma for a community health center non-profit client</li><li>Contributed to weekly sprints, delivering polished designs on schedule and iterating from feedback</li><li>Maintained consistent UX patterns and component libraries across the project</li></ul><div class="exp-tags"><span class="exp-tag">Figma</span><span class="exp-tag">Prototyping</span><span class="exp-tag">UX Research</span><span class="exp-tag">Agile Sprints</span></div></div></div>'
+        + '<div class="exp-entry" data-category="mil"><div class="exp-accent"></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Aircraft Pneudraulics Repairer</p><p class="exp-company">US Army National Guard</p></div><div class="exp-right"><p class="exp-date">Nov 2025 – Present</p><p class="exp-loc">National Guard</p></div></div><ul class="exp-bullets"><li>Inspect, diagnose, and repair pneudraulics systems on active military aircraft</li><li>Fabricate and install hydraulic tubes, hoses, and components to technical specification</li><li>Conduct safety training and instruct personnel on pneudraulics maintenance procedures</li><li>Operate and maintain common and specialized tools used in aircraft servicing</li></ul><div class="exp-tags"><span class="exp-tag">Aircraft Systems</span><span class="exp-tag">Technical Training</span><span class="exp-tag">Safety Compliance</span><span class="exp-tag">Hydraulics</span></div></div></div>'
+        + '<div class="exp-entry" data-category="tech"><div class="exp-accent"></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Apple Certified Computing Advisor</p><p class="exp-company">Best Buy</p></div><div class="exp-right"><p class="exp-date">Jun 2023 – Apr 2025</p><p class="exp-loc">Tualatin, OR</p></div></div><ul class="exp-bullets"><li>Provided sales support across all departments — Computing, Mobile, Home Theatre, Appliances, and Gaming</li><li>Communicated complex technology concepts clearly to customers of all backgrounds and comfort levels</li><li>Completed Apple SEED certification; relayed product knowledge and updates to associates across the store floor</li><li>Performed basic IT support through Geek Squad and scheduled customer installations</li><li>Trained and mentored 20+ new employees across three seasonal hiring waves</li></ul><div class="exp-tags"><span class="exp-tag">Apple Certified</span><span class="exp-tag">IT Support</span><span class="exp-tag">Sales</span><span class="exp-tag">Team Training</span><span class="exp-tag">Customer Service</span></div></div></div>'
+        + '<div class="exp-entry" data-category="creative"><div class="exp-accent"></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Crew Lead · Editor · Graphic Designer</p><p class="exp-company">TuHS Broadcasting</p></div><div class="exp-right"><p class="exp-date">Sep 2023 – May 2025</p><p class="exp-loc">Tualatin, OR</p></div></div><ul class="exp-bullets"><li>Led a live camera crew during broadcast football and basketball games, managing input switching and shot composition in real time</li><li>Edited weekly highlight reels and news segments for the school YouTube channel using Adobe Premiere Pro and DaVinci Resolve</li><li>Designed the official department logo, work apparel, and a complete branding guide for TuHS Broadcasting</li><li>Trained 4+ crew members on camera operation, live-stream etiquette, and setup procedures</li></ul><div class="exp-tags"><span class="exp-tag">Adobe Premiere Pro</span><span class="exp-tag">DaVinci Resolve</span><span class="exp-tag">Live Broadcast</span><span class="exp-tag">Branding</span><span class="exp-tag">Leadership</span></div></div></div>'
+        + '</div>'
+        + '<p class="clean-sub" style="margin-top:2rem">Education</p>'
+        + '<div class="exp-edu-grid">'
+        + '<div class="exp-edu-card"><p class="exp-edu-school">UC Irvine</p><p class="exp-edu-degree">B.S. Software Engineering &amp; Computer Science (Double Major)</p><p class="exp-edu-minor">Minor in Management &nbsp;·&nbsp; Activities: Commit the Change</p><p class="exp-edu-date">2025 – 2029</p></div>'
+        + '<div class="exp-edu-card"><p class="exp-edu-school">Tualatin High School</p><p class="exp-edu-degree">High School Diploma — Graduated With Honors</p><p class="exp-edu-minor">4.16 Weighted GPA &nbsp;·&nbsp; IB Program: English, Math, History, Physics</p><p class="exp-edu-date">Graduated 2025</p></div>'
+        + '</div>'
+        + '<p style="font-size:0.8rem;color:#999;margin-top:0.25rem">Full profile: <a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">linkedin.com/in/jacobiglenn</a></p>',
       page4: '<p class="clean-uc">Under construction — coming soon.</p>',
       about: '<p class="clean-sub">Contact me</p><p class="clean-contact">971-300-5659</p><p class="clean-contact"><a href="mailto:jacobiglenn@gmail.com" class="clean-link">jacobiglenn@gmail.com</a></p>'
     };
