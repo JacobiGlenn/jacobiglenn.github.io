@@ -2464,10 +2464,7 @@
       if (sw) sw.removeAttribute('aria-hidden');
       const hero = document.querySelector('.project-detail-hero');
       if (hero) {
-        hero.style.backgroundImage = '';
-        hero.style.backgroundSize = '';
-        hero.style.backgroundPosition = '';
-        hero.style.backgroundRepeat = '';
+        hero.style.background = '';
       }
     }
     function buildProjectDetailBody(meta) {
@@ -2484,14 +2481,10 @@
         const heroSrc = meta.headerUrl || meta.coverUrl;
         if (heroSrc) {
           const u = heroSrc.replace(/"/g, '\\"');
-          hero.style.backgroundImage = 'url("' + u + '")';
-          hero.style.backgroundSize = 'cover';
-          hero.style.backgroundPosition = 'center';
-          hero.style.backgroundRepeat = 'no-repeat';
+          hero.style.background = 'url("' + u + '") center / cover no-repeat';
         } else {
-          hero.style.backgroundImage = '';
-          hero.style.backgroundSize = '';
-          hero.style.backgroundPosition = '';
+          hero.style.background = '';
+        }
           hero.style.backgroundRepeat = '';
         }
       }
