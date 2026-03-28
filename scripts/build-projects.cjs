@@ -108,6 +108,7 @@ function loadProject(folderName, categoryKey, slug) {
     headerUrl,
     dateLabel,
     dateSort,
+    ongoing: !!data.ongoing,
     bodyHtml
   };
 }
