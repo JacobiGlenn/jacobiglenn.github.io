@@ -310,22 +310,30 @@
     #main-screen:not(.skeleton) .content.content-about {
       padding: 1.25rem 25px 2.5rem;
       align-items: stretch;
+      overflow-x: hidden;
+      max-width: 100%;
     }
     #main-screen:not(.skeleton) .content.content-about #page-content,
     #main-screen:not(.skeleton) .content.content-about #standard-content-wrap {
-      max-width: none;
+      max-width: 100%;
       width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
-    .about-bio { max-width: none; width: 100%; box-sizing: border-box; color: #444; line-height: 1.75; font-size: 0.98rem; padding: 0; }
+    .about-bio { max-width: 100%; width: 100%; min-width: 0; box-sizing: border-box; color: #444; line-height: 1.75; font-size: 0.98rem; padding: 0; overflow-x: hidden; }
     .about-bio p { margin: 0 0 1rem; }
     .about-bio p:last-child { margin-bottom: 0; }
-    .about-layout { display: grid; gap: 1.15rem; }
+    .about-layout { display: grid; gap: 1.15rem; min-width: 0; max-width: 100%; }
     .about-card {
       background: #fafafa;
       border: 1px solid #e8e8ec;
       border-radius: 12px;
       padding: 1.2rem 1.35rem 1.35rem;
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .about-card-label {
       font-size: 0.72rem;
@@ -340,93 +348,115 @@
       background: linear-gradient(165deg, #f8f7ff 0%, #fafafa 55%, #f8fafc 100%);
     }
     .about-intro-card p:last-of-type { margin-bottom: 0; }
-    .about-path-card { padding-bottom: 1.15rem; }
-    .about-path {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 0.35rem;
-      margin: 0.25rem 0 1rem;
-      padding: 0.5rem 0.25rem 0;
-      position: relative;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
+    .about-path-card { padding-bottom: 1.15rem; min-width: 0; max-width: 100%; }
+    .about-hz-hint { font-size: 0.86rem; color: #64748b; margin: 0 0 0.65rem; line-height: 1.5; }
+    .about-hz-scroll-outer {
+      margin: 0 0 1rem;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
     }
-    .about-path::before {
+    .about-hz-scroll {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 0 0.5rem;
+      margin: 0;
+      scrollbar-width: thin;
+      scrollbar-gutter: stable;
+      scroll-padding-left: 0;
+    }
+    .about-hz-track {
+      --hz-node: 10.5rem;
+      --hz-gap: 2.75rem;
+      --hz-tail: calc(2 * (var(--hz-node) + var(--hz-gap)));
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      gap: 0;
+      padding: 1rem 0 0.55rem 0;
+      padding-right: var(--hz-tail);
+      position: relative;
+      width: max-content;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    .about-hz-track::before {
       content: '';
       position: absolute;
-      left: 6%;
-      right: 6%;
-      top: calc(0.5rem + 5px);
+      left: calc(var(--hz-node) * 0.5);
+      right: 0;
+      top: calc(1rem + 9px);
       height: 3px;
-      background: linear-gradient(90deg, #c7d2fe, #818cf8 40%, #a5b4fc 100%);
+      background: linear-gradient(90deg, #c7d2fe, #818cf8 45%, #a5b4fc);
       border-radius: 3px;
-      opacity: 0.85;
       z-index: 0;
+      pointer-events: none;
     }
-    .about-path-step {
+    .about-hz-node {
+      flex: 0 0 auto;
+      width: var(--hz-node);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.32rem;
+      padding: 0.2rem 0.15rem 0.45rem;
+      margin: 0 var(--hz-gap) 0 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
       position: relative;
       z-index: 1;
-      flex: 1 1 0;
-      min-width: 4.25rem;
-      max-width: 6rem;
       text-align: center;
+      border-radius: 10px;
+      transition: background 0.15s;
     }
-    .about-path-dot {
-      display: block;
-      width: 12px;
-      height: 12px;
-      margin: 0 auto 0.55rem;
-      background: #fff;
-      border: 3px solid #6366f1;
+    .about-hz-node:hover { background: rgba(99, 102, 241, 0.07); }
+    .about-hz-node:focus-visible { outline: 2px solid #6366f1; outline-offset: 3px; }
+    .about-hz-node.is-active .about-hz-node-dot {
+      background: #6366f1;
+      box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(99, 102, 241, 0.28);
+    }
+    .about-hz-node-dot {
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(99, 102, 241, 0.25);
+      border: 3px solid #6366f1;
+      background: #fff;
+      flex-shrink: 0;
+      transition: background 0.15s, box-shadow 0.15s;
     }
-    .about-path-place { display: block; font-weight: 700; font-size: 0.74rem; color: #1e1b4b; letter-spacing: 0.02em; line-height: 1.25; }
-    .about-path-note { display: block; font-size: 0.68rem; color: #64748b; line-height: 1.35; margin-top: 0.2rem; }
-    .about-path-cap { font-size: 0.88rem; color: #64748b; margin: 0; line-height: 1.55; padding-top: 0.25rem; border-top: 1px solid #ececf0; }
-    .about-path-sub {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: #64748b;
-      margin: 0.85rem 0 0.45rem;
+    .about-hz-node-short { font-weight: 700; font-size: 0.72rem; color: #1e1b4b; line-height: 1.2; }
+    .about-hz-node:last-of-type { margin-right: 0; }
+    .about-hz-node-sub { font-size: 0.62rem; color: #64748b; line-height: 1.3; max-width: 9.5rem; }
+    .about-hz-detail {
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem 1.2rem 1.15rem;
+      margin: 0 0 1.15rem;
+      min-height: 5.25rem;
     }
-    .about-job-timeline {
-      margin: 0 0 0.5rem;
-      padding: 0;
-      border-top: 1px solid #ececf0;
-      padding-top: 0.65rem;
-    }
-    .about-job-row {
-      display: grid;
-      grid-template-columns: minmax(6.5rem, 7.5rem) 1fr;
-      gap: 0.35rem 0.85rem;
-      align-items: baseline;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid #f0f0f3;
-      font-size: 0.88rem;
-      line-height: 1.45;
-      color: #3f3f46;
-    }
-    .about-job-row:last-child { border-bottom: none; }
-    .about-job-row--uci {
-      margin-top: 0.35rem;
-      padding-top: 0.65rem;
-      border-top: 2px solid #c7d2fe;
-      border-bottom: none;
-      font-size: 0.92rem;
-    }
-    .about-job-when {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #6366f1;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-    .about-job-what { color: #27272a; }
+    .about-hz-detail-placeholder { margin: 0; font-size: 0.88rem; color: #94a3b8; }
+    .about-hz-detail-placeholder[hidden] { display: none !important; }
+    .about-hz-detail-inner[hidden] { display: none !important; }
+    .about-hz-detail-kicker { margin: 0 0 0.35rem; font-size: 0.68rem; font-weight: 700; color: #6366f1; text-transform: uppercase; letter-spacing: 0.07em; }
+    .about-hz-detail-title { margin: 0 0 0.45rem; font-size: 1.08rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
+    .about-hz-detail-text { margin: 0; font-size: 0.9rem; line-height: 1.65; color: #3f3f46; white-space: pre-wrap; }
+    .about-path-cap { font-size: 0.88rem; color: #64748b; margin: 0.75rem 0 0; line-height: 1.55; padding-top: 0.85rem; border-top: 1px solid #ececf0; }
     .about-goals-card { background: linear-gradient(180deg, #fff 0%, #fafbff 100%); }
     .about-goals-card p { margin: 0; color: #3f3f46; }
     .about-contact-card { background: linear-gradient(180deg, #fafafa 0%, #f4f4f5 100%); border-color: #e4e4e7; }
@@ -1983,24 +2013,31 @@
         + '</section>'
         + '<section class="about-card about-path-card" aria-labelledby="about-path-heading">'
         + '<h2 class="about-card-label" id="about-path-heading">Where I am from</h2>'
-        + '<div class="about-path" role="list">'
-        + '<div class="about-path-step" role="listitem"><span class="about-path-dot" aria-hidden="true"></span><span class="about-path-place">California</span><span class="about-path-note">Born</span></div>'
-        + '<div class="about-path-step" role="listitem"><span class="about-path-dot" aria-hidden="true"></span><span class="about-path-place">Oregon</span><span class="about-path-note">Middle &amp; high school</span></div>'
-        + '<div class="about-path-step" role="listitem"><span class="about-path-dot" aria-hidden="true"></span><span class="about-path-place">Tualatin</span><span class="about-path-note">Through graduation</span></div>'
-        + '</div>'
-        + '<p class="about-path-sub">Jobs &amp; service (by start date)</p>'
-        + '<div class="about-job-timeline">'
-        + '<div class="about-job-row"><span class="about-job-when">Jun 2021 – Sep 2021</span><span class="about-job-what"><strong>Dairy Queen</strong> — crew, training, rush service</span></div>'
-        + '<div class="about-job-row"><span class="about-job-when">Jul 2023 – Apr 2025</span><span class="about-job-what"><strong>Best Buy</strong> — sales advisor, Apple certified, ~30 seasonal hires trained</span></div>'
-        + '<div class="about-job-row"><span class="about-job-when">Sep 2023 – May 2025</span><span class="about-job-what"><strong>TuHS Broadcasting</strong> — crew lead, live sports, Weekly Wolf, editing &amp; design</span></div>'
-        + '<div class="about-job-row"><span class="about-job-when">Sep 2023 – present</span><span class="about-job-what"><strong>Social media design</strong> — freelance (school programs, then Code Ninjas graphics in college)</span></div>'
-        + '<div class="about-job-row"><span class="about-job-when">Jun 2025 – present</span><span class="about-job-what"><strong>Army National Guard</strong> — part-time enlistment after high school (see blog for role details)</span></div>'
-        + '<div class="about-job-row"><span class="about-job-when">Oct 2025 – present</span><span class="about-job-what"><strong>Commit the Change</strong> — UI/UX for healthcare tools at UCI</span></div>'
-        + '<div class="about-job-row"><span class="about-job-when">Nov 2025 – present</span><span class="about-job-what"><strong>Code Ninjas</strong> — Code Sensei, robotics, front desk</span></div>'
-        + '<div class="about-job-row"><span class="about-job-when">Feb 2026 – present</span><span class="about-job-what"><strong>Handshake</strong> — AI trainer, multimodal evaluation (contract)</span></div>'
-        + '<div class="about-job-row about-job-row--uci"><span class="about-job-when">2025 – present</span><span class="about-job-what"><strong>UC Irvine</strong> — B.S. Software Engineering &amp; Computer Science (double major, Networked Systems specialization)</span></div>'
-        + '</div>'
-        + '<p class="about-path-cap">Longer story — school years, how the site got built — is in <strong>Blog → Welcome to my website</strong>.</p>'
+        + '<p class="about-hz-hint">Scroll sideways inside the box below, then tap a dot for the longer blurb.</p>'
+        + '<div class="about-hz-scroll-outer">'
+        + '<div class="about-hz-scroll" role="region" aria-label="Life and work timeline">'
+        + '<div class="about-hz-track">'
+        + '<button type="button" class="about-hz-node" data-tid="ca" aria-label="California, born"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">California</span><span class="about-hz-node-sub">Born</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="or" aria-label="Oregon, age twelve"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Oregon</span><span class="about-hz-node-sub">Age 12</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="tul" aria-label="Tualatin through graduation"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Tualatin</span><span class="about-hz-node-sub">Through graduation</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="dq" aria-label="Dairy Queen 2021"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">DQ</span><span class="about-hz-node-sub">Jun 2021</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="bb" aria-label="Best Buy"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Best Buy</span><span class="about-hz-node-sub">Jul 2023</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="tuhs" aria-label="TuHS Broadcasting"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">TuHS TV</span><span class="about-hz-node-sub">Sep 2023</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="soc" aria-label="Social design freelance"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Social</span><span class="about-hz-node-sub">Sep 2023</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="army" aria-label="Army National Guard"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Army</span><span class="about-hz-node-sub">Jun 2025</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="ctc" aria-label="Commit the Change"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">CTC</span><span class="about-hz-node-sub">Oct 2025</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="cn" aria-label="Code Ninjas"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Code Ninjas</span><span class="about-hz-node-sub">Nov 2025</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="hs" aria-label="Handshake AI trainer"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Handshake</span><span class="about-hz-node-sub">Feb 2026</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="uci" aria-label="UC Irvine"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">UCI</span><span class="about-hz-node-sub">2025 – now</span></button>'
+        + '</div></div></div>'
+        + '<div class="about-hz-detail" id="about-hz-detail-panel" aria-live="polite">'
+        + '<p class="about-hz-detail-placeholder" id="about-hz-detail-placeholder">Tap a dot on the timeline.</p>'
+        + '<div class="about-hz-detail-inner" id="about-hz-detail-inner" hidden>'
+        + '<p class="about-hz-detail-kicker" id="about-hz-detail-date"></p>'
+        + '<h3 class="about-hz-detail-title" id="about-hz-detail-title"></h3>'
+        + '<p class="about-hz-detail-text" id="about-hz-detail-text"></p>'
+        + '</div></div>'
+        + '<p class="about-path-cap">Longer story — school years, how the site got built — is in <strong>Blog → Welcome to my website</strong>. Full résumé-style history is on <strong>Work Experience</strong>.</p>'
         + '</section>'
         + '<section class="about-card about-goals-card" aria-labelledby="about-goals-heading">'
         + '<h2 class="about-card-label" id="about-goals-heading">What I am aiming for</h2>'
@@ -3763,6 +3800,103 @@
       });
     })();
 
+    /** Copy for About page horizontal timeline (keys match data-tid on .about-hz-node). */
+    const ABOUT_TIMELINE_DETAIL = {
+      ca: {
+        date: 'Origin',
+        title: 'California',
+        detail: 'Born in California. A few years later my family moved north — the next stops on the timeline are where I grew up and went to school.'
+      },
+      or: {
+        date: 'Age 12',
+        title: 'Oregon',
+        detail: 'Moved to the Portland area at twelve. Middle and high school were all in Oregon before college pulled me back to California for UCI.'
+      },
+      tul: {
+        date: 'Through 2025',
+        title: 'Tualatin',
+        detail: 'Tualatin High School: broadcasting, esports and social content, competitions, jobs overlapping with class — the busy years that set up how I work now.'
+      },
+      dq: {
+        date: 'Jun 2021 – Sep 2021',
+        title: 'Dairy Queen',
+        detail: 'First real job: recipes, rush hours, cash handling, and helping train new crew. Small kitchen, high tempo — good baseline for showing up on time and not freezing when it gets loud.'
+      },
+      bb: {
+        date: 'Jul 2023 – Apr 2025',
+        title: 'Best Buy (Tualatin)',
+        detail: 'Sales across computing, mobile, home theater, and more; later Apple certified. Trained roughly thirty seasonal hires across three waves and became the person people found for spec-level questions.'
+      },
+      tuhs: {
+        date: 'Sep 2023 – May 2025',
+        title: 'TuHS Broadcasting',
+        detail: 'Crew lead for live sports, Weekly Wolf edits, YouTube pieces, and department branding. Lots of radio coordination during games and tight turnarounds on weekly news.'
+      },
+      soc: {
+        date: 'Sep 2023 – present',
+        title: 'Social & design (freelance)',
+        detail: 'Graphics and social for school programs first; after joining Code Ninjas in college, also location promos and Instagram work there. Same thread as broadcasting: make it legible and on-brand fast.'
+      },
+      army: {
+        date: 'Jun 2025 – present',
+        title: 'Army National Guard',
+        detail: 'Part-time enlistment right after high school, running alongside college. Role and platform specifics live in my welcome blog post so this page stays light.'
+      },
+      ctc: {
+        date: 'Oct 2025 – present',
+        title: 'Commit the Change',
+        detail: 'UI/UX at UCI for real healthcare tooling — call center and provider workflows for Celebrating Life Community Health Center. Figma prototypes, sprints with devs, details public when the work is shareable.'
+      },
+      cn: {
+        date: 'Nov 2025 – present',
+        title: 'Code Ninjas (Irvine)',
+        detail: 'Code Sensei and robotics track: JavaScript, Unity C#, LEGO SPIKE, plus front desk and promo graphics when needed. Kids ages ~5–14, lots of debugging patience.'
+      },
+      hs: {
+        date: 'Feb 2026 – present',
+        title: 'Handshake · AI trainer',
+        detail: 'Remote contract: multimodal model evaluation, prompts, grading outputs against rubrics, and structured annotation — basically making sure models behave when text, audio, and images mix.'
+      },
+      uci: {
+        date: '2025 – present',
+        title: 'UC Irvine',
+        detail: 'Double major in Software Engineering and Computer Science, Networked Systems specialization, plus org work like Commit the Change. This is the academic home base while everything else on the timeline runs in parallel.'
+      }
+    };
+
+    function initAboutTimeline() {
+      const root = document.getElementById('page-content');
+      if (!root) return;
+      const nodes = root.querySelectorAll('.about-hz-node[data-tid]');
+      const ph = root.querySelector('#about-hz-detail-placeholder');
+      const inner = root.querySelector('#about-hz-detail-inner');
+      const elDate = root.querySelector('#about-hz-detail-date');
+      const elTitle = root.querySelector('#about-hz-detail-title');
+      const elText = root.querySelector('#about-hz-detail-text');
+      if (!nodes.length || !inner || !ph || !elDate || !elTitle || !elText) return;
+
+      function activate(id) {
+        const d = ABOUT_TIMELINE_DETAIL[id];
+        if (!d) return;
+        nodes.forEach(function (n) {
+          n.classList.toggle('is-active', n.getAttribute('data-tid') === id);
+        });
+        ph.setAttribute('hidden', '');
+        inner.removeAttribute('hidden');
+        elDate.textContent = d.date;
+        elTitle.textContent = d.title;
+        elText.textContent = d.detail;
+      }
+
+      nodes.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activate(btn.getAttribute('data-tid'));
+        });
+      });
+
+      activate(nodes[0].getAttribute('data-tid'));
+    }
+
     function updatePageContent(page) {
       exitProjectDetail();
       const titleEl = document.getElementById('page-title');
@@ -3786,6 +3920,9 @@
         contentEl.textContent = PAGE_CONTENT[page] || '';
       } else {
         contentEl.innerHTML = CLEAN_CONTENT[page] || '';
+      }
+      if (!crsMode && page === 'about') {
+        requestAnimationFrame(function () { initAboutTimeline(); });
       }
       const showContent = (page === 'page1' && crsMode) || (crsMode && page !== 'page3' && page !== 'page4' && PAGE_CONTENT[page]) || (!crsMode && CLEAN_CONTENT[page]);
       contentEl.style.display = showContent ? 'block' : 'none';
