@@ -15,5 +15,5 @@
   <line x1="266" y1="0" x2="266" y2="450" stroke="#1a3a1a" stroke-width="1"/>
   <line x1="533" y1="0" x2="533" y2="450" stroke="#1a3a1a" stroke-width="1"/>
   <!-- Z centered at (400, 225) -->
-  <text x="400" y="300" font-family="Impact, Arial Black, sans-serif" font-size="220" font-weight="900" fill="url(#zgrad)" text-anchor="middle" dominant-baseline="auto">Z</text>
+  <text x="400" y="225" font-family="Impact, Arial Black, sans-serif" font-size="220" font-weight="900" fill="url(#zgrad)" text-anchor="middle" dominant-baseline="central">Z</text>
 </svg>
