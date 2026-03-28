@@ -5,6 +5,7 @@ github: https://github.com/JacobiGlenn/Name_FontCycler
 kind: dev
 cover: CARD.png
 header: COVER.svg
+date: "02/2026"
 ---
 
 <p class="project-detail-lead"><strong>Font Cycle Animation Maker for GitHub READMEs.</strong> Create eye-catching animated headers for your GitHub profile that cycle through dozens of fonts with a cool scramble effect in between.</p>

@@ -4,6 +4,7 @@ description: "Sample case study: a smiley face."
 kind: design
 galleryId: design-example
 cover: COVER.svg
+date: "03/2026"
 ---
 
 <p class="project-detail-reader-note">Other design entries on this site follow the same beats: intro, visuals with captions, how it was made, and a closing note. This one keeps the subject tiny on purpose.</p>

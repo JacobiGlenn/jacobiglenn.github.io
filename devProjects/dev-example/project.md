@@ -4,6 +4,7 @@ description: "The site you are on: one HTML file, GitHub Pages, and the write-up
 github: https://github.com/JacobiGlenn/jacobiglenn.github.io
 kind: dev
 cover: COVER.png
+date: "03/2026"
 ---
 
 <p class="project-detail-reader-note">This dev write-up is a little unusual: the &ldquo;project&rdquo; is the portfolio itself—the single page you are on right now. The screenshots below were captured from a local run so you can see the same UI in context.</p>
