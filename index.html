@@ -1377,15 +1377,44 @@
         html += `<div class="li-card-thumb" style="background-image:url('${thumb}');background-color:#111">`;
         html += `<div class="li-card-thumb-play"><svg viewBox="0 0 36 36" fill="white"><circle cx="18" cy="18" r="18" fill="rgba(0,0,0,0.45)"/><polygon points="14,11 28,18 14,25"/></svg></div>`;
         html += `</div><div class="li-card-body">`;
-        html += `<p class="li-card-date">${escHtml(v.date)}</p>`;
-        html += `<p class="li-card-text" style="-webkit-line-clamp:2">${escHtml(v.title)}</p>`;
+        html += `<p class="li-card-date" id="yt-card-date-${i}">${escHtml(v.date)}</p>`;
+        html += `<p class="li-card-text" style="-webkit-line-clamp:2" id="yt-card-title-${i}">${escHtml(v.title)}</p>`;
         html += `</div></div>`;
       });
       html += '</div></div>';
       html += '<button class="li-arrow li-arrow--next" onclick="ytCarouselMove(1)" aria-label="Next">';
       html += '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,2 12,8 6,14"/></svg></button>';
       html += '</div>';
+      // Fetch real titles + dates after render
+      setTimeout(loadYtCardMeta, 0);
       return html;
+    }
+
+    function loadYtCardMeta() {
+      YT_VIDEOS.forEach((v, i) => {
+        // oEmbed: free, no key, gets real title — works everywhere
+        fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${v.videoId}&format=json`)
+          .then(r => r.json())
+          .then(d => {
+            const titleEl = document.getElementById(`yt-card-title-${i}`);
+            if (titleEl && d.title) titleEl.textContent = d.title;
+          }).catch(() => {});
+        // YouTube API: gets real published date — only works on live site (key is domain-restricted)
+        const apiKey = window.YOUTUBE_API_KEY;
+        if (apiKey) {
+          fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${v.videoId}&key=${apiKey}`)
+            .then(r => r.json())
+            .then(data => {
+              const item = data.items && data.items[0];
+              if (!item) return;
+              const dateEl = document.getElementById(`yt-card-date-${i}`);
+              if (dateEl && item.snippet.publishedAt) {
+                const d = new Date(item.snippet.publishedAt);
+                dateEl.textContent = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+              }
+            }).catch(() => {});
+        }
+      });
     }
 
     function ytCarouselMove(dir) {

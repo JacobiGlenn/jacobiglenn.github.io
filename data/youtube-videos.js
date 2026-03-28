@@ -32,11 +32,11 @@ window.YOUTUBE_API_KEY = window.YOUTUBE_API_KEY || '';
 
 window.__YOUTUBE_VIDEOS = [
   {
-    id: 'yt-pocketzot-demo',
+    id: 'yt-minecraft-python',
     videoId: 'puTp9szMQqE',
     date: 'Mar 2026',
-    title: 'PocketZot — IrvineHacks 2026 Demo',
-    description: 'Live demo of PocketZot, our Best Neuro Hack winner at IrvineHacks 2026. PocketZot is a Chrome Extension with a Shimeji-style UCI anteater mascot that walks around AI chat sites, reacts to your prompts, and rewards good prompting habits. Built in 36 hours with React, FastAPI, and a fine-tuned GPT-4o-mini model.'
+    title: 'How I Coded Anime in Minecraft (With Python)',
+    description: 'A video about coding anime into Minecraft using Python.'
   },
   {
     id: 'yt-filler-2',
