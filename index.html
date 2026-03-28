@@ -1486,11 +1486,14 @@
       document.getElementById('yt-modal-stats').innerHTML = '';
       document.getElementById('yt-modal').classList.add('visible');
 
-      // Load like count from Firebase
-      const liked = _ytLikedThisSession.has(v.videoId);
-      fbGetCount('yt_' + v.videoId).then(count => {
+      // Load like count — capture videoId so stale callbacks from previous videos are ignored
+      const likeVideoId = v.videoId;
+      const liked = _ytLikedThisSession.has(likeVideoId);
+      renderLikeBtn(liked, 0); // reset button immediately on open
+      fbGetCount('yt_' + likeVideoId).then(count => {
+        if (_ytCurrentId !== likeVideoId) return; // stale — user already moved on
         _ytCurrentCount = count;
-        renderLikeBtn(liked, count);
+        renderLikeBtn(_ytLikedThisSession.has(likeVideoId), count);
       });
 
       // Pull real title for free via oEmbed (no API key needed)
@@ -1528,17 +1531,19 @@
     function toggleYtLike() {
       const vid = _ytCurrentId;
       if (!vid) return;
-      const btn = document.getElementById('yt-like-btn');
       const wasLiked = _ytLikedThisSession.has(vid);
       const newCount = wasLiked ? Math.max(0, _ytCurrentCount - 1) : _ytCurrentCount + 1;
       _ytCurrentCount = newCount;
-      if (wasLiked) { _ytLikedThisSession.delete(vid); }
-      else {
+      if (wasLiked) {
+        _ytLikedThisSession.delete(vid);
+      } else {
         _ytLikedThisSession.add(vid);
+        const btn = document.getElementById('yt-like-btn');
         btn.classList.add('pop');
         setTimeout(() => btn.classList.remove('pop'), 300);
       }
       renderLikeBtn(!wasLiked, newCount);
+      // Write to JSONBin, but only update UI if still on same video when it resolves
       fbSetCount('yt_' + vid, newCount);
     }
 
