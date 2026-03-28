@@ -26,10 +26,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Inject API keys
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          JSONBIN_BIN_ID: ${{ secrets.JSONBIN_BIN_ID }}
+          JSONBIN_KEY: ${{ secrets.JSONBIN_KEY }}
         run: |
-          echo "window.YOUTUBE_API_KEY = '${{ secrets.YOUTUBE_API_KEY }}';" > data/api-config.js
-          echo "window.JSONBIN_BIN_ID  = '${{ secrets.JSONBIN_BIN_ID }}';"  >> data/api-config.js
-          echo "window.JSONBIN_KEY     = '${{ secrets.JSONBIN_KEY }}';"     >> data/api-config.js
+          node -e "
+          const fs = require('fs');
+          const lines = [
+            'window.YOUTUBE_API_KEY = ' + JSON.stringify(process.env.YOUTUBE_API_KEY || '') + ';',
+            'window.JSONBIN_BIN_ID  = ' + JSON.stringify(process.env.JSONBIN_BIN_ID  || '') + ';',
+            'window.JSONBIN_KEY     = ' + JSON.stringify(process.env.JSONBIN_KEY     || '') + ';'
+          ];
+          fs.writeFileSync('data/api-config.js', lines.join('\n'));
+          console.log('api-config.js written');
+          "
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
