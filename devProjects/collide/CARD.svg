@@ -13,25 +13,25 @@
   <line x1="400" y1="0" x2="400" y2="450" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
   <line x1="600" y1="0" x2="600" y2="450" stroke="#ffffff" stroke-width="0.5" opacity="0.04"/>
 
-  <!-- RED cursor — with drawing swirl coming off the tip -->
-  <polygon points="110,145 110,190 123,177 130,193 137,190 129,173 143,170" fill="#f87171" opacity="0.9"/>
+  <!-- RED cursor — moved down 25px -->
+  <polygon points="110,170 110,215 123,202 130,218 137,215 129,198 143,195" fill="#f87171" opacity="0.9"/>
   <!-- swirl / drawing trail from red cursor tip -->
-  <path d="M 110,145 C 130,120 170,115 190,135 C 215,158 200,185 230,195 C 265,207 295,185 310,205 C 330,230 305,255 330,265" stroke="#f87171" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+  <path d="M 110,170 C 130,145 170,140 190,160 C 215,183 200,210 230,220 C 265,232 295,210 310,230 C 330,255 305,275 330,285" stroke="#f87171" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
   <!-- little dot at end of trail -->
-  <circle cx="332" cy="267" r="3" fill="#f87171" opacity="0.75"/>
+  <circle cx="332" cy="287" r="3" fill="#f87171" opacity="0.75"/>
 
   <!-- BLUE cursor -->
   <polygon points="420,130 420,175 433,162 440,178 447,175 439,158 453,155" fill="#60a5fa" opacity="0.9"/>
 
-  <!-- GREEN cursor — moved to sit at the left side of the comment bubble -->
-  <polygon points="555,210 555,255 568,242 575,258 582,255 574,238 588,235" fill="#34d399" opacity="0.9"/>
-  <!-- comment bubble: above and to the left of the cursor -->
-  <rect x="385" y="148" width="155" height="52" rx="12" fill="none" stroke="#34d399" stroke-width="2" opacity="0.8"/>
-  <!-- tail from bottom-right corner of bubble pointing down to cursor tip -->
-  <path d="M 535,200 L 554,209 L 520,200" fill="none" stroke="#34d399" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
+  <!-- GREEN cursor — moved right 45px, down 15px -->
+  <polygon points="600,225 600,270 613,257 620,273 627,270 619,253 633,250" fill="#34d399" opacity="0.9"/>
+  <!-- comment bubble: above and to the left -->
+  <rect x="430" y="163" width="155" height="52" rx="12" fill="none" stroke="#34d399" stroke-width="2" opacity="0.8"/>
+  <!-- tail from bottom-right of bubble to cursor tip -->
+  <path d="M 580,215 L 599,224 L 565,215" fill="none" stroke="#34d399" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
   <!-- text lines inside bubble -->
-  <line x1="400" y1="168" x2="525" y2="168" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
-  <line x1="400" y1="183" x2="506" y2="183" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+  <line x1="445" y1="183" x2="570" y2="183" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+  <line x1="445" y1="198" x2="551" y2="198" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
 
   <!-- YELLOW cursor -->
   <polygon points="690,135 690,180 703,167 710,183 717,180 709,163 723,160" fill="#fbbf24" opacity="0.9"/>
