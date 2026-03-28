@@ -21,19 +21,17 @@
   <text x="218" y="150" font-family="monospace" font-size="11" fill="#2e2e50" text-anchor="end">3</text>
   <text x="218" y="175" font-family="monospace" font-size="11" fill="#f87171" text-anchor="end">4</text>
   <text x="218" y="200" font-family="monospace" font-size="11" fill="#2e2e50" text-anchor="end">5</text>
-  <text x="218" y="225" font-family="monospace" font-size="11" fill="#2e2e50" text-anchor="end">6</text>
 
   <!-- CODE LINES — all red -->
   <text x="236" y="100" font-family="monospace" font-size="13" fill="#f87171">import { Session } from './core';</text>
   <text x="236" y="150" font-family="monospace" font-size="13" fill="#f87171">const room = new Session({</text>
   <!-- active edit row highlight -->
   <rect x="185" y="160" width="1015" height="22" fill="#f87171" opacity="0.07"/>
-  <!-- "alex" name tag: to the RIGHT of the pipe, vertically centered on the row -->
-  <rect x="476" y="152" width="34" height="14" rx="3" fill="#f87171" opacity="0.9"/>
-  <text x="493" y="159" font-family="monospace" font-size="9" fill="#0d0d1f" text-anchor="middle" dominant-baseline="central">alex</text>
   <text x="236" y="175" font-family="monospace" font-size="13" fill="#f87171">  sync: socket, cursors: true,<tspan>|</tspan></text>
+  <!-- "alex" name tag: right of the pipe, vertically on the same line -->
+  <rect x="479" y="163" width="34" height="14" rx="3" fill="#f87171" opacity="0.9"/>
+  <text x="496" y="170" font-family="monospace" font-size="9" fill="#0d0d1f" text-anchor="middle" dominant-baseline="central">alex</text>
   <text x="236" y="200" font-family="monospace" font-size="13" fill="#f87171">  onConflict: resolve,</text>
-  <text x="236" y="225" font-family="monospace" font-size="13" fill="#f87171">});</text>
 
   <!-- BLUE comment box -->
   <rect x="680" y="100" width="230" height="54" rx="8" fill="#080d1c" stroke="#60a5fa" stroke-width="1.5"/>
