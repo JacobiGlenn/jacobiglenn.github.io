@@ -23,15 +23,15 @@
   <!-- BLUE cursor -->
   <polygon points="420,130 420,175 433,162 440,178 447,175 439,158 453,155" fill="#60a5fa" opacity="0.9"/>
 
-  <!-- GREEN cursor — with comment oval nearby -->
-  <polygon points="570,155 570,200 583,187 590,203 597,200 589,183 603,180" fill="#34d399" opacity="0.9"/>
-  <!-- comment bubble oval -->
-  <ellipse cx="640" cy="255" rx="72" ry="34" fill="none" stroke="#34d399" stroke-width="2" opacity="0.8"/>
-  <!-- tail on bubble pointing up-left toward green cursor -->
-  <path d="M 600,247 L 582,223 L 618,242" fill="none" stroke="#34d399" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
+  <!-- GREEN cursor — with rounded-rect comment bubble -->
+  <polygon points="570,140 570,185 583,172 590,188 597,185 589,168 603,165" fill="#34d399" opacity="0.9"/>
+  <!-- comment bubble rounded rect -->
+  <rect x="578" y="200" width="148" height="52" rx="12" fill="none" stroke="#34d399" stroke-width="2" opacity="0.8"/>
+  <!-- tail pointing up-left toward green cursor -->
+  <path d="M 598,200 L 584,183 L 618,200" fill="none" stroke="#34d399" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
   <!-- text lines inside bubble -->
-  <line x1="590" y1="248" x2="688" y2="248" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
-  <line x1="600" y1="262" x2="678" y2="262" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+  <line x1="594" y1="218" x2="710" y2="218" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+  <line x1="594" y1="234" x2="692" y2="234" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
 
   <!-- YELLOW cursor -->
   <polygon points="690,135 690,180 703,167 710,183 717,180 709,163 723,160" fill="#fbbf24" opacity="0.9"/>
