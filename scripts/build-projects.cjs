@@ -29,13 +29,18 @@ function findDefaultCover(projectDir) {
   return null;
 }
 
-function resolveCoverUrl({ folderName, slug, projectDir, cover }) {
-  let rel = cover;
+function resolveUrl({ folderName, slug, projectDir, value, fallback }) {
+  let rel = value;
+  if (!rel && fallback) rel = fallback;
   if (!rel) rel = findDefaultCover(projectDir);
   if (!rel) return '';
   if (/^https?:\/\//i.test(rel)) return rel;
   if (rel.startsWith('assets/')) return rel;
   return `${folderName}/${slug}/${rel}`.replace(/\\/g, '/');
+}
+
+function resolveCoverUrl({ folderName, slug, projectDir, cover }) {
+  return resolveUrl({ folderName, slug, projectDir, value: cover });
 }
 
 function escapeHtml(s) {
@@ -44,6 +49,12 @@ function escapeHtml(s) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function buildHeaderStyle(p, fallbackColor) {
+  if (!p.coverUrl) return '';
+  const size = p.coverSize || 'cover';
+  return ` style="background: ${fallbackColor} url(&quot;${escapeHtml(p.coverUrl)}&quot;) center / ${size} no-repeat;"`;
 }
 
 function loadProject(folderName, categoryKey, slug) {
@@ -57,12 +68,9 @@ function loadProject(folderName, categoryKey, slug) {
   const { data, content } = matter(raw);
   const bodyHtml = content.trim();
   const defaultKind = categoryKey === 'design' ? 'design' : 'dev';
-  const coverUrl = resolveCoverUrl({
-    folderName,
-    slug,
-    projectDir,
-    cover: data.cover
-  });
+  const coverUrl = resolveUrl({ folderName, slug, projectDir, value: data.cover });
+  // header: separate hero image; falls back to cover, then COVER.*
+  const headerUrl = resolveUrl({ folderName, slug, projectDir, value: data.header, fallback: data.cover });
   return {
     id: slug,
     title: data.title || slug,
@@ -71,6 +79,8 @@ function loadProject(folderName, categoryKey, slug) {
     kind: data.kind || defaultKind,
     galleryId: data.galleryId || '',
     coverUrl,
+    coverSize: data.cover_size || '',
+    headerUrl,
     bodyHtml
   };
 }
@@ -79,14 +89,14 @@ function buildDesignCard(p) {
   const galleryBtn = p.galleryId
     ? `<button type="button" class="design-gallery-trigger" data-gallery="${escapeHtml(p.galleryId)}" aria-label="View featured images"><span class="design-stack" aria-hidden="true"><span class="design-stack-layer"></span><span class="design-stack-layer"></span><span class="design-stack-layer"></span></span></button>`
     : '';
-  return `<article class="project-card" data-project="${escapeHtml(p.id)}"><div class="project-card-header"><div class="project-card-header-inner"><span class="project-card-name">${escapeHtml(p.title)}</span>${galleryBtn}</div></div><div class="project-card-desc">${escapeHtml(p.description)}</div></article>`;
+  return `<article class="project-card" data-project="${escapeHtml(p.id)}"><div class="project-card-header"${buildHeaderStyle(p, '#ececec')}><div class="project-card-header-inner"><span class="project-card-name">${escapeHtml(p.title)}</span>${galleryBtn}</div></div><div class="project-card-desc">${escapeHtml(p.description)}</div></article>`;
 }
 
 function buildDevCard(p) {
   const gh = p.github
     ? `<a href="${escapeHtml(p.github)}" target="_blank" rel="noopener noreferrer" class="project-card-github" aria-label="View on GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>`
     : '';
-  return `<article class="project-card" data-project="${escapeHtml(p.id)}"><div class="project-card-header"><div class="project-card-header-inner"><span class="project-card-name">${escapeHtml(p.title)}</span>${gh}</div></div><div class="project-card-desc">${escapeHtml(p.description)}</div></article>`;
+  return `<article class="project-card" data-project="${escapeHtml(p.id)}"><div class="project-card-header"${buildHeaderStyle(p, '#4b5563')}><div class="project-card-header-inner"><span class="project-card-name">${escapeHtml(p.title)}</span>${gh}</div></div><div class="project-card-desc">${escapeHtml(p.description)}</div></article>`;
 }
 
 function main() {
@@ -107,6 +117,7 @@ function main() {
       if (p.github) entry.githubUrl = p.github;
       if (p.galleryId) entry.galleryId = p.galleryId;
       if (p.coverUrl) entry.coverUrl = p.coverUrl;
+      if (p.headerUrl) entry.headerUrl = p.headerUrl;
       PROJECT_PAGES[p.id] = entry;
     }
   }

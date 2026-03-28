@@ -305,7 +305,7 @@
     .clean-contact { margin: 0.35rem 0; }
     .clean-link { color: #0066cc; text-decoration: none; }
     .clean-link:hover { text-decoration: underline; }
-    .project-card { margin-top: 1.5rem; max-width: 360px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; }
+    .project-card { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; min-width: 0; }
     .project-card-header { position: relative; height: 140px; background: linear-gradient(135deg, #6b7280 0%, #9ca3af 50%, #6b7280 100%); }
     .project-card[data-project="dev-example"] .project-card-header {
       background: #0a0a0a url('devProjects/dev-example/COVER.png') center / cover no-repeat;
@@ -320,7 +320,9 @@
     .project-card-github:hover { opacity: 1; }
     .project-card-github svg { width: 28px; height: 28px; }
     .project-card-desc { padding: 1rem 1.25rem; font-size: 0.9rem; color: #555; line-height: 1.5; }
-    .portfolio-cards { display: flex; flex-direction: column; gap: 1.5rem; max-width: 360px; }
+    .portfolio-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 100%; }
+    @media (max-width: 760px) { .portfolio-cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .portfolio-cards { grid-template-columns: 1fr; } }
     .design-gallery-trigger { display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0; cursor: pointer; color: #fff; opacity: 0.95; transition: opacity 0.2s, transform 0.15s; }
     .design-gallery-trigger:hover { opacity: 1; transform: scale(1.05); }
     .design-gallery-trigger:focus-visible { outline: 2px solid #fff; outline-offset: 2px; border-radius: 4px; }
@@ -371,6 +373,30 @@
     .project-detail-timeline .tl-date { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 0.35rem; }
     .project-detail-code-wrap { margin: 1.25rem auto; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a2a; max-width: min(100%, 720px); width: 100%; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
     .project-detail-code-caption { margin: 0.5rem 0 0; font-size: 0.85rem; color: #666; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1rem 0 1.5rem; }
+    .tech-badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; text-decoration: none; border: none; cursor: pointer; transition: transform 0.15s, filter 0.15s; white-space: nowrap; }
+    .tech-badge:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .tech-badge--js   { background: #f7df1e; color: #222; }
+    .tech-badge--react{ background: #20232a; color: #61dafb; }
+    .tech-badge--py   { background: #306998; color: #ffd43b; }
+    .tech-badge--fast { background: #009688; color: #fff; }
+    .tech-badge--openai{ background: #10a37f; color: #fff; }
+    .tech-badge--pg   { background: #336791; color: #fff; }
+    .tech-badge--vite { background: #646cff; color: #fff; }
+    .tech-badge--ext  { background: #4285f4; color: #fff; }
+    .project-award { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #ffd700, #ffa500); color: #1a1a1a; font-size: 0.82rem; font-weight: 700; padding: 0.4rem 1rem; border-radius: 999px; margin: 0 0 1.25rem; letter-spacing: 0.03em; }
+    .project-demo-link { display: inline-flex; align-items: center; gap: 0.45rem; background: #ff0000; color: #fff; font-size: 0.85rem; font-weight: 600; padding: 0.45rem 1.1rem; border-radius: 6px; text-decoration: none; transition: background 0.15s, transform 0.15s; margin: 0.5rem 0; }
+    .project-demo-link:hover { background: #cc0000; transform: translateY(-1px); }
+    .project-video-wrap { position: relative; width: 100%; max-width: min(100%, 720px); padding-top: min(56.25%, calc(min(100%, 720px) * 0.5625)); margin: 1.25rem auto; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .project-video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .tech-badge--html { background: #e34c26; color: #fff; }
+    .tech-badge--css  { background: #264de4; color: #fff; }
+    .tech-badge--node { background: #3c873a; color: #fff; }
+    .tech-badge--ghpages { background: #24292e; color: #fff; }
+    .tech-badge--playwright { background: #2ead33; color: #fff; }
+    .tech-badge--figma { background: #f24e1e; color: #fff; }
+    .tech-badge--ai { background: #7c3aed; color: #fff; }
+    .tech-badge--svg { background: #ff9800; color: #fff; }
     .project-detail-code-label { background: #3a3a3a; color: #c8c8c8; font-size: 0.72rem; padding: 0.45rem 0.85rem; letter-spacing: 0.04em; }
     .project-detail-pre { margin: 0; padding: 1rem 1.15rem; background: #1e1e1e; color: #d4d4d4; font-family: Consolas, Monaco, 'Courier New', monospace; font-size: 0.78rem; line-height: 1.5; overflow-x: auto; white-space: pre; tab-size: 2; }
     .project-detail-fig { margin: 1.25rem auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #f5f5f5; max-width: min(100%, 560px); width: 100%; display: block; }
@@ -947,8 +973,8 @@
     };
     const CLEAN_CONTENT = {
       home: '<p class="clean-message">This is still a work in progress, thank you for understanding!</p>',
-      page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Under construction — coming soon.</p><div class="portfolio-cards">' + (GP.cardsHtml.design || '') + '</div>',
-      page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Under construction — coming soon.</p><div class="portfolio-cards">' + (GP.cardsHtml.dev || '') + '</div>',
+      page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Nothing here yet — the project listed below is a placeholder example while I build this out. Real design work coming soon.</p><div class="portfolio-cards">' + (GP.cardsHtml.design || '') + '</div>',
+      page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Still in progress — I\'ve only added a couple projects so far. More to come as I continue building this out.</p><div class="portfolio-cards">' + (GP.cardsHtml.dev || '') + '</div>',
       page3: '<p class="clean-uc">View my professional experience on LinkedIn.</p><a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">linkedin.com/in/jacobiglenn</a>',
       page4: '<p class="clean-uc">Under construction — coming soon.</p>',
       about: '<p class="clean-sub">Contact me</p><p class="clean-contact">971-300-5659</p><p class="clean-contact"><a href="mailto:jacobiglenn@gmail.com" class="clean-link">jacobiglenn@gmail.com</a></p>'
@@ -2448,8 +2474,9 @@
       const main = document.querySelector('#main-screen .content');
       const hero = document.querySelector('.project-detail-hero');
       if (hero) {
-        if (meta.coverUrl) {
-          const u = meta.coverUrl.replace(/"/g, '\\"');
+        const heroSrc = meta.headerUrl || meta.coverUrl;
+        if (heroSrc) {
+          const u = heroSrc.replace(/"/g, '\\"');
           hero.style.backgroundImage = 'url("' + u + '")';
           hero.style.backgroundSize = 'cover';
           hero.style.backgroundPosition = 'center';

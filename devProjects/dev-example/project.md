@@ -1,5 +1,5 @@
 ---
-title: This portfolio site
+title: Dev Project Example
 description: "The site you are on: one HTML file, GitHub Pages, and the write-up with real screenshots lives here."
 github: https://github.com/JacobiGlenn/jacobiglenn.github.io
 kind: dev
@@ -8,6 +8,15 @@ cover: COVER.png
 
 <p class="project-detail-reader-note">This dev write-up is a little unusual: the &ldquo;project&rdquo; is the portfolio itself—the single page you are on right now. The screenshots below were captured from a local run so you can see the same UI in context.</p>
 <p class="project-detail-lead"><strong>jacobiglenn.github.io</strong> is a static personal site hosted on <strong>GitHub Pages</strong> (<code>.nojekyll</code>, optional <code>CNAME</code>). Almost everything lives in one <code>index.html</code>: terminal intro, optional &ldquo;CRS&rdquo; glitch mode, portfolio navigation, design/dev case studies, and the project-detail view you are reading.</p>
+<h2 class="project-detail-h2">Tech stack</h2>
+<div class="tech-stack">
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer" class="tech-badge tech-badge--html">HTML</a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer" class="tech-badge tech-badge--css">CSS</a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="tech-badge tech-badge--js">JavaScript</a>
+  <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer" class="tech-badge tech-badge--node">Node.js</a>
+  <a href="https://playwright.dev" target="_blank" rel="noopener noreferrer" class="tech-badge tech-badge--playwright">Playwright</a>
+  <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer" class="tech-badge tech-badge--ghpages">GitHub Pages</a>
+</div>
 <h2 class="project-detail-h2">Landing: four-panel terminal</h2>
 <p>First visit (or after clearing site data) you get a retro terminal layout: prompt, ASCII art panel, log stream, and guide text. Type <code>Initialize</code> to start the flow; returning visitors within 24 hours can skip straight to the main shell unless the special <code>cGG</code> path runs.</p>
 <figure class="project-detail-fig tall-img"><img src="assets/dev-site-terminal.png" width="1280" height="800" alt="Screenshot of the four-panel terminal landing screen" loading="lazy" decoding="async"><figcaption>Captured from local <code>npx serve</code> — the boot experience before the main portfolio.</figcaption></figure>

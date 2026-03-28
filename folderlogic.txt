@@ -3,43 +3,64 @@ FOLDER-BASED PROJECTS (FUTURE REFERENCE)
 
 IDEA (SHORT)
 - Keep one folder per project under devProjects/ or designProjects/.
-- Each folder has a small config file (e.g. project.md) at the top: title, description, GitHub link, cover image.
-- The rest of the file is the long write-up (Markdown).
-- A build script reads those folders and generates a data file the site loads.
+- Each folder has a project.md with settings (frontmatter) at the top and the full write-up below.
+- A build script reads those folders and writes generated/projects-data.js, which index.html loads.
+- No paid services. GitHub Pages serves static files. Run npm run build:projects after any project.md change.
 
 FOLDER LAYOUT (EXAMPLE)
   devProjects/
     my-app/
       project.md
-      COVER.png
+      COVER.png       <- auto-detected as card cover if not set in frontmatter
+      CARD.png        <- optional: separate image just for the card strip
   designProjects/
     my-poster/
       project.md
-      COVER.jpg
+      COVER.svg
 
-COVER IMAGE
-- Name it COVER with a normal extension (COVER.png, COVER.jpg).
+COVER vs HEADER (two separate images, or one for both)
+- cover: image shown on the portfolio CARD strip.
+- header: image shown in the project DETAIL HERO (top banner when you open the project).
+- If you only set cover, both the card and the hero use it (simplest case).
+- If you set header separately, the hero uses that instead.
+- If neither is set, the build auto-detects COVER.png / COVER.jpg / COVER.svg / etc.
+- cover or header can be a local filename (e.g. CARD.png) or a full URL (https://...).
 
 WHAT project.md LOOKS LIKE (TOP = SETTINGS, BELOW = WRITE-UP)
 ---
 title: Display name (overrides folder name if you want)
-description: One line for the project card.
+description: "One line for the project card. Quote it if it contains a colon."
 github: https://github.com/you/repo
-cover: COVER.png
+cover: CARD.png          <- card strip image (local file or URL)
+header: COVER.svg        <- detail hero image (optional; omit to reuse cover)
 kind: dev
 ---
 
-## Section heading
-Paragraph text. **Bold** and links work after the build step converts Markdown to HTML.
+Write the case study here using HTML. Headings, figures, code blocks,
+tables, and lists all work. Use the project-detail-h2, project-detail-fig,
+project-detail-code-wrap, and project-detail-timeline classes to match the
+site's existing styles.
 
 STEP-BY-STEP: ADDING A NEW PROJECT
-1. Create a new folder under devProjects/ or designProjects/. Use a short URL-style name (lowercase, hyphens), e.g. my-photo-app.
-2. Add COVER.png or COVER.jpg (or add the image later and set cover: filename.ext in project.md).
-3. Create project.md in that folder. Fill in the --- block: title, description, github (if any), cover, kind (dev or design).
-4. Write the case study below the --- block in Markdown (headings, paragraphs, lists).
-5. Run the project build script (e.g. npm run build:projects — exact name depends on what you add later). This regenerates the file the site reads.
-6. Commit the new folder, the generated file, and push to GitHub. Wait for GitHub Pages to update (usually a minute or two).
+1. Create a new folder under devProjects/ or designProjects/.
+   Use a short URL-style name (lowercase, hyphens), e.g. my-photo-app.
+2. Add your image(s). Name the card image COVER.png/jpg/svg (auto-detected),
+   or use any filename and point to it with cover: in project.md.
+   Add a separate header: image if you want the detail hero to look different.
+3. Create project.md. Fill in the frontmatter block (title, description,
+   github, cover, header if needed, kind).
+   NOTE: quote description values that contain a colon, e.g. description: "My app: fast."
+4. Write the case study body below the --- block.
+5. Run: npm run build:projects
+   This regenerates generated/projects-data.js (the file the site reads).
+6. Refresh the site (hard refresh if needed to clear the cached script).
+7. Commit: new folder + generated/projects-data.js + push to GitHub.
+   GitHub Pages updates in about a minute.
 
 NOTES
-- The folder name becomes the project id/slug unless your build maps it differently.
-- If something looks wrong on the site, check: frontmatter typos, cover path, and that you ran the build after editing.
+- The folder name becomes the project id/slug (used as data-project on the card).
+- Descriptions containing colons must be quoted in the frontmatter or the YAML will break.
+- The build also injects the cover as an inline style on the generated card HTML,
+  so future projects get their cover automatically without adding CSS to index.html.
+- If something looks wrong: check frontmatter typos, image path, and that you ran the build.
+- generated/projects-data.js must be committed to the repo for GitHub Pages to see changes.

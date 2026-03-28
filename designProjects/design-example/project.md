@@ -8,6 +8,13 @@ cover: COVER.svg
 
 <p class="project-detail-reader-note">Other design entries on this site follow the same beats: intro, visuals with captions, how it was made, and a closing note. This one keeps the subject tiny on purpose.</p>
 <p class="project-detail-lead">The whole assignment: draw a friendly smiley as a <strong>circle</strong> with <strong>: )</strong> inside (colon, space, paren) on <strong>one horizontal line</strong>, not stacked upright.</p>
+<h2 class="project-detail-h2">Tools</h2>
+<div class="tech-stack">
+  <span class="tech-badge tech-badge--ghpages">Compass</span>
+  <span class="tech-badge tech-badge--svg">SVG</span>
+  <a href="https://www.figma.com" target="_blank" rel="noopener noreferrer" class="tech-badge tech-badge--figma">Figma</a>
+  <a href="https://fonts.google.com" target="_blank" rel="noopener noreferrer" class="tech-badge tech-badge--ai">Typography</a>
+</div>
 <div class="smiley-face-demo" aria-hidden="true"><div class="smiley-circle" title=": )"><span>: )</span></div></div>
 <p>Padding between the smiley and the inside edge of the circle mattered as much as the characters. Too little and the face felt crowded. Too much and it stopped feeling warm or friendly. The sweet spot was enough air so nothing touched the ring, but still read as one tight, happy mark.</p>
 <h2 class="project-detail-h2">Early passes</h2>
