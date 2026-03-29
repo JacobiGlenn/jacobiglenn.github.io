@@ -8,6 +8,7 @@
  *   date     – "MM/YYYY" format (required for sorting)
  *   cover    – Filename inside the post folder (e.g. "COVER.jpg"), optional
  *   excerpt  – Short teaser shown on the card (auto-generated from body if absent)
+ *   banner   – Optional; e.g. ascii-face for the animated ASCII card banner (see index.html)
  */
 const fs   = require('fs');
 const path = require('path');

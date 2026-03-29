@@ -17,6 +17,7 @@ FRONTMATTER (top of post.md):
   date: "MM/YYYY"        ← used for sorting and the date pill (e.g. 03/2026)
   cover: "COVER.jpg"     ← optional; image file in the same folder
   excerpt: "One sentence teaser shown on the card."  ← optional; auto-generated from body if absent
+  banner: ascii-face     ← optional; only special values the UI knows (e.g. animated ASCII banner on the card)
   ---
 
 BODY:
