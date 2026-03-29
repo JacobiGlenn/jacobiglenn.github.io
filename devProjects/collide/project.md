@@ -7,6 +7,7 @@ cover: CARD.svg
 header: COVER.svg
 date: "03/2026"
 ongoing: true
+featured: true
 ---
 
 <figure style="margin:0 0 1.5rem; max-width:420px;">

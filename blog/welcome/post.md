@@ -2,7 +2,7 @@
 title: "Welcome to my website"
 date: "03/2026"
 banner: ascii-face
-excerpt: "The full story: failed matrix rain, a broken JSONBin key, a globe that never worked, and how a personal portfolio became something I'm genuinely proud of."
+excerpt: "Build notes for this site: matrix rain I cut, JSONBin secrets in CI, STL-to-ASCII globe detour, folder pipelines, Work Experience iterations, and the boot terminal vs glitched CRT layer."
 ---
 
 <style>
@@ -20,6 +20,7 @@ excerpt: "The full story: failed matrix rain, a broken JSONBin key, a globe that
 .b-titem::before { content:''; position:absolute; left:-1.75rem; top:0.25rem; width:10px; height:10px; border-radius:50%; background:#6366f1; transform:translateX(-4px); border:2px solid #fff; box-shadow:0 0 0 2px #6366f1; }
 .b-quote { border-left: 4px solid #6366f1; padding: 0.6rem 1.25rem; margin: 0 0 1.5rem; background: #f5f3ff; border-radius: 0 8px 8px 0; font-style: italic; color: #4b5563; }
 .b-fullimg { width: 100%; display: block; border-radius: 8px; margin: 0 0 1.75rem; box-shadow: 0 4px 24px rgba(0,0,0,0.1); }
+.b-img-capped { width: 100%; max-width: 40rem; display: block; margin: 0 auto 1.75rem; border-radius: 8px; box-shadow: 0 4px 24px rgba(0,0,0,0.1); }
 pre, code { word-break: break-word; }
 .b-doc-scroll { max-height: min(70vh, 560px); overflow: auto; background: #12121c; color: #dce0ec; font-family: Consolas, 'Courier New', monospace; font-size: 0.64rem; line-height: 1.4; padding: 1rem 1.15rem; border-radius: 8px; margin: 0 0 1rem; white-space: pre; tab-size: 2; border: 1px solid #2d2d40; }
 details.b-doc-details summary { list-style: none; }
@@ -32,49 +33,48 @@ details.b-doc-details summary::-webkit-details-marker { display: none; }
 
 <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin:0 0 1.25rem">
   <span class="b-tag">Engineering</span>
-  <span class="b-tag b-tag--green">Lessons Learned</span>
-  <span class="b-tag b-tag--amber">War Stories</span>
+  <span class="b-tag b-tag--green">Lessons learned</span>
+  <span class="b-tag b-tag--amber">Build log</span>
   <span class="b-tag">Design</span>
-  <span class="b-tag b-tag--red">Things That Broke</span>
+  <span class="b-tag b-tag--red">Bugs I actually hit</span>
 </div>
 
-<p style="font-size:1.18rem;line-height:1.8;color:#111;font-weight:500;margin:0 0 1rem">The spinning ASCII face on the banner above this post is not a GIF. It's a <code style="background:#f0f0f0;padding:0.1em 0.4em;border-radius:4px">requestAnimationFrame</code> loop, 60 frames per second, mathematically rotating a portrait like a globe. It's probably the best metaphor for how this whole site was built: technically unnecessary, genuinely interesting, and arrived at through a weekend of failures.</p>
+<p style="font-size:1.18rem;line-height:1.8;color:#111;font-weight:500;margin:0 0 1rem">The face in the banner is not a GIF. It is a <code style="background:#f0f0f0;padding:0.1em 0.4em;border-radius:4px">requestAnimationFrame</code> loop that shifts each row of an ASCII portrait so it reads like a slow turn. I built it after I gave up on a real 3D globe (more on that below). It is a little extra, technically unnecessary, and arrived at through a weekend of failures, but it runs everywhere and it is mine.</p>
 
-<p>This post is the full story. The origin, the vision, the failed experiments, the actual technical problems I hit and how I solved them. It's not a portfolio overview. There are pages for that. This is the behind-the-scenes.</p>
+<p>This post is the long version of how the site came together: what I tried, what I threw away, and the bugs that only showed up after deploy. If you want the short version, use <strong>Work Experience</strong> and the project pages. This is the notebook in the margin.</p>
 
-<p style="margin:0 0 1rem;color:#555;font-size:0.98rem">If you only care about <strong>right now</strong>: I'm at UCI in Software Engineering and Computer Science, building and teaching on the side. The timeline below is a map; the college chapter is the one that matches what I'm doing today. High school is context, not coursework I'm still leading with.</p>
+<p style="margin:0 0 1rem;color:#555;font-size:0.98rem"><strong>Where I am now:</strong> UC Irvine, double-majoring in Software Engineering and Computer Science. I am in the <strong>Army National Guard</strong>, teach at Code Ninjas, and design real healthcare tools at Commit the Change. The timeline below is mostly orientation; the college chunk is what matches day to day.</p>
 
 <h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Timeline</h2>
 
 <div class="b-timeline" style="margin:0 0 2rem">
-  <div class="b-titem"><strong>Early years</strong> — Born in California.</div>
-  <div class="b-titem"><strong>Age 12</strong> — Family moved to Oregon (Portland area).</div>
-  <div class="b-titem"><strong>High school</strong> — Tualatin: broadcasting, design and social for school teams, robotics and game dev, competitions, first apps people actually used. The next section goes deep; this line is just orientation.</div>
-  <div class="b-titem"><strong>End of senior year</strong> — Enlisted in the Army National Guard.</div>
-  <div class="b-titem" style="margin-bottom:0"><strong>College (now)</strong> — UC Irvine, SE + CS; Commit the Change, Code Ninjas instruction, Guard, hackathons, and the projects on this site.</div>
+  <div class="b-titem"><strong>Early years:</strong> Born in California.</div>
+  <div class="b-titem"><strong>Spring 2018:</strong> Family moved to Oregon (Portland area).</div>
+  <div class="b-titem"><strong>High school:</strong> I was in broadcasting, picked up design and social work for school programs, held part-time jobs, did robotics and game dev, hit competitions, and shipped the first small apps people actually used.</div>
+  <div class="b-titem" style="margin-bottom:0"><strong>College (now):</strong> UC Irvine; enlisted in the Army; double major SE + CS; Commit the Change, Code Ninjas instruction, hackathons, and the projects on this site.</div>
 </div>
 
-<p style="margin:0 0 1.25rem;font-size:0.92rem;color:#555">On the military side, for anyone who wants the actual job title: I am a <strong>15H</strong> (aircraft pneudraulics repairer) working on <strong>UH-60 Black Hawk</strong> systems. I keep MOS and platform off the short About page and the résumé-style Work Experience card on purpose — fewer places to keep in sync — so this post is where that detail lives.</p>
+<p style="margin:0 0 1.25rem;font-size:0.92rem;color:#555">On the military side, for anyone who wants the actual job title: I am a <strong>15H</strong> (aircraft pneudraulics repairer) working on <strong>UH-60 Black Hawk</strong> systems.</p>
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
 <h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Where I Started</h2>
 
-<p style="margin:0 0 0.85rem">Freshman year of high school I was deep into <strong>game development</strong> and still assumed I would become a <strong>pediatrician</strong>, not an engineer. I watched a YouTuber named <strong>Dani</strong> ship funny, polished games. I did <strong>yard work for neighbors</strong> until I could afford a PC, installed <strong>Unity</strong>, and lived in C# tutorials. I did not seriously pick up Python until <strong>senior year</strong>. Before that it was mostly C#, stubbornness, and copy-paste from videos.</p>
+<p style="margin:0 0 0.85rem">Freshman year of high school I was deep into game development and assumed I would become a pediatrician, not an engineer. I watched a YouTuber named Dani make silly 2D platformers in Unity (especially while he was working on Karlson) and I loved the humor. I was super inspired and wanted to make my own game, which led to yard work for neighbors until I could afford a PC, then Unity and C# tutorials. I did not seriously pick up Python until senior year. Before that it was mostly C#, stubbornness, and copy-paste from videos.</p>
 
-<p style="margin:0 0 0.85rem">All four years I took <strong>IT</strong> classes. That is what pulled me into the wider tech space: <strong>cybersecurity</strong>, terminals, ports, hardware, how networks actually behave. I passed the <strong>first half of CompTIA A+</strong> and never got around to finishing the second exam. The labs and theory still shaped how I think about systems.</p>
+<p style="margin:0 0 0.85rem">All four years I took IT classes. That is what pulled me into the wider tech space: cybersecurity, terminals, ports, hardware, how networks actually behave. I passed the first half of CompTIA A+ and never got around to the second exam. Then I moved to California and my exam ticket expired. I am still hoping for a redemption arc and finishing the cert someday.</p>
 
-<p style="margin:0 0 0.85rem">I grew up in <strong>Tualatin, Oregon</strong>, a suburb of Portland where the closest tech scene was a long drive away. My "version control" was a <strong>Google Doc</strong> where I pasted scripts whole. The tab title was basically <strong>cobi = best coder</strong>. Objectively false, spiritually accurate.</p>
+<p style="margin:0 0 0.85rem">I grew up in Tualatin, Oregon, a suburb of Portland where the closest tech scene was a long drive away. My "version control" was a Google Doc where I pasted scripts whole. The tab title was literally cobi = best coder. I really thought that confidence would carry me straight into fully polished AAA games. That confidence never really left, but I do a better job hiding it now, ha!</p>
 
-<p style="margin:0 0 1rem;font-size:0.92rem;color:#555">The dump below is the real flavor: duplicate camera controllers (one labeled broken clamps), old clunky movement, a CharacterController mash-up with crouch on <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">X</code>, and an FPS sprint script for a game we called Scotty Potty. I trimmed only the middle of the longest file so the page loads. Regenerate the HTML from <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">blog/welcome/gdoc-raw.txt</code> via <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">node scripts/wrap-gdoc-fragment.cjs</code> before <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">npm run build:blog</code>.</p>
+<p style="margin:0 0 1rem;font-size:0.92rem;color:#555">Below is the actual Google Doc that held all the code. I used to name every game GDC (game design class) plus a number and paste the movement script from the last project, so iterations and Frankensteins were always happening. The doc got mangled over time and bounced around the class. It is a mishmash of a couple YouTube tutorials and frustration from Unity's official car tutorial. I entered the regional programming challenge and Oregon's statewide Oregon Game Project Challenge; we did not win, but I learned a lot, including my first time in Unreal Engine on a senior-year project.</p>
 
 <!--BLOG_GDOC_FRAGMENT-->
 
 <p style="margin:1.25rem 0 0.85rem">By senior year I was editing weekly news for the school's channel, airing every Wednesday to 2,500 students. I ran social for esports and tennis, stacked competition and coursework, and still entered Oregon's regional programming challenge, codeORcreate, where I won Best Presentation with an accessibility-focused public transit routing app judged by a panel of four. That was the first time I felt like I could actually make things people use.</p>
 
-<p style="margin:0 0 0.85rem">The rest of the calendar was clubs: <strong>robotics</strong> (state champions my junior year), <strong>game design club</strong> (we showed a project at the <strong>Oregon Game Project Challenge</strong>), <strong>LEAP Youth Alliance</strong> (drug-prevention coalition with town halls and volunteer events), <strong>Key Club</strong>, <strong>National Honor Society</strong>, <strong>feminism club</strong>, and a few more. I am still not sure how that fit next to multiple jobs and sports.</p>
+<p style="margin:0 0 0.85rem">The rest of the calendar was clubs: robotics (state champions my junior year), game design club (we showed a project at the Oregon Game Project Challenge), LEAP Youth Alliance (drug-prevention coalition with town halls and volunteer events), Key Club, National Honor Society, feminism club, and a few more. I am still not sure how that fit next to multiple jobs and sports.</p>
 
-<p style="margin:0 0 1.25rem">Since <strong>December 2019</strong> I have run a personal YouTube channel. For years I posted about <strong>two videos a week</strong> and streamed a lot on the side. Around <strong>2024</strong> that slowed to about <strong>one video a month</strong>. I am planning to <strong>retire that channel in September</strong> and start a new one aimed at <strong>informational coding videos and project updates</strong>. The carousel on this site's Blog page is set up for whatever I publish next.</p>
+<p style="margin:0 0 1.25rem">Since December 2019 I have run a personal YouTube channel. For years I posted about two videos a week and streamed a lot on the side. Around 2024 that slowed to about one video a month. I am planning to retire that channel in September and start a new one aimed at informational coding videos and project updates. The carousel on this site's Blog page is set up for whatever I publish next.</p>
 
 <div class="b-card" style="font-size:0.9rem;margin:0">
 <strong style="color:#6366f1">Fast forward:</strong> UC Irvine, double major Software Engineering and Computer Science, Army National Guard, Code Ninjas instructor teaching JavaScript and Unity C# to kids, designing real healthcare tools at Commit the Change, and two hackathon wins in the same school year. The About page in the nav stays short (where I am from, goals, contact); current roles live in Work Experience and LinkedIn.
@@ -82,9 +82,11 @@ details.b-doc-details summary::-webkit-details-marker { display: none; }
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The Brief</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">What I wanted this site to do</h2>
 
-<p>I've worked as a designer and as a developer. The tools are different but the goal is the same: make something that communicates clearly and looks like someone cared. I wanted a portfolio that didn't look like every other student portfolio. No Wix, no generic template, no "here are my three projects arranged in a grid please hire me."</p>
+<p>I care about both design and engineering, and I get picky when something reads as generic. I did not want a Wix template with three cards and a stock photo. I wanted something that felt like me: clear for someone skimming for a job, a little stranger if you stay on the boot screen and poke around.</p>
+
+<p style="margin:0 0 1.25rem;font-size:0.92rem;line-height:1.65;color:#444">The tools are different but the muscle is the same. When I design, I pay attention to how a developer would actually implement it. When I build, I make sure I understand the full design intent and why choices were made. On a team that means fewer handoffs that go sideways. Working solo I am a lot faster because I can run both sides in one head and keep a workflow that already matches how design and dev talk to each other.</p>
 
 <div class="b-split-3">
   <div class="b-card" style="border-left:4px solid #6366f1">
@@ -95,103 +97,72 @@ details.b-doc-details summary::-webkit-details-marker { display: none; }
   <div class="b-card" style="border-left:4px solid #10b981">
     <p style="font-size:0.75rem;color:#888;margin:0 0 0.3rem;text-transform:uppercase;letter-spacing:0.06em">Architecture Goal</p>
     <p style="font-weight:700;margin:0 0 0.35rem">Zero friction to expand</p>
-    <p style="font-size:0.84rem;color:#555;margin:0">Adding a new project should be: create a folder, write a markdown file, push. No touching HTML.</p>
+    <p style="font-size:0.84rem;color:#555;margin:0">New project: create a folder, add <code style="background:#f0f0f0;padding:0.08em 0.25em;border-radius:3px">project.md</code> with frontmatter, run the build and the card in the grid is generated for you. No hand-editing HTML. If you like how this is set up, you can steal the pattern for your own site.</p>
   </div>
   <div class="b-card" style="border-left:4px solid #f59e0b">
-    <p style="font-size:0.75rem;color:#888;margin:0 0 0.3rem;text-transform:uppercase;letter-spacing:0.06em">Hosting Goal</p>
-    <p style="font-weight:700;margin:0 0 0.35rem">Free forever</p>
-    <p style="font-size:0.84rem;color:#555;margin:0">No backend. No database. No monthly bill. Static files on GitHub Pages, deployed via Actions on every push.</p>
+    <p style="font-size:0.75rem;color:#888;margin:0 0 0.3rem;text-transform:uppercase;letter-spacing:0.06em">Open source</p>
+    <p style="font-weight:700;margin:0 0 0.35rem">Fork-friendly</p>
+    <p style="font-size:0.84rem;color:#555;margin:0">The repo is public so people can poke at the code, argue with my choices, and maybe take inspiration to make their own portfolio sites really rad. Static files on GitHub Pages, deployed via Actions on every push, with no backend or database at runtime.</p>
   </div>
 </div>
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1.5rem;letter-spacing:-0.02em">How It Got Built</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1.5rem;letter-spacing:-0.02em">Rough build history</h2>
 
 <div class="b-timeline">
   <div class="b-titem">
-    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Early 2025</p>
+    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Early January 2026</p>
     <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">Version zero: one giant HTML file</p>
-    <p style="font-size:0.88rem;color:#555;margin:0">All project content was hardcoded directly in <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">index.html</code>. Adding a project meant finding the right section of a 2,000-line file and pasting HTML into it by hand. Editing the wrong spot broke the layout. Editing the right spot still felt brittle. There was no system, just copy-paste and faith.</p>
+    <p style="font-size:0.88rem;color:#555;margin:0">Every project lived as hand-pasted HTML inside <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">index.html</code>. One file kept growing. I could break the layout by editing the wrong div. Even when I hit the right spot it felt fragile. There was no real structure, just memory and luck.</p>
   </div>
   <div class="b-titem">
-    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Summer 2025</p>
-    <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">The terminal concept, and the Matrix rain disaster</p>
-    <p style="font-size:0.88rem;color:#555;margin:0">The home screen needed something memorable. The plan: a Matrix-style falling character rain behind the UI. Dense green characters cascading down a black canvas. I built it. It animated. It looked incredible on my 4K monitor and like TV static on everything else.</p>
+    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Mid-January 2026</p>
+    <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">Terminal vibe, and matrix rain I ended up cutting</p>
+    <p style="font-size:0.88rem;color:#555;margin:0">I wanted something loud behind the boot UI, so I tried Matrix-style rain on a canvas. On a big external monitor it looked fine. On my laptop (Lenovo Legion) it was laggy, slow to boot, and honestly kind of ugly. Wrong tradeoff. I removed it.</p>
   </div>
   <div class="b-titem">
-    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Fall 2025</p>
+    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Late January 2026</p>
     <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">Architecture overhaul: the folder system</p>
-    <p style="font-size:0.88rem;color:#555;margin:0">Ripped out the hardcoded content, replaced it with a Node.js build script that reads <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">project.md</code> files from a folder structure. First time the site felt like a real system.</p>
+    <p style="font-size:0.88rem;color:#555;margin:0">I moved write-ups into per-project folders with <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">project.md</code> and a Node script that walks the tree, parses YAML with <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">gray-matter</code>, and emits one JS bundle the browser loads. That was the first time adding a project felt repeatable instead of scary.</p>
   </div>
   <div class="b-titem">
-    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Winter 2025</p>
+    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Early February 2026</p>
     <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">Work experience, photo stacks, awards</p>
     <p style="font-size:0.88rem;color:#555;margin:0">The experience section went through six layout iterations. The current version uses a vertical timeline with fanning photo stacks that open the full gallery on click.</p>
   </div>
   <div class="b-titem">
-    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Early 2026</p>
-    <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">Blog, LinkedIn, YouTube, and the JSONBin saga</p>
-    <p style="font-size:0.88rem;color:#555;margin:0">Added a full content pipeline: blog folder system with a build script, a LinkedIn carousel with local video thumbnail capture, YouTube with oEmbed title fetching, a global like counter, and a GitHub Actions workflow that injects API keys from secrets at deploy time.</p>
+    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Mid-February 2026</p>
+    <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">This site as a real pipeline</p>
+    <p style="font-size:0.88rem;color:#555;margin:0">I started pushing seriously on this static setup in February: same folder idea extended to the blog (<code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">post.md</code> per entry, <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">npm run build:blog</code> to regenerate <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">generated/blog-data.js</code>), polish on the boot terminal, and tightening how cards and heroes resolve from frontmatter so new work is mostly “drop files, build, push.”</p>
+  </div>
+  <div class="b-titem">
+    <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">Late February 2026</p>
+    <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">Blog carousels, LinkedIn, YouTube, JSONBin</p>
+    <p style="font-size:0.88rem;color:#555;margin:0">LinkedIn posts and YouTube rows are data-driven: <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">data/linkedin-posts.js</code> and <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">data/youtube-videos.js</code>, with helper scripts (<code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">scripts/add-linkedin.cjs</code>, <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">scripts/add-youtube.cjs</code>) so adding an entry is a small CLI flow instead of hand-editing giant objects. oEmbed fills card titles without a key; the Data API supplies views when a key is injected at deploy. Global likes go through JSONBin with secrets wired in GitHub Actions.</p>
   </div>
   <div class="b-titem" style="margin-bottom:0">
     <p style="font-size:0.72rem;color:#888;margin:0 0 0.15rem;letter-spacing:0.06em;text-transform:uppercase">March 2026</p>
-    <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">This post</p>
-    <p style="font-size:0.88rem;color:#555;margin:0">Still ongoing. Still adding to it. You're reading it on the blog page, which itself was built two weeks before this sentence was written.</p>
+    <p style="font-weight:800;font-size:1rem;margin:0 0 0.3rem">This post (and room to grow)</p>
+    <p style="font-size:0.88rem;color:#555;margin:0">Still ongoing. I hope to add more posts on what I am building and keep the site in sync with projects and videos, and the pipelines are in place so it stays low-friction.</p>
   </div>
 </div>
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The Matrix Rain: A Cautionary Tale</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Matrix rain</h2>
 
-<div class="b-split">
-<div>
-<p style="margin:0 0 0.85rem">The plan seemed bulletproof. A full-screen canvas element behind the terminal UI, rendering columns of green falling characters in the classic Matrix style. I wrote the canvas renderer in about two hours, tweaked the speed and opacity for another hour, and thought it looked amazing.</p>
-<p style="margin:0 0 0.85rem">The problems arrived in order:</p>
-<ol style="padding-left:1.5rem;margin:0 0 0.85rem;line-height:2.1;font-size:0.9rem">
-  <li>On lower-DPI screens the characters blurred into smears</li>
-  <li>The canvas overlapped the terminal panel's click targets on mobile</li>
-  <li>Performance dropped to ~40fps on a 2019 MacBook</li>
-  <li>With <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">z-index</code> management, the rain bled through the UI panels</li>
-  <li>The aesthetic was derivative. It's the first thing every "hacker theme" portfolio does</li>
-</ol>
-<p style="margin:0">I killed it decisively. The Matrix rain was the obvious choice, and the obvious choice is rarely the right one.</p>
-</div>
-<div>
-<div style="background:#0a0a0a;border-radius:10px;padding:1.25rem;font-family:'Courier New',monospace;font-size:0.77rem;color:#33ff66;line-height:1.6">
-<span style="color:#888">// What I thought the canvas code would do:</span><br>
-<span style="color:#33ff66">// look cool on every screen</span><br><br>
-<span style="color:#888">// What it actually did on mobile:</span><br>
-<span style="color:#f87171">▓▓▒▒░░</span><span style="color:#888"> blur</span><br>
-<span style="color:#f87171">▒▒▒▓▓▓</span><span style="color:#888"> more blur</span><br>
-<span style="color:#f87171">░▒▓█▓▒</span><span style="color:#888"> still blur</span><br>
-<span style="color:#f87171">▓▒░░▒▓</span><span style="color:#888"> performance warning</span><br><br>
-<span style="color:#ffd700">// Estimated: needs rethink</span><br>
-<span style="color:#f87171">// Actual: needs deletion</span>
-</div>
-<div class="b-card" style="margin-top:1rem;font-size:0.85rem">
-  <strong>What replaced it:</strong> The ASCII face. One <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">&lt;pre&gt;</code> element, monospace text, CSS scale transform. Works on every screen. Unique. Actually interesting to look at.
-</div>
-</div>
+<p style="margin:0 0 0.85rem">I put a full-screen canvas behind the terminal and drew falling green columns. It was fun to write and it looked sharp on a big external monitor. On the machine I actually use day to day it was laggy, took a long time to feel “ready,” and looked worse than I wanted. I wanted something a recruiter can open fast, with a path for people who want to dig deeper. Matrix rain failed both tests, so I deleted it.</p>
+
+<div class="b-card" style="font-size:0.88rem;margin:0 0 1.25rem">
+  <strong>What I kept instead:</strong> the ASCII face in a <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">&lt;pre&gt;</code>, same row-shift idea as the section below but light enough to load and read everywhere.
 </div>
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:2.5rem 0 1rem;letter-spacing:-0.02em">The Globe That Never Worked</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:2.5rem 0 1rem;letter-spacing:-0.02em">The weekend I spent on a globe</h2>
 
-<p>Before the face, the terminal panel was supposed to have a rotating ASCII globe: a 3D sphere mapped to a character grid, lit from the side, rotating on the yaw axis. The math was right. The results were not.</p>
+<p>Before the face, I wanted a rotating “hacker globe” in ASCII. I went through countless open-source GitHub projects and could not get ASCII art to rotate in a way that felt right. Eventually I found an STL-to-ASCII pipeline where you could rotate the model, ported something like that in, and ended up with what you see in the boot flow. I said alright, good enough, and shipped it. It is not the rotating math globe I pictured, but it has its own weird charm and I still like how it looks.</p>
 
-<div class="b-split">
-<div>
-<div style="background:#fef3c7;border-left:4px solid #f59e0b;padding:0.85rem 1.25rem;border-radius:0 8px 8px 0;font-size:0.87rem;margin:0 0 1rem">
-  <strong>The core problem:</strong> A procedurally rendered ASCII sphere looks like a circle. At the resolution of a monospace grid, the character-to-character variation was too coarse to read as curvature. The "sphere" looked flat, like a disc with shadows. Increasing the grid resolution made it too large for the panel. Reducing it made it look like 12 characters arranged in a rough circle.
-</div>
-<p style="font-size:0.88rem;margin:0 0 0.85rem">I spent a full weekend on this. I tried different character sets (<code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">.,:;!|*#@</code> for brightness ramps), different rotation speeds, different lighting angles. Nothing looked like a globe.</p>
-<div style="background:#d1fae5;border-left:4px solid #10b981;padding:0.85rem 1.25rem;border-radius:0 8px 8px 0;font-size:0.87rem">
-  <strong>The pivot:</strong> Instead of generating a sphere, I applied the globe rotation algorithm to an existing ASCII portrait. Each row rotates horizontally by an amount proportional to <code style="background:#dcfce7;padding:0.1em 0.3em;border-radius:3px">cos(latitude)</code>, fast at the equator, still at the poles. The face appears to turn its head in 3D. Zero new geometry, zero new math, runs in ten lines.
-</div>
-</div>
-<div>
-<pre style="background:#1a1a1a;color:#e0e0e0;padding:1rem 1.25rem;border-radius:8px;font-size:0.77rem;line-height:1.6;overflow-x:auto;margin:0;tab-size:2"><code><span style="color:#888">// The globe rotation algorithm,</span>
+<pre style="background:#1a1a1a;color:#e0e0e0;padding:1rem 1.25rem;border-radius:8px;font-size:0.77rem;line-height:1.6;overflow-x:auto;margin:0 0 1.25rem;tab-size:2"><code><span style="color:#888">// The globe rotation algorithm,</span>
 <span style="color:#888">// applied to an ASCII face:</span>
 
 for (let row = 0; row &lt; h; row++) {
@@ -209,22 +180,16 @@ for (let row = 0; row &lt; h; row++) {
   out += line.slice(shift)
            + line.slice(0, shift);
 }</code></pre>
-</div>
-</div>
-
-<div class="b-quote">
-  Ten lines to replace a weekend of globe math. The real lesson: I was solving the wrong problem. I didn't need a globe. I needed something that felt alive.
-</div>
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The Architecture: Why Folders</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Why everything lives in folders</h2>
 
 <div class="b-split">
 <div>
-<p style="margin:0 0 0.85rem">The original hardcoded HTML structure had a fundamental problem: every new project required touching the same file, in the same fragile spots, with no safety net. The risk of breaking something unrelated was constant.</p>
-<p style="margin:0 0 0.85rem">The solution I landed on is a dead-simple folder structure. Every project is a folder. The folder contains a <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">project.md</code> file with YAML frontmatter for metadata and HTML body for the project write-up. Images live next to the markdown file with predictable names.</p>
-<p style="margin:0">A Node.js build script reads every folder, parses the frontmatter using <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">gray-matter</code>, and writes a single JS file. The browser loads that file on page load. No server. No API calls. No database.</p>
+<p style="margin:0 0 0.85rem">Hardcoding everything in one HTML file meant every new case study was a surgery on the same page. I was going to keep shipping projects, so I needed a layout I could add to without touching unrelated sections.</p>
+<p style="margin:0 0 0.85rem">What I do now is simple: one folder per project, a <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">project.md</code> with YAML at the top for title, dates, links, and HTML body below. Images sit next to the markdown with consistent names.</p>
+<p style="margin:0">A Node script walks the folders, uses <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">gray-matter</code> for the frontmatter, and emits a single bundle the browser loads. Still static hosting. Still no database.</p>
 </div>
 <div>
 <pre style="background:#1a1a1a;color:#e0e0e0;padding:1rem 1.25rem;border-radius:8px;font-size:0.77rem;line-height:1.7;overflow-x:auto;margin:0;tab-size:2"><code>devProjects/
@@ -267,9 +232,9 @@ ongoing: false        <span style="color:#888"># affects tier in the sort</span>
   </div>
 </details>
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The Card Sort Algorithm</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">How project cards sort</h2>
 
-<p>Project cards don't just sort by date. They sort by tier first, then by date within a tier. The four tiers exist because I have example projects I want at the top, active ones in the middle, and finished ones at the bottom, always newest-first within each group.</p>
+<p>Cards are not strictly chronological. I group them so placeholder examples stay visible while I build the real list, ongoing work sits in the middle, and older shipped work still shows up without burying the stuff I want people to click first. Inside each group it is newest first.</p>
 
 <div style="overflow-x:auto;margin:0 0 1.75rem">
 <table style="width:100%;border-collapse:collapse;font-size:0.86rem">
@@ -291,61 +256,13 @@ ongoing: false        <span style="color:#888"># affects tier in the sort</span>
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The Projects</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Work Experience (many drafts)</h2>
 
-<img src="assets/dev-site-project-detail.png" alt="Project detail view" class="b-fullimg">
+<img src="/assets/dev-site-experience.png" alt="Screenshot: Work Experience timeline (full page)" class="b-img-capped" loading="lazy" decoding="async">
 
-<div class="b-split">
-<div>
-<p style="font-size:0.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#6366f1;margin:0 0 0.4rem">PocketZot / IrvineHacks 2026 Winner</p>
-<p style="margin:0 0 0.75rem;font-size:0.9rem">A Chrome extension with a Shimeji-style anteater that walks around AI chat sites and classifies how you're using AI. My contributions were the physics engine, the sprite state machine, and the in-extension shop. My teammates built the backend, classifier, and database.</p>
-<p style="margin:0 0 0.75rem;font-size:0.9rem">The physics was the part I dug into. The anteater has velocity, drag, gravity, and boundary conditions. You can grab it and throw it across the screen. When it hits a wall it bounces with a damped coefficient. When you let go mid-throw it keeps whatever momentum you gave it.</p>
-<details style="border:1px solid #e5e7eb;border-radius:8px;padding:0 0.85rem;font-size:0.83rem">
-  <summary style="cursor:pointer;padding:0.75rem 0;font-weight:700;list-style:none;display:flex;justify-content:space-between">Physics snippet <span style="color:#9ca3af">click to expand</span></summary>
-  <div style="padding:0 0 0.75rem">
-<pre style="background:#1a1a1a;color:#e0e0e0;padding:0.75rem;border-radius:6px;font-size:0.75rem;line-height:1.55;overflow-x:auto;margin:0.5rem 0 0;tab-size:2"><code><span style="color:#888">// Per-frame physics update</span>
-this.vy += GRAVITY * dt;
-this.vx *= Math.pow(DRAG, dt);
-this.vy *= Math.pow(DRAG, dt);
+<p>If anything on the site got redrawn over and over, it was this page. I wanted color and motion so it felt alive, but I was not sure how to bolt on effects that still scale when I add more roles. Real company logos would mean chasing assets and aspect ratios forever, so the “logos” on the timeline are mostly color, type, and simple shapes, easy to duplicate for the next job without a redesign.</p>
 
-this.x += this.vx * dt;
-this.y += this.vy * dt;
-
-<span style="color:#888">// Floor bounce</span>
-if (this.y > floorY) {
-  this.y = floorY;
-  this.vy *= -BOUNCE_COEFF;
-  if (Math.abs(this.vy) &lt; 10) {
-    this.vy = 0;
-    this.setState('idle');
-  }
-}</code></pre>
-  </div>
-</details>
-</div>
-<div>
-<p style="font-size:0.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#6366f1;margin:0 0 0.4rem">[CollIDE] (Ongoing)</p>
-<p style="margin:0 0 0.75rem;font-size:0.9rem">A collaborative IDE where every developer has their own AI assistant, but all those assistants share a read-only view of what the whole team is doing. The core thesis: AI tools are built for individuals. CollIDE is built for teams.</p>
-<p style="margin:0 0 0.75rem;font-size:0.9rem">The card and banner artwork are entirely hand-drawn SVGs: colored cursors, live code text, comment bubbles. No image files. Getting all four cursors to sit within the viewBox without clipping took more coordinate recalculations than I care to count.</p>
-<div class="b-card" style="font-size:0.83rem;margin:0">
-  <strong>SVG Lesson:</strong> Everything drawn outside the <code style="background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px">viewBox</code> is clipped. The fix is always the same: increase the viewBox padding, then recalculate every coordinate. There is no shortcut.
-</div>
-</div>
-</div>
-
-<hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
-
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The Work Experience Page</h2>
-
-<img src="assets/dev-site-developer.png" alt="Developer portfolio grid" class="b-fullimg">
-
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:0 0 1.75rem">
-<img src="assets/dev-site-experience.png" alt="Work Experience timeline on the site" style="width:100%;display:block;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
-<img src="assets/dev-site-blog.png" alt="Blog section with post cards" style="width:100%;display:block;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
-<img src="assets/dev-site-about.png" alt="About page with bio and contact" style="width:100%;display:block;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
-</div>
-
-<p>This page went through the most redesign iterations of anything on the site. The first version was a flat list. The second was a two-column grid. The third looked like a LinkedIn printout. The current version is a vertical timeline with a left accent line, company logo squares, tag chips, and a dedicated content block per role.</p>
+<p>What you see now is a vertical timeline with a saturated accent strip, those lettered blocks, tags, and a real paragraph per role. The photo stacks are plain images exported small, layered with absolute positioning, slight rotations, and a hover state that fans them out before you click into the lightbox. Same viewer as the design portfolio so I did not maintain two modal systems.</p>
 
 <p>The detail that makes it work: the photo stack. For roles that have media attached, a stack of three overlapping photos sits in the dead space under the date. The cards fan out slightly using CSS rotation transforms. On hover, the back cards slide apart:</p>
 
@@ -379,9 +296,11 @@ if (this.y > floorY) {
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">YouTube Integration: Three Layers Deep</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">YouTube on the blog page</h2>
 
-<p style="font-size:0.9rem;margin:0 0 1rem">This section is separate from my long-running personal channel (since late 2019). The carousel on the Blog page reads from <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">data/youtube-videos.js</code> and opens a modal with an embed, description pulled from the API when the key is present, oEmbed title on the card, and the JSONBin like counter. Right now the data file lists the videos I choose to feature (for example my Minecraft Python video); as I launch the new coding-focused channel, new IDs go in the same file.</p>
+<p style="font-size:0.9rem;margin:0 0 1rem">This section is separate from my long-running personal channel (since late 2019). The carousel on the Blog page reads from <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">data/youtube-videos.js</code> and opens a modal with an embed, description from the Data API when the key is present, oEmbed title on the card, and a global like counter backed by JSONBin.</p>
+
+<p style="font-size:0.9rem;margin:0 0 1rem">The stock like UI kept lying to me (wrong video, stale counts, weird state when I closed and reopened modals fast), so I ended up calling the YouTube API myself, wiring view counts and a heart that syncs to one shared number per video. That was my first time minting an API key and shipping something that depends on it; I am usually the frontend person on a team, so the whole thing was a fun stretch.</p>
 
 <div class="b-split-3" style="margin:0 0 1.25rem">
   <div class="b-card" style="border-top:3px solid #6366f1">
@@ -421,16 +340,16 @@ if (window.YOUTUBE_API_KEY) {
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The JSONBin Disaster</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">JSONBin and GitHub Actions bugs</h2>
 
-<p>I wanted a global like counter on YouTube videos, one number shared across all visitors, not browser-local. Firebase required a credit card on the free tier. JSONBin.io did not. JSONBin stores a JSON object behind a REST API, completely free.</p>
+<p>I wanted one like count per YouTube video for everyone who visits, not a number that only lived in local storage. Firebase wanted a card on file for the free tier. JSONBin did not, so I used their REST API and a single JSON blob.</p>
 
-<p>The implementation was clean. Local testing worked. I deployed. Likes stopped saving.</p>
+<p>It worked on my machine. After deploy, likes never stuck.</p>
 
 <div style="background:#fef3c7;border-left:4px solid #f59e0b;border-radius:0 10px 10px 0;padding:1rem 1.25rem;margin:0 0 1rem">
-<p style="font-weight:800;margin:0 0 0.5rem;font-size:0.95rem">The Problem: Shell Variable Expansion</p>
-<p style="margin:0 0 0.75rem;font-size:0.88rem">The JSONBin master key starts with <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">$2a$10$J7Mgg...</code>, a bcrypt hash prefix. When the GitHub Actions workflow used <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">echo</code> to write it to disk, bash expanded <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">$2</code>, <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">$10</code>, and <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">$J</code> as shell variables. They're undefined in the workflow environment. They evaluate to empty strings. The key written to disk was <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">"a..."</code> (completely garbage).</p>
-<p style="margin:0;font-size:0.88rem">Every write request came back <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">401 Unauthorized</code>. The site swallowed the error silently. The counter appeared to work, it incremented locally in the modal, but the count was never actually saved to JSONBin. On every reopen: zero.</p>
+<p style="font-weight:800;margin:0 0 0.5rem;font-size:0.95rem">What went wrong</p>
+<p style="margin:0 0 0.75rem;font-size:0.88rem">Basically the formatting step screwed up how the secret was written out, so the file on disk was not the key I thought it was. I had to route the value through Node and <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">JSON.stringify</code> so nothing got reinterpreted on the way. Total pain.</p>
+<p style="margin:0;font-size:0.88rem">Every bad write came back <code style="background:#fef3c7;padding:0.1em 0.35em;border-radius:3px;font-family:monospace">401 Unauthorized</code>. The UI still looked fine locally, but nothing persisted server-side until the inject step was fixed.</p>
 </div>
 
 <div class="b-split">
@@ -470,11 +389,11 @@ if (window.YOUTUBE_API_KEY) {
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The Race Condition</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Likes showing up on the wrong video</h2>
 
-<p>After fixing the key injection, a different bug appeared: opening a video modal, liking it, closing it, reopening it, count showed zero again. And opening a different video sometimes showed the previous video as "liked."</p>
+<p>After the key fix, I still saw weird UI: close a modal, open it again, count looked wrong. Open a second video, sometimes the heart state from the first one stuck around.</p>
 
-<p>The cause was classic: asynchronous fetch callbacks don't know about state changes that happened after they started. The fetch for video A starts. User navigates to video B. The fetch for video A completes. Its callback updates the UI for whatever video is currently open, which is now video B.</p>
+<p>That was me not guarding async. A fetch for video A would finish after I had already opened video B, and the old callback would still touch the DOM.</p>
 
 <details style="border:1px solid #e5e7eb;border-radius:8px;padding:0 1rem;margin:0 0 1.75rem;font-size:0.88rem">
   <summary style="cursor:pointer;padding:0.9rem 0;font-weight:700;list-style:none;display:flex;justify-content:space-between">The fix: captured ID pattern <span style="color:#9ca3af">click to expand</span></summary>
@@ -500,17 +419,19 @@ if (window.YOUTUBE_API_KEY) {
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">The Terminal</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Boot terminal</h2>
 
-<img src="assets/dev-site-terminal.png" alt="Boot terminal with four panels" class="b-fullimg">
+<p style="font-size:0.9rem;margin:0 0 1rem">This is one of my favorite parts of the site. I love ASCII art and the little “I am in a hacker movie” feeling you get from terminal UIs and tiny web games, so I went hard on easter eggs and boot animations. I also got ahead of myself and rushed a full CRT chrome pass first. After stepping back, I kept a proper command terminal for the real first screen and left the old CRT layer as a <strong>glitched</strong> alternate presentation, mostly for people who like poking under the hood.</p>
 
-<p style="font-size:0.9rem">The first screen is a real (fake) shell. You type <code style="background:#f0f0f0;padding:0.1em 0.35em;border-radius:4px">Initialize</code> to run the boot animation. When it finishes, you are in a <strong>command phase</strong>: the site does not open until you type something.</p>
+<img src="/assets/dev-site-terminal.png" alt="Screenshot: boot terminal with four panels" class="b-img-capped" loading="lazy" decoding="async">
+
+<p style="font-size:0.9rem;margin:1.25rem 0 1rem">The first screen is a real (fake) shell. You type <code style="background:#f0f0f0;padding:0.1em 0.35em;border-radius:4px">Initialize</code> to run the boot animation. When it finishes, you are in a <strong>command phase</strong>: the site does not open until you type something.</p>
 
 <p style="font-size:0.9rem">The bottom-right <strong>GUIDEBOOK</strong> panel lists the same commands as the in-terminal <code style="background:#f0f0f0;padding:0.1em 0.35em;border-radius:4px">HELP</code> output so nobody has to guess. Implemented commands today:</p>
 
 <ul style="font-size:0.9rem;line-height:1.85;margin:0 0 1rem;padding-left:1.35rem">
   <li><strong>HELP</strong> (also <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">GUIDE</code>, <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">?</code>): prints the full list.</li>
-  <li><strong>EXP</strong>: text-only walkthrough of my résumé order (Army Guard through Dairy Queen). Then <strong>N</strong> / <strong>P</strong> step forward or back, <strong>Q</strong> returns to the command phase.</li>
+  <li><strong>EXP</strong>: text-only walkthrough of my résumé order (Army National Guard through Dairy Queen). Then <strong>N</strong> / <strong>P</strong> step forward or back, <strong>Q</strong> returns to the command phase.</li>
   <li><strong>SPIN</strong>: temporarily multiplies how fast the ASCII portrait rotates (same renderer as the blog banner).</li>
   <li><strong>TIME</strong>: prints <code style="background:#f0f0f0;padding:0.08em 0.3em;border-radius:3px">Date.toString()</code> from your browser.</li>
   <li><strong>CLS</strong>: clears the transcript so the panel is readable again.</li>
@@ -520,22 +441,13 @@ if (window.YOUTUBE_API_KEY) {
 
 <p style="font-size:0.9rem;margin:0 0 1rem">Return visitors can skip the whole terminal when a recent normal-visit timestamp is still valid (same <code style="background:#f0f0f0;padding:0.1em 0.35em;border-radius:4px">localStorage</code> mechanism as before).</p>
 
-<p style="font-size:0.9rem;margin:0 0 1rem">After you reach the main site, there is still a separate <strong>crs</strong> presentation layer (alternate layouts per page, extra experiments like the Flappy mini-game on Home). Turning that on is an easter egg from the keyboard, not documented in the guidebook, on purpose.</p>
+<img src="/assets/dev-site-home.png" alt="Screenshot: home view (normal site after boot)" class="b-img-capped" loading="lazy" decoding="async">
 
-<pre style="background:#1a1a1a;color:#e0e0e0;padding:1rem 1.25rem;border-radius:8px;font-size:0.78rem;line-height:1.6;overflow-x:auto;margin:0;tab-size:2"><code><span style="color:#888">// Simplified post-boot dispatch (conceptually)</span>
-if (mode === 'exp') { handle N | P | Q; return; }
-if (mode === 'postinit') {
-  if (isHelp(cmd))   printHelp();
-  else if (cmd === 'exp') openExpViewer();
-  else if (cmd === 'spin') boostAsciiSpeed();
-  else if (cmd === 'time') printDate();
-  else if (cmd === 'cls')  clearTranscript();
-  else openWebsiteWithName(raw);  <span style="color:#888">// default</span>
-}</code></pre>
+<p style="font-size:0.9rem;margin:0 0 1rem">The <strong>crs</strong> / glitched layer keeps the CRT fantasy: scanlines, weird layout variants, an ASCII fish tank, a Flappy-style mini-game, and a horse mini-game inspired by the old “random button” energy. It is intentionally undocumented in the guidebook: a reward if you go looking.</p>
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Everything the Site Runs On</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">Stack</h2>
 
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.75rem;margin:0 0 1.75rem">
   <div class="b-card" style="text-align:center;padding:1rem 0.75rem">
@@ -585,16 +497,14 @@ if (mode === 'postinit') {
   </div>
 </div>
 
-<p>No React. No Vue. No Webpack. No <code style="background:#f0f0f0;padding:0.1em 0.4em;border-radius:4px;font-size:0.9em">node_modules</code> at runtime. The entire site is one <code style="background:#f0f0f0;padding:0.1em 0.4em;border-radius:4px;font-size:0.9em">index.html</code> with everything inlined. Nav clicks are instant because there's no routing, no hydration, no bundle to parse. Pages swap by toggling CSS visibility on pre-rendered content blocks already in the DOM.</p>
+<p>No React. No Vue. No Webpack. No <code style="background:#f0f0f0;padding:0.1em 0.4em;border-radius:4px;font-size:0.9em">node_modules</code> at runtime. The entire site is one <code style="background:#f0f0f0;padding:0.1em 0.4em;border-radius:4px;font-size:0.9em">index.html</code> with everything inlined, so it stays wicked fast even on rough hardware, which is how I think more of the web ought to behave. Nav clicks are instant because there is no routing, no hydration, no bundle to parse. Pages swap by toggling CSS visibility on pre-rendered blocks already in the DOM.</p>
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">
 
-<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">What's Next</h2>
+<h2 style="font-size:1.5rem;font-weight:900;color:#111;margin:0 0 1rem;letter-spacing:-0.02em">What is next</h2>
 
-<p>The design portfolio has one placeholder entry. The blog has one post. There's one YouTube video and five LinkedIn posts. This is a working scaffolding, not a finished product. That was the whole point. Every system is in place to expand without touching the core layout.</p>
+<p>Right now the design tab still has a placeholder card, this is the only long post, and the social carousels are thin on purpose. I cared more about having the pipelines in place (markdown in folders, build scripts, deploy) than about filling every slot on day one.</p>
 
-<p>More projects ship as they get interesting enough to write about. More posts come when something is worth documenting. The boot terminal will keep gaining small quality-of-life commands as I think of them.</p>
+<p>When a project is worth explaining, it gets a folder and a write-up. I want to blog more to sharpen my writing and keep people posted on what I am shipping. Down the road I might add more tabs or sections; still figuring out the shape of that.</p>
 
-<div class="b-quote" style="margin:1.5rem 0 0">
-  If you made it here, try <code style="background:#ede9fe;padding:0.08em 0.35em;border-radius:4px">Initialize</code>, then <code style="background:#ede9fe;padding:0.08em 0.35em;border-radius:4px">EXP</code>, then your name. The guidebook in the corner is there so you never fly blind.
-</div>
+<p style="margin:1.25rem 0 0;font-size:0.95rem;color:#4b5563;line-height:1.7">If something looks cached weird, <code style="background:#f0f0f0;padding:0.08em 0.35em;border-radius:4px">Ctrl+Shift+R</code> (hard refresh) clears it. After you enter your name on the normal boot flow, close the UI upgrade popup with the <strong>X</strong> and you can wander into the glitched CRT layer. I hope to add more soon. Thanks for reading.</p>

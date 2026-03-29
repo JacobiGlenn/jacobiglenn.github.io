@@ -3,6 +3,8 @@
  * Reads each devProjects and designProjects subfolder for project.md,
  * parses YAML frontmatter (gray-matter), and writes generated/projects-data.js
  * for index.html (PROJECT_PAGES + portfolio card HTML).
+ *
+ * Optional frontmatter: featured: true — homepage shows up to 3 dev + 1 design featured (max 4 total).
  */
 const fs = require('fs');
 const path = require('path');
@@ -109,6 +111,7 @@ function loadProject(folderName, categoryKey, slug) {
     dateLabel,
     dateSort,
     ongoing: !!data.ongoing,
+    featured: !!data.featured,
     bodyHtml
   };
 }
@@ -171,6 +174,8 @@ function main() {
       description: p.description || '',
       dateSort: p.dateSort,
       ongoing: !!p.ongoing,
+      featured: !!p.featured,
+      category: 'design',
       html: buildDesignCard(p)
     })),
     dev: devProjects.map((p) => ({
@@ -179,6 +184,8 @@ function main() {
       description: p.description || '',
       dateSort: p.dateSort,
       ongoing: !!p.ongoing,
+      featured: !!p.featured,
+      category: 'dev',
       html: buildDevCard(p)
     }))
   };

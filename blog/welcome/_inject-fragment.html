@@ -1,5 +1,4 @@
 <details class="b-doc-details" style="border:1px solid #e5e7eb;border-radius:10px;padding:0 1rem 1rem;margin:0 0 1.25rem"><summary style="cursor:pointer;padding:0.9rem 0;font-weight:800;color:#374151">Open the actual Google Doc paste (long, scrollable)</summary><pre class="b-doc-scroll">                   the complete coding doc
-        (Google Drive tab title was basically "cobi = best coder" — peak confidence)
 
 ================================================================================
 Cam look (broken clamps, dont use)
@@ -9,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 [AddComponentMenu("Camera-Control/Smooth Mouse Look")]
 public class SmoothMouseLook : MonoBehaviour {
- 
+
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
     public float sensitivityX = 15F;
@@ -32,23 +31,91 @@ public class SmoothMouseLook : MonoBehaviour {
         {
             rotAverageY = 0f;
             rotAverageX = 0f;
+
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+
             rotArrayY.Add(rotationY);
             rotArrayX.Add(rotationX);
-            if (rotArrayY.Count &gt;= frameCounter) { rotArrayY.RemoveAt(0); }
-            if (rotArrayX.Count &gt;= frameCounter) { rotArrayX.RemoveAt(0); }
-            // ... (dozens more lines: loop averages, quaternions, ClampAngle — same paste in Drive)
+
+            if (rotArrayY.Count &gt;= frameCounter) {
+                rotArrayY.RemoveAt(0);
+            }
+            if (rotArrayX.Count &gt;= frameCounter) {
+                rotArrayX.RemoveAt(0);
+            }
+
+            for(int j = 0; j &lt; rotArrayY.Count; j++) {
+                rotAverageY += rotArrayY[j];
+            }
+            for(int i = 0; i &lt; rotArrayX.Count; i++) {
+                rotAverageX += rotArrayX[i];
+            }
+
+            rotAverageY /= rotArrayY.Count;
+            rotAverageX /= rotArrayX.Count;
+
+            rotAverageY = ClampAngle (rotAverageY, minimumY, maximumY);
+            rotAverageX = ClampAngle (rotAverageX, minimumX, maximumX);
+
+            Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
+            Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);
+
+            transform.localRotation = originalRotation * xQuaternion * yQuaternion;
         }
-        // ... MouseX / MouseY branches ...
+        else if (axes == RotationAxes.MouseX)
+        {
+            rotAverageX = 0f;
+            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            rotArrayX.Add(rotationX);
+            if (rotArrayX.Count &gt;= frameCounter) {
+                rotArrayX.RemoveAt(0);
+            }
+            for(int i = 0; i &lt; rotArrayX.Count; i++) {
+                rotAverageX += rotArrayX[i];
+            }
+            rotAverageX /= rotArrayX.Count;
+            rotAverageX = ClampAngle (rotAverageX, minimumX, maximumX);
+            Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);
+            transform.localRotation = originalRotation * xQuaternion;
+        }
+        else
+        {
+            rotAverageY = 0f;
+            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            rotArrayY.Add(rotationY);
+            if (rotArrayY.Count &gt;= frameCounter) {
+                rotArrayY.RemoveAt(0);
+            }
+            for(int j = 0; j &lt; rotArrayY.Count; j++) {
+                rotAverageY += rotArrayY[j];
+            }
+            rotAverageY /= rotArrayY.Count;
+            rotAverageY = ClampAngle (rotAverageY, minimumY, maximumY);
+            Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
+            transform.localRotation = originalRotation * yQuaternion;
+        }
     }
     void Start ()
-    {    
+    {
         Rigidbody rb = GetComponent&lt;Rigidbody&gt;();
-        if (rb) rb.freezeRotation = true;
+        if (rb)
+            rb.freezeRotation = true;
         originalRotation = transform.localRotation;
     }
-    public static float ClampAngle (float angle, float min, float max) { /* ... */ }
+    public static float ClampAngle (float angle, float min, float max)
+    {
+        angle = angle % 360;
+        if ((angle &gt;= -360F) &amp;&amp; (angle &lt;= 360F)) {
+            if (angle &lt; -360F) {
+                angle += 360F;
+            }
+            if (angle &gt; 360F) {
+                angle -= 360F;
+            }
+        }
+        return Mathf.Clamp (angle, min, max);
+   }
 }
 
 ================================================================================
@@ -57,6 +124,9 @@ Cam look (no broken clamps)
 using UnityEngine;
 using System.Collections;
 
+/// MouseLook rotates the transform based on the mouse delta.
+/// Minimum and Maximum values can be used to constrain the possible rotation
+
 [AddComponentMenu("Camera-Control/Mouse Look")]
 public class MouseLook : MonoBehaviour {
 
@@ -64,10 +134,13 @@ public class MouseLook : MonoBehaviour {
 	public RotationAxes axes = RotationAxes.MouseXAndY;
 	public float sensitivityX = 15F;
 	public float sensitivityY = 15F;
+
 	public float minimumX = -360F;
 	public float maximumX = 360F;
+
 	public float minimumY = -60F;
 	public float maximumY = 60F;
+
 	float rotationY = 0F;
 
 	void Update ()
@@ -75,17 +148,31 @@ public class MouseLook : MonoBehaviour {
 		if (axes == RotationAxes.MouseXAndY)
 		{
 			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+
 			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
 		}
-		// ... MouseX / MouseY ...
+		else if (axes == RotationAxes.MouseX)
+		{
+			transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+		}
+		else
+		{
+			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+
+			transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
+		}
 	}
+
 	void Start ()
 	{
 		if (GetComponent&lt;Rigidbody&gt;())
 			GetComponent&lt;Rigidbody&gt;().freezeRotation = true;
-} }
+}
+}
 
 ================================================================================
 Movement (old and clunky)
@@ -99,29 +186,154 @@ public class Walking : MonoBehaviour {
  public float gravity = -5;
  public float jumpSpeed = 20;
  public float jumpForce = 5;
- float velocityY = 0; 
+
+ float velocityY = 0;
+
  CharacterController controller;
- void Start() { controller = GetComponent&lt;CharacterController&gt;(); }
+
+ void Start()
+ {
+     controller = GetComponent&lt;CharacterController&gt;();
+ }
+
  void Update()
  {
      velocityY += gravity * Time.deltaTime;
+
      Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
      input = input.normalized;
+
      Vector3 temp = Vector3.zero;
-     if (input.z == 1) { temp += transform.forward; }
-     else if (input.z == -1) { temp += transform.forward * -1; }
-     if (input.x == 1) { temp += transform.right; }
-     else if (input.x == -1) { temp += transform.right * -1; }
+     if (input.z == 1)
+     {
+         temp += transform.forward;
+     }
+     else if (input.z == -1)
+     {
+         temp += transform.forward * -1;
+     }
+
+     if (input.x == 1)
+     {
+         temp += transform.right;
+     }
+     else if (input.x == -1)
+     {
+         temp += transform.right * -1;
+     }
+
      Vector3 velocity = temp * speed;
      velocity.y = velocityY;
+
      controller.Move(velocity * Time.deltaTime);
-     if (controller.isGrounded) { velocityY = 0; }
+
+     if (controller.isGrounded)
+     {
+         velocityY = 0;
+     }
+
  }
 }
 
 ================================================================================
-Moving COMPLETE (mobb) — crouch on X, CharacterController
+Movement (no jumping/crouching)
 ================================================================================
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+public CharacterController controller;
+
+public float speed = 12f;
+public float gravity = -19.81f;
+public float jumpHeight = 3f;
+
+public Transform groundCheck;
+public float groundDistance = 0.4f;
+public LayerMask groundMask;
+
+Vector3 velocity;
+bool isGrounded;
+private bool onGround;
+
+void Update()
+{
+isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+if (isGrounded &amp;&amp; velocity.y &lt; 0)
+{
+velocity.y = -2f;
+}
+
+float x = Input.GetAxis("Horizontal");
+float z = Input.GetAxis("Vertical");
+
+Vector3 move = transform.right * x + transform.forward * z;
+
+controller.Move(move * speed * Time.deltaTime);
+
+if (Input.GetButtonDown("Jump") &amp;&amp; isGrounded)
+{
+velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+}
+
+velocity.y += gravity * Time.deltaTime;
+
+controller.Move(velocity * Time.deltaTime);
+}
+}
+
+================================================================================
+Jump force jumping
+================================================================================
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class playerController : MonoBehaviour
+{
+public float jumpForce;
+public float gravityModifier;
+private Rigidbody playerRb;
+
+    void Start()
+    {
+    playerRb = GetComponent&lt;Rigidbody&gt;();
+	Physics.gravity *= gravityModifier;
+	}
+
+	public bool isOnGround = true;
+
+    void Update()
+    {
+       if (Input.GetKeyDown(KeyCode.Space) &amp;&amp; isOnGround)
+	   {
+	   playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+	   isOnGround = false;
+	   }
+    }
+
+public bool gameOver = false;
+	public ParticleSystem explosionParticle;
+
+	private void OnCollisionEnter(Collision collision)
+	{
+	if (collision.gameObject.CompareTag("Ground")) {
+	isOnGround = true;
+	} else if (collision.gameObject.CompareTag("obstacle")) {
+
+	}
+}
+}
+
+================================================================================
+Moving COMPLETE
+================================================================================
+using UnityEngine;
+using System.Collections;
+
 public class mobb : MonoBehaviour {
     public Transform firstperson;
     public int health = 100;
@@ -130,41 +342,72 @@ public class mobb : MonoBehaviour {
     public float gravity = 20.0F;
     public bool isCrouching = false;
     private Vector3 moveDirection = Vector3.zero;
+
     void Update () {
-        if(Input.GetButtonDown("Fire1")) { }
+        if(Input.GetButtonDown("Fire1")) {
+
+        }
         Movement();
     }
+
     void Movement() {
         CharacterController controller = GetComponent&lt;CharacterController&gt;();
         if(controller.isGrounded) {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
-            if(Input.GetButton ("Jump")) moveDirection.y = jumpSpeed;
+
+            if(Input.GetButton ("Jump"))
+                moveDirection.y = jumpSpeed;
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move (moveDirection * Time.deltaTime);
-        if(Input.GetKey(KeyCode.X)) { /* crouch toggles firstperson Y */ }
+
+
+if(Input.GetKey(KeyCode.X)) {
+ Vector3 pos = firstperson.transform.position;
+            if(!isCrouching) {
+                pos += new Vector3(0,-1f,0);
+                firstperson.transform.position = pos;
+                isCrouching = true;
+            }
+            else if(isCrouching) {
+                pos += new Vector3(0,1f,0);
+                firstperson.transform.position = pos;
+                isCrouching = false;
+            }
+            }
     }
 }
 
 ================================================================================
-New script ( for scotty potty game ) — FPSMovement, sprint
+New script ( for scottys game )
 ================================================================================
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 public class FPSMovement : MonoBehaviour
 {
    public float speed = 7f;
    Rigidbody rb;
    public float normalSpeed = 7f;
    public float sprintSpeed = 14f;
-   void Start() { rb = GetComponent&lt;Rigidbody&gt;(); }
+   void Start()
+   {
+       rb = GetComponent&lt;Rigidbody&gt;();
+   }
    private void FixedUpdate()
    {
        float x = Input.GetAxisRaw("Horizontal");
        float z = Input.GetAxisRaw("Vertical");
        Vector3 moveBy = transform.right * x + transform.forward * z;
-       if (Input.GetKey(KeyCode.LeftShift)) { speed = sprintSpeed; }
-       else { speed = normalSpeed; }
+       if (Input.GetKey(KeyCode.LeftShift))
+       {
+           speed = sprintSpeed;
+       } else
+       {
+           speed = normalSpeed;
+       }
        rb.MovePosition(rb.position + moveBy.normalized * speed * Time.fixedDeltaTime);
    }
 }

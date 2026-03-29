@@ -214,7 +214,7 @@
     .loading-bar { height: 100%; width: 0; background: #fff; transition: width 0.5s ease; }
     #main-screen { flex-direction: column; align-items: stretch; justify-content: flex-start; background: #fff; color: #111; min-height: 100vh; height: 100%; }
     #main-screen .nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; padding: 1rem 2rem; min-height: calc(40px + 2rem); background: #000; color: #fff; flex-shrink: 0; }
-    #main-screen .nav-logo { position: absolute; height: 4rem; width: auto; cursor: pointer; object-fit: contain; filter: invert(1); top: 50%; transform: translateY(-50%); left: 2rem; }
+    #main-screen .nav-logo { position: absolute; height: 3.35rem; width: auto; cursor: pointer; object-fit: contain; filter: invert(1); top: 50%; transform: translateY(-50%); left: 1.15rem; }
     #main-screen .nav-links { flex: 1; display: flex; justify-content: center; gap: calc(1.5rem + 4px); align-items: center; }
     #main-screen .nav a { color: #fff; text-decoration: none; }
     .nav-dropdown { position: relative; }
@@ -306,6 +306,280 @@
     .clean-contact { margin: 0.35rem 0; }
     .clean-link { color: #0066cc; text-decoration: none; }
     .clean-link:hover { text-decoration: underline; }
+    /* Home (clean mode) */
+    /* Home: full content width like blog, ~2× blog horizontal padding (blog inner uses 1.25rem) */
+    #main-screen:not(.skeleton) .content.content-home {
+      padding: 1rem clamp(1.35rem, 4.5vw, 3.75rem) 1.1rem;
+      align-items: stretch;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    #main-screen:not(.skeleton) .content.content-home #standard-content-wrap,
+    #main-screen:not(.skeleton) .content.content-home #page-content {
+      max-width: 100%;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    #main-screen:not(.skeleton) .content.content-home #page-title {
+      display: none;
+    }
+    /* Home: one viewport, no inner scroll on typical laptop; flex fills space below nav */
+    #main-screen.crs-done:not(.skeleton) .content.content-home {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+    }
+    @media (min-width: 640px) and (min-height: 720px) {
+      #main-screen.crs-done:not(.skeleton) .content.content-home {
+        overflow-y: hidden;
+      }
+    }
+    #main-screen.crs-done:not(.skeleton) .content.content-home #page-content {
+      display: flex !important;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .clean-home {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    #main-screen.crs-done:not(.skeleton) .content.content-home .clean-home {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 640px) and (min-height: 720px) {
+      #main-screen.crs-done:not(.skeleton) .content.content-home .clean-home {
+        justify-content: space-between;
+        gap: clamp(0.35rem, 1.1vh, 0.95rem);
+      }
+    }
+    .clean-home-hero {
+      margin: 0 0 1.1rem;
+      padding: 0 0 0.85rem;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      flex-shrink: 0;
+    }
+    .clean-home-hero-inner { max-width: none; padding: 0; margin: 0; text-align: left; }
+    .clean-home-eyebrow {
+      font-size: clamp(0.88rem, 1.9vw, 1.02rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: #64748b;
+      margin: 0 0 0.45rem;
+      line-height: 1.35;
+    }
+    .clean-home-name {
+      font-size: clamp(1.65rem, 4.2vw, 2.45rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: #0f172a;
+      margin: 0 0 1.05rem;
+    }
+    .clean-home-lead {
+      font-size: 0.96rem;
+      line-height: 1.65;
+      color: #334155;
+      margin: 0;
+      max-width: min(48rem, 100%);
+    }
+    .clean-home-directory {
+      margin: 0 0 0.95rem;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .clean-home-dir-title {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin: 0;
+    }
+    .clean-home-dir-head-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.4rem 2rem;
+      margin: 0 0 0.75rem;
+      align-items: baseline;
+    }
+    @media (min-width: 720px) {
+      .clean-home-dir-head-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .clean-home-dir-split {
+      display: grid;
+      gap: 1rem 2rem;
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    @media (min-width: 720px) {
+      .clean-home-dir-split {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem clamp(2rem, 4vw, 3.25rem);
+      }
+    }
+    .clean-home-dir-col-left,
+    .clean-home-dir-nested {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .clean-home-dir-col-left li,
+    .clean-home-dir-nested li {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.52;
+      color: #475569;
+      padding-left: 0.85rem;
+      border-left: 3px solid #e2e8f0;
+    }
+    .clean-home-dir-col-left strong,
+    .clean-home-dir-nested strong { color: #0f172a; font-weight: 700; }
+    .clean-home-portfolios-intro {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: #64748b;
+      margin: 0 0 0.5rem;
+    }
+    .clean-home-featured-wrap {
+      margin: 0;
+      padding: 0.85rem 0 0;
+      border-top: 1px solid #e8ecf1;
+    }
+    #main-screen.crs-done:not(.skeleton) .content.content-home .clean-home-featured-wrap {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    #home-featured-projects {
+      flex: 0 0 auto;
+      min-width: 0;
+    }
+    .clean-home-featured-kicker {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #0f172a;
+      margin: 0 0 0.5rem;
+    }
+    .home-featured-grid {
+      display: grid;
+      gap: clamp(0.75rem, 1.5vw, 1.15rem);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .home-featured-grid--two { grid-template-columns: repeat(2, 1fr); }
+      .home-featured-grid--three { grid-template-columns: repeat(3, 1fr); }
+      .home-featured-grid--four { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .home-featured-grid--four { grid-template-columns: repeat(4, 1fr); }
+    }
+    .home-featured-grid--one {
+      max-width: 22rem;
+      margin: 0 auto;
+    }
+    .home-featured-cell {
+      min-width: 0;
+    }
+    .home-featured-cell .project-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(15, 23, 42, 0.07);
+      border-radius: 12px;
+      box-shadow: 0 8px 28px -10px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .clean-home-featured-wrap .project-card-header {
+      height: clamp(92px, 13.5vh, 138px);
+    }
+    .clean-home-featured-wrap .project-card-name { font-size: 0.92rem; }
+    .clean-home-featured-wrap .project-card-desc {
+      padding: 0.6rem 0.95rem 0.7rem;
+      font-size: 0.82rem;
+      line-height: 1.48;
+    }
+    .home-featured-cell .project-card .project-card-desc { flex: 1; }
+    .home-featured-cell .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px -10px rgba(15, 23, 42, 0.16);
+    }
+    .home-featured-empty {
+      font-size: 0.92rem;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.6;
+      padding: 1.25rem 1.35rem;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px dashed #cbd5e1;
+    }
+    .clean-home-contact {
+      font-size: 0.82rem;
+      color: #64748b;
+      margin: 0.75rem 0 0;
+      line-height: 1.55;
+      padding-top: 0.7rem;
+      border-top: 1px solid #e8ecf1;
+      flex-shrink: 0;
+    }
+    @media (min-height: 760px) {
+      #main-screen:not(.skeleton) .content.content-home {
+        padding-top: 1.1rem;
+        padding-bottom: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      #main-screen:not(.skeleton) .content.content-home { padding: 1rem 1.25rem 2.5rem; }
+    }
+    /* Sticky back bar: project detail, blog, modals */
+    .detail-sticky-bar { position: sticky; top: 0; z-index: 60; flex-shrink: 0; display: flex; align-items: center; min-height: 3rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(15,23,42,0.08); box-shadow: 0 1px 0 rgba(255,255,255,0.8); transition: transform 0.22s ease, opacity 0.2s ease, visibility 0.2s; }
+    .detail-sticky-bar--dark { background: rgba(17,17,17,0.92); border-bottom-color: rgba(255,255,255,0.12); box-shadow: none; }
+    .detail-back-btn { display: inline-flex; align-items: center; gap: 0.35rem; margin: 0; padding: 0.4rem 0.85rem; font-size: 0.86rem; font-weight: 600; font-family: inherit; line-height: 1.2; color: #1e293b; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+    .detail-back-btn:hover { background: #e2e8f0; border-color: #cbd5e1; }
+    .detail-sticky-bar--dark .detail-back-btn { color: #f1f5f9; background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+    .detail-sticky-bar--dark .detail-back-btn:hover { background: rgba(255,255,255,0.2); }
+    .detail-sticky-bar.detail-sticky-bar--scroll-hidden {
+      transform: translateY(-110%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .modal-close-x,
+    .design-gallery-close.modal-close-x {
+      min-width: 2.25rem;
+      height: 2.25rem;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 1;
+    }
     /* About page: use nearly full content width with ~25px side padding */
     #main-screen:not(.skeleton) .content.content-about {
       padding: 1.25rem 25px 2.5rem;
@@ -533,7 +807,7 @@
     @media (max-width: 640px) {
       /* Nav: collapse links, shrink logo */
       #main-screen .nav { padding: 0.6rem 0.75rem; gap: 0; justify-content: space-between; flex-wrap: wrap; min-height: unset; }
-      #main-screen .nav-logo { position: static; height: 2.2rem; transform: none; margin-right: auto; }
+      #main-screen .nav-logo { position: static; height: 1.95rem; transform: none; margin-right: auto; }
       #main-screen .nav-links { flex: none; width: 100%; justify-content: center; gap: 0.6rem; flex-wrap: wrap; font-size: 0.82rem; padding: 0.3rem 0 0.5rem; }
       .nav-dropdown-menu { left: 0; transform: none; }
       /* Content padding */
@@ -577,10 +851,10 @@
     #design-gallery-slide .shape-study { min-height: 0; padding: 0.5rem; }
     .design-gallery-prev, .design-gallery-next { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: none; background: #fff; color: #111; font-size: 1.5rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
     .design-gallery-prev:hover, .design-gallery-next:hover { background: #f0f0f0; }
-    .design-gallery-inner { position: relative; z-index: 1; max-width: min(90vw, 600px); width: 100%; padding-top: 0.5rem; }
-    .design-gallery-close { position: absolute; top: 0; right: 0; width: 36px; height: 36px; border: none; background: #fff; border-radius: 50%; font-size: 1.25rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 2; }
-    .design-gallery-close:hover { background: #f0f0f0; }
-    .design-gallery-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 2.5rem; }
+    .design-gallery-inner { position: relative; z-index: 1; max-width: min(90vw, 600px); width: 100%; padding-top: 0.5rem; display: flex; flex-direction: column; align-items: stretch; max-height: 88vh; overflow-y: auto; }
+    .design-gallery-close { position: sticky; top: 0; align-self: flex-start; border: 1px solid #e2e8f0; background: #fff; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 2; margin: 0 0 0.5rem; font-family: inherit; color: #1e293b; transition: background 0.15s; }
+    .design-gallery-close:hover { background: #f1f5f9; }
+    .design-gallery-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.35rem; }
     .project-card[data-project] { cursor: pointer; }
     .project-card[data-project] .project-card-desc,
     .project-card[data-project] .project-card-header { cursor: pointer; }
@@ -588,13 +862,11 @@
     .project-card[data-project] .project-card-github { cursor: pointer; }
     #standard-content-wrap { flex: 1; display: flex; flex-direction: column; min-height: 0; align-self: stretch; width: 100%; }
     #main-screen.crs .content #standard-content-wrap { display: contents; }
-    #main-screen .content #project-detail-view { display: none; flex: 1; flex-direction: column; align-items: stretch; width: 100%; min-height: 0; overflow: visible; align-self: stretch; }
+    #main-screen .content #project-detail-view { display: none; flex: 1; flex-direction: column; align-items: stretch; width: 100%; min-height: 0; overflow: visible; align-self: stretch; position: relative; }
     #main-screen .content.show-project-detail #standard-content-wrap { display: none !important; }
     #main-screen .content.show-project-detail #project-detail-view { display: flex !important; }
     .project-detail-hero { width: 100%; height: 220px; position: relative; border-radius: 0; overflow: hidden; margin: 0; flex-shrink: 0; background: linear-gradient(135deg, #6b7280 0%, #9ca3af 50%, #6b7280 100%); }
     .project-detail-hero::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.25); pointer-events: none; }
-    .project-detail-back { position: absolute; top: 1rem; left: 1rem; z-index: 1; background: rgba(0,0,0,0.45); color: #fff; border: none; border-radius: 6px; padding: 0.45rem 1rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: background 0.15s; }
-    .project-detail-back:hover { background: rgba(0,0,0,0.7); }
     .project-detail-title { font-family: Georgia, serif; font-size: 2.25rem; font-weight: 400; color: #111; width: 100%; box-sizing: border-box; padding: 1.25rem 2rem 0; margin: 0 0 0.75rem; text-align: left; align-self: flex-start; }
     .project-detail-body { width: 100%; max-width: none; box-sizing: border-box; padding: 0 2rem 2.5rem; color: #444; line-height: 1.65; }
     .project-detail-body p { margin: 0 0 1rem; }
@@ -620,7 +892,8 @@
     .tech-badge--vite { background: #646cff; color: #fff; }
     .tech-badge--ext  { background: #4285f4; color: #fff; }
     .project-award { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #ffd700, #ffa500); color: #1a1a1a; font-size: 0.82rem; font-weight: 700; padding: 0.4rem 1rem; border-radius: 999px; margin: 0 0 1.25rem; letter-spacing: 0.03em; }
-    .project-card-date { display: block; font-size: 0.72rem; font-family: monospace; color: #888; padding: 0.3rem 0.85rem 0; letter-spacing: 0.04em; } align-items: center; gap: 0.45rem; background: #ff0000; color: #fff; font-size: 0.85rem; font-weight: 600; padding: 0.45rem 1.1rem; border-radius: 6px; text-decoration: none; transition: background 0.15s, transform 0.15s; margin: 0.5rem 0; }
+    .project-card-date { display: block; font-size: 0.72rem; font-family: monospace; color: #888; padding: 0.3rem 0.85rem 0; letter-spacing: 0.04em; }
+    .project-demo-link { display: inline-flex; align-items: center; gap: 0.45rem; background: #ff0000; color: #fff; font-size: 0.85rem; font-weight: 600; padding: 0.45rem 1.1rem; border-radius: 6px; text-decoration: none; transition: background 0.15s, transform 0.15s; margin: 0.5rem 0; }
     .project-demo-link:hover { background: #cc0000; transform: translateY(-1px); }
     .project-link-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0 0.5rem; }
     .project-link { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; font-weight: 600; padding: 0.5rem 1.1rem; border-radius: 6px; text-decoration: none; transition: opacity 0.15s, transform 0.15s; }
@@ -724,8 +997,6 @@
     #blog-detail { display: none; position: fixed; inset: 0; z-index: 3000; background: #fff; overflow-y: auto; overflow-x: hidden; }
     #blog-detail.visible { display: block; }
     .blog-detail-hero { width: 100%; height: 280px; background: linear-gradient(135deg,#6b7280,#9ca3af); background-size: cover; background-position: center; position: relative; }
-    .blog-detail-hero-back { position: absolute; top: 1rem; left: 1rem; background: rgba(0,0,0,0.45); color: #fff; border: none; border-radius: 6px; padding: 0.45rem 1rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; z-index: 1; transition: background 0.15s; }
-    .blog-detail-hero-back:hover { background: rgba(0,0,0,0.7); }
     .blog-detail-inner { max-width: none; margin: 0; padding: 2rem 1.25rem 4rem; }
     .blog-detail-date { font-size: 0.75rem; color: #999; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 0.4rem; }
     .blog-detail-title { font-size: 1.6rem; font-weight: 800; color: #1a1a1a; margin: 0 0 1.5rem; line-height: 1.25; }
@@ -765,16 +1036,16 @@
     .li-modal-body { padding: 1.4rem 1.6rem 1.8rem; }
     .li-modal-date { font-size: 0.72rem; color: #aaa; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 0.6rem; }
     .li-modal-text { font-size: 0.92rem; color: #333; line-height: 1.75; margin: 0; }
-    .li-modal-close { position: sticky; top: 0; display: flex; justify-content: flex-end; padding: 0.75rem 0.75rem 0; background: #fff; }
-    .li-modal-close button { background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #888; line-height: 1; padding: 0.25rem; border-radius: 4px; transition: color 0.15s; }
-    .li-modal-close button:hover { color: #111; }
+    .li-modal-bar { position: sticky; top: 0; z-index: 2; display: flex; justify-content: flex-start; align-items: center; padding: 0.65rem 1rem; background: #fff; border-bottom: 1px solid #eee; }
+    .li-modal-bar button.modal-close-x { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; color: #1e293b; font-family: inherit; transition: background 0.15s, border-color 0.15s; }
+    .li-modal-bar button.modal-close-x:hover { background: #e2e8f0; }
     /* ── YouTube modal ─────────────────────────────────── */
     #yt-modal { display: none; position: fixed; inset: 0; z-index: 4000; background: rgba(0,0,0,0.72); align-items: center; justify-content: center; padding: 1.5rem; }
     #yt-modal.visible { display: flex; }
     .yt-modal-box { background: #111; border-radius: 12px; width: min(90vw, 960px); max-height: 92vh; overflow-y: auto; box-shadow: 0 24px 70px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
-    .yt-modal-top { position: sticky; top: 0; display: flex; justify-content: flex-end; padding: 0.6rem 0.75rem 0; background: #111; z-index: 1; }
-    .yt-modal-top button { background: none; border: none; cursor: pointer; color: #888; font-size: 1.2rem; padding: 0.25rem; border-radius: 4px; transition: color 0.15s; }
-    .yt-modal-top button:hover { color: #fff; }
+    .yt-modal-top { position: sticky; top: 0; display: flex; justify-content: flex-start; align-items: center; padding: 0.6rem 1rem; background: #111; z-index: 2; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .yt-modal-top button.modal-close-x { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; color: #e2e8f0; font-family: inherit; transition: background 0.15s, color 0.15s; }
+    .yt-modal-top button.modal-close-x:hover { background: rgba(255,255,255,0.2); color: #fff; }
     .yt-modal-embed { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
     .yt-modal-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
     .yt-modal-body { padding: 1.2rem 1.5rem 1.6rem; background: #fff; border-radius: 0 0 12px 12px; }
@@ -1022,7 +1293,7 @@
   <div id="welcome-screen" class="screen hidden"><h1 id="welcome-name"></h1></div>
   <div id="main-screen" class="screen hidden skeleton">
     <nav class="nav">
-      <img src="assets/logo.svg" class="nav-logo" alt="Jacobi Glenn logo">
+      <img src="/assets/logo.svg" class="nav-logo" alt="Jacobi Glenn logo">
       <div class="nav-links">
         <a href="#" data-page="home">Home</a>
         <div class="nav-dropdown">
@@ -1039,7 +1310,7 @@
     </nav>
     <main class="content content-home">
       <div id="standard-content-wrap">
-      <h1 id="page-title">Home</h1>
+      <h1 id="page-title"></h1>
       <div id="page-content"></div>
       <div id="flappy-container">
         <div id="flappy-outer">
@@ -1071,9 +1342,10 @@
       </div>
       </div>
       <div id="project-detail-view" class="project-detail-view" aria-hidden="true">
-        <div class="project-detail-hero" aria-hidden="true">
-          <button class="project-detail-back" onclick="exitProjectDetail()" aria-label="Back">← Back</button>
+        <div class="detail-sticky-bar" role="navigation" aria-label="Project">
+          <button type="button" class="detail-back-btn" onclick="exitProjectDetail()" aria-label="Back to portfolio">← Back</button>
         </div>
+        <div class="project-detail-hero" aria-hidden="true"></div>
         <h1 class="project-detail-title" id="project-detail-title">Project</h1>
         <div id="project-detail-body" class="project-detail-body"></div>
       </div>
@@ -1094,8 +1366,10 @@
 
   <!-- Blog detail overlay -->
   <div id="blog-detail" role="dialog" aria-modal="true" aria-label="Blog post">
+    <div class="detail-sticky-bar" role="navigation" aria-label="Blog post">
+      <button type="button" class="detail-back-btn" onclick="closeBlogDetail()" aria-label="Back to blog">← Back</button>
+    </div>
     <div class="blog-detail-hero" id="blog-detail-hero">
-      <button class="blog-detail-hero-back" onclick="closeBlogDetail()">← Back</button>
       <div id="blog-hero-ascii-wrap"><pre id="blog-hero-art"></pre></div>
     </div>
     <div class="blog-detail-inner">
@@ -1108,7 +1382,7 @@
   <!-- LinkedIn post modal -->
   <div id="li-modal" role="dialog" aria-modal="true" aria-label="LinkedIn post">
     <div class="li-modal-box">
-      <div class="li-modal-close"><button onclick="closeLiModal()" aria-label="Close">✕</button></div>
+      <div class="li-modal-bar"><button type="button" class="modal-close-x" onclick="closeLiModal()" aria-label="Close">&times;</button></div>
       <div class="li-modal-media" id="li-modal-media"></div>
       <div class="li-modal-body">
         <p class="li-modal-date" id="li-modal-date"></p>
@@ -1120,7 +1394,7 @@
   <!-- YouTube video modal -->
   <div id="yt-modal" role="dialog" aria-modal="true" aria-label="YouTube video">
     <div class="yt-modal-box">
-      <div class="yt-modal-top"><button onclick="closeYtModal()" aria-label="Close">✕</button></div>
+      <div class="yt-modal-top"><button type="button" class="modal-close-x" onclick="closeYtModal()" aria-label="Close">&times;</button></div>
       <div class="yt-modal-embed"><iframe id="yt-modal-iframe" allowfullscreen allow="autoplay; encrypted-media"></iframe></div>
       <div class="yt-modal-body">
         <div class="yt-modal-meta">
@@ -1146,7 +1420,7 @@
   <div id="design-gallery-modal" class="design-gallery-modal" role="dialog" aria-modal="true" aria-label="Image gallery">
     <div class="design-gallery-backdrop" tabindex="-1" aria-hidden="true"></div>
     <div class="design-gallery-inner">
-      <button type="button" class="design-gallery-close" id="design-gallery-close" aria-label="Close gallery">×</button>
+      <button type="button" class="design-gallery-close modal-close-x" id="design-gallery-close" aria-label="Close">&times;</button>
       <div class="design-gallery-row">
         <div class="design-gallery-dialog">
           <button type="button" class="design-gallery-prev" id="design-gallery-prev" aria-label="Previous image">‹</button>
@@ -1441,7 +1715,7 @@
       return n;
     }
 
-    const PAGE_TITLES = { home: 'Home', page1: 'Designer', page2: 'Developer', page3: 'Work Experience', page4: 'Blog', about: 'About' };
+    const PAGE_TITLES = { home: '', page1: 'Designer', page2: 'Developer', page3: 'Work Experience', page4: 'Blog', about: 'About' };
     const ENDLESS_HORSE_LEG = '\t       | | | |             || |  \n';
     const HORSE_HEAD = "   ,\n_,,)\\.~,,._\n(()`  ``\\))),,_\n |     \\ ''((\\)))),,_          ____\n |6`   |   ''((\\())) \"-.____.-\"    `-.-,\n |    .'\\    ''))))'                  \\)))\n |   |   `.     ''                     ((((\n \\, _)     \\/                          |))))\n  `'        |                          (((((\n            \\                  |       ))))))\n             `|    |           ,\\     /((((((\n              |   / `-.______.<  \\   |  )))))\n              |   |  /         `. \\  \\  ((((\n              |  / \\ |           `.\\  | (((\n              \\  | | |             )| |  ))\n               | | | |             || |  '\n";
     const BOX_CONTENT = {
@@ -1541,6 +1815,7 @@
     };
     /** Populated by scripts/build-projects.cjs into generated/projects-data.js; edit each project folder's project.md, then npm run build:projects. */
     const GP = window.__GENERATED_PROJECTS || { PROJECT_PAGES: {}, cardsHtml: { design: '', dev: '' }, cardsData: { design: [], dev: [] } };
+    /** Each cardsData item: { id, title, description, dateSort, ongoing, featured?, category: 'design'|'dev', html } */
     const PROJECT_PAGES = GP.PROJECT_PAGES || {};
 
     function renderCards(kind) {
@@ -1558,6 +1833,27 @@
         .sort((a, b) => tier(a) - tier(b) || b.dateSort - a.dateSort)
         .map(c => c.html).join('');
     }
+
+    /** Homepage: featured: true — up to 3 dev + 1 design (max 4 cards). */
+    function renderHomeFeaturedProjects() {
+      const mount = document.getElementById('home-featured-projects');
+      if (!mount) return;
+      const d = (GP.cardsData && GP.cardsData.design) || [];
+      const v = (GP.cardsData && GP.cardsData.dev) || [];
+      function byDate(a, b) { return b.dateSort - a.dateSort; }
+      const dFeat = d.filter(function (p) { return p.featured; }).sort(byDate).slice(0, 1);
+      const vFeat = v.filter(function (p) { return p.featured; }).sort(byDate).slice(0, 3);
+      var cards = vFeat.concat(dFeat).slice(0, 4);
+      if (!cards.length) {
+        mount.innerHTML = '<p class="home-featured-empty">No homepage projects yet. Add <code>featured: true</code> to <code>project.md</code> files under <code>devProjects</code> or <code>designProjects</code> (up to three dev and one design), then run <code>npm run build:projects</code>.</p>';
+        return;
+      }
+      var mod = cards.length === 1 ? 'one' : cards.length === 2 ? 'two' : cards.length === 3 ? 'three' : 'four';
+      mount.innerHTML = '<div class="home-featured-grid home-featured-grid--' + mod + '">' +
+        cards.map(function (p) { return '<div class="home-featured-cell">' + p.html + '</div>'; }).join('') +
+        '</div>';
+    }
+
     const DESIGN_GALLERY_DATA = {
       'tuhs': [
         { kind: 'img', src: 'assets/experience/tuhs/team.png',      caption: 'The TuHS Broadcasting crew — wearing the apparel I designed for the department.' },
@@ -1566,10 +1862,10 @@
         { kind: 'img', src: 'assets/experience/tuhs/monitors.png',  caption: 'Football broadcast setup — left monitor shows current output, primed output, and live stream view. Right monitor is the scoreboard, updated live.' }
       ],
       'social': [
-        { kind: 'img', src: 'assets/experience/social/esports.png',   caption: 'TuHS Esports Instagram — I posted 5x/week covering match results for all three teams, highlight clips, and promotional reels.' },
-        { kind: 'img', src: 'assets/experience/social/tennis.png',    caption: 'Tualatin Boys Tennis — game-day graphics built around photography I shot of the players, plus team-building reels and informational videos.' },
-        { kind: 'img', src: 'assets/experience/social/codeninjas.png',caption: 'Code Ninjas Irvine — designed location-specific graphics and managed distribution of company-wide promotional posts.' },
-        { kind: 'img', src: 'assets/experience/social/news.png',      caption: 'Weekly Wolf News — edited every Friday for a Wednesday broadcast, airing in every classroom to 2,500+ students. Covered upcoming school events and weekly highlights.' }
+        { kind: 'img', src: 'assets/experience/social/news.png',       caption: 'Weekly Wolf News: edited every Friday for a Wednesday broadcast to about 2,500 students. School events and weekly highlights.' },
+        { kind: 'img', src: 'assets/experience/social/esports.png',   caption: 'TuHS Esports Instagram: about five posts a week with match results, highlights, and reels for all three teams.' },
+        { kind: 'img', src: 'assets/experience/social/tennis.png',    caption: 'Tualatin Boys Tennis: game-day graphics from my photos, team reels, and informational videos.' },
+        { kind: 'img', src: 'assets/experience/social/codeninjas.png',caption: 'Code Ninjas Irvine (Nov 2025 onward): location graphics and company-wide promo distribution. Only social work I still run.' }
       ],
       'design-example': [
         { kind: 'solid', color: '#c62828', caption: 'This is an example of an image: a solid color fill.' },
@@ -1653,9 +1949,11 @@
       const el = document.getElementById('blog-detail');
       el.classList.add('visible');
       el.scrollTop = 0;
+      bindScrollHideDetailBar(el);
     }
 
     function closeBlogDetail() {
+      unbindDetailBarScroll();
       document.getElementById('blog-detail').classList.remove('visible');
       closeBlogHeroAscii();
     }
@@ -1976,7 +2274,35 @@
     });
 
     const CLEAN_CONTENT = {
-      home: '<p class="clean-message">This is still a work in progress, thank you for understanding!</p>',
+      home: '<div class="clean-home">'
+        + '<div class="clean-home-hero"><div class="clean-home-hero-inner">'
+        + '<p class="clean-home-eyebrow">Software Engineering and Computer Science major at UC Irvine</p>'
+        + '<h2 class="clean-home-name">Jacobi Glenn</h2>'
+        + '<p class="clean-home-lead">I build full-stack products, and I work on UI/UX for a healthcare project with <strong>Commit the Change</strong>, and teach kids <strong>JavaScript</strong> and <strong>Unity</strong> at <strong>Code Ninjas</strong>. This site is the long-form portfolio: case studies, code, writing, and a build log when I feel like documenting the messy parts.</p>'
+        + '</div></div>'
+        + '<div class="clean-home-directory">'
+        + '<div class="clean-home-dir-head-row">'
+        + '<p class="clean-home-dir-title">What you will find here</p>'
+        + '<p class="clean-home-dir-title">Portfolios</p>'
+        + '</div>'
+        + '<div class="clean-home-dir-split">'
+        + '<ul class="clean-home-dir-col-left">'
+        + '<li><strong>Work Experience</strong> Pretty standard résumé with photos.</li>'
+        + '<li><strong>Blog</strong> Deeper posts, LinkedIn and YouTube highlights, and occasional build notes.</li>'
+        + '<li><strong>About</strong> Timeline and context: where I am from, school, how to reach me.</li>'
+        + '</ul>'
+        + '<div class="clean-home-dir-col-right">'
+        + '<p class="clean-home-portfolios-intro">The <strong>Portfolios</strong> dropdown in the nav splits build work and design work into two pages.</p>'
+        + '<ul class="clean-home-dir-nested">'
+        + '<li><strong>Developer</strong> Apps, extensions, and other projects I have built that are worth mentioning, with repos and demos when I can share them.</li>'
+        + '<li><strong>Designer</strong> Digital and visual work I have made for companies, websites, and similar — a culmination of the design skills I bring together.</li>'
+        + '</ul></div></div></div>'
+        + '<section class="clean-home-featured-wrap" aria-labelledby="home-featured-heading">'
+        + '<p id="home-featured-heading" class="clean-home-featured-kicker">Featured work</p>'
+        + '<div id="home-featured-projects"></div>'
+        + '</section>'
+        + '<p class="clean-home-contact"><strong>Contact:</strong> <a href="mailto:jacobiglenn@gmail.com" class="clean-link">jacobiglenn@gmail.com</a> · <a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">LinkedIn</a> · <a href="https://github.com/JacobiGlenn" target="_blank" rel="noopener noreferrer" class="clean-link">GitHub</a></p>'
+        + '</div>',
       page1: '<p class="clean-sub">Selected Work</p><p class="clean-uc">Nothing here yet — the project listed below is a placeholder example while I build this out. Real design work coming soon.</p><div class="portfolio-cards">' + renderCards('design') + '</div>',
       page2: '<p class="clean-sub">Projects</p><p class="clean-uc">Still in progress — I\'ve only added a couple projects so far. More to come as I continue building this out.</p><div class="portfolio-cards">' + renderCards('dev') + '</div>',
       page3: '<p class="clean-sub">Summary</p>'
@@ -1986,11 +2312,11 @@
         + '<div class="exp-entry" data-category="mil"><div class="exp-accent"></div><div class="exp-logo" style="background:#1b3a2d"><span class="exp-logo-letter" style="color:#c8d8a0;font-size:0.8rem">★</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Army National Guard</p><p class="exp-company">Part-time · enlisted end of high school</p></div></div><ul class="exp-bullets"><li>Part-time service alongside college — drill, training, and the discipline that comes with it</li><li>MOS and platform details: see the blog post <strong>Welcome to my website</strong></li></ul><div class="exp-tags"><span class="exp-tag">Leadership</span><span class="exp-tag">Discipline</span><span class="exp-tag">Teamwork</span></div></div></div>'
         + '<div class="exp-entry" data-category="ai"><div class="exp-accent"></div><div class="exp-logo" style="background:#c5f240"><span class="exp-logo-letter" style="color:#111;font-size:1.2rem">H</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">AI Trainer – Multimodal Systems Expert</p><p class="exp-company">Handshake &middot; Contract</p></div><div class="exp-right"><p class="exp-date">Feb 2026 – Present</p><p class="exp-loc">Remote</p></div></div><ul class="exp-bullets"><li>Evaluated AI model performance across audio, visual, and text-based tasks to assess multimodal accuracy and identify areas for improvement</li><li>Created domain-specific prompts and evaluated AI-generated responses to assess LLM reasoning and comprehension in technical contexts</li><li>Analyzed model outputs for correctness, clarity, and depth, comparing against domain-specific criteria and academic sources</li><li>Applied subject-matter expertise to evaluate and refine AI-generated responses for real-world alignment</li><li>Contributed to structured data annotation and content review projects supporting the development of accurate and inclusive AI systems</li></ul><div class="exp-tags"><span class="exp-tag">Prompt Engineering</span><span class="exp-tag">LLM Analysis</span><span class="exp-tag">AI Training</span><span class="exp-tag">Data Annotation</span><span class="exp-tag">Technical Writing</span><span class="exp-tag">Model Evaluation</span></div></div></div>'
         + '<div class="exp-entry" data-category="edu"><div class="exp-accent"></div><div class="exp-logo" style="background:#0f0f0f;border:1px solid #333"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">CN</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Code Ninjas</p><p class="exp-company">Part-time &middot; Irvine, CA</p></div><div class="exp-right"><p class="exp-date">Nov 2025 – Present</p></div></div><div class="exp-subroles"><div class="exp-subrole"><p class="exp-subrole-role">Robotics Teacher | Code Sensei</p><p class="exp-subrole-date">Feb 2026 – Present</p><ul class="exp-bullets"><li>Created weekly lesson plans based on the LEGO SPIKE curriculum for groups of 3–6 students</li><li>Taught robotics fundamentals through hands-on exploration and personalized instruction techniques</li></ul></div><div class="exp-subrole"><p class="exp-subrole-role">Code Sensei</p><p class="exp-subrole-date">Nov 2025 – Present</p><ul class="exp-bullets"><li>Supported students aged 5–14 through block-based coding, JavaScript, and Unity game development</li><li>Provided real-time support for logic errors, syntax issues, and platform navigation with emphasis on conceptual understanding</li><li>Managed front desk operations including phone support, scheduling, and administrative tasks</li><li>Designed promotional graphics and videos for events and social media outreach</li></ul></div></div><div class="exp-tags"><span class="exp-tag">JavaScript</span><span class="exp-tag">Unity C#</span><span class="exp-tag">LEGO SPIKE</span><span class="exp-tag">Teaching</span><span class="exp-tag">Graphic Design</span></div></div></div>'
-        + '<div class="exp-entry" data-category="creative"><div class="exp-accent"></div><div class="exp-logo" style="background:#f97316"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">SM</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Social Media Designer</p><p class="exp-company">Freelance</p></div><div class="exp-right"><p class="exp-date">Sep 2023 – Present</p><p class="exp-loc">Remote</p></div></div><ul class="exp-bullets"><li>Code Ninjas Irvine: graphics, video, and Instagram while on staff in college (not high school)</li><li>Co-founded and ran esports programs at Tualatin High School and later Tigard High School: funding, outreach, and branding; designed logos and apparel for esports, broadcasting, Pack Leaders, and other clubs</li><li>Fundraised through the student store with esports-branded drinks (Slurp Juice, E Berry) and Dutch Bros-style promo stickers</li><li>Ran TuHS Esports and Boys Tennis social accounts at the same time: match graphics, highlights, and reels</li><li>Weekly Wolf: produced YouTube videos and edited the weekly news show aired Wednesdays to 2,500+ students (Friday edit to Wednesday air)</li></ul><div class="exp-tags"><span class="exp-tag">Graphic Design</span><span class="exp-tag">Adobe PS &amp; AI</span><span class="exp-tag">Social Media</span><span class="exp-tag">Video Editing</span><span class="exp-tag">Branding</span></div><div class="exp-photo-stack" onclick="openDesignGallery(\'social\',0)"><div class="exp-photo-card exp-photo-card--back2" style="background-image:url(\'assets/experience/social/codeninjas.png\')"></div><div class="exp-photo-card exp-photo-card--back1" style="background-image:url(\'assets/experience/social/tennis.png\')"></div><div class="exp-photo-card exp-photo-card--front"  style="background-image:url(\'assets/experience/social/esports.png\')"></div></div></div></div>'
+        + '<div class="exp-entry" data-category="creative"><div class="exp-accent"></div><div class="exp-logo" style="background:#f97316"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">MM</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Multimedia &amp; social</p><p class="exp-company">Freelance &middot; YouTube, Weekly Wolf, TuHS programs</p></div><div class="exp-right"><p class="exp-date">Dec 2019 – Jun 2025</p><p class="exp-loc">Remote &amp; TuHS</p></div></div><ul class="exp-bullets"><li>Personal YouTube from December 2019: iMovie, then DaVinci Resolve, then Premiere Pro</li><li>Sophomore year: Weekly Wolf school news, weekly uploads for about 2,500 students</li><li>From about January of sophomore year: TuHS esports (later Tigard too): programs, outreach, logos, apparel, broadcasting tie-ins; student store drinks (Slurp Juice, E Berry) and promo stickers</li><li>Boys tennis graphics from junior year, heavier cadence from December of senior year (match graphics, highlights, reels)</li><li>Stepped back from TuHS-linked and personal school socials in June 2025; Code Ninjas Irvine promos from November 2025 are under Code Ninjas</li></ul><div class="exp-tags"><span class="exp-tag">Graphic Design</span><span class="exp-tag">Adobe PS &amp; AI</span><span class="exp-tag">Social Media</span><span class="exp-tag">Video Editing</span><span class="exp-tag">Branding</span></div><div class="exp-photo-stack" onclick="openDesignGallery(\'social\',0)"><div class="exp-photo-card exp-photo-card--back2" style="background-image:url(\'assets/experience/social/esports.png\')"></div><div class="exp-photo-card exp-photo-card--back1" style="background-image:url(\'assets/experience/social/tennis.png\')"></div><div class="exp-photo-card exp-photo-card--front"  style="background-image:url(\'assets/experience/social/news.png\')"></div></div></div></div>'
         + '<div class="exp-entry" data-category="design"><div class="exp-accent"></div><div class="exp-logo" style="background:#6b21a8"><span class="exp-logo-letter" style="color:#fff;font-size:0.6rem">CTC</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">UI/UX Designer</p><p class="exp-company">Commit The Change, UCI &nbsp;·&nbsp; <a href="https://ctc-uci.com/" target="_blank" rel="noopener noreferrer" class="clean-link">ctc-uci.com</a></p></div><div class="exp-right"><p class="exp-date">Oct 2025 – Present</p><p class="exp-loc">Irvine, CA</p></div></div><ul class="exp-bullets"><li>Product and UI/UX design for tools that help call center staff and healthcare providers stay aligned and make scheduling smoother for Celebrating Life Community Health Center in Orange County</li><li>Wireframes and clickable prototypes in Figma; iterating with developers and project leads as the product evolves</li><li>More visuals and a deeper write-up coming as the work becomes shareable</li></ul><div class="exp-tags"><span class="exp-tag">Figma</span><span class="exp-tag">Prototyping</span><span class="exp-tag">UX Research</span><span class="exp-tag">Agile Sprints</span><span class="exp-tag">Slack</span></div></div></div>'
         + '<div class="exp-entry" data-category="tech"><div class="exp-accent"></div><div class="exp-logo" style="background:#003b8e"><span class="exp-logo-letter" style="color:#ffd100;font-size:0.65rem">BB</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Best Buy</p><p class="exp-company">Part-time &middot; Tualatin, OR</p></div><div class="exp-right"><p class="exp-date">Jul 2023 – Apr 2025</p></div></div><div class="exp-subroles"><div class="exp-subrole"><p class="exp-subrole-role">Apple Certified Sales Advisor</p><p class="exp-subrole-date">Feb 2025 – Apr 2025</p><ul class="exp-bullets"><li>Completed Apple SEED certification and relayed product updates and knowledge to associates across the store</li><li>Provided specialized computing and mobile advisory to customers seeking Apple ecosystem guidance</li></ul></div><div class="exp-subrole"><p class="exp-subrole-role">Sales Advisor</p><p class="exp-subrole-date">Jul 2023 – Feb 2025</p><ul class="exp-bullets"><li>Provided sales support across all departments including Computing, Mobile, Home Theatre, Appliances, and Gaming</li><li>Communicated complex technology concepts clearly to customers of all backgrounds and comfort levels</li><li>Performed basic IT support through Geek Squad and scheduled customer installations</li><li>Trained and mentored ~30 new employees across three seasonal hiring waves; go-to for computing and home theater questions</li><li>Kept a pocket notebook of product differences across the sales floor to answer detailed customer comparisons</li></ul></div></div><div class="exp-tags"><span class="exp-tag">Apple Certified</span><span class="exp-tag">IT Support</span><span class="exp-tag">Sales</span><span class="exp-tag">Team Training</span><span class="exp-tag">Customer Service</span></div></div></div>'
-        + '<div class="exp-entry" data-category="creative"><div class="exp-accent"></div><div class="exp-logo" style="background:#1a1a2e"><span class="exp-logo-letter" style="color:#fff;font-size:0.62rem">THS</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Crew Lead · Editor · Graphic Designer</p><p class="exp-company">TuHS Broadcasting</p></div><div class="exp-right"><p class="exp-date">Sep 2023 – May 2025</p><p class="exp-loc">Tualatin, OR</p></div></div><div class="exp-photo-stack" onclick="openDesignGallery(\'tuhs\')"><div class="exp-photo-card exp-photo-card--back2" style="background-image:url(\'assets/experience/tuhs/soundcart.png\')"></div><div class="exp-photo-card exp-photo-card--back1" style="background-image:url(\'assets/experience/tuhs/soundtown.png\')"></div><div class="exp-photo-card exp-photo-card--front" style="background-image:url(\'assets/experience/tuhs/team.png\')"></div></div><ul class="exp-bullets"><li>Crew lead: trained camera operators, managed the crew during live football and basketball broadcasts, and coordinated camera switches and timing over radio with the production team</li><li>Sophomore year focused on editing; junior and senior years added live streaming for football and basketball</li><li>Produced YouTube videos for Weekly Wolf and edited the weekly news package shown schoolwide</li><li>Designed the department logo, work apparel, and branding guide for TuHS Broadcasting</li></ul><div class="exp-tags"><span class="exp-tag">Adobe Premiere Pro</span><span class="exp-tag">DaVinci Resolve</span><span class="exp-tag">Live Broadcast</span><span class="exp-tag">Branding</span><span class="exp-tag">Leadership</span></div></div></div>'
-        + '<div class="exp-entry" data-category="service"><div class="exp-accent"></div><div class="exp-logo" style="background:#d71920"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">DQ</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Crew Member</p><p class="exp-company">Dairy Queen</p></div><div class="exp-right"><p class="exp-date">Jun 2021 – Sep 2021</p><p class="exp-loc">On-site</p></div></div><ul class="exp-bullets"><li>Memorized food and drink recipes to prepare orders with speed and accuracy during rush hours</li><li>Recommended menu items based on customer preferences and dietary restrictions</li><li>Assisted in training 3+ new employees and maintained smooth team operations</li><li>Handled cash drawers and cleared tables to keep service running efficiently</li></ul><div class="exp-tags"><span class="exp-tag">Customer Service</span><span class="exp-tag">Cash Handling</span><span class="exp-tag">Team Training</span></div></div></div>'
+        + '<div class="exp-entry" data-category="creative"><div class="exp-accent"></div><div class="exp-logo" style="background:#1a1a2e"><span class="exp-logo-letter" style="color:#fff;font-size:0.62rem">THS</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Crew Lead · Editor · Graphic Designer</p><p class="exp-company">TuHS Broadcasting</p></div><div class="exp-right"><p class="exp-date">Sep 2023 – Jun 2025</p><p class="exp-loc">Tualatin, OR</p></div></div><div class="exp-photo-stack" onclick="openDesignGallery(\'tuhs\')"><div class="exp-photo-card exp-photo-card--back2" style="background-image:url(\'assets/experience/tuhs/soundcart.png\')"></div><div class="exp-photo-card exp-photo-card--back1" style="background-image:url(\'assets/experience/tuhs/soundtown.png\')"></div><div class="exp-photo-card exp-photo-card--front" style="background-image:url(\'assets/experience/tuhs/team.png\')"></div></div><ul class="exp-bullets"><li>Crew lead: trained camera operators, managed the crew during live football and basketball broadcasts, and coordinated camera switches and timing over radio with the production team</li><li>Sophomore year focused on editing; junior and senior years added live streaming for football and basketball</li><li>Produced YouTube videos for Weekly Wolf and edited the weekly news package shown schoolwide</li><li>Designed the department logo, work apparel, and branding guide for TuHS Broadcasting</li></ul><div class="exp-tags"><span class="exp-tag">Adobe Premiere Pro</span><span class="exp-tag">DaVinci Resolve</span><span class="exp-tag">Live Broadcast</span><span class="exp-tag">Branding</span><span class="exp-tag">Leadership</span></div></div></div>'
+        + '<div class="exp-entry" data-category="service"><div class="exp-accent"></div><div class="exp-logo" style="background:#d71920"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">DQ</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Crew Member</p><p class="exp-company">Dairy Queen</p></div><div class="exp-right"><p class="exp-date">Jun 2022 – Sep 2022</p><p class="exp-loc">On-site</p></div></div><ul class="exp-bullets"><li>Memorized food and drink recipes to prepare orders with speed and accuracy during rush hours</li><li>Recommended menu items based on customer preferences and dietary restrictions</li><li>Assisted in training 3+ new employees and maintained smooth team operations</li><li>Handled cash drawers and cleared tables to keep service running efficiently</li></ul><div class="exp-tags"><span class="exp-tag">Customer Service</span><span class="exp-tag">Cash Handling</span><span class="exp-tag">Team Training</span></div></div></div>'
         + '</div>'
         + '<p class="clean-sub" style="margin-top:2rem">Education</p>'
         + '<div class="exp-edu-grid">'
@@ -2008,7 +2334,7 @@
       about: '<div class="about-bio about-layout">'
         + '<section class="about-card about-intro-card" aria-labelledby="about-intro-heading">'
         + '<h2 class="about-card-label" id="about-intro-heading">About me</h2>'
-        + '<p>I am a <strong>Software Engineering</strong> and <strong>Computer Science</strong> student at <strong>UC Irvine</strong>. I\'m really interested in large-scale applications, AI, collaborative tech, and dependable systems at serious scale.</p>'
+        + '<p>I am a <strong>Software Engineering</strong> and <strong>Computer Science</strong> student at <strong>UC Irvine</strong>. I\'m really interested in large-scale applications, AI, and collaboration software.</p>'
         + '<p>This site is my developer portfolio, design portfolio, and blog, with a boot terminal on first load if you want to explore before the main UI. What I am up to week to week lives in <strong>Work Experience</strong> and on <a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer" class="clean-link">LinkedIn</a> so this page does not need constant edits.</p>'
         + '</section>'
         + '<section class="about-card about-path-card" aria-labelledby="about-path-heading">'
@@ -2017,18 +2343,18 @@
         + '<div class="about-hz-scroll-outer">'
         + '<div class="about-hz-scroll" role="region" aria-label="Life and work timeline">'
         + '<div class="about-hz-track">'
-        + '<button type="button" class="about-hz-node" data-tid="ca" aria-label="California, born"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">California</span><span class="about-hz-node-sub">Born</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="or" aria-label="Oregon, age twelve"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Oregon</span><span class="about-hz-node-sub">Age 12</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="tul" aria-label="Tualatin through graduation"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Tualatin</span><span class="about-hz-node-sub">Through graduation</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="dq" aria-label="Dairy Queen 2021"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">DQ</span><span class="about-hz-node-sub">Jun 2021</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="bb" aria-label="Best Buy"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Best Buy</span><span class="about-hz-node-sub">Jul 2023</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="tuhs" aria-label="TuHS Broadcasting"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">TuHS TV</span><span class="about-hz-node-sub">Sep 2023</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="soc" aria-label="Social design freelance"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Social</span><span class="about-hz-node-sub">Sep 2023</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="army" aria-label="Army National Guard"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Army</span><span class="about-hz-node-sub">Jun 2025</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="ctc" aria-label="Commit the Change"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">CTC</span><span class="about-hz-node-sub">Oct 2025</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="cn" aria-label="Code Ninjas"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Code Ninjas</span><span class="about-hz-node-sub">Nov 2025</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="hs" aria-label="Handshake AI trainer"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Handshake</span><span class="about-hz-node-sub">Feb 2026</span></button>'
-        + '<button type="button" class="about-hz-node" data-tid="uci" aria-label="UC Irvine"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">UCI</span><span class="about-hz-node-sub">2025 – now</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="ca" aria-label="California, born March 2007"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">California</span><span class="about-hz-node-sub">Mar 2007</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="or" aria-label="Oregon from April 2018"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Oregon</span><span class="about-hz-node-sub">Apr 2018</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="multimedia" aria-label="Multimedia and social, December 2019 through June 2025"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Multimedia</span><span class="about-hz-node-sub">Dec 2019 – Jun 2025</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="tuhs" aria-label="TuHS high school"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">TuHS</span><span class="about-hz-node-sub">Sep 2021 – Jun 2025</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="dq" aria-label="Dairy Queen, summer after freshman year"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">DQ</span><span class="about-hz-node-sub">Jun – Sep 2022</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="bb" aria-label="Best Buy"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Best Buy</span><span class="about-hz-node-sub">Jul 2023 – Apr 2025</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="bcast" aria-label="TuHS Broadcasting"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Broadcast</span><span class="about-hz-node-sub">Sep 2023 – Jun 2025</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="uci" aria-label="UC Irvine"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">UCI</span><span class="about-hz-node-sub">Sep 2025 – Jun 2029</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="army" aria-label="Army National Guard"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Army</span><span class="about-hz-node-sub">Sep 2025 – present</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="ctc" aria-label="Commit the Change"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">CTC</span><span class="about-hz-node-sub">Oct 2025 – present</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="cn" aria-label="Code Ninjas"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Code Ninjas</span><span class="about-hz-node-sub">Nov 2025 – present</span></button>'
+        + '<button type="button" class="about-hz-node" data-tid="hs" aria-label="Handshake AI trainer"><span class="about-hz-node-dot" aria-hidden="true"></span><span class="about-hz-node-short">Handshake</span><span class="about-hz-node-sub">Feb 2026 – present</span></button>'
         + '</div></div></div>'
         + '<div class="about-hz-detail" id="about-hz-detail-panel" aria-live="polite">'
         + '<p class="about-hz-detail-placeholder" id="about-hz-detail-placeholder">Tap a dot on the timeline.</p>'
@@ -2041,11 +2367,11 @@
         + '</section>'
         + '<section class="about-card about-goals-card" aria-labelledby="about-goals-heading">'
         + '<h2 class="about-card-label" id="about-goals-heading">What I am aiming for</h2>'
-        + '<p>I would be thrilled to work at Microsoft, Apple, or Amazon someday. My heart is especially set on <strong>Redmond and Microsoft</strong>. I follow security news and consumer tech closely (shoutout MKBHD &amp; <em>Wired</em>). I plan to earn an associate degree in cybersecurity through a community college while I finish my bachelor\'s, so I can leave undergrad with multiple credentials. I am studying Spanish and want to be bilingual by graduation, with a longer-term goal of four languages: Spanish, Mandarin, Japanese, and French. I know that is ambitious. I am okay chasing it anyway. I love learning and I do not plan to stop.</p>'
+        + '<p>My top goal is <strong>Microsoft</strong>, specifically the <strong>Redmond, Washington</strong> campus. I would also be thrilled at Apple or Amazon someday. I follow security news and consumer tech closely (shoutout MKBHD &amp; <em>Wired</em>). I plan to earn an associate degree in cybersecurity through a community college while I finish my bachelor\'s, so I can leave undergrad with multiple credentials. I am studying Spanish and want to be bilingual by graduation, with a longer-term goal of four languages: Spanish, Mandarin, Japanese, and French. I know that is ambitious. I am okay chasing it anyway. I love learning and I do not plan to stop.</p>'
         + '</section>'
         + '<section class="about-card about-contact-card" aria-labelledby="about-contact-heading">'
         + '<h2 class="about-card-label" id="about-contact-heading">Contact</h2>'
-        + '<p class="about-contact-lead">I am based in <strong>Irvine, California</strong> (Pacific time). Email is the most reliable way to reach me; phone and LinkedIn work too. Open to conversations about internships, collaboration, or anything on this site.</p>'
+        + '<p class="about-contact-lead">I am based in <strong>Irvine, California</strong> (Pacific time). I check email about hourly. Email is the most reliable way to reach me; phone and LinkedIn work too. I will be away on military orders from <strong>April through September 2026</strong> and largely unreachable during that window. Open to conversations about internships, collaboration, or anything on this site.</p>'
         + '<div class="about-contact-grid">'
         + '<a class="about-contact-tile" href="mailto:jacobiglenn@gmail.com"><span class="about-contact-tile-k">Email</span><span class="about-contact-tile-v">jacobiglenn@gmail.com</span></a>'
         + '<a class="about-contact-tile" href="tel:+19713005659"><span class="about-contact-tile-k">Phone</span><span class="about-contact-tile-v">971-300-5659</span></a>'
@@ -2171,11 +2497,11 @@
       { title: 'Army National Guard', lines: ['Part-time Guard alongside college — drill, training, the usual.', 'MOS and airframe: blog → Welcome to my website (I keep specifics there).'] },
       { title: 'Handshake · AI Trainer', lines: ['Multimodal AI evaluation, prompts, response analysis.', 'Feb 2026 – Present · Remote contract.'] },
       { title: 'Code Ninjas · Irvine', lines: ['Code Sensei & robotics: JavaScript, Unity C#, LEGO SPIKE, front desk.', 'Nov 2025 – Present.'] },
-      { title: 'Social Media Designer · Freelance', lines: ['Branding, esports programs, Weekly Wolf / TuHS content, Code Ninjas (college staff).', 'Sep 2023 – Present.'] },
+      { title: 'Multimedia & social · Freelance', lines: ['YouTube through Weekly Wolf, esports, boys tennis; ended TuHS-era socials Jun 2025.', 'Dec 2019 – Jun 2025. CN promos: see Code Ninjas.'] },
       { title: 'Commit the Change · UCI', lines: ['UI/UX for CLCHC tools: call center & provider scheduling.', 'See ctc-uci.com · Oct 2025 – Present.'] },
       { title: 'Best Buy · Tualatin', lines: ['Apple certified; computing & home theater; trained ~30 seasonal hires.', 'Jul 2023 – Apr 2025.'] },
-      { title: 'TuHS Broadcasting', lines: ['Crew lead, live sports, Weekly Wolf, editing & streaming.', 'Sep 2023 – May 2025.'] },
-      { title: 'Dairy Queen', lines: ['Crew member, training, rush service.', 'Summer 2021.'] }
+      { title: 'TuHS Broadcasting', lines: ['Crew lead, live sports, Weekly Wolf, editing & streaming.', 'Sep 2023 – Jun 2025.'] },
+      { title: 'Dairy Queen', lines: ['Crew member, training, rush service.', 'Summer after freshman year, Jun–Sep 2022.'] }
     ];
     let terminalExpIndex = 0;
 
@@ -3749,7 +4075,41 @@
         grid.appendChild(box);
       });
     }
+    let _unbindDetailBarScroll = null;
+    function unbindDetailBarScroll() {
+      if (typeof _unbindDetailBarScroll === 'function') {
+        _unbindDetailBarScroll();
+        _unbindDetailBarScroll = null;
+      }
+    }
+    function bindScrollHideDetailBar(scrollRoot) {
+      unbindDetailBarScroll();
+      if (!scrollRoot) return;
+      const bar = scrollRoot.querySelector('.detail-sticky-bar');
+      if (!bar) return;
+      let lastTop = scrollRoot.scrollTop;
+      function onScroll() {
+        const top = scrollRoot.scrollTop;
+        const delta = top - lastTop;
+        if (top < 24) {
+          bar.classList.remove('detail-sticky-bar--scroll-hidden');
+        } else if (delta > 8) {
+          bar.classList.add('detail-sticky-bar--scroll-hidden');
+        } else if (delta < -8) {
+          bar.classList.remove('detail-sticky-bar--scroll-hidden');
+        }
+        lastTop = top;
+      }
+      scrollRoot.addEventListener('scroll', onScroll, { passive: true });
+      bar.classList.remove('detail-sticky-bar--scroll-hidden');
+      _unbindDetailBarScroll = function() {
+        scrollRoot.removeEventListener('scroll', onScroll);
+        bar.classList.remove('detail-sticky-bar--scroll-hidden');
+      };
+    }
+
     function exitProjectDetail() {
+      unbindDetailBarScroll();
       const main = document.querySelector('#main-screen .content');
       if (main) main.classList.remove('show-project-detail');
       const pv = document.getElementById('project-detail-view');
@@ -3785,6 +4145,8 @@
       document.getElementById('project-detail-view').setAttribute('aria-hidden', 'false');
       document.getElementById('standard-content-wrap').setAttribute('aria-hidden', 'true');
       main.classList.add('show-project-detail');
+      main.scrollTop = 0;
+      bindScrollHideDetailBar(main);
     }
     (function initPortfolioProjectClicks() {
       const wrap = document.getElementById('standard-content-wrap');
@@ -3803,64 +4165,64 @@
     /** Copy for About page horizontal timeline (keys match data-tid on .about-hz-node). */
     const ABOUT_TIMELINE_DETAIL = {
       ca: {
-        date: 'Origin',
-        title: 'California',
-        detail: 'Born in California. A few years later my family moved north — the next stops on the timeline are where I grew up and went to school.'
+        date: 'Mar 2007',
+        title: 'Born in California',
+        detail: 'Birth and early childhood in California before the move to Oregon.'
       },
       or: {
-        date: 'Age 12',
+        date: 'Apr 2018',
         title: 'Oregon',
-        detail: 'Moved to the Portland area at twelve. Middle and high school were all in Oregon before college pulled me back to California for UCI.'
+        detail: 'Family moved in April 2018. Lived in the Portland area through high school graduation, then left for college in California.'
       },
-      tul: {
-        date: 'Through 2025',
-        title: 'Tualatin',
-        detail: 'Tualatin High School: broadcasting, esports and social content, competitions, jobs overlapping with class — the busy years that set up how I work now.'
+      multimedia: {
+        date: 'Dec 2019 – Jun 2025',
+        title: 'Multimedia & social',
+        detail: 'Started in December 2019 with a personal YouTube channel, editing in iMovie, then DaVinci Resolve, then Premiere Pro. Sophomore year at TuHS I took on Weekly Wolf, our weekly news show for about 2,500 students. From about January of sophomore year I built out TuHS esports social and branding (plus logos, apparel, and student store fundraisers). Boys tennis graphics from junior year, with more consistent work from December of senior year. I stepped away from TuHS and school-linked personal accounts in June 2025. Promo graphics for Code Ninjas are on the Code Ninjas entry (Nov 2025 onward), and that is the only social work I still do.'
+      },
+      tuhs: {
+        date: 'Sep 2021 – Jun 2025',
+        title: 'Tualatin High School (TuHS)',
+        detail: 'High school diploma with honors, IB coursework in film, English, math, history, and physics (no IB exams). Broadcasting, esports, clubs, and overlapping jobs during these years.'
       },
       dq: {
-        date: 'Jun 2021 – Sep 2021',
-        title: 'Dairy Queen',
-        detail: 'First real job: recipes, rush hours, cash handling, and helping train new crew. Small kitchen, high tempo — good baseline for showing up on time and not freezing when it gets loud.'
+        date: 'Jun 2022 – Sep 2022',
+        title: 'Dairy Queen, crew member',
+        detail: 'Summer after freshman year at TuHS. Memorized recipes, rush service, cash and tables, and helped train new crew. On site.'
       },
       bb: {
         date: 'Jul 2023 – Apr 2025',
-        title: 'Best Buy (Tualatin)',
-        detail: 'Sales across computing, mobile, home theater, and more; later Apple certified. Trained roughly thirty seasonal hires across three waves and became the person people found for spec-level questions.'
+        title: 'Best Buy, Tualatin',
+        detail: 'Sales advisor across departments including computing, mobile, home theater, appliances, and gaming. Geek Squad basics and installs. Apple SEED certified from February 2025. Trained many new hires and explained tech clearly to customers.'
       },
-      tuhs: {
-        date: 'Sep 2023 – May 2025',
+      bcast: {
+        date: 'Sep 2023 – Jun 2025',
         title: 'TuHS Broadcasting',
-        detail: 'Crew lead for live sports, Weekly Wolf edits, YouTube pieces, and department branding. Lots of radio coordination during games and tight turnarounds on weekly news.'
-      },
-      soc: {
-        date: 'Sep 2023 – present',
-        title: 'Social & design (freelance)',
-        detail: 'Graphics and social for school programs first; after joining Code Ninjas in college, also location promos and Instagram work there. Same thread as broadcasting: make it legible and on-brand fast.'
-      },
-      army: {
-        date: 'Jun 2025 – present',
-        title: 'Army National Guard',
-        detail: 'Part-time enlistment right after high school, running alongside college. Role and platform specifics live in my welcome blog post so this page stays light.'
-      },
-      ctc: {
-        date: 'Oct 2025 – present',
-        title: 'Commit the Change',
-        detail: 'UI/UX at UCI for real healthcare tooling — call center and provider workflows for Celebrating Life Community Health Center. Figma prototypes, sprints with devs, details public when the work is shareable.'
-      },
-      cn: {
-        date: 'Nov 2025 – present',
-        title: 'Code Ninjas (Irvine)',
-        detail: 'Code Sensei and robotics track: JavaScript, Unity C#, LEGO SPIKE, plus front desk and promo graphics when needed. Kids ages ~5–14, lots of debugging patience.'
-      },
-      hs: {
-        date: 'Feb 2026 – present',
-        title: 'Handshake · AI trainer',
-        detail: 'Remote contract: multimodal model evaluation, prompts, grading outputs against rubrics, and structured annotation — basically making sure models behave when text, audio, and images mix.'
+        detail: 'Crew lead for live football and basketball, scoreboard and NFHS stream, Weekly Wolf edits, TimberwolfTV YouTube, department logo and apparel, and training others on cameras and stream etiquette.'
       },
       uci: {
-        date: '2025 – present',
+        date: 'Sep 2025 – Jun 2029 (expected)',
         title: 'UC Irvine',
-        detail: 'Double major in Software Engineering and Computer Science, Networked Systems specialization, plus org work like Commit the Change. This is the academic home base while everything else on the timeline runs in parallel.'
+        detail: 'Bachelor\'s in Software Engineering and Computer Science (double major), Networked Systems specialization. Commit the Change and other campus work run alongside classes. In progress.'
+      },
+      army: {
+        date: 'Sep 2025 – present (current)',
+        title: 'Army National Guard',
+        detail: 'Part time enlistment alongside UCI. Drill, training, and discipline balanced with school. MOS and platform details are in the welcome blog post.'
+      },
+      ctc: {
+        date: 'Oct 2025 – present (current)',
+        title: 'Commit the Change, UI/UX',
+        detail: 'Product and UI/UX for Celebrating Life Community Health Center: tools so call center staff and providers stay aligned and scheduling is smoother. Figma wireframes and prototypes with developers in sprints.'
+      },
+      cn: {
+        date: 'Nov 2025 – present (current)',
+        title: 'Code Ninjas, Irvine',
+        detail: 'Code Sensei: Microsoft IMPACT, block coding, JavaScript, and Unity C# with ages 5 to 14, front desk, and scheduling. Promo graphics and social for the Irvine location (only multimedia or social work I still run). Robotics teacher from Feb 2026 with LEGO SPIKE lesson plans for small groups.'
+      },
+      hs: {
+        date: 'Feb 2026 – present (current)',
+        title: 'Handshake, AI trainer',
+        detail: 'Remote contract evaluating multimodal models across audio, visual, and text. Domain prompts, response grading against rubrics, and structured annotation so outputs stay accurate and inclusive.'
       }
     };
 
@@ -3920,6 +4282,9 @@
         contentEl.textContent = PAGE_CONTENT[page] || '';
       } else {
         contentEl.innerHTML = CLEAN_CONTENT[page] || '';
+      }
+      if (!crsMode && page === 'home') {
+        renderHomeFeaturedProjects();
       }
       if (!crsMode && page === 'about') {
         requestAnimationFrame(function () { initAboutTimeline(); });
@@ -4057,8 +4422,28 @@
         updatePageContent(a.getAttribute('data-page'));
       });
     });
+    (function setupContentPageLinks() {
+      const wrap = document.getElementById('standard-content-wrap');
+      if (!wrap) return;
+      wrap.addEventListener('click', function (e) {
+        const a = e.target.closest('a[data-page]');
+        if (!a || !wrap.contains(a)) return;
+        e.preventDefault();
+        updatePageContent(a.getAttribute('data-page'));
+      });
+    })();
     const navLogo = document.querySelector('.nav-logo');
-    if (navLogo) navLogo.addEventListener('click', togglePage2StreamPause);
+    if (navLogo) {
+      navLogo.addEventListener('click', function () {
+        const ms = document.getElementById('main-screen');
+        if (!ms || !ms.classList.contains('crs-done')) return;
+        if (document.querySelector('#main-screen .content.content-page2') && page2StreamResume) {
+          togglePage2StreamPause();
+          return;
+        }
+        updatePageContent('home');
+      });
+    }
 
     if (trySkipToMain()) { /* skipped to main, done */ }
   </script>

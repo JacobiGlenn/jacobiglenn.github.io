@@ -56,7 +56,7 @@ async function main() {
     await page.locator('.content.show-project-detail').waitFor({ state: 'visible', timeout: 5000 });
     await page.screenshot({ path: path.join(assets, 'dev-site-project-detail.png'), type: 'png', fullPage: true });
 
-    await page.locator('.project-detail-back').click();
+    await page.locator('#project-detail-view .detail-back-btn').click();
     await page.waitForTimeout(350);
     await page.locator('a[data-page="page3"]').click();
     await page.waitForTimeout(450);

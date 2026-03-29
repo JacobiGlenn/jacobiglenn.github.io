@@ -7,6 +7,7 @@ cover: CARD.png
 header: COVER.png
 cover_size: cover
 date: "02/2026"
+featured: true
 ---
 
 <p class="project-detail-lead"><strong>PocketZot</strong> is a Chrome extension built at IrvineHacks 2026. It monitors your prompts to AI assistants and grades how much cognitive work you are actually doing. Your virtual anteater mascot gains health when you prompt thoughtfully and loses it when you let the AI do all the thinking.</p>
