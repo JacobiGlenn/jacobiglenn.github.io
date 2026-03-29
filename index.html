@@ -612,14 +612,14 @@
     .about-card-label {
       font-size: 0.72rem;
       font-weight: 700;
-      color: #6366f1;
+      color: #2f855a;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin: 0 0 0.75rem;
     }
     .about-intro-card {
-      border-left: 4px solid #6366f1;
-      background: linear-gradient(165deg, #f8f7ff 0%, #fafafa 55%, #f8fafc 100%);
+      border-left: 4px solid #2f855a;
+      background: linear-gradient(165deg, #f0fdf4 0%, #f8fbf7 55%, #effaf3 100%);
     }
     .about-intro-card p:last-of-type { margin-bottom: 0; }
     .about-path-card { padding-bottom: 1.15rem; min-width: 0; max-width: 100%; }
@@ -673,7 +673,7 @@
       right: 0;
       top: calc(1rem + 9px);
       height: 3px;
-      background: linear-gradient(90deg, #c7d2fe, #818cf8 45%, #a5b4fc);
+      background: linear-gradient(90deg, #c6f6d5, #2f855a 45%, #68d391);
       border-radius: 3px;
       z-index: 0;
       pointer-events: none;
@@ -698,22 +698,22 @@
       border-radius: 10px;
       transition: background 0.15s;
     }
-    .about-hz-node:hover { background: rgba(99, 102, 241, 0.07); }
-    .about-hz-node:focus-visible { outline: 2px solid #6366f1; outline-offset: 3px; }
+    .about-hz-node:hover { background: rgba(72, 187, 120, 0.07); }
+    .about-hz-node:focus-visible { outline: 2px solid #2f855a; outline-offset: 3px; }
     .about-hz-node.is-active .about-hz-node-dot {
-      background: #6366f1;
-      box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(99, 102, 241, 0.28);
+      background: #2f855a;
+      box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(72, 187, 120, 0.28);
     }
     .about-hz-node-dot {
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      border: 3px solid #6366f1;
+      border: 3px solid #2f855a;
       background: #fff;
       flex-shrink: 0;
       transition: background 0.15s, box-shadow 0.15s;
     }
-    .about-hz-node-short { font-weight: 700; font-size: 0.72rem; color: #1e1b4b; line-height: 1.2; }
+    .about-hz-node-short { font-weight: 700; font-size: 0.72rem; color: #22543d; line-height: 1.2; }
     .about-hz-node:last-of-type { margin-right: 0; }
     .about-hz-node-sub { font-size: 0.62rem; color: #64748b; line-height: 1.3; max-width: 9.5rem; }
     .about-hz-detail {
@@ -727,11 +727,11 @@
     .about-hz-detail-placeholder { margin: 0; font-size: 0.88rem; color: #94a3b8; }
     .about-hz-detail-placeholder[hidden] { display: none !important; }
     .about-hz-detail-inner[hidden] { display: none !important; }
-    .about-hz-detail-kicker { margin: 0 0 0.35rem; font-size: 0.68rem; font-weight: 700; color: #6366f1; text-transform: uppercase; letter-spacing: 0.07em; }
+    .about-hz-detail-kicker { margin: 0 0 0.35rem; font-size: 0.68rem; font-weight: 700; color: #2f855a; text-transform: uppercase; letter-spacing: 0.07em; }
     .about-hz-detail-title { margin: 0 0 0.45rem; font-size: 1.08rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
     .about-hz-detail-text { margin: 0; font-size: 0.9rem; line-height: 1.65; color: #3f3f46; white-space: pre-wrap; }
     .about-path-cap { font-size: 0.88rem; color: #64748b; margin: 0.75rem 0 0; line-height: 1.55; padding-top: 0.85rem; border-top: 1px solid #ececf0; }
-    .about-goals-card { background: linear-gradient(180deg, #fff 0%, #fafbff 100%); }
+    .about-goals-card { background: #fafafa; }
     .about-goals-card p { margin: 0; color: #3f3f46; }
     .about-contact-card { background: linear-gradient(180deg, #fafafa 0%, #f4f4f5 100%); border-color: #e4e4e7; }
     .about-contact-lead { margin: 0 0 1rem; font-size: 0.95rem; line-height: 1.6; color: #52525b; max-width: 42rem; }
@@ -762,16 +762,21 @@
       transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
     }
     .about-contact-tile:hover {
-      border-color: #6366f1;
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.12);
+      border-color: #2f855a;
+      box-shadow: 0 6px 20px rgba(47, 133, 90, 0.24);
       transform: translateY(-1px);
+    }
+    .about-contact-tile {
+      background: #f0fff4;
+      border: 1px solid #d4d4d8;
+      border-left: 4px solid #2f855a;
     }
     .about-contact-tile-k {
       font-size: 0.68rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.07em;
-      color: #6366f1;
+      color: #2f855a;
     }
     .about-contact-tile-v { font-size: 0.9rem; font-weight: 600; color: #18181b; word-break: break-word; line-height: 1.35; }
     @media (min-width: 720px) {
@@ -922,11 +927,11 @@
     .exp-entry { display: flex; gap: 0; padding: 1.25rem 0; border-bottom: 1px solid #eee; }
     .exp-entry:last-child { border-bottom: none; }
     .exp-accent { width: 3px; border-radius: 2px; flex-shrink: 0; margin-right: 1rem; align-self: stretch; min-height: 1rem; }
-    .exp-entry[data-category="edu"]      .exp-accent { background: #3c873a; }
-    .exp-entry[data-category="design"]   .exp-accent { background: #f24e1e; }
+    .exp-entry[data-category="edu"]      .exp-accent { background: #333; }
+    .exp-entry[data-category="design"]   .exp-accent { background: #6b21a8; }
     .exp-entry[data-category="mil"]      .exp-accent { background: #4b5563; }
     .exp-entry[data-category="tech"]     .exp-accent { background: #3178c6; }
-    .exp-entry[data-category="creative"] .exp-accent { background: #f59e0b; }
+    .exp-entry[data-category="creative"] .exp-accent { background: #f97316; }
     .exp-body { flex: 1; min-width: 0; position: relative; }
     .exp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
     .exp-role { font-size: 1rem; font-weight: 700; color: #1a1a1a; font-family: Georgia, 'Times New Roman', serif; }
@@ -958,8 +963,9 @@
     .exp-edu-date   { font-size: 0.75rem; color: #999; margin-top: 0.5rem; font-weight: 600; }
     .exp-summary { background: #f5f7ff; border: 1px solid #dde2f5; border-radius: 10px; padding: 1.25rem 1.4rem; margin: 0.25rem 0 1.5rem; }
     .exp-summary p { font-size: 0.92rem; color: #333; line-height: 1.75; margin: 0; }
-    .exp-entry[data-category="ai"]      .exp-accent { background: #7c3aed; }
+    .exp-entry[data-category="ai"]      .exp-accent { background: #9eff37; }
     .exp-entry[data-category="service"] .exp-accent { background: #0891b2; }
+    .exp-entry[data-category="broadcast"] .exp-accent { background: #b22222; }
     .exp-logo { width: 44px; height: 44px; flex-shrink: 0; margin-right: 0.75rem; border-radius: 10px; display: flex; align-items: center; justify-content: center; align-self: flex-start; }
     .exp-logo-letter { font-size: 1rem; font-weight: 900; font-family: "Arial Black", Arial, sans-serif; line-height: 1; letter-spacing: -0.02em; }
     .exp-subroles { display: flex; flex-direction: column; gap: 0; margin: 0.25rem 0 0.5rem; }
@@ -1871,6 +1877,26 @@
         { kind: 'solid', color: '#c62828', caption: 'This is an example of an image: a solid color fill.' },
         { kind: 'smiley', caption: 'This is an example of an image: the finished smiley mark.' },
         { kind: 'shapes', caption: 'This is an example of an image: oval, triangle, and square (from the case study).' }
+      ],
+      'cn': [
+        { kind: 'solid', color: '#2f855a', caption: 'Images are planned and will be added soon.' },
+        { kind: 'solid', color: '#faf7ed', caption: 'Example image' },
+        { kind: 'solid', color: '#2f855a', caption: 'Example video ▶️' }
+      ],
+      'ctc': [
+        { kind: 'solid', color: '#2f855a', caption: 'Images are planned and will be added soon.' },
+        { kind: 'solid', color: '#faf7ed', caption: 'Example image' },
+        { kind: 'solid', color: '#2f855a', caption: 'Example video ▶️' }
+      ],
+      'uci': [
+        { kind: 'solid', color: '#2f855a', caption: 'Images are planned and will be added soon.' },
+        { kind: 'solid', color: '#faf7ed', caption: 'Example image' },
+        { kind: 'solid', color: '#2f855a', caption: 'Example video ▶️' }
+      ],
+      'hs': [
+        { kind: 'solid', color: '#2f855a', caption: 'Images are planned and will be added soon.' },
+        { kind: 'solid', color: '#faf7ed', caption: 'Example image' },
+        { kind: 'solid', color: '#2f855a', caption: 'Example video ▶️' }
       ]
     };
     // ── Blog + LinkedIn helpers ──────────────────────────────────────────────
@@ -2311,17 +2337,17 @@
         + '<div class="exp-timeline">'
         + '<div class="exp-entry" data-category="mil"><div class="exp-accent"></div><div class="exp-logo" style="background:#1b3a2d"><span class="exp-logo-letter" style="color:#c8d8a0;font-size:0.8rem">★</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Army National Guard</p><p class="exp-company">Part-time · enlisted end of high school</p></div></div><ul class="exp-bullets"><li>Part-time service alongside college — drill, training, and the discipline that comes with it</li><li>MOS and platform details: see the blog post <strong>Welcome to my website</strong></li></ul><div class="exp-tags"><span class="exp-tag">Leadership</span><span class="exp-tag">Discipline</span><span class="exp-tag">Teamwork</span></div></div></div>'
         + '<div class="exp-entry" data-category="ai"><div class="exp-accent"></div><div class="exp-logo" style="background:#c5f240"><span class="exp-logo-letter" style="color:#111;font-size:1.2rem">H</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">AI Trainer – Multimodal Systems Expert</p><p class="exp-company">Handshake &middot; Contract</p></div><div class="exp-right"><p class="exp-date">Feb 2026 – Present</p><p class="exp-loc">Remote</p></div></div><ul class="exp-bullets"><li>Evaluated AI model performance across audio, visual, and text-based tasks to assess multimodal accuracy and identify areas for improvement</li><li>Created domain-specific prompts and evaluated AI-generated responses to assess LLM reasoning and comprehension in technical contexts</li><li>Analyzed model outputs for correctness, clarity, and depth, comparing against domain-specific criteria and academic sources</li><li>Applied subject-matter expertise to evaluate and refine AI-generated responses for real-world alignment</li><li>Contributed to structured data annotation and content review projects supporting the development of accurate and inclusive AI systems</li></ul><div class="exp-tags"><span class="exp-tag">Prompt Engineering</span><span class="exp-tag">LLM Analysis</span><span class="exp-tag">AI Training</span><span class="exp-tag">Data Annotation</span><span class="exp-tag">Technical Writing</span><span class="exp-tag">Model Evaluation</span></div></div></div>'
-        + '<div class="exp-entry" data-category="edu"><div class="exp-accent"></div><div class="exp-logo" style="background:#0f0f0f;border:1px solid #333"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">CN</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Code Ninjas</p><p class="exp-company">Part-time &middot; Irvine, CA</p></div><div class="exp-right"><p class="exp-date">Nov 2025 – Present</p></div></div><div class="exp-subroles"><div class="exp-subrole"><p class="exp-subrole-role">Robotics Teacher | Code Sensei</p><p class="exp-subrole-date">Feb 2026 – Present</p><ul class="exp-bullets"><li>Created weekly lesson plans based on the LEGO SPIKE curriculum for groups of 3–6 students</li><li>Taught robotics fundamentals through hands-on exploration and personalized instruction techniques</li></ul></div><div class="exp-subrole"><p class="exp-subrole-role">Code Sensei</p><p class="exp-subrole-date">Nov 2025 – Present</p><ul class="exp-bullets"><li>Supported students aged 5–14 through block-based coding, JavaScript, and Unity game development</li><li>Provided real-time support for logic errors, syntax issues, and platform navigation with emphasis on conceptual understanding</li><li>Managed front desk operations including phone support, scheduling, and administrative tasks</li><li>Designed promotional graphics and videos for events and social media outreach</li></ul></div></div><div class="exp-tags"><span class="exp-tag">JavaScript</span><span class="exp-tag">Unity C#</span><span class="exp-tag">LEGO SPIKE</span><span class="exp-tag">Teaching</span><span class="exp-tag">Graphic Design</span></div></div></div>'
-        + '<div class="exp-entry" data-category="creative"><div class="exp-accent"></div><div class="exp-logo" style="background:#f97316"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">MM</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Multimedia &amp; social</p><p class="exp-company">Freelance &middot; YouTube, Weekly Wolf, TuHS programs</p></div><div class="exp-right"><p class="exp-date">Dec 2019 – Jun 2025</p><p class="exp-loc">Remote &amp; TuHS</p></div></div><ul class="exp-bullets"><li>Personal YouTube from December 2019: iMovie, then DaVinci Resolve, then Premiere Pro</li><li>Sophomore year: Weekly Wolf school news, weekly uploads for about 2,500 students</li><li>From about January of sophomore year: TuHS esports (later Tigard too): programs, outreach, logos, apparel, broadcasting tie-ins; student store drinks (Slurp Juice, E Berry) and promo stickers</li><li>Boys tennis graphics from junior year, heavier cadence from December of senior year (match graphics, highlights, reels)</li><li>Stepped back from TuHS-linked and personal school socials in June 2025; Code Ninjas Irvine promos from November 2025 are under Code Ninjas</li></ul><div class="exp-tags"><span class="exp-tag">Graphic Design</span><span class="exp-tag">Adobe PS &amp; AI</span><span class="exp-tag">Social Media</span><span class="exp-tag">Video Editing</span><span class="exp-tag">Branding</span></div><div class="exp-photo-stack" onclick="openDesignGallery(\'social\',0)"><div class="exp-photo-card exp-photo-card--back2" style="background-image:url(\'assets/experience/social/esports.png\')"></div><div class="exp-photo-card exp-photo-card--back1" style="background-image:url(\'assets/experience/social/tennis.png\')"></div><div class="exp-photo-card exp-photo-card--front"  style="background-image:url(\'assets/experience/social/news.png\')"></div></div></div></div>'
-        + '<div class="exp-entry" data-category="design"><div class="exp-accent"></div><div class="exp-logo" style="background:#6b21a8"><span class="exp-logo-letter" style="color:#fff;font-size:0.6rem">CTC</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">UI/UX Designer</p><p class="exp-company">Commit The Change, UCI &nbsp;·&nbsp; <a href="https://ctc-uci.com/" target="_blank" rel="noopener noreferrer" class="clean-link">ctc-uci.com</a></p></div><div class="exp-right"><p class="exp-date">Oct 2025 – Present</p><p class="exp-loc">Irvine, CA</p></div></div><ul class="exp-bullets"><li>Product and UI/UX design for tools that help call center staff and healthcare providers stay aligned and make scheduling smoother for Celebrating Life Community Health Center in Orange County</li><li>Wireframes and clickable prototypes in Figma; iterating with developers and project leads as the product evolves</li><li>More visuals and a deeper write-up coming as the work becomes shareable</li></ul><div class="exp-tags"><span class="exp-tag">Figma</span><span class="exp-tag">Prototyping</span><span class="exp-tag">UX Research</span><span class="exp-tag">Agile Sprints</span><span class="exp-tag">Slack</span></div></div></div>'
+        + '<div class="exp-entry" data-category="edu"><div class="exp-accent"></div><div class="exp-logo" style="background:#000;border:1px solid #333"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">CN</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Code Ninjas</p><p class="exp-company">Part-time &middot; Irvine, CA</p></div><div class="exp-right"><p class="exp-date">Nov 2025 – Present</p></div></div><div class="exp-subroles"><div class="exp-subrole"><p class="exp-subrole-role">Robotics Teacher | Code Sensei</p><p class="exp-subrole-date">Feb 2026 – Present</p><ul class="exp-bullets"><li>Created weekly lesson plans based on the LEGO SPIKE curriculum for groups of 3–6 students</li><li>Taught robotics fundamentals through hands-on exploration and personalized instruction techniques</li></ul></div><div class="exp-subrole"><p class="exp-subrole-role">Code Sensei</p><p class="exp-subrole-date">Nov 2025 – Present</p><ul class="exp-bullets"><li>Supported students aged 5–14 through block-based coding, JavaScript, and Unity game development</li><li>Provided real-time support for logic errors, syntax issues, and platform navigation with emphasis on conceptual understanding</li><li>Managed front desk operations including phone support, scheduling, and administrative tasks</li><li>Designed promotional graphics and videos for events and social media outreach</li></ul></div></div><div class="exp-tags"><span class="exp-tag">JavaScript</span><span class="exp-tag">Unity C#</span><span class="exp-tag">LEGO SPIKE</span><span class="exp-tag">Teaching</span><span class="exp-tag">Graphic Design</span></div><div class="exp-photo-stack" onclick="openDesignGallery(\'cn\')"><div class="exp-photo-card exp-photo-card--front" style="background:#2f855a;"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#faf7ed;"></div><div class="exp-photo-card exp-photo-card--back2" style="background:#2f855a;"></div></div></div></div>'
+        + '<div class="exp-entry" data-category="creative"><div class="exp-accent"></div><div class="exp-logo" style="background:#f97316"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">MM</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Multimedia &amp; Social</p><p class="exp-company">Freelance &middot; YouTube, Instagram, Graphic Design, and Company Logos</p></div><div class="exp-right"><p class="exp-date">Dec 2019 – Jun 2025</p><p class="exp-loc">Remote &amp; TuHS</p></div></div><ul class="exp-bullets"><li>Proficient in video editing software: iMovie, DaVinci Resolve, Premiere Pro, and CapCut</li><li>Utilized Adobe Illustrator, Photoshop, and Canva for photo editing and graphic design</li><li>Managed TimberwolfTV YouTube channel, editing weekly uploads for approximately 2,500 students</li><li>Created Instagram content for TuHS esports and Tualatin Boys Tennis, producing up to 10 posts weekly across both accounts (match graphics, highlights, reels)</li><li>Currently designing promotional materials and videos for Code Ninjas Irvine location</li></ul><div class="exp-tags"><span class="exp-tag">Graphic Design</span><span class="exp-tag">Adobe PS &amp; AI</span><span class="exp-tag">Social Media</span><span class="exp-tag">Video Editing</span><span class="exp-tag">Branding</span></div><div class="exp-photo-stack" onclick="openDesignGallery(\'social\',0)"><div class="exp-photo-card exp-photo-card--back2" style="background-image:url(\'assets/experience/social/esports.png\')"></div><div class="exp-photo-card exp-photo-card--back1" style="background-image:url(\'assets/experience/social/tennis.png\')"></div><div class="exp-photo-card exp-photo-card--front"  style="background-image:url(\'assets/experience/social/news.png\')"></div></div></div></div>'
+        + '<div class="exp-entry" data-category="design"><div class="exp-accent"></div><div class="exp-logo" style="background:#6b21a8"><span class="exp-logo-letter" style="color:#fff;font-size:0.6rem">CTC</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">UI/UX Designer</p><p class="exp-company">Commit The Change, UCI &nbsp;·&nbsp; <a href="https://ctc-uci.com/" target="_blank" rel="noopener noreferrer" class="clean-link">ctc-uci.com</a></p></div><div class="exp-right"><p class="exp-date">Oct 2025 – Present</p><p class="exp-loc">Irvine, CA</p></div></div><ul class="exp-bullets"><li>Product and UI/UX designer for Celebrating Life Community Health Center project</li><li>Wireframes and clickable prototypes in Figma; iterating with developers and project leads as the product evolves</li><li>More visuals and a deeper write-up coming as the work becomes shareable</li></ul><div class="exp-tags"><span class="exp-tag">Figma</span><span class="exp-tag">Prototyping</span><span class="exp-tag">UX Research</span><span class="exp-tag">Agile Sprints</span><span class="exp-tag">Slack</span></div><div class="exp-photo-stack" onclick="openDesignGallery(\'ctc\')"><div class="exp-photo-card exp-photo-card--front" style="background:#2f855a;"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#faf7ed;"></div><div class="exp-photo-card exp-photo-card--back2" style="background:#2f855a;"></div></div></div></div>'
         + '<div class="exp-entry" data-category="tech"><div class="exp-accent"></div><div class="exp-logo" style="background:#003b8e"><span class="exp-logo-letter" style="color:#ffd100;font-size:0.65rem">BB</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Best Buy</p><p class="exp-company">Part-time &middot; Tualatin, OR</p></div><div class="exp-right"><p class="exp-date">Jul 2023 – Apr 2025</p></div></div><div class="exp-subroles"><div class="exp-subrole"><p class="exp-subrole-role">Apple Certified Sales Advisor</p><p class="exp-subrole-date">Feb 2025 – Apr 2025</p><ul class="exp-bullets"><li>Completed Apple SEED certification and relayed product updates and knowledge to associates across the store</li><li>Provided specialized computing and mobile advisory to customers seeking Apple ecosystem guidance</li></ul></div><div class="exp-subrole"><p class="exp-subrole-role">Sales Advisor</p><p class="exp-subrole-date">Jul 2023 – Feb 2025</p><ul class="exp-bullets"><li>Provided sales support across all departments including Computing, Mobile, Home Theatre, Appliances, and Gaming</li><li>Communicated complex technology concepts clearly to customers of all backgrounds and comfort levels</li><li>Performed basic IT support through Geek Squad and scheduled customer installations</li><li>Trained and mentored ~30 new employees across three seasonal hiring waves; go-to for computing and home theater questions</li><li>Kept a pocket notebook of product differences across the sales floor to answer detailed customer comparisons</li></ul></div></div><div class="exp-tags"><span class="exp-tag">Apple Certified</span><span class="exp-tag">IT Support</span><span class="exp-tag">Sales</span><span class="exp-tag">Team Training</span><span class="exp-tag">Customer Service</span></div></div></div>'
-        + '<div class="exp-entry" data-category="creative"><div class="exp-accent"></div><div class="exp-logo" style="background:#1a1a2e"><span class="exp-logo-letter" style="color:#fff;font-size:0.62rem">THS</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Crew Lead · Editor · Graphic Designer</p><p class="exp-company">TuHS Broadcasting</p></div><div class="exp-right"><p class="exp-date">Sep 2023 – Jun 2025</p><p class="exp-loc">Tualatin, OR</p></div></div><div class="exp-photo-stack" onclick="openDesignGallery(\'tuhs\')"><div class="exp-photo-card exp-photo-card--back2" style="background-image:url(\'assets/experience/tuhs/soundcart.png\')"></div><div class="exp-photo-card exp-photo-card--back1" style="background-image:url(\'assets/experience/tuhs/soundtown.png\')"></div><div class="exp-photo-card exp-photo-card--front" style="background-image:url(\'assets/experience/tuhs/team.png\')"></div></div><ul class="exp-bullets"><li>Crew lead: trained camera operators, managed the crew during live football and basketball broadcasts, and coordinated camera switches and timing over radio with the production team</li><li>Sophomore year focused on editing; junior and senior years added live streaming for football and basketball</li><li>Produced YouTube videos for Weekly Wolf and edited the weekly news package shown schoolwide</li><li>Designed the department logo, work apparel, and branding guide for TuHS Broadcasting</li></ul><div class="exp-tags"><span class="exp-tag">Adobe Premiere Pro</span><span class="exp-tag">DaVinci Resolve</span><span class="exp-tag">Live Broadcast</span><span class="exp-tag">Branding</span><span class="exp-tag">Leadership</span></div></div></div>'
+        + '<div class="exp-entry" data-category="broadcast"><div class="exp-accent"></div><div class="exp-logo" style="background:#b22222"><span class="exp-logo-letter" style="color:#696969;font-size:0.62rem">THS</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Crew Lead · Editor · Graphic Designer</p><p class="exp-company">TuHS Broadcasting</p></div><div class="exp-right"><p class="exp-date">Sep 2023 – Jun 2025</p><p class="exp-loc">Tualatin, OR</p></div></div><div class="exp-photo-stack" onclick="openDesignGallery(\'tuhs\')"><div class="exp-photo-card exp-photo-card--back2" style="background-image:url(\'assets/experience/tuhs/soundcart.png\')"></div><div class="exp-photo-card exp-photo-card--back1" style="background-image:url(\'assets/experience/tuhs/soundtown.png\')"></div><div class="exp-photo-card exp-photo-card--front" style="background-image:url(\'assets/experience/tuhs/team.png\')"></div></div><ul class="exp-bullets"><li>Crew lead: trained camera operators, managed the crew during live football and basketball broadcasts, and coordinated camera switches and timing over radio with the production team</li><li>Sophomore year focused on editing; junior and senior years added live streaming for football and basketball</li><li>Produced YouTube videos for Weekly Wolf and edited the weekly news package shown schoolwide</li><li>Designed the department logo, work apparel, and branding guide for TuHS Broadcasting</li></ul><div class="exp-tags"><span class="exp-tag">Adobe Premiere Pro</span><span class="exp-tag">DaVinci Resolve</span><span class="exp-tag">Live Broadcast</span><span class="exp-tag">Branding</span><span class="exp-tag">Leadership</span></div></div></div>'
         + '<div class="exp-entry" data-category="service"><div class="exp-accent"></div><div class="exp-logo" style="background:#d71920"><span class="exp-logo-letter" style="color:#fff;font-size:0.65rem">DQ</span></div><div class="exp-body"><div class="exp-top"><div><p class="exp-role">Crew Member</p><p class="exp-company">Dairy Queen</p></div><div class="exp-right"><p class="exp-date">Jun 2022 – Sep 2022</p><p class="exp-loc">On-site</p></div></div><ul class="exp-bullets"><li>Memorized food and drink recipes to prepare orders with speed and accuracy during rush hours</li><li>Recommended menu items based on customer preferences and dietary restrictions</li><li>Assisted in training 3+ new employees and maintained smooth team operations</li><li>Handled cash drawers and cleared tables to keep service running efficiently</li></ul><div class="exp-tags"><span class="exp-tag">Customer Service</span><span class="exp-tag">Cash Handling</span><span class="exp-tag">Team Training</span></div></div></div>'
         + '</div>'
         + '<p class="clean-sub" style="margin-top:2rem">Education</p>'
         + '<div class="exp-edu-grid">'
-        + '<div class="exp-edu-card"><div class="exp-edu-card-text"><p class="exp-edu-school">UC Irvine</p><p class="exp-edu-degree">B.S. Software Engineering &amp; Computer Science (Double Major)</p><p class="exp-edu-minor">CS Specialization: Networked Systems &nbsp;·&nbsp; Activities: Commit the Change</p><p class="exp-edu-date">2025 – Present</p></div><div class="exp-photo-stack" style="position:relative;top:0;right:0;flex-shrink:0;" onclick=""><div class="exp-photo-card exp-photo-card--back2" style="background:#93c5fd"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#60a5fa"></div><div class="exp-photo-card exp-photo-card--front" style="background:#3b82f6"></div></div></div>'
-        + '<div class="exp-edu-card"><div class="exp-edu-card-text"><p class="exp-edu-school">Tualatin High School</p><p class="exp-edu-degree">High School Diploma, Graduated With Honors</p><p class="exp-edu-minor">4.16 Weighted GPA &nbsp;·&nbsp; IB coursework: Film, English, Math, History, Physics (no IB exams)</p><p class="exp-edu-date">Graduated 2025</p></div><div class="exp-photo-stack" style="position:relative;top:0;right:0;flex-shrink:0;" onclick=""><div class="exp-photo-card exp-photo-card--back2" style="background:#93c5fd"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#60a5fa"></div><div class="exp-photo-card exp-photo-card--front" style="background:#3b82f6"></div></div></div>'
+        + '<div class="exp-edu-card"><div class="exp-edu-card-text"><p class="exp-edu-school">UC Irvine</p><p class="exp-edu-degree">B.S. Software Engineering &amp; Computer Science (Double Major)</p><p class="exp-edu-minor">CS Specialization: Networked Systems &nbsp;·&nbsp; Activities: Commit the Change</p><p class="exp-edu-date">2025 – Present</p></div><div class="exp-photo-stack" style="position:relative;top:0;right:0;flex-shrink:0;" onclick="openDesignGallery(\'uci\')"><div class="exp-photo-card exp-photo-card--back2" style="background:#2f855a"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#faf7ed"></div><div class="exp-photo-card exp-photo-card--front" style="background:#2f855a"></div></div></div>'
+        + '<div class="exp-edu-card"><div class="exp-edu-card-text"><p class="exp-edu-school">Tualatin High School</p><p class="exp-edu-degree">High School Diploma, Graduated With Honors</p><p class="exp-edu-minor">4.16 Weighted GPA &nbsp;·&nbsp; IB coursework: Film, English, Math, History, Physics (no IB exams)</p><p class="exp-edu-date">Graduated 2025</p></div><div class="exp-photo-stack" style="position:relative;top:0;right:0;flex-shrink:0;" onclick="openDesignGallery(\'hs\')"><div class="exp-photo-card exp-photo-card--back2" style="background:#2f855a"></div><div class="exp-photo-card exp-photo-card--back1" style="background:#faf7ed"></div><div class="exp-photo-card exp-photo-card--front" style="background:#2f855a"></div></div></div>'
         + '</div>'
         + '<p class="clean-sub" style="margin-top:2rem">Honors &amp; Awards</p>'
         + '<div class="exp-awards-grid">'
@@ -2367,14 +2393,14 @@
         + '</section>'
         + '<section class="about-card about-goals-card" aria-labelledby="about-goals-heading">'
         + '<h2 class="about-card-label" id="about-goals-heading">What I am aiming for</h2>'
-        + '<p>My top goal is <strong>Microsoft</strong>, specifically the <strong>Redmond, Washington</strong> campus. I would also be thrilled at Apple or Amazon someday. I follow security news and consumer tech closely (shoutout MKBHD &amp; <em>Wired</em>). I plan to earn an associate degree in cybersecurity through a community college while I finish my bachelor\'s, so I can leave undergrad with multiple credentials. I am studying Spanish and want to be bilingual by graduation, with a longer-term goal of four languages: Spanish, Mandarin, Japanese, and French. I know that is ambitious. I am okay chasing it anyway. I love learning and I do not plan to stop.</p>'
+        + '<p>My top goal is to be a software engineer in Redmond, Washington, working for Microsoft. I would also be thrilled at Apple or Amazon someday. I plan to earn an associate degree in cybersecurity through a community college while I finish my bachelor\'s, so I can leave undergrad with multiple credentials. I am studying Spanish and want to be bilingual by graduation, with a longer-term goal of four languages: Spanish, Mandarin, Japanese, and French. I know that is ambitious. I am okay chasing it anyway. I love learning and I do not plan to stop.</p>'
         + '</section>'
         + '<section class="about-card about-contact-card" aria-labelledby="about-contact-heading">'
         + '<h2 class="about-card-label" id="about-contact-heading">Contact</h2>'
         + '<p class="about-contact-lead">I am based in <strong>Irvine, California</strong> (Pacific time). I check email about hourly. Email is the most reliable way to reach me; phone and LinkedIn work too. I will be away on military orders from <strong>April through September 2026</strong> and largely unreachable during that window. Open to conversations about internships, collaboration, or anything on this site.</p>'
         + '<div class="about-contact-grid">'
         + '<a class="about-contact-tile" href="mailto:jacobiglenn@gmail.com"><span class="about-contact-tile-k">Email</span><span class="about-contact-tile-v">jacobiglenn@gmail.com</span></a>'
-        + '<a class="about-contact-tile" href="tel:+19713005659"><span class="about-contact-tile-k">Phone</span><span class="about-contact-tile-v">971-300-5659</span></a>'
+        + '<div class="about-contact-tile" onclick="navigator.clipboard.writeText(\'971-300-5659\'); this.innerHTML = \'<span class=\\\'about-contact-tile-k\\\'>Phone</span><span class=\\\'about-contact-tile-v\\\'>Copied!</span>\'; setTimeout(() => { this.innerHTML = \'<span class=\\\'about-contact-tile-k\\\'>Phone</span><span class=\\\'about-contact-tile-v\\\'>971-300-5659</span>\'; }, 2000);" style="cursor:pointer;"><span class="about-contact-tile-k">Phone</span><span class="about-contact-tile-v">971-300-5659</span></div>'
         + '<a class="about-contact-tile" href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer"><span class="about-contact-tile-k">LinkedIn</span><span class="about-contact-tile-v">linkedin.com/in/jacobiglenn</span></a>'
         + '</div>'
         + '</section>'
