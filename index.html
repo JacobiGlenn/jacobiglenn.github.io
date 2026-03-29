@@ -860,6 +860,17 @@
     .design-gallery-close { position: sticky; top: 0; align-self: flex-start; border: 1px solid #e2e8f0; background: #fff; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 2; margin: 0 0 0.5rem; font-family: inherit; color: #1e293b; transition: background 0.15s; }
     .design-gallery-close:hover { background: #f1f5f9; }
     .design-gallery-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.35rem; }
+    #project-view-modal { position: fixed; inset: 0; z-index: 3000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    #project-view-modal.is-open { display: flex; }
+    .project-view-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); cursor: pointer; }
+    .project-view-inner { position: relative; z-index: 1; max-width: min(95vw, 1000px); width: 100%; max-height: 88vh; overflow-y: auto; background: #fff; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .project-view-content { padding: 2rem 1.5rem; }
+    .project-view-header { font-size: 1.35rem; font-weight: 600; color: #2f855a; margin: 0 0 1.5rem; text-align: center; }
+    .project-view-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .project-view-grid img { width: 100%; height: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
+    .project-view-grid img:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .project-view-close { position: absolute; top: 1rem; right: 1rem; border: 1px solid #e2e8f0; background: #fff; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 2; font-family: inherit; color: #1e293b; transition: background 0.15s; font-size: 1.5rem; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding: 0; }
+    .project-view-close:hover { background: #f1f5f9; }
     .project-card[data-project] { cursor: pointer; }
     .project-card[data-project] .project-card-desc,
     .project-card[data-project] .project-card-header { cursor: pointer; }
@@ -1439,7 +1450,18 @@
     </div>
   </div>
 
-  <script src="generated/projects-data.js"></script>
+  <div id="project-view-modal" class="project-view-modal" role="dialog" aria-modal="true" aria-label="Project view">
+    <div class="project-view-backdrop" tabindex="-1" aria-hidden="true"></div>
+    <div class="project-view-inner">
+      <button type="button" class="project-view-close modal-close-x" id="project-view-close" aria-label="Close">&times;</button>
+      <div class="project-view-content">
+        <h2 class="project-view-header">Work in progress — check back later</h2>
+        <div class="project-view-grid" id="project-view-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="generated/projects-data.js"></div>
   <script src="generated/blog-data.js"></script>
   <script src="data/api-config.js"></script>
   <script src="data/linkedin-posts.js"></script>
@@ -1881,22 +1903,60 @@
       'cn': [
         { kind: 'solid', color: '#2f855a', caption: 'Images are planned and will be added soon.' },
         { kind: 'solid', color: '#faf7ed', caption: 'Example image' },
-        { kind: 'solid', color: '#2f855a', caption: 'Example video ▶️' }
+        { kind: 'video', color: '#2f855a', caption: 'Example video' }
       ],
       'ctc': [
-        { kind: 'solid', color: '#2f855a', caption: 'Images are planned and will be added soon.' },
-        { kind: 'solid', color: '#faf7ed', caption: 'Example image' },
-        { kind: 'solid', color: '#2f855a', caption: 'Example video ▶️' }
+        { kind: 'img', src: 'assets/experience/ctc/team.png', caption: 'Project team' },
+        { kind: 'img', src: 'assets/experience/ctc/sprint.png', caption: 'Designers working on Figma during weekly sprint' },
+        { kind: 'img', src: 'assets/experience/ctc/allhands.png', caption: 'Monthly all-hands meeting (dev and design with rad merch)' }
       ],
       'uci': [
         { kind: 'solid', color: '#2f855a', caption: 'Images are planned and will be added soon.' },
         { kind: 'solid', color: '#faf7ed', caption: 'Example image' },
-        { kind: 'solid', color: '#2f855a', caption: 'Example video ▶️' }
+        { kind: 'video', color: '#2f855a', caption: 'Example video' }
       ],
       'hs': [
         { kind: 'solid', color: '#2f855a', caption: 'Images are planned and will be added soon.' },
         { kind: 'solid', color: '#faf7ed', caption: 'Example image' },
-        { kind: 'solid', color: '#2f855a', caption: 'Example video ▶️' }
+        { kind: 'video', color: '#2f855a', caption: 'Example video' }
+      ],
+      'poster': [
+        { kind: 'img', src: 'assets/experience/design/poster/posterproject-1.png', caption: 'Poster design 1' },
+        { kind: 'img', src: 'assets/experience/design/poster/posterproject-2.png', caption: 'Poster design 2' },
+        { kind: 'img', src: 'assets/experience/design/poster/posterproject-3.png', caption: 'Poster design 3' }
+      ],
+      'esports-logo': [
+        { kind: 'img', src: 'assets/experience/design/esports-logo/esportslogoproject-1.png', caption: 'Logo design 1' },
+        { kind: 'img', src: 'assets/experience/design/esports-logo/esportslogoproject-2.png', caption: 'Logo design 2' },
+        { kind: 'img', src: 'assets/experience/design/esports-logo/esportslogoproject-3.png', caption: 'Logo design 3' },
+        { kind: 'img', src: 'assets/experience/design/esports-logo/esportslogoproject-4.png', caption: 'Logo design 4' },
+        { kind: 'img', src: 'assets/experience/design/esports-logo/esportslogoproject-5.png', caption: 'Logo design 5' },
+        { kind: 'img', src: 'assets/experience/design/esports-logo/esportslogoproject-6.png', caption: 'Logo design 6' }
+      ],
+      'physics-brochure': [
+        { kind: 'img', src: 'assets/experience/design/physics-brochure/physicsextravaganzaproject-1.png', caption: 'Brochure page 1' },
+        { kind: 'img', src: 'assets/experience/design/physics-brochure/physicsextravaganzaproject-2.png', caption: 'Brochure page 2' }
+      ],
+      'red-ribbon': [
+        { kind: 'img', src: 'assets/experience/design/red-ribbon/TualatinRedRibbonProject.png', caption: 'Red Ribbon Week banner' }
+      ],
+      'pack-leader': [
+        { kind: 'img', src: 'assets/experience/design/pack-leader/packleaderlogoproject-1.png', caption: 'Logo design 1' },
+        { kind: 'img', src: 'assets/experience/design/pack-leader/packleaderlogoproject-2.png', caption: 'Logo design 2' }
+      ],
+      'esports-banner': [
+        { kind: 'img', src: 'assets/experience/design/esports-banner/esportsbannerproject-1.png', caption: 'Banner design 1' },
+        { kind: 'img', src: 'assets/experience/design/esports-banner/esportsbannerproject-2.png', caption: 'Banner design 2' },
+        { kind: 'img', src: 'assets/experience/design/esports-banner/esportsbannerproject-3.png', caption: 'Banner design 3' },
+        { kind: 'img', src: 'assets/experience/design/esports-banner/esportsbannerproject-4.png', caption: 'Banner design 4' }
+      ],
+      'f25': [
+        { kind: 'img', src: 'assets/experience/design/f25/f25project-1.png', caption: 'Senior Design Project 1' },
+        { kind: 'img', src: 'assets/experience/design/f25/f25project-2.png', caption: 'Senior Design Project 2' },
+        { kind: 'img', src: 'assets/experience/design/f25/f25project-3.png', caption: 'Senior Design Project 3' },
+        { kind: 'img', src: 'assets/experience/design/f25/f25project-4.png', caption: 'Senior Design Project 4' },
+        { kind: 'img', src: 'assets/experience/design/f25/f25project-5.png', caption: 'Senior Design Project 5' },
+        { kind: 'img', src: 'assets/experience/design/f25/f25project-6.png', caption: 'Senior Design Project 6' }
       ]
     };
     // ── Blog + LinkedIn helpers ──────────────────────────────────────────────
@@ -4377,6 +4437,12 @@
         main.appendChild(img);
       } else if (item.kind === 'solid') {
         inner.style.background = item.color;
+      } else if (item.kind === 'video') {
+        inner.style.background = item.color;
+        const playBtn = document.createElement('div');
+        playBtn.style.cssText = 'font-size:4.5rem;color:rgba(255,255,255,0.85);display:flex;align-items:center;justify-content:center;text-shadow:0 2px 8px rgba(0,0,0,0.4);';
+        playBtn.textContent = '▶';
+        main.appendChild(playBtn);
       } else if (item.kind === 'smiley') {
         inner.style.background = '#e8e8e8';
         const sc = document.createElement('div');
@@ -4439,6 +4505,40 @@
         if (e.key === 'Escape') { closeDesignGallery(); e.preventDefault(); }
         if (e.key === 'ArrowLeft') { stepDesignGallery(-1); e.preventDefault(); }
         if (e.key === 'ArrowRight') { stepDesignGallery(1); e.preventDefault(); }
+      });
+    })();
+
+    function openProjectView(projectId) {
+      if (!DESIGN_GALLERY_DATA[projectId]) return;
+      const items = DESIGN_GALLERY_DATA[projectId];
+      const grid = document.getElementById('project-view-grid');
+      grid.textContent = '';
+      items.forEach(item => {
+        if (item.kind === 'img') {
+          const img = document.createElement('img');
+          img.src = item.src;
+          img.alt = item.caption || '';
+          img.style.cssText = 'max-width:100%; height:auto; border-radius:8px;';
+          grid.appendChild(img);
+        }
+      });
+      document.getElementById('project-view-modal').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectView() {
+      document.getElementById('project-view-modal').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    (function setupProjectViewModal() {
+      const modal = document.getElementById('project-view-modal');
+      if (!modal) return;
+      modal.querySelector('.project-view-backdrop').onclick = () => closeProjectView();
+      document.getElementById('project-view-close').onclick = () => closeProjectView();
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { closeProjectView(); e.preventDefault(); }
       });
     })();
 
