@@ -40,11 +40,13 @@ function staticContent(): Plugin {
         const url = (req.url || '').split('?')[0]
         const folder = folders.find((f) => url === `/${f}` || url.startsWith(`/${f}/`))
         if (!folder) return next()
+        const ext = path.extname(url).toLowerCase()
+        if (ext === '.json' || ext === '.md') return next()
         const rel = decodeURIComponent(url.slice(1))
         const file = path.resolve(rel)
         if (!fs.existsSync(file) || !fs.statSync(file).isFile()) return next()
-        const ext = path.extname(file).toLowerCase()
-        res.setHeader('Content-Type', MIME[ext] || 'application/octet-stream')
+        const fileExt = path.extname(file).toLowerCase()
+        res.setHeader('Content-Type', MIME[fileExt] || 'application/octet-stream')
         fs.createReadStream(file).pipe(res)
       })
     },

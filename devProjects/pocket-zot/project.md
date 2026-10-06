@@ -40,11 +40,11 @@ featured: true
 
 <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:1.25rem 0;">
   <figure class="project-detail-fig" style="max-width:260px;flex:1 1 200px;margin:0;">
-    <img src="devProjects/pocket-zot/main-popup.png" alt="PocketZot main popup showing Bobby the anteater, health bar, and ants" loading="lazy" decoding="async">
+    <img src="/devProjects/pocket-zot/main-popup.png" alt="PocketZot main popup showing Bobby the anteater, health bar, and ants" loading="lazy" decoding="async">
     <figcaption>Main popup — Bobby's stats, health bar, and ant count.</figcaption>
   </figure>
   <figure class="project-detail-fig" style="max-width:260px;flex:1 1 200px;margin:0;">
-    <img src="devProjects/pocket-zot/study-summary.png" alt="Study summary screen showing prompt breakdown and ants earned" loading="lazy" decoding="async">
+    <img src="/devProjects/pocket-zot/study-summary.png" alt="Study summary screen showing prompt breakdown and ants earned" loading="lazy" decoding="async">
     <figcaption>Study summary — prompt breakdown, good vs bad, ants earned.</figcaption>
   </figure>
 </div>
@@ -222,7 +222,7 @@ var FRAME_MS = {
 <p>Ants are the in-game currency earned from high-scoring prompts. The shop lets you spend them on hats: Plunger, Cracked Egg, Crown, and Christmas Hat. Each hat is a separate <code>div</code> overlaid on top of the base sprite element, not drawn into a canvas — this kept hat rendering decoupled from the sprite animation loop entirely.</p>
 
 <figure class="project-detail-fig" style="max-width:320px;">
-  <img src="devProjects/pocket-zot/shop.png" alt="PocketZot shop screen showing hats available for purchase" loading="lazy" decoding="async">
+  <img src="/devProjects/pocket-zot/shop.png" alt="PocketZot shop screen showing hats available for purchase" loading="lazy" decoding="async">
   <figcaption>The shop — buy hats with ants earned from good prompts.</figcaption>
 </figure>
 

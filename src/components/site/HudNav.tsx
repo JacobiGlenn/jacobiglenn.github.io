@@ -25,7 +25,6 @@ export function HudNav() {
   const location = useLocation()
   const [menu, setMenu] = useState(false)
   const [ports, setPorts] = useState(false)
-  const [ping, setPing] = useState(false)
   const portRef = useRef<HTMLDivElement>(null)
   const onPortfolio = location.pathname.startsWith('/portfolio')
   const onDesign = location.pathname.startsWith('/portfolio/design')
@@ -34,9 +33,6 @@ export function HudNav() {
   useEffect(() => {
     setMenu(false)
     setPorts(false)
-    setPing(true)
-    const id = window.setTimeout(() => setPing(false), 320)
-    return () => window.clearTimeout(id)
   }, [location.pathname])
 
   useEffect(() => {
@@ -73,7 +69,7 @@ export function HudNav() {
         <div className="relative mx-auto hidden min-w-0 flex-1 justify-center md:flex">
           <div className="nav-island-glow" />
           <div className="relative z-10" ref={portRef}>
-            <nav className={`nav-island flex items-stretch ${ping ? 'nav-fire' : ''}`} aria-label="Primary">
+            <nav className="nav-island flex items-stretch" aria-label="Primary">
               {modules.map((m) => (
                 <NavLink
                   key={m.to}

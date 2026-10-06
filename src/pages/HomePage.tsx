@@ -1,4 +1,5 @@
 import { SiteCard } from '@/components/site/SiteCard'
+import { FontCycleName } from '@/components/site/FontCycleName'
 import { featuredProjects } from '@/lib/content'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
@@ -7,18 +8,17 @@ export function HomePage() {
   const featured = featuredProjects()
   const [copied, setCopied] = useState(false)
   return (
-    <div className="space-y-10 py-6">
-      <section id="pitch" className="hud-frame scroll-mt-28 overflow-hidden p-6 md:p-8">
-        <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-accent)]">
-          <span>Irvine · Pacific</span>
+    <div className="space-y-12 py-6">
+      <section id="pitch" className="hero-plate scroll-mt-28">
+        <div className="hero-meta">
+          <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">ctOS // identity</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-steel)]">Irvine · Pacific</span>
         </div>
-        <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
           Soph @ UC Irvine | Coding Tutor | US Army
         </p>
-        <h1 className="mt-2 font-[family-name:var(--font-display)] text-5xl uppercase leading-[0.9] tracking-wide md:text-7xl">
-          Jacobi Glenn
-        </h1>
-        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--color-muted)]">
+        <FontCycleName text="Jacobi Glenn" />
+        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[var(--color-muted)]">
           I build full-stack products, work on UI/UX for a healthcare project with <strong className="text-[var(--color-ink)]">Commit the Change</strong>, and
           teach kids <strong className="text-[var(--color-ink)]">JavaScript</strong> and <strong className="text-[var(--color-ink)]">Unity</strong> at{' '}
           <strong className="text-[var(--color-ink)]">Code Ninjas</strong>. This is the long-form portfolio: case studies, code, writing, and a build log when
