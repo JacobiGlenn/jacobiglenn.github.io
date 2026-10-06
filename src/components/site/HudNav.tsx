@@ -1,6 +1,5 @@
-import { NavLink } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { writeReadable } from '@/lib/readable'
+import { NavLink, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 
 const modules = [
@@ -16,99 +15,114 @@ function Clock() {
     return () => clearInterval(id)
   }, [])
   return (
-    <span className="font-mono text-[10px] tracking-[0.16em] text-[var(--color-muted)]">
+    <span className="hidden font-mono text-[10px] tracking-[0.16em] text-[var(--color-muted)] sm:inline">
       {t.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
     </span>
   )
 }
 
-export function HudNav({ readable, setReadable }: { readable: boolean; setReadable: (v: boolean) => void }) {
+export function HudNav() {
+  const location = useLocation()
   const [menu, setMenu] = useState(false)
+  const [menuShown, setMenuShown] = useState(false)
+  const [ports, setPorts] = useState(false)
+  const [portsShown, setPortsShown] = useState(false)
+  const portRef = useRef<HTMLDivElement>(null)
+  const onPortfolio = location.pathname.startsWith('/portfolio')
+
+  useEffect(() => {
+    if (menu) setMenuShown(true)
+    else {
+      const id = window.setTimeout(() => setMenuShown(false), 280)
+      return () => window.clearTimeout(id)
+    }
+  }, [menu])
+
+  useEffect(() => {
+    if (ports) setPortsShown(true)
+    else {
+      const id = window.setTimeout(() => setPortsShown(false), 220)
+      return () => window.clearTimeout(id)
+    }
+  }, [ports])
+
+  useEffect(() => {
+    setMenu(false)
+    setPorts(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (!portRef.current?.contains(e.target as Node)) setPorts(false)
+    }
+    document.addEventListener('mousedown', onDoc)
+    return () => document.removeEventListener('mousedown', onDoc)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-line)] bg-[color-mix(in_srgb,var(--color-ground)_88%,transparent)] backdrop-blur-sm">
-      <div className="mx-auto flex max-w-[1200px] items-stretch gap-3 px-3 py-2 md:px-5">
-        <NavLink to="/" className="group relative flex items-center gap-2 pr-3 text-inherit hover:text-[var(--color-ink)]">
+    <header className="sticky top-0 z-40 bg-gradient-to-b from-[var(--color-ground)] via-[color-mix(in_srgb,var(--color-ground)_88%,transparent)] to-transparent px-3 pb-2 pt-3 md:px-5">
+      <div className="mx-auto flex max-w-[1400px] items-center gap-3">
+        <NavLink to="/" className="group relative z-10 flex items-center gap-2 text-inherit hover:text-[var(--color-ink)]">
           <span className="nav-seal relative grid h-11 w-11 place-items-center border border-[var(--color-accent)] [clip-path:polygon(18%_0,100%_0,100%_82%,82%_100%,0_100%,0_18%)]">
-            <img src="/assets/logo.svg" alt="Jacobi Glenn" className="h-7 w-7 object-contain" />
+            <img src="/assets/logo-mark.png" alt="" className="h-7 w-7 object-contain" />
           </span>
           <span className="hidden leading-tight sm:block">
             <span className="block font-mono text-[9px] tracking-[0.28em] text-[var(--color-accent)]">JG-07 // SEAL</span>
-            <span className="font-[family-name:var(--font-display)] text-lg uppercase tracking-[0.12em]">Glenn</span>
+            <span className="font-[family-name:var(--font-display)] text-lg uppercase tracking-[0.08em]">Jacobi Glenn</span>
           </span>
         </NavLink>
 
-        <nav className="relative hidden min-w-0 flex-1 items-center md:flex" aria-label="Primary">
-          <div className="flex w-full items-center border border-[var(--color-line)] [clip-path:polygon(12px_0,100%_0,100%_calc(100%-12px),calc(100%-12px)_100%,0_100%,0_12px)]">
+        <div className="relative mx-auto hidden min-w-0 flex-1 justify-center md:flex">
+          <div className="nav-island-glow" />
+          <nav
+            className="nav-island relative flex items-stretch overflow-visible"
+            aria-label="Primary"
+          >
             {modules.map((m) => (
               <NavLink
                 key={m.to}
                 to={m.to}
                 end={m.end}
                 className={({ isActive }) =>
-                  `flex-1 px-3 py-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] border-r border-[var(--color-line)] ${
-                    isActive
-                      ? 'bg-[var(--color-accent)] text-[#111]'
-                      : 'text-[var(--color-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-ground-2)]'
-                  }`
+                  `island-tab ${isActive ? 'island-tab-on' : ''}`
                 }
               >
                 {m.label}
               </NavLink>
             ))}
-            <div className="relative flex-[1.4]">
-              <div className="flex">
-                <NavLink
-                  to="/portfolio/design"
-                  className={({ isActive }) =>
-                    `flex-1 px-2 py-3 text-center font-mono text-[11px] uppercase tracking-[0.14em] border-r border-[var(--color-line)] ${
-                      isActive
-                        ? 'bg-[var(--color-accent)] text-[#111]'
-                        : 'text-[var(--color-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-ground-2)]'
-                    }`
-                  }
-                >
-                  Design
-                </NavLink>
-                <NavLink
-                  to="/portfolio/dev"
-                  className={({ isActive }) =>
-                    `flex-1 px-2 py-3 text-center font-mono text-[11px] uppercase tracking-[0.14em] ${
-                      isActive
-                        ? 'bg-[var(--color-accent)] text-[#111]'
-                        : 'text-[var(--color-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-ground-2)]'
-                    }`
-                  }
-                >
-                  Dev
-                </NavLink>
-              </div>
+            <div className="relative" ref={portRef}>
+              <button
+                type="button"
+                className={`island-tab border-l border-[var(--color-line)] ${onPortfolio ? 'island-tab-on' : ''}`}
+                aria-expanded={ports}
+                onClick={() => setPorts((v) => !v)}
+              >
+                Portfolios ▾
+              </button>
+              {portsShown ? (
+                <div className={`port-drop ${ports ? 'port-drop-in' : 'port-drop-out'}`}>
+                  <NavLink to="/portfolio/design" className="port-link" onClick={() => setPorts(false)}>
+                    Designer
+                  </NavLink>
+                  <NavLink to="/portfolio/dev" className="port-link" onClick={() => setPorts(false)}>
+                    Developer
+                  </NavLink>
+                </div>
+              ) : null}
             </div>
-          </div>
-        </nav>
+          </nav>
+        </div>
 
         <div className="ml-auto flex items-center gap-2">
           <Clock />
-          <Button
-            type="button"
-            size="sm"
-            variant={readable ? 'solid' : 'default'}
-            onClick={() => {
-              const next = !readable
-              setReadable(next)
-              writeReadable(next)
-            }}
-            aria-pressed={readable}
-          >
-            Readable
-          </Button>
           <Button type="button" size="sm" className="md:hidden" onClick={() => setMenu((v) => !v)} aria-expanded={menu}>
             Menu
           </Button>
         </div>
       </div>
-      {menu ? (
-        <div className="grid gap-1 border-t border-[var(--color-line)] p-3 md:hidden">
+
+      {menuShown ? (
+        <div className={`mobile-sheet md:hidden ${menu ? 'mobile-sheet-in' : 'mobile-sheet-out'}`}>
           {[
             { to: '/', label: 'Home' },
             { to: '/portfolio/design', label: 'Designer' },
@@ -116,7 +130,7 @@ export function HudNav({ readable, setReadable }: { readable: boolean; setReadab
             { to: '/experience', label: 'Work Experience' },
             { to: '/blog', label: 'Blog' },
           ].map((l) => (
-            <NavLink key={l.to} to={l.to} onClick={() => setMenu(false)} className="border border-[var(--color-line)] px-3 py-2 font-mono text-xs uppercase tracking-[0.16em]">
+            <NavLink key={l.to} to={l.to} onClick={() => setMenu(false)} className="mobile-link">
               {l.label}
             </NavLink>
           ))}

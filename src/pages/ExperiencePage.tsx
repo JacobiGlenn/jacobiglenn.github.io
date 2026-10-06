@@ -5,7 +5,7 @@ import type { ExpJob } from '@/lib/types'
 
 function JobCard({ job }: { job: ExpJob }) {
   return (
-    <article className="hud-frame relative p-5">
+    <article className="hud-frame relative p-5 before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-[var(--color-accent)]">
       <div className="flex gap-4">
         <div
           className="grid h-12 w-12 shrink-0 place-items-center font-[family-name:var(--font-display)]"
@@ -70,12 +70,12 @@ function JobCard({ job }: { job: ExpJob }) {
 
 export function ExperiencePage() {
   return (
-    <div className="mx-auto max-w-[960px] space-y-8 px-4 py-8 md:px-8">
+    <div className="space-y-8 px-4 py-8 md:px-8">
       <div>
-        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">Employer view</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">Employer view // service record</p>
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-5xl uppercase">Work Experience</h1>
       </div>
-      <div className="hud-frame p-5 text-[var(--color-muted)] leading-relaxed">{experience.summary}</div>
+      <div className="hud-frame p-5 leading-relaxed text-[var(--color-muted)]">{experience.summary}</div>
       <div className="space-y-4">
         {experience.jobs.map((j) => (
           <JobCard key={j.id} job={j} />

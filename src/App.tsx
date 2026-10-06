@@ -6,20 +6,15 @@ import { ExperiencePage } from '@/pages/ExperiencePage'
 import { BlogPage } from '@/pages/BlogPage'
 import { Terminal } from '@/terminal/Terminal'
 import { markVisited, shouldSkipTerminal } from '@/lib/visit'
-import { readReadable, writeReadable } from '@/lib/readable'
 import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 export default function App() {
   const location = useLocation()
   const [ready, setReady] = useState(() => shouldSkipTerminal())
-  const [readable, setReadable] = useState(false)
   const [hello, setHello] = useState('')
 
   useEffect(() => {
-    const on = readReadable()
-    setReadable(on)
-    writeReadable(on)
     if (new URLSearchParams(location.search).get('direct') === '1') {
       markVisited('Guest')
       setReady(true)
@@ -51,10 +46,9 @@ export default function App() {
         </div>
       ) : null}
       <Routes>
-        <Route element={<Layout readable={readable} setReadable={setReadable} />}>
+        <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/portfolio/design" element={<PortfolioPage />} />
-          <Route path="/portfolio/dev" element={<PortfolioPage />} />
+          <Route path="/portfolio/:kind" element={<PortfolioPage />} />
           <Route path="/portfolio/:kind/:id" element={<ProjectDetailPage />} />
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/blog" element={<BlogPage />} />

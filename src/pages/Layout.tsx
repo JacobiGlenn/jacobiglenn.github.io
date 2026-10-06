@@ -1,13 +1,20 @@
+import { Atmosphere, SideRail, StatusBar } from '@/components/site/Atmosphere'
 import { HudNav } from '@/components/site/HudNav'
 import { Outlet } from 'react-router-dom'
 
-export function Layout({ readable, setReadable }: { readable: boolean; setReadable: (v: boolean) => void }) {
+export function Layout() {
   return (
-    <div className="min-h-dvh bg-[var(--color-ground)] text-[var(--color-ink)]">
-      <HudNav readable={readable} setReadable={setReadable} />
-      <main>
-        <Outlet />
-      </main>
+    <div className="relative min-h-dvh bg-[var(--color-ground)] text-[var(--color-ink)]">
+      <Atmosphere />
+      <HudNav />
+      <div className="relative z-[1] grid pb-10 lg:grid-cols-[168px_minmax(0,1fr)_168px] xl:grid-cols-[210px_minmax(0,1fr)_210px]">
+        <SideRail side="left" />
+        <main className="min-w-0">
+          <Outlet />
+        </main>
+        <SideRail side="right" />
+      </div>
+      <StatusBar />
     </div>
   )
 }

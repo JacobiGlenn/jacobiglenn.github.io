@@ -7,12 +7,16 @@ export function HomePage() {
   const featured = featuredProjects()
   const [copied, setCopied] = useState(false)
   return (
-    <div className="mx-auto max-w-[1100px] space-y-10 px-4 py-8 md:px-8">
-      <section className="hud-frame p-6 md:p-8">
-        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">
-          Software Engineering // Computer Science // UC Irvine
+    <div className="space-y-10 px-4 py-8 md:px-8">
+      <section className="hud-frame overflow-hidden p-6 md:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-accent)]">
+          <span>Channel open // JG-07</span>
+          <span className="text-[var(--color-steel)]">Irvine · Pacific</span>
+        </div>
+        <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+          Soph @ UC Irvine | Coding Tutor | US Army
         </p>
-        <h1 className="mt-3 font-[family-name:var(--font-display)] text-5xl uppercase leading-[0.9] tracking-wide md:text-7xl">
+        <h1 className="mt-2 font-[family-name:var(--font-display)] text-5xl uppercase leading-[0.9] tracking-wide md:text-7xl">
           Jacobi Glenn
         </h1>
         <p className="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--color-muted)]">
@@ -21,6 +25,11 @@ export function HomePage() {
           <strong className="text-[var(--color-ink)]">Code Ninjas</strong>. This is the long-form portfolio: case studies, code, writing, and a build log when
           the messy parts are worth documenting.
         </p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">SE // CS</span>
+          <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">UCI</span>
+          <span className="border border-[var(--color-accent)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent)]">Live</span>
+        </div>
       </section>
 
       <section className="hud-frame p-6">

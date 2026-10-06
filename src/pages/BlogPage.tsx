@@ -1,22 +1,24 @@
 import { AsciiHead } from '@/components/site/AsciiHead'
 import { ButtonCarousel } from '@/components/site/ButtonCarousel'
 import { HtmlBlock } from '@/components/site/HtmlBlock'
+import { Lightbox } from '@/components/site/Lightbox'
 import { MediaImage, assetPath } from '@/components/site/MediaImage'
+import { StickyBack } from '@/components/site/StickyBack'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { blogPosts, linkedInPosts, youtubeVideos } from '@/lib/content'
 import { getLikeCount, setLikeCount, youtubeStats } from '@/lib/likes'
 import type { LinkedInPost, YouTubeVideo } from '@/lib/types'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function LinkedInCard({ post, onOpen }: { post: LinkedInPost; onOpen: () => void }) {
   const media = post.media[0]
   return (
-    <button type="button" onClick={onOpen} className="hud-frame w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
+    <button type="button" onClick={onOpen} className="hud-frame group relative w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
+      <span className="card-sweep" />
       <div className="h-36 bg-[var(--color-ground-2)]">
         {post.thumb ? (
-          <MediaImage src={assetPath(post.thumb)} alt="" className="h-full w-full object-cover" />
+          <MediaImage src={assetPath(post.thumb)} alt="" className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.05]" />
         ) : media?.type === 'video' ? (
           media.src.endsWith('.mp4') ? (
             <video src={assetPath(media.src)} muted className="h-full w-full object-cover" />
@@ -39,11 +41,12 @@ function LinkedInCard({ post, onOpen }: { post: LinkedInPost; onOpen: () => void
 
 function YtCard({ video, onOpen }: { video: YouTubeVideo; onOpen: () => void }) {
   return (
-    <button type="button" onClick={onOpen} className="hud-frame w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
+    <button type="button" onClick={onOpen} className="hud-frame group relative w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
+      <span className="card-sweep" />
       <MediaImage
         src={`https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`}
         alt={video.title}
-        className="h-36 w-full object-cover"
+        className="h-36 w-full object-cover transition duration-300 group-hover:scale-[1.05]"
       />
       <div className="p-3">
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-accent)]">{video.date}</p>
@@ -74,16 +77,14 @@ export function BlogPage() {
 
   if (post) {
     return (
-      <div className="mx-auto max-w-[860px] px-4 py-6 md:px-8">
-        <Button asChild>
-          <Link to="/blog">← Back</Link>
-        </Button>
+      <div className="px-4 py-6 md:px-8">
+        <StickyBack to="/blog" />
         {post.banner === 'ascii-face' ? (
-          <div className="mt-4 h-40 overflow-hidden border border-[var(--color-line)]">
+          <div className="h-48 overflow-hidden border border-[var(--color-line)]">
             <AsciiHead />
           </div>
         ) : post.coverUrl ? (
-          <MediaImage src={assetPath(post.coverUrl)} alt="" className="mt-4 max-h-64 w-full object-cover" />
+          <MediaImage src={assetPath(post.coverUrl)} alt="" className="max-h-64 w-full object-cover" />
         ) : null}
         <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">{post.dateDisplay}</p>
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl uppercase">{post.title}</h1>
@@ -93,7 +94,7 @@ export function BlogPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[1100px] space-y-10 px-4 py-8 md:px-8">
+    <div className="space-y-10 px-4 py-8 md:px-8">
       <div>
         <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">Transmission log</p>
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-5xl uppercase">Blog</h1>
@@ -104,15 +105,20 @@ export function BlogPage() {
           <button
             key={p.id}
             type="button"
-            className="hud-frame flex overflow-hidden text-left"
+            className="hud-frame group relative flex overflow-hidden text-left"
             onClick={() => navigate(`/blog/${p.id}`)}
           >
-            <div className="h-36 w-40 shrink-0 bg-[var(--color-ground-2)]">
-              {p.banner === 'ascii-face' ? <AsciiHead className="h-full" /> : <MediaImage src={p.coverUrl ? assetPath(p.coverUrl) : undefined} alt={p.title} className="h-full w-full object-cover" />}
+            <span className="card-sweep" />
+            <div className="h-36 w-44 shrink-0 bg-[var(--color-ground-2)]">
+              {p.banner === 'ascii-face' ? (
+                <AsciiHead className="h-full" />
+              ) : (
+                <MediaImage src={p.coverUrl ? assetPath(p.coverUrl) : undefined} alt={p.title} className="h-full w-full object-cover" />
+              )}
             </div>
             <div className="p-4">
               <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-accent)]">{p.dateDisplay}</p>
-              <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl uppercase">{p.title}</h2>
+              <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl uppercase group-hover:text-[var(--color-accent)]">{p.title}</h2>
               <p className="mt-2 text-sm text-[var(--color-muted)]">{p.excerpt}</p>
             </div>
           </button>
@@ -136,70 +142,64 @@ export function BlogPage() {
         ))}
       </ButtonCarousel>
 
-      <Dialog open={!!li} onOpenChange={(o) => !o && setLi(null)}>
-        <DialogContent>
-          {li ? (
-            <>
-              <DialogTitle>{li.date}</DialogTitle>
-              <HtmlBlock html={li.text} className="mt-3" />
-              {li.media[0]?.type === 'image' ? (
-                <MediaImage src={assetPath(li.media[0].src)} alt={li.media[0].alt || ''} className="mt-4 w-full" />
-              ) : null}
-              {li.media[0]?.type === 'video' ? (
-                li.media[0].src.includes('youtube') ? (
-                  <iframe title="video" src={li.media[0].src} className="mt-4 aspect-video w-full border-0" allowFullScreen />
-                ) : (
-                  <video src={assetPath(li.media[0].src)} controls className="mt-4 w-full" />
-                )
-              ) : null}
-            </>
-          ) : null}
-        </DialogContent>
-      </Dialog>
+      <Lightbox open={!!li} onClose={() => setLi(null)} title={li?.date || 'LinkedIn'}>
+        {li ? (
+          <>
+            <HtmlBlock html={li.text} />
+            {li.media[0]?.type === 'image' ? (
+              <MediaImage src={assetPath(li.media[0].src)} alt={li.media[0].alt || ''} className="mt-4 w-full" />
+            ) : null}
+            {li.media[0]?.type === 'video' ? (
+              li.media[0].src.includes('youtube') ? (
+                <iframe title="video" src={li.media[0].src} className="mt-4 aspect-video w-full border-0" allowFullScreen />
+              ) : (
+                <video src={assetPath(li.media[0].src)} controls className="mt-4 w-full" />
+              )
+            ) : null}
+          </>
+        ) : null}
+      </Lightbox>
 
-      <Dialog open={!!yt} onOpenChange={(o) => !o && setYt(null)}>
-        <DialogContent>
-          {yt ? (
-            <>
-              <DialogTitle>{yt.title}</DialogTitle>
-              <iframe
-                title={yt.title}
-                src={`https://www.youtube.com/embed/${yt.videoId}`}
-                className="mt-4 aspect-video w-full border-0"
-                allowFullScreen
-              />
-              <p className="mt-3 font-mono text-xs text-[var(--color-muted)]">{yt.date}</p>
-              {stats ? (
-                <p className="font-mono text-xs">
-                  {stats.views} views · {stats.likes} likes
-                </p>
-              ) : null}
-              <p className="mt-2 text-sm text-[var(--color-muted)]">{yt.description}</p>
-              <div className="mt-4 flex gap-2">
-                <Button
-                  type="button"
-                  variant={liked ? 'solid' : 'default'}
-                  onClick={async () => {
-                    const next = !liked
-                    const n = likeCount + (next ? 1 : -1)
-                    setLiked(next)
-                    setLike(Math.max(0, n))
-                    localStorage.setItem(`yt-like-${yt.videoId}`, next ? '1' : '0')
-                    await setLikeCount(yt.videoId, Math.max(0, n))
-                  }}
-                >
-                  Like {likeCount}
-                </Button>
-                <Button asChild>
-                  <a href={`https://www.youtube.com/watch?v=${yt.videoId}`} target="_blank" rel="noopener noreferrer">
-                    Watch on YouTube
-                  </a>
-                </Button>
-              </div>
-            </>
-          ) : null}
-        </DialogContent>
-      </Dialog>
+      <Lightbox open={!!yt} onClose={() => setYt(null)} title={yt?.title || 'YouTube'}>
+        {yt ? (
+          <>
+            <iframe
+              title={yt.title}
+              src={`https://www.youtube.com/embed/${yt.videoId}`}
+              className="aspect-video w-full border-0"
+              allowFullScreen
+            />
+            <p className="mt-3 font-mono text-xs text-[var(--color-muted)]">{yt.date}</p>
+            {stats ? (
+              <p className="font-mono text-xs">
+                {stats.views} views · {stats.likes} likes
+              </p>
+            ) : null}
+            <p className="mt-2 text-sm text-[var(--color-muted)]">{yt.description}</p>
+            <div className="mt-4 flex gap-2">
+              <Button
+                type="button"
+                variant={liked ? 'solid' : 'default'}
+                onClick={async () => {
+                  const next = !liked
+                  const n = likeCount + (next ? 1 : -1)
+                  setLiked(next)
+                  setLike(Math.max(0, n))
+                  localStorage.setItem(`yt-like-${yt.videoId}`, next ? '1' : '0')
+                  await setLikeCount(yt.videoId, Math.max(0, n))
+                }}
+              >
+                Like {likeCount}
+              </Button>
+              <Button asChild>
+                <a href={`https://www.youtube.com/watch?v=${yt.videoId}`} target="_blank" rel="noopener noreferrer">
+                  Watch on YouTube
+                </a>
+              </Button>
+            </div>
+          </>
+        ) : null}
+      </Lightbox>
     </div>
   )
 }

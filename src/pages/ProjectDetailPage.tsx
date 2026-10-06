@@ -1,9 +1,9 @@
 import { HtmlBlock } from '@/components/site/HtmlBlock'
 import { MediaImage, assetPath } from '@/components/site/MediaImage'
 import { PhotoStack } from '@/components/site/PhotoStack'
+import { StickyBack } from '@/components/site/StickyBack'
 import { projectById } from '@/lib/content'
 import { Link, useParams } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
 
 export function ProjectDetailPage() {
   const { id = '', kind = 'dev' } = useParams()
@@ -18,12 +18,10 @@ export function ProjectDetailPage() {
   }
   const hero = project.headerUrl || project.coverUrl
   return (
-    <div className="mx-auto max-w-[920px] px-4 py-6 md:px-8">
-      <Button asChild>
-        <Link to={`/portfolio/${project.kind === 'design' ? 'design' : 'dev'}`}>← Back</Link>
-      </Button>
+    <div className="px-4 py-6 md:px-8">
+      <StickyBack to={`/portfolio/${project.kind === 'design' ? 'design' : 'dev'}`} />
       {hero ? (
-        <div className="relative mt-4 h-56 overflow-hidden border border-[var(--color-line)]">
+        <div className="relative h-56 overflow-hidden border border-[var(--color-line)]">
           <MediaImage src={assetPath(hero)} alt="" className="h-full w-full object-cover" />
         </div>
       ) : null}
