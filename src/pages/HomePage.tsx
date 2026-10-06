@@ -1,0 +1,81 @@
+import { SiteCard } from '@/components/site/SiteCard'
+import { featuredProjects } from '@/lib/content'
+import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+
+export function HomePage() {
+  const featured = featuredProjects()
+  const [copied, setCopied] = useState(false)
+  return (
+    <div className="mx-auto max-w-[1100px] space-y-10 px-4 py-8 md:px-8">
+      <section className="hud-frame p-6 md:p-8">
+        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">
+          Software Engineering // Computer Science // UC Irvine
+        </p>
+        <h1 className="mt-3 font-[family-name:var(--font-display)] text-5xl uppercase leading-[0.9] tracking-wide md:text-7xl">
+          Jacobi Glenn
+        </h1>
+        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--color-muted)]">
+          I build full-stack products, work on UI/UX for a healthcare project with <strong className="text-[var(--color-ink)]">Commit the Change</strong>, and
+          teach kids <strong className="text-[var(--color-ink)]">JavaScript</strong> and <strong className="text-[var(--color-ink)]">Unity</strong> at{' '}
+          <strong className="text-[var(--color-ink)]">Code Ninjas</strong>. This is the long-form portfolio: case studies, code, writing, and a build log when
+          the messy parts are worth documenting.
+        </p>
+      </section>
+
+      <section className="hud-frame p-6">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-muted)]">Objective</p>
+        <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl uppercase">What I am aiming for</h2>
+        <p className="mt-4 max-w-3xl leading-relaxed text-[var(--color-muted)]">
+          My top goal is to be a software engineer in Redmond, Washington, working for Microsoft. I would also be thrilled at Apple or Amazon someday. I plan
+          to earn an associate degree in cybersecurity through a community college while I finish my bachelor&apos;s. I am studying Spanish and want to be
+          bilingual by graduation, with a longer-term goal of four languages: Spanish, Mandarin, Japanese, and French. I love learning and I do not plan to
+          stop.
+        </p>
+      </section>
+
+      <section>
+        <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-accent)]">Active files // featured</p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((p) => (
+            <SiteCard key={p.id} project={p} />
+          ))}
+        </div>
+      </section>
+
+      <section className="hud-frame p-6">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-muted)]">Uplink</p>
+        <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl uppercase">Contact</h2>
+        <p className="mt-3 max-w-2xl text-sm text-[var(--color-muted)]">
+          Irvine, California (Pacific time). Email is the most reliable. I will be away on military orders from April through September 2026 and largely
+          unreachable during that window.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Button asChild>
+            <a href="mailto:jacobiglenn@gmail.com">jacobiglenn@gmail.com</a>
+          </Button>
+          <Button asChild>
+            <a href="https://linkedin.com/in/jacobiglenn" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+          </Button>
+          <Button asChild>
+            <a href="https://github.com/JacobiGlenn" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              navigator.clipboard.writeText('971-300-5659')
+              setCopied(true)
+              window.setTimeout(() => setCopied(false), 1600)
+            }}
+          >
+            {copied ? 'Copied' : '971-300-5659'}
+          </Button>
+        </div>
+      </section>
+    </div>
+  )
+}

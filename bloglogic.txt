@@ -174,9 +174,10 @@ LIKE COUNTER (shared across all visitors via JSONBin.io):
 BUILD COMMANDS (summary)
 ----------------------------------------------------------------------
 
-  npm run build:projects  ← rebuild generated/projects-data.js (run after changing devProjects/ or designProjects/)
-  npm run build:blog      ← rebuild generated/blog-data.js     (run after changing blog/ folder)
-  npm run build           ← runs both of the above
+  npm run build:projects  ← rebuild generated/projects.json
+  npm run build:blog      ← rebuild generated/blog.json
+  npm run build:experience← rebuild generated/experience.json
+  npm run build           ← generators + Vite bundle
 
   npm run add:youtube <url>  ← auto-add a YouTube entry (fetches title, prepends to data/youtube-videos.js)
   npm run add:linkedin       ← interactive prompt to add a LinkedIn post to data/linkedin-posts.js
@@ -193,7 +194,7 @@ QUICK REFERENCE: WHAT NEEDS A BUILD?
   design projects    → npm run build:projects    (folder: designProjects/<name>/project.md)
   linkedin posts     → NO BUILD                  (file: data/linkedin-posts.js)
   youtube videos     → NO BUILD                  (file: data/youtube-videos.js)
-  work experience    → NO BUILD                  (inline in index.html CLEAN_CONTENT.page3)
+  work experience    → npm run build:experience  (data/experience.json, optional Positions.csv)
 
 ----------------------------------------------------------------------
 BOOT TERMINAL (first screen, index.html)
@@ -212,7 +213,7 @@ BOOT TERMINAL (first screen, index.html)
                                 Work Experience, LinkedIn, and nav About for goals/contact
                                 (termPrintAbout() in index.html)
     PROJECTS, PORTFOLIO      — dev + design project titles + descriptions (from
-                                generated/projects-data.js cardsData; run build:projects after edits)
+                                generated/projects.json; run build:projects after edits)
     EXP, EXPERIENCE           — step through work experience blurbs; then N / P / Q
     SPIN, FASTER              — speed up the ASCII portrait ~10 seconds
     TIME, DATE                — print local date/time

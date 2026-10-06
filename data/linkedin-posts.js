@@ -13,7 +13,7 @@
  * thumb: optional card background image (leave '' for video cards)
  */
 
-window.__LINKEDIN_POSTS = [
+export const LINKEDIN_POSTS = [
   {
     id: 'li-irvinehacks-2026',
     date: 'Mar 2026',

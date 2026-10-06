@@ -23,14 +23,7 @@
  *   description – shown in the modal below the embed
  */
 
-// Optional: paste your YouTube Data API key here to enable view/like counts
-// Leave as empty string '' if you don't want stats
-// API key is injected from data/api-config.js (gitignored).
-// See .github/workflows/deploy.yml — key is stored as a GitHub secret.
-// For local dev: create data/api-config.js manually (it's gitignored).
-window.YOUTUBE_API_KEY = window.YOUTUBE_API_KEY || '';
-
-window.__YOUTUBE_VIDEOS = [
+export const YOUTUBE_VIDEOS = [
   {
     id: 'yt-minecraft-python',
     videoId: 'puTp9szMQqE',

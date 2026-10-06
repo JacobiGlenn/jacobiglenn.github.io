@@ -1,4 +1,6 @@
 node_modules/
+dist/
+*.tsbuildinfo
 
 # API keys — never commit real keys
 # The workflow injects them from GitHub secrets at deploy time

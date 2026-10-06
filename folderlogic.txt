@@ -4,7 +4,7 @@ FOLDER-BASED PROJECTS (FUTURE REFERENCE)
 IDEA (SHORT)
 - Keep one folder per project under devProjects/ or designProjects/.
 - Each folder has a project.md with settings (frontmatter) at the top and the full write-up below.
-- A build script reads those folders and writes generated/projects-data.js, which index.html loads.
+- A build script reads those folders and writes generated/projects.json, which the app loads.
 - No paid services. GitHub Pages serves static files. Run npm run build:projects after any project.md change.
 
 FOLDER LAYOUT (EXAMPLE)
@@ -52,9 +52,9 @@ STEP-BY-STEP: ADDING A NEW PROJECT
    NOTE: quote description values that contain a colon, e.g. description: "My app: fast."
 4. Write the case study body below the --- block.
 5. Run: npm run build:projects
-   This regenerates generated/projects-data.js (the file the site reads).
+   This regenerates generated/projects.json (the file the site reads).
 6. Refresh the site (hard refresh if needed to clear the cached script).
-7. Commit: new folder + generated/projects-data.js + push to GitHub.
+7. Commit: new folder + generated/projects.json + push to GitHub.
    GitHub Pages updates in about a minute.
 
 NOTES
@@ -63,4 +63,5 @@ NOTES
 - The build also injects the cover as an inline style on the generated card HTML,
   so future projects get their cover automatically without adding CSS to index.html.
 - If something looks wrong: check frontmatter typos, image path, and that you ran the build.
-- generated/projects-data.js must be committed to the repo for GitHub Pages to see changes.
+- generated/projects.json must be committed to the repo for GitHub Pages to see changes.
+- Set `draft: true` in frontmatter to keep a folder in git without publishing it.

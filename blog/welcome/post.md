@@ -77,7 +77,7 @@ details.b-doc-details summary::-webkit-details-marker { display: none; }
 <p style="margin:0 0 1.25rem">Since December 2019 I have run a personal YouTube channel. For years I posted about two videos a week and streamed a lot on the side. Around 2024 that slowed to about one video a month. I am planning to retire that channel in September and start a new one aimed at informational coding videos and project updates. The carousel on this site's Blog page is set up for whatever I publish next.</p>
 
 <div class="b-card" style="font-size:0.9rem;margin:0">
-<strong style="color:#6366f1">Fast forward:</strong> UC Irvine, double major Software Engineering and Computer Science, Army National Guard, Code Ninjas instructor teaching JavaScript and Unity C# to kids, designing real healthcare tools at Commit the Change, and two hackathon wins in the same school year. The About page in the nav stays short (where I am from, goals, contact); current roles live in Work Experience and LinkedIn.
+<strong style="color:#6366f1">Fast forward:</strong> UC Irvine, double major Software Engineering and Computer Science, Army National Guard, Code Ninjas instructor teaching JavaScript and Unity C# to kids, designing real healthcare tools at Commit the Change, and two hackathon wins in the same school year. Goals and contact live on Home; current roles live in Work Experience and LinkedIn.
 </div>
 
 <hr style="border:none;border-top:2px solid #f0f0f0;margin:2.5rem 0">

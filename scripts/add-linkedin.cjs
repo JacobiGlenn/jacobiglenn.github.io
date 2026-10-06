@@ -95,10 +95,10 @@ async function main() {
   }`;
 
   const original = fs.readFileSync(DATA_FILE, 'utf8');
-  const insertAfter = 'window.__LINKEDIN_POSTS = [';
+  const insertAfter = 'export const LINKEDIN_POSTS = [';
   const idx = original.indexOf(insertAfter);
   if (idx === -1) {
-    console.error('Could not find window.__LINKEDIN_POSTS = [ in', DATA_FILE);
+    console.error('Could not find export const LINKEDIN_POSTS = [ in', DATA_FILE);
     process.exit(1);
   }
 

@@ -1,31 +1,49 @@
 {
   "name": "jacobiglenn.github.io",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "Jacobi Glenn portfolio",
+  "type": "module",
   "scripts": {
+    "dev": "npm run generate && vite",
+    "generate": "node scripts/build-projects.cjs && node scripts/build-blog.cjs && node scripts/build-experience.cjs",
     "build:projects": "node scripts/build-projects.cjs",
     "build:blog": "node scripts/build-blog.cjs",
-    "build": "node scripts/build-projects.cjs && node scripts/build-blog.cjs",
+    "build:experience": "node scripts/build-experience.cjs",
+    "build": "npm run generate && vite build",
+    "preview": "vite preview",
     "add:youtube": "node scripts/add-youtube.cjs",
     "add:linkedin": "node scripts/add-linkedin.cjs",
-    "screenshots": "node scripts/capture-portfolio-screens.cjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "screenshots": "node scripts/capture-portfolio-screens.cjs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JacobiGlenn/jacobiglenn.github.io.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/JacobiGlenn/jacobiglenn.github.io/issues"
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-navigation-menu": "^1.2.14",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.4",
+    "tailwind-merge": "^3.3.1"
   },
-  "homepage": "https://github.com/JacobiGlenn/jacobiglenn.github.io#readme",
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@types/node": "^24.5.2",
+    "@vitejs/plugin-react": "^5.0.4",
     "gray-matter": "^4.0.3",
-    "playwright": "^1.58.2"
+    "playwright": "^1.58.2",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7"
   }
 }
