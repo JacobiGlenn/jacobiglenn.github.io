@@ -18,7 +18,7 @@ export function ProjectDetailPage() {
   }
   const hero = project.headerUrl || project.coverUrl
   return (
-    <div className="px-4 py-6 md:px-8">
+    <div className="py-6">
       <StickyBack to={`/portfolio/${project.kind === 'design' ? 'design' : 'dev'}`} />
       {hero ? (
         <div className="relative h-56 overflow-hidden border border-[var(--color-line)]">

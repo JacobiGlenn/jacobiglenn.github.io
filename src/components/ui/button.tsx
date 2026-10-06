@@ -4,12 +4,12 @@ import { cn } from '@/lib/utils'
 import type { ButtonHTMLAttributes } from 'react'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 font-mono uppercase tracking-[0.14em] text-xs transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none cursor-pointer border',
+  'inline-flex items-center justify-center gap-2 font-mono uppercase tracking-[0.14em] text-xs transition-[border-color,color,background-color] duration-75 disabled:opacity-40 disabled:pointer-events-none cursor-pointer border',
   {
     variants: {
       variant: {
         default:
-          'bg-transparent border-[var(--color-line)] text-[var(--color-ink)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:-translate-y-px hover:shadow-[0_0_16px_var(--color-glow,rgba(197,242,64,0.35))]',
+          'bg-transparent border-[var(--color-line)] text-[var(--color-ink)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]',
         solid:
           'bg-[var(--color-accent)] text-[#111] border-[var(--color-accent)] hover:brightness-110',
         ghost: 'border-transparent hover:border-[var(--color-line)]',

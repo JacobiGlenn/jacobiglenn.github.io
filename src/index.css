@@ -83,10 +83,9 @@ a:hover { color: var(--color-accent); }
 }
 
 .nav-island {
-  background: color-mix(in srgb, var(--color-ground) 78%, transparent);
+  background: color-mix(in srgb, var(--color-ground) 82%, transparent);
   border: 1px solid var(--color-line);
   clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
-  backdrop-filter: blur(10px);
 }
 
 .island-tab {
@@ -100,46 +99,45 @@ a:hover { color: var(--color-accent); }
   background: transparent;
   border: 0;
   cursor: pointer;
+  transition: background-color 70ms linear, color 70ms linear;
 }
 a.island-tab { color: var(--color-muted); }
-.island-tab:hover { background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
+.island-tab:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
 a.island-tab:hover { color: var(--color-ink); }
 .island-tab-on { background: var(--color-accent); }
 a.island-tab-on, a.island-tab-on:hover { color: #111; }
 
 .port-drop {
   position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  min-width: 11rem;
-  border: 1px solid var(--color-line);
-  background: color-mix(in srgb, var(--color-ground) 94%, transparent);
-  backdrop-filter: blur(12px);
-  overflow: hidden;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  min-width: 12rem;
+  border: 1px solid var(--color-accent);
+  background: var(--color-ground);
 }
-.port-drop-in { animation: slide-in 200ms ease forwards; }
-.port-drop-out { animation: slide-out 180ms ease forwards; }
+.port-drop-in { animation: slide-in 110ms ease-out forwards; }
 .port-link {
   display: block;
-  padding: 0.7rem 0.9rem;
+  padding: 0.75rem 0.95rem;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-ink);
   border-bottom: 1px solid var(--color-line);
+  transition: background-color 70ms linear, color 70ms linear;
 }
 .port-link:last-child { border-bottom: 0; }
-.port-link:hover, .port-link.active { background: var(--color-accent); color: #111; }
+.port-link:hover, .port-link-on { background: var(--color-accent); color: #111; }
 
 .mobile-sheet {
   margin-top: 0.75rem;
   border: 1px solid var(--color-line);
-  background: color-mix(in srgb, var(--color-ground) 94%, transparent);
+  background: var(--color-ground);
   overflow: hidden;
 }
-.mobile-sheet-in { animation: slide-in 240ms ease forwards; }
-.mobile-sheet-out { animation: slide-out 200ms ease forwards; }
+.mobile-sheet-in { animation: slide-in 140ms ease-out forwards; }
 .mobile-link {
   display: block;
   padding: 0.85rem 1rem;
@@ -160,31 +158,57 @@ a.island-tab-on, a.island-tab-on:hover { color: #111; }
   background: linear-gradient(115deg, transparent 30%, rgba(197, 242, 64, 0.16) 48%, transparent 62%);
   transform: translateX(-120%);
 }
-.group:hover .card-sweep, .group\/stack:hover .card-sweep {
-  animation: sweep 650ms ease;
+.blog-row:hover .card-sweep {
+  animation: sweep 520ms ease;
 }
 
-.ticker {
-  display: inline-block;
-  animation: ticker 42s linear infinite;
-  padding-left: 100%;
+.site-card {
+  transition: border-color 80ms linear;
+}
+.site-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--color-accent);
+  z-index: 3;
+  pointer-events: none;
+  transition: width 80ms linear;
+}
+.site-card:hover {
+  border-color: var(--color-accent);
+}
+.site-card:hover::after { width: 4px; }
+
+.media-card {
+  transition: transform 80ms linear, border-color 80ms linear;
+}
+.media-card:hover {
+  border-color: var(--color-steel);
+  transform: rotate(-1.25deg);
+}
+
+.exp-card {
+  transition: border-color 80ms linear, transform 80ms linear;
+}
+.exp-card:hover {
+  border-color: var(--color-accent);
+  transform: translateX(6px);
+}
+.exp-card:hover .exp-tag {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 @keyframes slide-in {
-  from { opacity: 0; transform: translateY(-12px); }
+  from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
-}
-@keyframes slide-out {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(-12px); }
 }
 @keyframes sweep {
   from { transform: translateX(-120%); }
   to { transform: translateX(120%); }
-}
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 
 .hud-frame {

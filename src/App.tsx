@@ -48,8 +48,10 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/portfolio/:kind" element={<PortfolioPage />} />
-          <Route path="/portfolio/:kind/:id" element={<ProjectDetailPage />} />
+          <Route path="/portfolio/design" element={<PortfolioPage />} />
+          <Route path="/portfolio/dev" element={<PortfolioPage />} />
+          <Route path="/portfolio/design/:id" element={<ProjectDetailPage />} />
+          <Route path="/portfolio/dev/:id" element={<ProjectDetailPage />} />
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:id" element={<BlogPage />} />

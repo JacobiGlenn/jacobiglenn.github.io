@@ -14,11 +14,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 function LinkedInCard({ post, onOpen }: { post: LinkedInPost; onOpen: () => void }) {
   const media = post.media[0]
   return (
-    <button type="button" onClick={onOpen} className="hud-frame group relative w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
-      <span className="card-sweep" />
+    <button type="button" onClick={onOpen} className="media-card hud-frame w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
       <div className="h-36 bg-[var(--color-ground-2)]">
         {post.thumb ? (
-          <MediaImage src={assetPath(post.thumb)} alt="" className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.05]" />
+          <MediaImage src={assetPath(post.thumb)} alt="" className="h-full w-full object-cover" />
         ) : media?.type === 'video' ? (
           media.src.endsWith('.mp4') ? (
             <video src={assetPath(media.src)} muted className="h-full w-full object-cover" />
@@ -41,12 +40,11 @@ function LinkedInCard({ post, onOpen }: { post: LinkedInPost; onOpen: () => void
 
 function YtCard({ video, onOpen }: { video: YouTubeVideo; onOpen: () => void }) {
   return (
-    <button type="button" onClick={onOpen} className="hud-frame group relative w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
-      <span className="card-sweep" />
+    <button type="button" onClick={onOpen} className="media-card hud-frame w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
       <MediaImage
         src={`https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`}
         alt={video.title}
-        className="h-36 w-full object-cover transition duration-300 group-hover:scale-[1.05]"
+        className="h-36 w-full object-cover"
       />
       <div className="p-3">
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-accent)]">{video.date}</p>
@@ -77,7 +75,7 @@ export function BlogPage() {
 
   if (post) {
     return (
-      <div className="px-4 py-6 md:px-8">
+      <div className="py-6">
         <StickyBack to="/blog" />
         {post.banner === 'ascii-face' ? (
           <div className="h-48 overflow-hidden border border-[var(--color-line)]">
@@ -94,7 +92,7 @@ export function BlogPage() {
   }
 
   return (
-    <div className="space-y-10 px-4 py-8 md:px-8">
+    <div className="space-y-10 py-6">
       <div>
         <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">Transmission log</p>
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-5xl uppercase">Blog</h1>
@@ -105,7 +103,7 @@ export function BlogPage() {
           <button
             key={p.id}
             type="button"
-            className="hud-frame group relative flex overflow-hidden text-left"
+            className="blog-row hud-frame group relative flex overflow-hidden text-left"
             onClick={() => navigate(`/blog/${p.id}`)}
           >
             <span className="card-sweep" />

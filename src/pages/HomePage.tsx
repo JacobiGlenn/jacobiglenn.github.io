@@ -7,11 +7,10 @@ export function HomePage() {
   const featured = featuredProjects()
   const [copied, setCopied] = useState(false)
   return (
-    <div className="space-y-10 px-4 py-8 md:px-8">
-      <section className="hud-frame overflow-hidden p-6 md:p-8">
+    <div className="space-y-10 py-6">
+      <section id="pitch" className="hud-frame scroll-mt-28 overflow-hidden p-6 md:p-8">
         <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-accent)]">
-          <span>Channel open // JG-07</span>
-          <span className="text-[var(--color-steel)]">Irvine · Pacific</span>
+          <span>Irvine · Pacific</span>
         </div>
         <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
           Soph @ UC Irvine | Coding Tutor | US Army
@@ -32,7 +31,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="hud-frame p-6">
+      <section id="objective" className="hud-frame scroll-mt-28 p-6">
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-muted)]">Objective</p>
         <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl uppercase">What I am aiming for</h2>
         <p className="mt-4 max-w-3xl leading-relaxed text-[var(--color-muted)]">
@@ -43,16 +42,16 @@ export function HomePage() {
         </p>
       </section>
 
-      <section>
+      <section id="featured" className="scroll-mt-28">
         <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-accent)]">Active files // featured</p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {featured.map((p) => (
             <SiteCard key={p.id} project={p} />
           ))}
         </div>
       </section>
 
-      <section className="hud-frame p-6">
+      <section id="contact" className="hud-frame scroll-mt-28 p-6">
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-muted)]">Uplink</p>
         <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl uppercase">Contact</h2>
         <p className="mt-3 max-w-2xl text-sm text-[var(--color-muted)]">
