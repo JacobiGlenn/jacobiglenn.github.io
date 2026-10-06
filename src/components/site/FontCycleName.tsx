@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const FONTS = [
   '"Big Shoulders Display", sans-serif',
@@ -15,12 +15,21 @@ const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ█▓▒░'
 export function FontCycleName({ text }: { text: string }) {
   const [font, setFont] = useState(0)
   const [shown, setShown] = useState(text)
+  const holdRef = useRef<number | undefined>(undefined)
+  const scrambleRef = useRef<number | undefined>(undefined)
 
   useEffect(() => {
-    let scramble: number | undefined
-    const hold = window.setInterval(() => {
+    const clearAll = () => {
+      if (holdRef.current) window.clearInterval(holdRef.current)
+      if (scrambleRef.current) window.clearInterval(scrambleRef.current)
+      holdRef.current = undefined
+      scrambleRef.current = undefined
+    }
+
+    const runScramble = () => {
+      if (scrambleRef.current) window.clearInterval(scrambleRef.current)
       let n = 0
-      scramble = window.setInterval(() => {
+      scrambleRef.current = window.setInterval(() => {
         n += 1
         setShown(
           text
@@ -29,15 +38,34 @@ export function FontCycleName({ text }: { text: string }) {
             .join(''),
         )
         if (n > 8) {
-          if (scramble) window.clearInterval(scramble)
+          if (scrambleRef.current) window.clearInterval(scrambleRef.current)
+          scrambleRef.current = undefined
           setFont((f) => (f + 1) % FONTS.length)
           setShown(text)
         }
       }, 40)
-    }, 2200)
+    }
+
+    const start = () => {
+      clearAll()
+      setShown(text)
+      holdRef.current = window.setInterval(runScramble, 2200)
+    }
+
+    const onVis = () => {
+      if (document.hidden) {
+        clearAll()
+        setShown(text)
+      } else {
+        start()
+      }
+    }
+
+    if (!document.hidden) start()
+    document.addEventListener('visibilitychange', onVis)
     return () => {
-      window.clearInterval(hold)
-      if (scramble) window.clearInterval(scramble)
+      document.removeEventListener('visibilitychange', onVis)
+      clearAll()
     }
   }, [text])
 

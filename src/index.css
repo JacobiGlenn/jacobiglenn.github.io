@@ -478,6 +478,12 @@ a.island-tab-on, a.island-tab-on:hover { color: var(--color-accent); }
 .lb-in .lb-panel { animation: lb-panel-in 160ms ease-out; }
 .lb-out { pointer-events: none; animation: lb-in 140ms ease-in reverse forwards; }
 
+@keyframes mini-burst {
+  0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)); }
+}
+.mini-burst { animation: mini-burst 900ms ease-out forwards; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

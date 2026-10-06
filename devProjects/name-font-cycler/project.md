@@ -67,7 +67,7 @@ cd Name_FontCycler</pre></div>
 
 <p><strong>7. Embed in your README</strong></p>
 <div class="project-detail-code-wrap"><div class="project-detail-code-label">HTML</div><pre class="project-detail-pre">&lt;h1 align="center"&gt;
-  &lt;img src="Assets/NameFontCycle.gif" alt="Jacob Glenn" width="550"&gt;
+  &lt;img src="Assets/NameFontCycle.gif" alt="Jacobi Glenn" width="550"&gt;
 &lt;/h1&gt;</pre></div>
 
 <h2 class="project-detail-h2">Customization options</h2>

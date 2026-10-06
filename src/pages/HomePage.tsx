@@ -1,4 +1,5 @@
 import { SiteCard } from '@/components/site/SiteCard'
+import { MiniGridCard } from '@/components/site/MiniGridCard'
 import { FontCycleName } from '@/components/site/FontCycleName'
 import { featuredProjects } from '@/lib/content'
 import { Button } from '@/components/ui/button'
@@ -50,6 +51,7 @@ export function HomePage() {
           {featured.map((p) => (
             <SiteCard key={p.id} project={p} />
           ))}
+          <MiniGridCard />
         </div>
       </section>
 
