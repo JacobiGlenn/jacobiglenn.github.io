@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 const modules = [
   { to: '/', label: 'Home', end: true },
   { to: '/experience', label: 'Work' },
-  { to: '/blog', label: 'Log' },
+  { to: '/blog', label: 'Blog' },
 ]
 
 function Clock() {
@@ -15,7 +15,7 @@ function Clock() {
     return () => clearInterval(id)
   }, [])
   return (
-    <span className="hidden font-mono text-[10px] tracking-[0.16em] text-[var(--color-muted)] sm:inline">
+    <span className="hidden font-mono text-[10px] tracking-[0.16em] text-[var(--color-muted)] lg:inline">
       {t.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
     </span>
   )
@@ -25,6 +25,7 @@ export function HudNav() {
   const location = useLocation()
   const [menu, setMenu] = useState(false)
   const [ports, setPorts] = useState(false)
+  const [ping, setPing] = useState(false)
   const portRef = useRef<HTMLDivElement>(null)
   const onPortfolio = location.pathname.startsWith('/portfolio')
   const onDesign = location.pathname.startsWith('/portfolio/design')
@@ -33,6 +34,9 @@ export function HudNav() {
   useEffect(() => {
     setMenu(false)
     setPorts(false)
+    setPing(true)
+    const id = window.setTimeout(() => setPing(false), 320)
+    return () => window.clearTimeout(id)
   }, [location.pathname])
 
   useEffect(() => {
@@ -53,13 +57,13 @@ export function HudNav() {
 
   return (
     <header className="sticky top-0 z-40 overflow-visible bg-gradient-to-b from-[var(--color-ground)] via-[color-mix(in_srgb,var(--color-ground)_88%,transparent)] to-transparent px-3 pb-2 pt-3 md:px-5">
-      <div className="mx-auto flex max-w-[1400px] items-center gap-3">
-        <NavLink to="/" className="group relative z-10 flex items-center gap-2 text-inherit hover:text-[var(--color-ink)]">
-          <span className="nav-seal relative grid h-11 w-11 place-items-center border border-[var(--color-accent)] [clip-path:polygon(18%_0,100%_0,100%_82%,82%_100%,0_100%,0_18%)]">
-            <img src="/assets/logo-mark.png" alt="" className="h-7 w-7 object-contain" />
+      <div className="mx-auto flex max-w-[1400px] items-center gap-4">
+        <NavLink to="/" className="group relative z-10 flex min-w-0 shrink-0 items-center gap-2 text-inherit hover:text-[var(--color-ink)]">
+          <span className="nav-seal relative grid h-11 w-11 shrink-0 place-items-center border border-[var(--color-accent)] [clip-path:polygon(18%_0,100%_0,100%_82%,82%_100%,0_100%,0_18%)]">
+            <img src="/assets/logo.svg" alt="Jacobi Glenn" className="h-7 w-7 object-contain" />
           </span>
-          <span className="hidden max-w-[16rem] leading-tight sm:block">
-            <span className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--color-accent)]">
+          <span className="hidden leading-tight md:block">
+            <span className="block whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.08em] text-[var(--color-accent)]">
               Soph @ UC Irvine | Coding Tutor | US Army
             </span>
             <span className="font-[family-name:var(--font-display)] text-lg uppercase tracking-[0.08em]">Jacobi Glenn</span>
@@ -69,7 +73,7 @@ export function HudNav() {
         <div className="relative mx-auto hidden min-w-0 flex-1 justify-center md:flex">
           <div className="nav-island-glow" />
           <div className="relative z-10" ref={portRef}>
-            <nav className="nav-island flex items-stretch" aria-label="Primary">
+            <nav className={`nav-island flex items-stretch ${ping ? 'nav-fire' : ''}`} aria-label="Primary">
               {modules.map((m) => (
                 <NavLink
                   key={m.to}

@@ -25,7 +25,7 @@ export function HomePage() {
           the messy parts are worth documenting.
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
-          <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">SE // CS</span>
+          <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">SWE // CS</span>
           <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">UCI</span>
           <span className="border border-[var(--color-accent)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent)]">Live</span>
         </div>

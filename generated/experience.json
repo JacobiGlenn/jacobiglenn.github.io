@@ -1,23 +1,54 @@
 {
-  "summary": "Computer Science and Software Engineering student at UC Irvine, double majoring with a specialization in Networked Systems. I have hands-on experience on both sides of a product: as a developer I have shipped full-stack applications and won two hackathons (ICSSC WebJam 2025 and IrvineHacks 2026), and as a UX designer at Commit the Change I am building real tools for Celebrating Life Community Health Center, a healthcare provider serving underserved communities in Orange County. I also teach JavaScript, Unity C#, and block-based programming at Code Ninjas and evaluate multimodal AI models professionally.",
+  "summary": "Software Engineering and Computer Science student at UC Irvine focused on full-stack app development, backed by years of programming, IT, and product design experience. Proven track record of delivering polished, user-facing features and meeting delivery milestones.",
   "jobs": [
     {
-      "id": "army",
-      "company": "Army National Guard",
-      "title": "Aircraft Pneudraulics Repairer (15H)",
-      "location": "Part-time · enlisted end of high school",
-      "start": "Sep 2025",
+      "id": "merage",
+      "company": "UC Irvine · The Paul Merage School of Business",
+      "title": "Merage Tech · Student Computing Assistant",
+      "location": "Irvine, CA",
+      "start": "Sep 2026",
       "end": "Present",
-      "dateLabel": "Sep 2025 – Present",
-      "dateSort": 202509,
+      "dateLabel": "Sep 2026 – Present",
+      "dateSort": 202609,
       "bullets": [
-        "Part-time service alongside college — drill, training, and the discipline that comes with it",
-        "MOS and platform details: see the blog post Welcome to my website"
+        "Student computing support for Merage Tech at the Paul Merage School of Business",
+        "Helping faculty and students with day-to-day systems, labs, and classroom technology"
       ],
       "tags": [
-        "Leadership",
-        "Discipline",
-        "Teamwork"
+        "IT Support",
+        "Higher Ed",
+        "Help Desk"
+      ],
+      "category": "tech",
+      "logo": {
+        "bg": "#0b3d2e",
+        "color": "#c5f240",
+        "letter": "MT",
+        "size": "0.7rem"
+      },
+      "photos": []
+    },
+    {
+      "id": "army",
+      "company": "US Army",
+      "title": "Aircraft Pneudraulics Repairer (PV2 · 15H)",
+      "location": "Army National Guard",
+      "start": "Nov 2025",
+      "end": "Present",
+      "dateLabel": "Nov 2025 – Present",
+      "dateSort": 202511,
+      "bullets": [
+        "BCT Honor Graduate",
+        "Troubleshoot aircraft hydraulic and pneumatic systems: isolate pressure losses, fluid leaks, and mechanical faults with precision test equipment and schematics",
+        "Document maintenance actions in digital tracking systems for complete historical compliance and traceability",
+        "Keep a hazardous-material-compliant workspace and operate specialized ground support equipment and hydraulic test stands"
+      ],
+      "tags": [
+        "15H",
+        "Hydraulics",
+        "Pneumatics",
+        "Aircraft Maintenance",
+        "Leadership"
       ],
       "category": "mil",
       "logo": {
@@ -69,7 +100,7 @@
       "start": "Nov 2025",
       "end": "Present",
       "dateLabel": "Nov 2025 – Present",
-      "dateSort": 202511,
+      "dateSort": 202602,
       "bullets": [],
       "tags": [
         "JavaScript",
@@ -93,16 +124,17 @@
           "date": "Feb 2026 – Present",
           "bullets": [
             "Created weekly lesson plans based on the LEGO SPIKE curriculum for groups of 3–6 students",
-            "Taught robotics fundamentals through hands-on exploration and personalized instruction techniques"
+            "Taught robotics fundamentals through hands-on exploration and personalized instruction",
+            "Continuing Microsoft IMPACT support (block-based coding, JavaScript, Unity) alongside weekly robotics"
           ]
         },
         {
           "role": "Code Sensei",
-          "date": "Nov 2025 – Present",
+          "date": "Nov 2025 – Feb 2026",
           "bullets": [
-            "Supported students aged 5–14 through block-based coding, JavaScript, and Unity game development",
-            "Provided real-time support for logic errors, syntax issues, and platform navigation with emphasis on conceptual understanding",
-            "Managed front desk operations including phone support, scheduling, and administrative tasks",
+            "Supported students aged 5–14 through Microsoft IMPACT: block-based coding, JavaScript, and Unity",
+            "Provided real-time support for logic errors, syntax, and platform navigation with emphasis on understanding over quick fixes",
+            "Managed front desk operations including phone support, scheduling, and parent communication",
             "Designed promotional graphics and videos for events and social media outreach"
           ]
         }
@@ -110,19 +142,20 @@
     },
     {
       "id": "social",
-      "company": "Freelance · YouTube, Instagram, Graphic Design, and Company Logos",
-      "title": "Multimedia & Social",
-      "location": "Remote & TuHS",
-      "start": "Dec 2019",
-      "end": "Jun 2025",
-      "dateLabel": "Dec 2019 – Jun 2025",
-      "dateSort": 201912,
+      "company": "Freelance",
+      "title": "Social Media Designer",
+      "location": "Remote",
+      "start": "Sep 2023",
+      "end": "Present",
+      "dateLabel": "Sep 2023 – Present",
+      "dateSort": 202309,
       "bullets": [
         "Proficient in video editing software: iMovie, DaVinci Resolve, Premiere Pro, and CapCut",
         "Utilized Adobe Illustrator, Photoshop, and Canva for photo editing and graphic design",
         "Managed TimberwolfTV YouTube channel, editing weekly uploads for approximately 2,500 students",
         "Created Instagram content for TuHS esports and Tualatin Boys Tennis, producing up to 10 posts weekly across both accounts (match graphics, highlights, reels)",
-        "Currently designing promotional materials and videos for Code Ninjas Irvine location"
+        "Currently designing for Code Ninjas Irvine (@codeninjasirvine)",
+        "Previously designed for TuHS Esports and Tualatin Boys Tennis; edited YouTube for TimberwolfTV and @ob1cobi"
       ],
       "tags": [
         "Graphic Design",
@@ -156,9 +189,11 @@
       "dateSort": 202510,
       "companyHref": "https://ctc-uci.com/",
       "bullets": [
-        "Product and UI/UX designer for Celebrating Life Community Health Center project",
-        "Wireframes and clickable prototypes in Figma; iterating with developers and project leads as the product evolves",
-        "More visuals and a deeper write-up coming as the work becomes shareable"
+        "Designed an internal quota-management platform for Celebrating Life Community Health Center, serving ~15K patients across 5 clinics",
+        "Designed the end-to-end quota workflow in Figma (create, edit, delete) around a slide-out side panel",
+        "Validated usability with think-aloud testing and iterated from sketches through hi-fi prototypes with a 5-person design team",
+        "Built an audit-log interface giving staff full traceability into quota changes",
+        "Applied Chakra UI and client brand guidelines so designs stayed developer-ready"
       ],
       "tags": [
         "Figma",
@@ -265,10 +300,10 @@
       "company": "Dairy Queen",
       "title": "Crew Member",
       "location": "On-site",
-      "start": "Jun 2022",
-      "end": "Sep 2022",
-      "dateLabel": "Jun 2022 – Sep 2022",
-      "dateSort": 202206,
+      "start": "Jun 2021",
+      "end": "Sep 2021",
+      "dateLabel": "Jun 2021 – Sep 2021",
+      "dateSort": 202106,
       "bullets": [
         "Memorized food and drink recipes to prepare orders with speed and accuracy during rush hours",
         "Recommended menu items based on customer preferences and dietary restrictions",
@@ -295,8 +330,14 @@
       "school": "UC Irvine",
       "degree": "B.S. Software Engineering & Computer Science (Double Major)",
       "minor": "CS Specialization: Networked Systems · Activities: Commit the Change",
-      "date": "2025 – Present",
+      "date": "Sep 2025 – Jun 2029",
       "galleryId": "uci"
+    },
+    {
+      "school": "American Military University",
+      "degree": "Associate of Science, Cybersecurity",
+      "minor": "In progress alongside the UCI bachelor's",
+      "date": "Sep 2026 – Jun 2028"
     },
     {
       "school": "Tualatin High School",
@@ -307,6 +348,11 @@
     }
   ],
   "honors": [
+    {
+      "title": "Honor Graduate",
+      "issuer": "US Army Basic Combat Training",
+      "desc": "Honor Graduate at BCT while serving as a 15H National Guardsman (Aircraft Pneudraulics Repair)."
+    },
     {
       "title": "Best Neuro Hack",
       "issuer": "IrvineHacks 2026 · Mar 2026",

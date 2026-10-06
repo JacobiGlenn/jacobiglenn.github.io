@@ -94,7 +94,7 @@ export function BlogPage() {
   return (
     <div className="space-y-10 py-6">
       <div>
-        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">Transmission log</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">Socials & Posts</p>
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-5xl uppercase">Blog</h1>
       </div>
 
