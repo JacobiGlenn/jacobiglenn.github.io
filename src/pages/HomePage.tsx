@@ -15,14 +15,13 @@ export function HomePage() {
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-steel)]">Irvine · Pacific</span>
         </div>
         <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
-          Soph @ UC Irvine | Coding Tutor | US Army
+          UC Irine | US Army | Code Ninjas | Merage Tech
         </p>
         <FontCycleName text="Jacobi Glenn" />
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[var(--color-muted)]">
-          I build full-stack products, work on UI/UX for a healthcare project with <strong className="text-[var(--color-ink)]">Commit the Change</strong>, and
-          teach kids <strong className="text-[var(--color-ink)]">JavaScript</strong> and <strong className="text-[var(--color-ink)]">Unity</strong> at{' '}
-          <strong className="text-[var(--color-ink)]">Code Ninjas</strong>. This is the long-form portfolio: case studies, code, writing, and a build log when
-          the messy parts are worth documenting.
+          I am a full-stack developer currently teaching kids <strong className="text-[var(--color-ink)]">JavaScript</strong> and <strong className="text-[var(--color-ink)]">Lego Robotics</strong> at{' '}
+          at <strong className="text-[var(--color-ink)]">Code Ninjas</strong> and building product UI/UX at <strong className="text-[var(--color-ink)]">Commit the Change</strong> with  <strong className="text-[var(--color-ink)]">Figma</strong> 
+          This is my main portfolio
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
           <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">SWE // CS</span>

@@ -4,53 +4,17 @@ import { PortfolioPage } from '@/pages/PortfolioPage'
 import { ProjectDetailPage } from '@/pages/ProjectDetailPage'
 import { ExperiencePage } from '@/pages/ExperiencePage'
 import { BlogPage } from '@/pages/BlogPage'
-import { Terminal } from '@/terminal/Terminal'
 import { BootForm } from '@/components/site/BootForm'
-import { markVisited, shouldSkipTerminal } from '@/lib/visit'
-import { useCallback, useEffect, useState } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { useCallback, useState } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 export default function App() {
-  const location = useLocation()
-  const [ready, setReady] = useState(() => shouldSkipTerminal())
-  const [hello, setHello] = useState('')
   const [booting, setBooting] = useState(true)
-
-  useEffect(() => {
-    if (new URLSearchParams(location.search).get('direct') === '1') {
-      markVisited('Guest')
-      setReady(true)
-    }
-  }, [location.search])
-
-  useEffect(() => {
-    if (!hello) return
-    const id = window.setTimeout(() => setHello(''), 420)
-    return () => window.clearTimeout(id)
-  }, [hello])
-
   const finishBoot = useCallback(() => setBooting(false), [])
-
-  if (!ready) {
-    return (
-      <Terminal
-        onEnter={(name) => {
-          setHello(name)
-          setReady(true)
-          setBooting(true)
-        }}
-      />
-    )
-  }
 
   return (
     <>
       {booting ? <BootForm onDone={finishBoot} /> : null}
-      {hello ? (
-        <div className="pointer-events-none fixed inset-0 z-[95] grid place-items-center font-[family-name:var(--font-display)] text-4xl uppercase tracking-[0.12em] text-[var(--color-accent)]">
-          {hello}
-        </div>
-      ) : null}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />

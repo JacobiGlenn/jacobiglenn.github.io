@@ -19,7 +19,6 @@
 
 :root {
   color-scheme: dark;
-  --hud-h: 4.75rem;
 }
 
 * { box-sizing: border-box; }

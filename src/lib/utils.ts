@@ -21,7 +21,3 @@ export function placeholderDataUri(title: string) {
   </svg>`
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
 }
-
-export function keyOf(company: string, title: string) {
-  return `${company}|${title}`.toLowerCase().replace(/\s+/g, ' ').trim()
-}

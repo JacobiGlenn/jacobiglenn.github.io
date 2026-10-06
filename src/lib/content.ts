@@ -44,10 +44,3 @@ export function featuredProjects() {
   return [...v, ...d].slice(0, 4)
 }
 
-export function expSnippets(jobs: ExpJob[]) {
-  return jobs.map((j) => ({
-    title: `${j.title} · ${j.company}`,
-    lines: [j.bullets[0] || j.subroles?.[0]?.bullets[0] || j.location, j.dateLabel].filter(Boolean) as string[],
-  }))
-}
-
