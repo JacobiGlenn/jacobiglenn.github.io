@@ -57,7 +57,11 @@ function loadPost(slug) {
   if (bodyHtml.includes('<!--BLOG_GDOC_FRAGMENT-->') && fs.existsSync(gdocInject)) {
     bodyHtml = bodyHtml.replace('<!--BLOG_GDOC_FRAGMENT-->', fs.readFileSync(gdocInject, 'utf8'));
   }
-  const coverUrl = data.cover ? `/blog/${slug}/${data.cover}` : findCover(postDir, slug);
+  const coverUrl = data.cover
+    ? `/blog/${slug}/${data.cover}`
+    : data.banner
+      ? ''
+      : findCover(postDir, slug);
   const excerptRaw = data.excerpt || stripHtml(bodyHtml).slice(0, 180).trim();
   const excerpt = excerptRaw.length >= 180 ? excerptRaw + '...' : excerptRaw;
   return {

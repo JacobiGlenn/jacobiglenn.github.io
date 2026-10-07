@@ -22,7 +22,12 @@ export function ProjectDetailPage() {
       <StickyBack to={`/portfolio/${project.kind === 'design' ? 'design' : 'dev'}`} />
       {hero ? (
         <div className="relative h-56 overflow-hidden border border-[var(--color-line)]">
-          <MediaImage src={assetPath(hero)} alt="" className="h-full w-full object-cover" />
+          <MediaImage
+            src={assetPath(hero)}
+            alt=""
+            className="h-full w-full bg-white"
+            style={{ objectFit: project.coverSize === 'contain' ? 'contain' : 'cover' }}
+          />
         </div>
       ) : null}
       <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl uppercase">{project.title}</h1>

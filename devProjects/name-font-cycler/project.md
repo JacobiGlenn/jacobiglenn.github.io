@@ -20,7 +20,7 @@ featured: true
 </div>
 
 <figure class="project-detail-fig" style="max-width:560px;background:#111;">
-<img src="https://raw.githubusercontent.com/JacobiGlenn/Name_FontCycler/main/NameFontCycle.gif" width="550" alt="Animated header: name cycling through fonts" loading="lazy" decoding="async" style="display:block;margin:0 auto;max-width:100%;height:auto;">
+<img src="https://raw.githubusercontent.com/JacobiGlenn/Name_FontCycler/main/NameFontCycle.gif" width="550" alt="Animated header: name cycling through fonts" style="display:block;margin:0 auto;max-width:100%;height:auto;">
 <figcaption><code>NameFontCycle.gif</code> from the repository</figcaption>
 </figure>
 

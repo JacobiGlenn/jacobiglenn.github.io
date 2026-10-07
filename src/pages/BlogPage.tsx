@@ -1,4 +1,5 @@
 import { AsciiHead } from '@/components/site/AsciiHead'
+import { BootLoopCard, BootLoopHeader } from '@/components/site/BootAnteater'
 import { ButtonCarousel } from '@/components/site/ButtonCarousel'
 import { HtmlBlock } from '@/components/site/HtmlBlock'
 import { Lightbox } from '@/components/site/Lightbox'
@@ -81,12 +82,16 @@ export function BlogPage() {
           <div className="h-48 overflow-hidden border border-[var(--color-line)]">
             <AsciiHead />
           </div>
+        ) : post.banner === 'boot-anteater' ? (
+          <div className="overflow-hidden">
+            <BootLoopHeader />
+          </div>
         ) : post.coverUrl ? (
           <MediaImage src={assetPath(post.coverUrl)} alt="" className="max-h-64 w-full object-cover" />
         ) : null}
         <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">{post.dateDisplay}</p>
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl uppercase">{post.title}</h1>
-        <HtmlBlock html={post.bodyHtml} className="mt-6" />
+        <HtmlBlock html={post.bodyHtml} className="mt-6 blog-prose" />
       </div>
     )
   }
@@ -107,9 +112,11 @@ export function BlogPage() {
             onClick={() => navigate(`/blog/${p.id}`)}
           >
             <span className="card-sweep" />
-            <div className="h-36 w-44 shrink-0 bg-[var(--color-ground-2)]">
+            <div className="h-36 w-52 shrink-0 bg-[var(--color-ground-2)]">
               {p.banner === 'ascii-face' ? (
                 <AsciiHead className="h-full" />
+              ) : p.banner === 'boot-anteater' ? (
+                <BootLoopCard />
               ) : (
                 <MediaImage src={p.coverUrl ? assetPath(p.coverUrl) : undefined} alt={p.title} className="h-full w-full object-cover" />
               )}

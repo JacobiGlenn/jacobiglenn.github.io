@@ -5,6 +5,7 @@ github: https://github.com/JacobiGlenn/Zotletics
 kind: dev
 cover: CARD.svg
 header: COVER.svg
+cover_size: contain
 date: "11/2025"
 ongoing: true
 ---

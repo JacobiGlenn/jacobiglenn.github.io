@@ -1,16 +1,72 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
   <rect width="800" height="450" fill="#ffffff"/>
-  <text x="400" y="70" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="22" fill="#111" letter-spacing="4">WORK IN PROGRESS</text>
-  <text x="400" y="250" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#111" xml:space="preserve">
-    <tspan x="400" dy="0">            .-.</tspan>
-    <tspan x="400" dy="14">           /  |</tspan>
-    <tspan x="400" dy="14">     .--.-'   '-.</tspan>
-    <tspan x="400" dy="14">    /  (o)   (o) \</tspan>
-    <tspan x="400" dy="14">    |      ^      |</tspan>
-    <tspan x="400" dy="14">     \   '---'   /</tspan>
-    <tspan x="400" dy="14">      '-._____.-'</tspan>
-    <tspan x="400" dy="14">         /   \</tspan>
-    <tspan x="400" dy="14">    ____/     \____</tspan>
-    <tspan x="400" dy="14">   /  anteater zot  \</tspan>
-  </text>
+  <text x="400" y="32" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="16" fill="#111" letter-spacing="6">WORK IN PROGRESS</text>
+  <g transform="translate(231.53, 48) scale(0.5974)">
+    <text font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" fill="#111" xml:space="preserve">
+      <tspan x="0" dy="0">                                             +M+           =#MMM####MM#+                 .+MM;</tspan>
+      <tspan x="0" dy="10.2">                                              ;X#=.        =#MM#M#MMMM#;                +M; .</tspan>
+      <tspan x="0" dy="10.2">                                                =#M        =##MMMMMMMM#;               XM=</tspan>
+      <tspan x="0" dy="10.2">                                                 .M.       =#####M#####.            .+M+.</tspan>
+      <tspan x="0" dy="10.2">                                                  #.        ######M###X           .;MX=</tspan>
+      <tspan x="0" dy="10.2">                                                  MM        .+#######=         .XM#X</tspan>
+      <tspan x="0" dy="10.2">                                                  ;#=         ;=##=;;         .MM+.</tspan>
+      <tspan x="0" dy="10.2">                                                   M#.        ;M#M.           M;</tspan>
+      <tspan x="0" dy="10.2">                                                   ;#M       ;#####X         ;M</tspan>
+      <tspan x="0" dy="10.2">                                                    +#=     ;###M#M#.       .M.</tspan>
+      <tspan x="0" dy="10.2">                                                     X#=    X##MMMM#+       M=</tspan>
+      <tspan x="0" dy="10.2">                                                      =#+; =##MMMMMMM     ;M+</tspan>
+      <tspan x="0" dy="10.2">                                              .;.      X######MMMMM##   .+#X</tspan>
+      <tspan x="0" dy="10.2">                                             =#MM.      +M####MMMM###M.=M#+</tspan>
+      <tspan x="0" dy="10.2">                                           .XM..XM=       =M##M#MM#######=</tspan>
+      <tspan x="0" dy="10.2">                                          ;MM;   M##+      .X#####M+====.</tspan>
+      <tspan x="0" dy="10.2">                                         =M=      X##M;.  ;;######+           .+;</tspan>
+      <tspan x="0" dy="10.2">                                      ;+M=.        .;X#M######MM###=..  ..;++M#XX.</tspan>
+      <tspan x="0" dy="10.2">                                    =M#=              . +####MMMM#####MM######. .M</tspan>
+      <tspan x="0" dy="10.2">                                  =XX=                    X##MMMM#####MXXX=.    .#+</tspan>
+      <tspan x="0" dy="10.2">                                 M.                       M##MXMM##XMM.          =#.</tspan>
+      <tspan x="0" dy="10.2">                               XX                       ;=####MMM##+              XM</tspan>
+      <tspan x="0" dy="10.2">                                                       =####MMMMM##X               M=</tspan>
+      <tspan x="0" dy="10.2">                                            .;;;;;;;;;X##MM###MMM###M              .X+;</tspan>
+      <tspan x="0" dy="10.2">                                            M########M===.=M###M#####M.              +#;</tspan>
+      <tspan x="0" dy="10.2">                                           =M...++++.     ;M#####=.=###M=.            .M+.</tspan>
+      <tspan x="0" dy="10.2">                                           M=             X######=    =####M++=         +#X</tspan>
+      <tspan x="0" dy="10.2">                                          .X              +######X     ...=M###.         .=M=</tspan>
+      <tspan x="0" dy="10.2">                                          =.            +#######M             #.            MM</tspan>
+      <tspan x="0" dy="10.2">                                         .X            +####M####M;           XM             .</tspan>
+      <tspan x="0" dy="10.2">                                         M;           X#####MMM####=          .M</tspan>
+      <tspan x="0" dy="10.2">                                       ;M.           +##M#MMMM######           MX</tspan>
+      <tspan x="0" dy="10.2">                                      .#+            M###M##MMM#####.          +X</tspan>
+      <tspan x="0" dy="10.2">                                     +M+            X####MM#MMMM####=           M</tspan>
+      <tspan x="0" dy="10.2">                                    ++.             ####M#MMMMM#M###M           M=</tspan>
+      <tspan x="0" dy="10.2">                                    ;              .###MMMMMMMMM#M##M           ;M</tspan>
+      <tspan x="0" dy="10.2">                                   .=              M##M#MMMMMMMM####M           .M=</tspan>
+      <tspan x="0" dy="10.2">                                  +X               M##MM#M#XMM#######            .M=</tspan>
+      <tspan x="0" dy="10.2">                                                  .##MM##MMMMM#M#M##M             ;M</tspan>
+      <tspan x="0" dy="10.2">                                                  +###MMMMMMMM######M              +X</tspan>
+      <tspan x="0" dy="10.2">                                                  +###MMMMM#MM###M##M              .M.</tspan>
+      <tspan x="0" dy="10.2">                                                  M##M##XMMMMMMMM###M               ++</tspan>
+      <tspan x="0" dy="10.2">                                                  #####MXMMMMM##M###X                XM</tspan>
+      <tspan x="0" dy="10.2">                                                  ###MMMMMMMMMM#####=</tspan>
+      <tspan x="0" dy="10.2">                                                  ####MMM#MMM#######.</tspan>
+      <tspan x="0" dy="10.2">                                                  ###MMMMXMM########</tspan>
+      <tspan x="0" dy="10.2">                                                  M###MMMMMMMM#####M</tspan>
+      <tspan x="0" dy="10.2">                                                  +######XMM#MM####;</tspan>
+      <tspan x="0" dy="10.2">                                                  .##M##M#MXMMM###+</tspan>
+      <tspan x="0" dy="10.2">                                                   +######MM#M###M</tspan>
+      <tspan x="0" dy="10.2">                                                    M######MM###M;</tspan>
+      <tspan x="0" dy="10.2">                                                    .X#########M;</tspan>
+      <tspan x="0" dy="10.2">                                                      =M######=</tspan>
+      <tspan x="0" dy="10.2">              .                                        ;+++++.</tspan>
+      <tspan x="0" dy="10.2">              =</tspan>
+      <tspan x="0" dy="10.2">             .=</tspan>
+      <tspan x="0" dy="10.2">              X</tspan>
+      <tspan x="0" dy="10.2">              =;</tspan>
+      <tspan x="0" dy="10.2">              =X</tspan>
+      <tspan x="0" dy="10.2">              =#          ;</tspan>
+      <tspan x="0" dy="10.2">               M         ;</tspan>
+      <tspan x="0" dy="10.2">               X=        +====.</tspan>
+      <tspan x="0" dy="10.2">               X=       X#####M. ;</tspan>
+      <tspan x="0" dy="10.2">               X       =#######= =</tspan>
+    </text>
+  </g>
 </svg>
