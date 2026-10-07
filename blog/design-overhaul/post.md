@@ -1,5 +1,5 @@
 ---
-title: "Design overhaul, or: I threw out the one giant HTML file"
+title: "Design overhaul"
 date: "10/2026"
 banner: boot-anteater
 excerpt: "The complete vision for what the site should have been. With huge inspo from Marathon, Watch Dogs, Cyberpunk, and Evangelion. It's all in react now too!"
