@@ -1,0 +1,372 @@
+{
+  "summary": "Software Engineering and Computer Science student at UC Irvine focused on full-stack app development, backed by years of programming, IT, and product design experience. Proven track record of delivering polished, user-facing features and meeting delivery milestones.",
+  "jobs": [
+    {
+      "id": "merage",
+      "company": "UC Irvine · The Paul Merage School of Business",
+      "title": "Merage Tech · Student Computing Assistant",
+      "location": "Irvine, CA",
+      "start": "Sep 2026",
+      "end": "Present",
+      "dateLabel": "Sep 2026 – Present",
+      "dateSort": 202609,
+      "bullets": [
+        "Student computing support for Merage Tech at the Paul Merage School of Business",
+        "Helping faculty and students with day-to-day systems, labs, and classroom technology"
+      ],
+      "tags": [
+        "IT Support",
+        "Higher Ed",
+        "Help Desk"
+      ],
+      "category": "tech",
+      "logo": {
+        "bg": "#0b3d2e",
+        "color": "#c5f240",
+        "letter": "MT",
+        "size": "0.7rem"
+      },
+      "photos": []
+    },
+    {
+      "id": "army",
+      "company": "US Army",
+      "title": "Aircraft Pneudraulics Repairer (PV2 · 15H)",
+      "location": "Army National Guard",
+      "start": "Nov 2025",
+      "end": "Present",
+      "dateLabel": "Nov 2025 – Present",
+      "dateSort": 202511,
+      "bullets": [
+        "BCT Honor Graduate",
+        "Troubleshoot aircraft hydraulic and pneumatic systems: isolate pressure losses, fluid leaks, and mechanical faults with precision test equipment and schematics",
+        "Document maintenance actions in digital tracking systems for complete historical compliance and traceability",
+        "Keep a hazardous-material-compliant workspace and operate specialized ground support equipment and hydraulic test stands"
+      ],
+      "tags": [
+        "15H",
+        "Hydraulics",
+        "Pneumatics",
+        "Aircraft Maintenance",
+        "Leadership"
+      ],
+      "category": "mil",
+      "logo": {
+        "bg": "#1b3a2d",
+        "color": "#c8d8a0",
+        "letter": "★",
+        "size": "0.8rem"
+      },
+      "photos": []
+    },
+    {
+      "id": "handshake",
+      "company": "Handshake",
+      "title": "AI Trainer – Multimodal Systems Expert",
+      "location": "Remote",
+      "start": "Feb 2026",
+      "end": "Present",
+      "dateLabel": "Feb 2026 – Present",
+      "dateSort": 202602,
+      "bullets": [
+        "Evaluated AI model performance across audio, visual, and text-based tasks to assess multimodal accuracy and identify areas for improvement",
+        "Created domain-specific prompts and evaluated AI-generated responses to assess LLM reasoning and comprehension in technical contexts",
+        "Analyzed model outputs for correctness, clarity, and depth, comparing against domain-specific criteria and academic sources",
+        "Applied subject-matter expertise to evaluate and refine AI-generated responses for real-world alignment",
+        "Contributed to structured data annotation and content review projects supporting the development of accurate and inclusive AI systems"
+      ],
+      "tags": [
+        "Prompt Engineering",
+        "LLM Analysis",
+        "AI Training",
+        "Data Annotation",
+        "Technical Writing",
+        "Model Evaluation"
+      ],
+      "category": "ai",
+      "logo": {
+        "bg": "#c5f240",
+        "color": "#111",
+        "letter": "H",
+        "size": "1.2rem"
+      },
+      "photos": []
+    },
+    {
+      "id": "cn",
+      "company": "Code Ninjas",
+      "title": "Code Sensei / Robotics Teacher",
+      "location": "Irvine, CA",
+      "start": "Nov 2025",
+      "end": "Present",
+      "dateLabel": "Nov 2025 – Present",
+      "dateSort": 202602,
+      "bullets": [],
+      "tags": [
+        "JavaScript",
+        "Unity C#",
+        "LEGO SPIKE",
+        "Teaching",
+        "Graphic Design"
+      ],
+      "category": "edu",
+      "logo": {
+        "bg": "#000",
+        "color": "#fff",
+        "letter": "CN",
+        "size": "0.65rem"
+      },
+      "galleryId": "cn",
+      "photos": [],
+      "subroles": [
+        {
+          "role": "Robotics Teacher | Code Sensei",
+          "date": "Feb 2026 – Present",
+          "bullets": [
+            "Created weekly lesson plans based on the LEGO SPIKE curriculum for groups of 3–6 students",
+            "Taught robotics fundamentals through hands-on exploration and personalized instruction",
+            "Continuing Microsoft IMPACT support (block-based coding, JavaScript, Unity) alongside weekly robotics"
+          ]
+        },
+        {
+          "role": "Code Sensei",
+          "date": "Nov 2025 – Feb 2026",
+          "bullets": [
+            "Supported students aged 5–14 through Microsoft IMPACT: block-based coding, JavaScript, and Unity",
+            "Provided real-time support for logic errors, syntax, and platform navigation with emphasis on understanding over quick fixes",
+            "Managed front desk operations including phone support, scheduling, and parent communication",
+            "Designed promotional graphics and videos for events and social media outreach"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "company": "Freelance",
+      "title": "Social Media Designer",
+      "location": "Remote",
+      "start": "Sep 2023",
+      "end": "Present",
+      "dateLabel": "Sep 2023 – Present",
+      "dateSort": 202309,
+      "bullets": [
+        "Proficient in video editing software: iMovie, DaVinci Resolve, Premiere Pro, and CapCut",
+        "Utilized Adobe Illustrator, Photoshop, and Canva for photo editing and graphic design",
+        "Managed TimberwolfTV YouTube channel, editing weekly uploads for approximately 2,500 students",
+        "Created Instagram content for TuHS esports and Tualatin Boys Tennis, producing up to 10 posts weekly across both accounts (match graphics, highlights, reels)",
+        "Currently designing for Code Ninjas Irvine (@codeninjasirvine)",
+        "Previously designed for TuHS Esports and Tualatin Boys Tennis; edited YouTube for TimberwolfTV and @ob1cobi"
+      ],
+      "tags": [
+        "Graphic Design",
+        "Adobe PS & AI",
+        "Social Media",
+        "Video Editing",
+        "Branding"
+      ],
+      "category": "creative",
+      "logo": {
+        "bg": "#f97316",
+        "color": "#fff",
+        "letter": "MM",
+        "size": "0.65rem"
+      },
+      "galleryId": "social",
+      "photos": [
+        "assets/experience/social/news.png",
+        "assets/experience/social/esports.png",
+        "assets/experience/social/tennis.png"
+      ]
+    },
+    {
+      "id": "ctc",
+      "company": "Commit The Change, UCI",
+      "title": "UI/UX Designer",
+      "location": "Irvine, CA",
+      "start": "Oct 2025",
+      "end": "Present",
+      "dateLabel": "Oct 2025 – Present",
+      "dateSort": 202510,
+      "companyHref": "https://ctc-uci.com/",
+      "bullets": [
+        "Designed an internal quota-management platform for Celebrating Life Community Health Center, serving ~15K patients across 5 clinics",
+        "Designed the end-to-end quota workflow in Figma (create, edit, delete) around a slide-out side panel",
+        "Validated usability with think-aloud testing and iterated from sketches through hi-fi prototypes with a 5-person design team",
+        "Built an audit-log interface giving staff full traceability into quota changes",
+        "Applied Chakra UI and client brand guidelines so designs stayed developer-ready"
+      ],
+      "tags": [
+        "Figma",
+        "Prototyping",
+        "UX Research",
+        "Agile Sprints",
+        "Slack"
+      ],
+      "category": "design",
+      "logo": {
+        "bg": "#6b21a8",
+        "color": "#fff",
+        "letter": "CTC",
+        "size": "0.6rem"
+      },
+      "galleryId": "ctc",
+      "photos": []
+    },
+    {
+      "id": "bb",
+      "company": "Best Buy",
+      "title": "Sales Advisor / Apple Certified Sales Advisor",
+      "location": "Tualatin, OR",
+      "start": "Jul 2023",
+      "end": "Apr 2025",
+      "dateLabel": "Jul 2023 – Apr 2025",
+      "dateSort": 202307,
+      "bullets": [],
+      "tags": [
+        "Apple Certified",
+        "IT Support",
+        "Sales",
+        "Team Training",
+        "Customer Service"
+      ],
+      "category": "tech",
+      "logo": {
+        "bg": "#003b8e",
+        "color": "#ffd100",
+        "letter": "BB",
+        "size": "0.65rem"
+      },
+      "photos": [],
+      "subroles": [
+        {
+          "role": "Apple Certified Sales Advisor",
+          "date": "Feb 2025 – Apr 2025",
+          "bullets": [
+            "Completed Apple SEED certification and relayed product updates and knowledge to associates across the store",
+            "Provided specialized computing and mobile advisory to customers seeking Apple ecosystem guidance"
+          ]
+        },
+        {
+          "role": "Sales Advisor",
+          "date": "Jul 2023 – Feb 2025",
+          "bullets": [
+            "Provided sales support across all departments including Computing, Mobile, Home Theatre, Appliances, and Gaming",
+            "Communicated complex technology concepts clearly to customers of all backgrounds and comfort levels",
+            "Performed basic IT support through Geek Squad and scheduled customer installations",
+            "Trained and mentored ~30 new employees across three seasonal hiring waves; go-to for computing and home theater questions",
+            "Kept a pocket notebook of product differences across the sales floor to answer detailed customer comparisons"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tuhs",
+      "company": "TuHS Broadcasting",
+      "title": "Crew Lead · Editor · Graphic Designer",
+      "location": "Tualatin, OR",
+      "start": "Sep 2023",
+      "end": "Jun 2025",
+      "dateLabel": "Sep 2023 – Jun 2025",
+      "dateSort": 202309,
+      "bullets": [
+        "Crew lead: trained camera operators, managed the crew during live football and basketball broadcasts, and coordinated camera switches and timing over radio with the production team",
+        "Sophomore year focused on editing; junior and senior years added live streaming for football and basketball",
+        "Produced YouTube videos for Weekly Wolf and edited the weekly news package shown schoolwide",
+        "Designed the department logo, work apparel, and branding guide for TuHS Broadcasting"
+      ],
+      "tags": [
+        "Adobe Premiere Pro",
+        "DaVinci Resolve",
+        "Live Broadcast",
+        "Branding",
+        "Leadership"
+      ],
+      "category": "broadcast",
+      "logo": {
+        "bg": "#b22222",
+        "color": "#d0d0d0",
+        "letter": "THS",
+        "size": "0.62rem"
+      },
+      "galleryId": "tuhs",
+      "photos": [
+        "assets/experience/tuhs/team.png",
+        "assets/experience/tuhs/soundtown.png",
+        "assets/experience/tuhs/soundcart.png"
+      ]
+    },
+    {
+      "id": "dq",
+      "company": "Dairy Queen",
+      "title": "Crew Member",
+      "location": "On-site",
+      "start": "Jun 2021",
+      "end": "Sep 2021",
+      "dateLabel": "Jun 2021 – Sep 2021",
+      "dateSort": 202106,
+      "bullets": [
+        "Memorized food and drink recipes to prepare orders with speed and accuracy during rush hours",
+        "Recommended menu items based on customer preferences and dietary restrictions",
+        "Assisted in training 3+ new employees and maintained smooth team operations",
+        "Handled cash drawers and cleared tables to keep service running efficiently"
+      ],
+      "tags": [
+        "Customer Service",
+        "Cash Handling",
+        "Team Training"
+      ],
+      "category": "service",
+      "logo": {
+        "bg": "#d71920",
+        "color": "#fff",
+        "letter": "DQ",
+        "size": "0.65rem"
+      },
+      "photos": []
+    }
+  ],
+  "education": [
+    {
+      "school": "UC Irvine",
+      "degree": "B.S. Software Engineering & Computer Science (Double Major)",
+      "minor": "CS Specialization: Networked Systems · Activities: Commit the Change",
+      "date": "Sep 2025 – Jun 2029",
+      "galleryId": "uci"
+    },
+    {
+      "school": "American Military University",
+      "degree": "Associate of Science, Cybersecurity",
+      "minor": "In progress alongside the UCI bachelor's",
+      "date": "Sep 2026 – Jun 2028"
+    },
+    {
+      "school": "Tualatin High School",
+      "degree": "High School Diploma, Graduated With Honors",
+      "minor": "4.16 Weighted GPA · IB coursework: Film, English, Math, History, Physics (no IB exams)",
+      "date": "Graduated 2025",
+      "galleryId": "hs"
+    }
+  ],
+  "honors": [
+    {
+      "title": "Honor Graduate",
+      "issuer": "US Army Basic Combat Training",
+      "desc": "Honor Graduate at BCT while serving as a 15H National Guardsman (Aircraft Pneudraulics Repair)."
+    },
+    {
+      "title": "Best Neuro Hack",
+      "issuer": "IrvineHacks 2026 · Mar 2026",
+      "desc": "Awarded at UC Irvine's flagship collegiate hackathon — the largest in Orange County. Built PocketZot, a browser-extension digital pet that classifies cognitive offloading in real time using a fine-tuned GPT-4o-mini model."
+    },
+    {
+      "title": "Best Healthcare App",
+      "issuer": "ICSSC Webjam 2025 · Nov 2025",
+      "desc": "Built Zotletics (then Anteater Gym Service) — a fitness platform that generates workout plans tailored to UCI campus gyms based on available equipment and student data."
+    },
+    {
+      "title": "Best Presentation",
+      "issuer": "codeORcreate 2024 · Sep 2024",
+      "desc": "Oregon's regional programming challenge. Built an accessibility-focused public transit app with a routing algorithm that adapts to the user's disability — judged by a panel of 4 and awarded Best Presentation."
+    }
+  ]
+}

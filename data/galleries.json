@@ -1,0 +1,39 @@
+{
+  "tuhs": [
+    { "kind": "img", "src": "/assets/experience/tuhs/team.png", "caption": "The TuHS Broadcasting crew — wearing the apparel I designed for the department." },
+    { "kind": "img", "src": "/assets/experience/tuhs/soundtown.png", "caption": "Our SoundTown cart: ATEM Blackmagic full-size board with HDMI inputs feeding individual LCD screens for each camera feed." },
+    { "kind": "img", "src": "/assets/experience/tuhs/soundcart.png", "caption": "Soundcraft audio cart controlling output from cameras and microphones placed throughout the gym." },
+    { "kind": "img", "src": "/assets/experience/tuhs/monitors.png", "caption": "Football broadcast setup — left monitor shows current output, primed output, and live stream view. Right monitor is the scoreboard, updated live." }
+  ],
+  "social": [
+    { "kind": "img", "src": "/assets/experience/social/news.png", "caption": "Weekly Wolf News: edited every Friday for a Wednesday broadcast to about 2,500 students. School events and weekly highlights." },
+    { "kind": "img", "src": "/assets/experience/social/esports.png", "caption": "TuHS Esports Instagram: about five posts a week with match results, highlights, and reels for all three teams." },
+    { "kind": "img", "src": "/assets/experience/social/tennis.png", "caption": "Tualatin Boys Tennis: game-day graphics from my photos, team reels, and informational videos." },
+    { "kind": "img", "src": "/assets/experience/social/codeninjas.png", "caption": "Code Ninjas Irvine (Nov 2025 onward): location graphics and company-wide promo distribution. Only social work I still run." }
+  ],
+  "design-example": [
+    { "kind": "solid", "color": "#c62828", "caption": "This is an example of an image: a solid color fill." },
+    { "kind": "smiley", "caption": "This is an example of an image: the finished smiley mark." },
+    { "kind": "shapes", "caption": "This is an example of an image: oval, triangle, and square (from the case study)." }
+  ],
+  "cn": [
+    { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
+    { "kind": "solid", "color": "#faf7ed", "caption": "Example image" },
+    { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
+  ],
+  "ctc": [
+    { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
+    { "kind": "solid", "color": "#faf7ed", "caption": "Example image" },
+    { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
+  ],
+  "uci": [
+    { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
+    { "kind": "solid", "color": "#faf7ed", "caption": "Example image" },
+    { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
+  ],
+  "hs": [
+    { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
+    { "kind": "solid", "color": "#faf7ed", "caption": "Example image" },
+    { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
+  ]
+}

@@ -20,7 +20,7 @@ featured: true
 </div>
 
 <figure class="project-detail-fig" style="max-width:560px;background:#111;">
-<img src="https://raw.githubusercontent.com/JacobiGlenn/Name_FontCycler/main/NameFontCycle.gif" width="550" alt="Animated header: name cycling through fonts" loading="lazy" decoding="async" style="display:block;margin:0 auto;max-width:100%;height:auto;">
+<img src="https://raw.githubusercontent.com/JacobiGlenn/Name_FontCycler/main/NameFontCycle.gif" width="550" alt="Animated header: name cycling through fonts" style="display:block;margin:0 auto;max-width:100%;height:auto;">
 <figcaption><code>NameFontCycle.gif</code> from the repository</figcaption>
 </figure>
 
@@ -67,7 +67,7 @@ cd Name_FontCycler</pre></div>
 
 <p><strong>7. Embed in your README</strong></p>
 <div class="project-detail-code-wrap"><div class="project-detail-code-label">HTML</div><pre class="project-detail-pre">&lt;h1 align="center"&gt;
-  &lt;img src="Assets/NameFontCycle.gif" alt="Jacob Glenn" width="550"&gt;
+  &lt;img src="Assets/NameFontCycle.gif" alt="Jacobi Glenn" width="550"&gt;
 &lt;/h1&gt;</pre></div>
 
 <h2 class="project-detail-h2">Customization options</h2>

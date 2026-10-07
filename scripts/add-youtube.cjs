@@ -82,10 +82,10 @@ async function main() {
 
   // Insert after `window.__YOUTUBE_VIDEOS = [`
   const original = fs.readFileSync(DATA_FILE, 'utf8');
-  const insertAfter = 'window.__YOUTUBE_VIDEOS = [';
+  const insertAfter = 'export const YOUTUBE_VIDEOS = [';
   const idx = original.indexOf(insertAfter);
   if (idx === -1) {
-    console.error('Could not find window.__YOUTUBE_VIDEOS = [ in', DATA_FILE);
+    console.error('Could not find export const YOUTUBE_VIDEOS = [ in', DATA_FILE);
     process.exit(1);
   }
 

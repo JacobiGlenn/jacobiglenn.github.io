@@ -8,10 +8,11 @@ header: COVER.svg
 date: "03/2026"
 ongoing: true
 featured: true
+draft: true
 ---
 
 <figure style="margin:0 0 1.5rem; max-width:420px;">
-  <img src="devProjects/collide/LOGO.svg" alt="CollIDE logo" style="width:100%; height:auto; display:block;">
+  <img src="/devProjects/collide/LOGO.svg" alt="CollIDE logo" style="width:100%; height:auto; display:block;">
 </figure>
 
 <p class="project-detail-lead"><strong>CollIDE</strong> is a collaborative, AI-powered code editor designed for teams. Every AI coding tool out there is built around a single developer. CollIDE is built around the whole team, where each person's AI assistant understands what everyone else is working on and can prevent conflicts before they ever happen.</p>
