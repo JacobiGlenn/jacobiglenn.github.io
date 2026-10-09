@@ -88,4 +88,6 @@ export type Honor = {
   title: string
   issuer: string
   desc: string
+  image?: string
+  images?: string[]
 }

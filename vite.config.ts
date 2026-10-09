@@ -46,7 +46,28 @@ function staticContent(): Plugin {
         const file = path.resolve(rel)
         if (!fs.existsSync(file) || !fs.statSync(file).isFile()) return next()
         const fileExt = path.extname(file).toLowerCase()
+        const total = fs.statSync(file).size
         res.setHeader('Content-Type', MIME[fileExt] || 'application/octet-stream')
+        res.setHeader('Accept-Ranges', 'bytes')
+        const range = req.headers.range
+        if (range) {
+          const match = /bytes=(\d*)-(\d*)/.exec(range)
+          const start = match?.[1] ? Number(match[1]) : 0
+          const end = match?.[2] ? Number(match[2]) : total - 1
+          if (!match || start > end || start >= total) {
+            res.statusCode = 416
+            res.setHeader('Content-Range', `bytes */${total}`)
+            res.end()
+            return
+          }
+          const last = Math.min(end, total - 1)
+          res.statusCode = 206
+          res.setHeader('Content-Range', `bytes ${start}-${last}/${total}`)
+          res.setHeader('Content-Length', String(last - start + 1))
+          fs.createReadStream(file, { start, end: last }).pipe(res)
+          return
+        }
+        res.setHeader('Content-Length', String(total))
         fs.createReadStream(file).pipe(res)
       })
     },

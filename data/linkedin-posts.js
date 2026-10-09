@@ -1,7 +1,8 @@
 /**
  * LinkedIn Posts Data
  * -------------------
- * Add posts with:  npm run add:linkedin
+ * Add posts with:  npm run add:linkedin -- <linkedin-post-url>
+ * Undo the newest: npm run explode:linkedin
  * Delete a post:   remove its object from the array below
  * Array is newest-first (leftmost card in the carousel).
  *
@@ -14,6 +15,13 @@
  */
 
 export const LINKEDIN_POSTS = [
+  {
+    id: "li-7509387075100753920",
+    date: "Sep 2026",
+    text: "I’m happy to share that I’m starting a new position at Merage Tech as a Student Computing Assistant! This is a student position at the University of California, Irvine - The Paul Merage School of Business where I get to preform basic IT services in the classroom or through walk-in support for students. I am extremely excited to learn and grow with the wonderful people I'm working with and help all of my fellow anteaters with any tech related issues!",
+    media: [],
+    thumb: ''
+  },
   {
     id: 'li-irvinehacks-2026',
     date: 'Mar 2026',

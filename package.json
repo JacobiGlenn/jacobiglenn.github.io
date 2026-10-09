@@ -14,6 +14,8 @@
     "preview": "vite preview",
     "add:youtube": "node scripts/add-youtube.cjs",
     "add:linkedin": "node scripts/add-linkedin.cjs",
+    "explode:youtube": "node scripts/explode-entry.cjs youtube",
+    "explode:linkedin": "node scripts/explode-entry.cjs linkedin",
     "screenshots": "node scripts/capture-portfolio-screens.cjs"
   },
   "repository": {

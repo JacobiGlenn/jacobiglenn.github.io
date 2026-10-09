@@ -3,6 +3,7 @@ title: Design Project Example
 description: "Sample case study: a smiley face."
 kind: design
 galleryId: design-example
+draft: true
 cover: COVER.svg
 date: "03/2026"
 ---
