@@ -7,14 +7,11 @@ How jacobiglenn.com is put together. Shareable overview; implementation details 
 ```mermaid
 flowchart LR
   hit[Visit jacobiglenn.com]
-  term[Boot terminal]
   main[Main site]
   hit -->|first visit| term
   term -->|name / GO / Skip / Initialize then name| main
   hit -->|return within 24h or ?direct=1| main
-  main --> home[Home]
-  main --> port[Portfolios]
-  main --> exp[Work Experience]
+  main --> home[Home]  main --> exp[Work Experience]
   main --> blog[Blog]
   port --> des[Designer]
   port --> dev[Developer]
