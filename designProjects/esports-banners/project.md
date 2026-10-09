@@ -5,7 +5,7 @@ kind: design
 cover: banner.jpg
 header: banner.jpg
 cover_size: contain
-date: "03/2025"
+date: "11/2025 – 03/2025"
 ---
 
 <p class="project-detail-lead"><strong>Esports Banners</strong> started as a commission after the team rejected the first banner, a white sheet covered in game logos. This was still the colorful stretch, before everything locked to red and black. The replacement hung around the school and went to recruitment events. The spring season banner was the shift. It was not printed. It played on the TVs in the halls. Black type was hard to read on those screens, so that one is red and white.</p>

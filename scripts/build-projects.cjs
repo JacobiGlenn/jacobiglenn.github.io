@@ -52,13 +52,16 @@ function resolveUrl({ folderName, slug, projectDir, value, fallback }) {
 
 function parseDateSort(dateStr) {
   if (!dateStr) return 0;
-  const [mm, yyyy] = String(dateStr).split('/');
-  return parseInt(yyyy || 0) * 100 + parseInt(mm || 0);
+  const matches = [...String(dateStr).matchAll(/(\d{1,2})\s*\/\s*(\d{4})/g)];
+  if (!matches.length) return 0;
+  return Math.max(...matches.map((m) => parseInt(m[2], 10) * 100 + parseInt(m[1], 10)));
 }
 
 function formatDateLabel(dateStr, ongoing) {
   if (!dateStr) return '';
-  return ongoing ? dateStr + ' – Present' : dateStr;
+  const raw = String(dateStr).trim().replace(/\s+-\s+/g, ' – ');
+  if (ongoing && !/present/i.test(raw)) return raw + ' – Present';
+  return raw;
 }
 
 function loadProject(folderName, categoryKey, slug) {

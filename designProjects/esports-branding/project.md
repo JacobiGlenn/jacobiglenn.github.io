@@ -5,7 +5,7 @@ kind: design
 cover: instagram.jpg
 header: eyes-banner.jpg
 cover_size: contain
-date: "03/2025"
+date: "09/2023 – 06/2025"
 ---
 
 <p class="project-detail-lead"><strong>Esports Branding</strong> is the Tualatin High School esports identity. I was one of the designers in the digital arts department, so when the school went through a branding change I ended up on a lot of it. The logo came first, through most of junior year and again around November and December of senior year, after the mascot changed. Once that mark settled, the Instagram stayed red and black: match highlights, videos, and promo, usually more than five posts a week. The same look went on a drink we made with the on-campus cafe, Wolf Cafe, to bring in more revenue. Buy the drink, get an exclusive sticker.</p>

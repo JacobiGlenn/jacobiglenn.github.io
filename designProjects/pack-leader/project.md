@@ -4,7 +4,7 @@ description: "Tualatin High School pack leader logo. A paw mark printed on the b
 kind: design
 cover: final.jpg
 header: banner.jpg
-date: "03/2025"
+date: "09/2024"
 ---
 
 <p class="project-detail-lead"><strong>Pack Leader</strong> is the logo for the Tualatin High School pack leader work shirts, printed on the back. Pack leaders are juniors and seniors who mentor the sophomores. We came in a day early to show them around, and about once a month we went to their class to check in and hold a community meeting.</p>

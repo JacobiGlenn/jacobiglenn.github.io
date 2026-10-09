@@ -34,9 +34,7 @@
     { "kind": "img", "src": "/assets/experience/ctc/merch.jpg", "caption": "The Celebrating Life project team in Commit the Change merch." }
   ],
   "uci": [
-    { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
-    { "kind": "solid", "color": "#faf7ed", "caption": "Example image" },
-    { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
+    { "kind": "img", "src": "/assets/experience/uci/student-center.jpg", "caption": "The student center at UC Irvine." }
   ],
   "hs": [
     { "kind": "img", "src": "/assets/experience/hs/valorant.jpg", "caption": "Valorant practice. We placed 4th nationally that year at the HSEL tournament." },
