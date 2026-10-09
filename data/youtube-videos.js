@@ -5,13 +5,6 @@
  * Thumbnails load automatically from YouTube — no API key needed.
  * For view/like counts, add your YouTube Data API key below (optional).
  *
- * HOW TO GET A FREE API KEY (optional, for stats):
- *   1. Go to console.cloud.google.com
- *   2. Create a project → Enable "YouTube Data API v3"
- *   3. Create credentials → API Key
- *   4. Restrict it to your site URL (Jacobi.github.io)
- *   5. Paste it into window.YOUTUBE_API_KEY below
- *
  * To add a video:  npm run add:youtube -- <url>
  * To undo that:   npm run explode:youtube
  * To delete one:  remove its object from the array
