@@ -23,6 +23,13 @@ export const LINKEDIN_POSTS = [
     thumb: ''
   },
   {
+    id: "li-7444486208954638336",
+    date: "Mar 2026",
+    text: "I’m really happy to say I got a git certification through the UCI libraries! I had spent most of this quarter slowly chipping away at it and got my certification sent today. I learned so much in the process and I’m one step closer to my goals! Special thanks to UC Irvine Libraries for hosting this wonderful workshop and making super informative videos, and to Anthony Suh  for explaining a ton of GIT concepts to me during our hackathon project. I’m excited to get on more certifications in the future so keep an eye out for that ;)",
+    media: [{ type: 'image', src: "assets/linkedin/li-7444486208954638336.jpg", alt: "I’m really happy to say I got a git certification through the UCI libraries!" }],
+    thumb: "assets/linkedin/li-7444486208954638336.jpg"
+  },
+  {
     id: 'li-irvinehacks-2026',
     date: 'Mar 2026',
     text: 'This weekend, my team and I took home "Best Neuro Hack" at IrvineHacks 2026, the largest collegiate hackathon in Orange County.<br><br>We built PocketZot, a digital pet built into a browser extension that analyzes how users interact with AI in real time. As you ask questions, PocketZot classifies your level of cognitive offloading and gives you a score. That score determines how much health you\'d lose and how many ants you earn, which you can use to buy accessories for your pet.<br><br>PocketZot helps students become more aware of how they\'re using AI — it highlights whether someone is prompting to understand the material or relying on AI to finish homework quickly. Our goal is to encourage healthier learning habits and more intentional prompting from students.<br><br>This project pushed me in a way no hackathon ever has and I learned so much this weekend! Huge thank you to the judges and the IrvineHacks coordinators for the thoughtful feedback and for creating such a supportive environment. And the biggest shoutouts to Evie Ngo, Candice Lu, and Anthony Suh for being the best team I\'ve been apart of — I\'m really proud of what we made!<br><br><a href="https://lnkd.in/gC_Mwc6d" class="clean-link" target="_blank">GitHub</a> &nbsp;·&nbsp; <a href="https://lnkd.in/gA6KJQTr" class="clean-link" target="_blank">Devpost</a> &nbsp;·&nbsp; <a href="https://lnkd.in/gFxknvd9" class="clean-link" target="_blank">Figma prototype</a> &nbsp;·&nbsp; <a href="https://lnkd.in/gZTWdtkS" class="clean-link" target="_blank">Video demo</a>',
