@@ -23,8 +23,7 @@ export function ButtonCarousel({ children, label }: { children: ReactNode; label
       </div>
       <div
         ref={ref}
-        className="flex gap-3 overflow-x-hidden scroll-smooth pb-2"
-        style={{ scrollbarWidth: 'none' }}
+        className="carousel-track flex gap-3 scroll-smooth pb-2"
       >
         {children}
       </div>

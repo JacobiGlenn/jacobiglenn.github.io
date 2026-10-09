@@ -1,6 +1,6 @@
 # jacobiglenn.com
 
-Portfolio for Jacobi Glenn. First visit is a boot terminal; after that you land on the main site (Home, Designer / Developer portfolios, Work Experience, Blog).
+Portfolio for Jacobi Glenn. A short boot splash plays, then you land on the main site (Home, Designer / Developer portfolios, Work Experience, Blog). The old command terminal is gone.
 
 **Stack:** Vite + React, still static, still free on GitHub Pages. No extra hosting cost. Visitors get a `dist/` folder of HTML/JS/CSS, same as before — the build is just how the site is assembled.
 
@@ -30,10 +30,11 @@ Full walkthrough: [bloglogic.txt](bloglogic.txt)
 
 No folder build. Edit `data/linkedin-posts.js` / `data/youtube-videos.js`, or:
 
-- `npm run add:linkedin`
-- `npm run add:youtube https://youtu.be/VIDEO_ID`
+- `npm run add:linkedin -- https://www.linkedin.com/feed/update/urn:li:activity:ID/`
+- `npm run add:youtube -- https://youtu.be/VIDEO_ID`
+- `npm run explode:linkedin` and `npm run explode:youtube` drop the newest entry if you added one twice
 
-Images go in `assets/linkedin/`. Details: [bloglogic.txt](bloglogic.txt)
+Images go in `assets/linkedin/`. YouTube thumbnails load from YouTube. Details: [bloglogic.txt](bloglogic.txt)
 
 ### Work experience
 
@@ -49,10 +50,8 @@ Full walkthrough: [experiencelogic.txt](experiencelogic.txt)
 
 ---
 
-## Docs for sharing
+## Docs
 
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — trees of how the site is put together
-- [docs/OVERHAUL.md](docs/OVERHAUL.md) — why Vite, design choices, what changed
 - [docs/STYLE.md](docs/STYLE.md) — type, color, motion, components
 
-Readable mode (white / black / Arial) is the **Readable** control in the HUD. Skip the terminal with `?direct=1` or the on-screen skip control.
+Readable mode (white / black / Arial) is the **Readable** control in the HUD.

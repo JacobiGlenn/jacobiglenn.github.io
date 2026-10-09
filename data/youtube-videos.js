@@ -12,8 +12,9 @@
  *   4. Restrict it to your site URL (Jacobi.github.io)
  *   5. Paste it into window.YOUTUBE_API_KEY below
  *
- * To add a video:  copy an object, add it to the TOP of the array (newest first)
- * To delete:       remove its object from the array
+ * To add a video:  npm run add:youtube -- <url>
+ * To undo that:   npm run explode:youtube
+ * To delete one:  remove its object from the array
  *
  * Fields:
  *   id          – unique string, no spaces

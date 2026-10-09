@@ -39,6 +39,7 @@
       "dateSort": 202511,
       "bullets": [
         "BCT Honor Graduate",
+        "439 on the aft",
         "Troubleshoot aircraft hydraulic and pneumatic systems: isolate pressure losses, fluid leaks, and mechanical faults with precision test equipment and schematics",
         "Document maintenance actions in digital tracking systems for complete historical compliance and traceability",
         "Keep a hazardous-material-compliant workspace and operate specialized ground support equipment and hydraulic test stands"
@@ -57,7 +58,13 @@
         "letter": "★",
         "size": "0.8rem"
       },
-      "photos": []
+      "galleryId": "army",
+      "photos": [
+        "assets/experience/army/certificate.jpg",
+        "assets/experience/army/chinook.jpg",
+        "assets/experience/army/strut.jpg",
+        "assets/experience/army/agpu.jpg"
+      ]
     },
     {
       "id": "handshake",
@@ -98,8 +105,8 @@
       "title": "Code Sensei / Robotics Teacher",
       "location": "Irvine, CA",
       "start": "Nov 2025",
-      "end": "Present",
-      "dateLabel": "Nov 2025 – Present",
+      "end": "Oct 2026",
+      "dateLabel": "Nov 2025 – Oct 2026",
       "dateSort": 202602,
       "bullets": [],
       "tags": [
@@ -117,11 +124,15 @@
         "size": "0.65rem"
       },
       "galleryId": "cn",
-      "photos": [],
+      "photos": [
+        "assets/experience/cn/build.jpg",
+        "assets/experience/cn/lesson.jpg",
+        "assets/experience/cn/classroom.jpg"
+      ],
       "subroles": [
         {
           "role": "Robotics Teacher | Code Sensei",
-          "date": "Feb 2026 – Present",
+          "date": "Feb 2026 – Oct 2026",
           "bullets": [
             "Created weekly lesson plans based on the LEGO SPIKE curriculum for groups of 3–6 students",
             "Taught robotics fundamentals through hands-on exploration and personalized instruction",
@@ -210,7 +221,11 @@
         "size": "0.6rem"
       },
       "galleryId": "ctc",
-      "photos": []
+      "photos": [
+        "assets/experience/ctc/team.jpg",
+        "assets/experience/ctc/meeting.jpg",
+        "assets/experience/ctc/merch.jpg"
+      ]
     },
     {
       "id": "bb",
@@ -292,7 +307,8 @@
       "photos": [
         "assets/experience/tuhs/team.png",
         "assets/experience/tuhs/soundtown.png",
-        "assets/experience/tuhs/soundcart.png"
+        "assets/experience/tuhs/soundcart.png",
+        "assets/experience/tuhs/deck.jpg"
       ]
     },
     {
@@ -350,13 +366,18 @@
   "honors": [
     {
       "title": "Honor Graduate",
-      "issuer": "US Army Basic Combat Training",
-      "desc": "Honor Graduate at BCT while serving as a 15H National Guardsman (Aircraft Pneudraulics Repair)."
+      "issuer": "Fort Sill · US Army Basic Combat Training",
+      "desc": "Honor Graduate at BCT while serving as a 15H National Guardsman (Aircraft Pneudraulics Repair).",
+      "image": "assets/experience/army/certificate.jpg"
     },
     {
       "title": "Best Neuro Hack",
       "issuer": "IrvineHacks 2026 · Mar 2026",
-      "desc": "Awarded at UC Irvine's flagship collegiate hackathon — the largest in Orange County. Built PocketZot, a browser-extension digital pet that classifies cognitive offloading in real time using a fine-tuned GPT-4o-mini model."
+      "desc": "Awarded at UC Irvine's flagship collegiate hackathon — the largest in Orange County. Built PocketZot, a browser-extension digital pet that classifies cognitive offloading in real time using a fine-tuned GPT-4o-mini model.",
+      "images": [
+        "assets/experience/honors/neuro-team.jpg",
+        "assets/experience/honors/neuro-bereal.jpg"
+      ]
     },
     {
       "title": "Best Healthcare App",

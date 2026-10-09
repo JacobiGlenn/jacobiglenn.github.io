@@ -24,7 +24,7 @@ export function ProjectDetailPage() {
         <div className="relative h-56 overflow-hidden border border-[var(--color-line)]">
           <MediaImage
             src={assetPath(hero)}
-            alt=""
+            alt={project.title}
             className="h-full w-full bg-white"
             style={{ objectFit: project.coverSize === 'contain' ? 'contain' : 'cover' }}
           />

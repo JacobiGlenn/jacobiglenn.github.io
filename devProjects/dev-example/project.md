@@ -4,6 +4,7 @@ description: "The site you are on: one HTML file, GitHub Pages, and the write-up
 github: https://github.com/JacobiGlenn/jacobiglenn.github.io
 kind: dev
 cover: COVER.png
+draft: true
 date: "03/2026"
 ---
 

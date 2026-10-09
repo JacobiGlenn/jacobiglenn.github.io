@@ -12,30 +12,61 @@ import type { LinkedInPost, YouTubeVideo } from '@/lib/types'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+const LI_PLACEHOLDERS = [
+  '/assets/linkedin/placeholders/scan.svg',
+  '/assets/linkedin/placeholders/marks.svg',
+  '/assets/linkedin/placeholders/grid.svg',
+]
+
+function linkedInPlaceholder(id: string) {
+  let n = 0
+  for (const ch of id) n = (n + ch.charCodeAt(0)) % LI_PLACEHOLDERS.length
+  return LI_PLACEHOLDERS[n]
+}
+
 function LinkedInCard({ post, onOpen }: { post: LinkedInPost; onOpen: () => void }) {
   const media = post.media[0]
+  const placeholder = linkedInPlaceholder(post.id)
   return (
-    <button type="button" onClick={onOpen} className="media-card hud-frame w-[min(320px,82vw)] shrink-0 overflow-hidden text-left">
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onOpen()
+        }
+      }}
+      className="media-card hud-frame w-[min(320px,82vw)] shrink-0 overflow-hidden text-left"
+    >
       <div className="h-36 bg-[var(--color-ground-2)]">
         {post.thumb ? (
           <MediaImage src={assetPath(post.thumb)} alt="" className="h-full w-full object-cover" />
         ) : media?.type === 'video' ? (
           media.src.endsWith('.mp4') ? (
-            <video src={assetPath(media.src)} muted className="h-full w-full object-cover" />
+            <video
+              src={`${assetPath(media.src)}#t=0.1`}
+              muted
+              playsInline
+              preload="metadata"
+              aria-label={post.date}
+              className="pointer-events-none h-full w-full object-cover [transform:translateZ(0)]"
+            />
           ) : (
             <div className="grid h-full place-items-center font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
               Video
             </div>
           )
         ) : (
-          <MediaImage alt={post.date} className="h-full w-full object-cover" />
+          <MediaImage src={placeholder} alt="" className="h-full w-full object-cover" />
         )}
       </div>
       <div className="p-3">
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-accent)]">{post.date}</p>
         <p className="mt-2 line-clamp-4 text-sm text-[var(--color-muted)]">{post.text.replace(/<[^>]+>/g, ' ')}</p>
       </div>
-    </button>
+    </div>
   )
 }
 
@@ -87,7 +118,7 @@ export function BlogPage() {
             <BootLoopHeader />
           </div>
         ) : post.coverUrl ? (
-          <MediaImage src={assetPath(post.coverUrl)} alt="" className="max-h-64 w-full object-cover" />
+          <MediaImage src={assetPath(post.coverUrl)} alt={post.title} className="max-h-64 w-full object-cover" />
         ) : null}
         <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)]">{post.dateDisplay}</p>
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl uppercase">{post.title}</h1>
@@ -158,7 +189,14 @@ export function BlogPage() {
               li.media[0].src.includes('youtube') ? (
                 <iframe title="video" src={li.media[0].src} className="mt-4 aspect-video w-full border-0" allowFullScreen />
               ) : (
-                <video src={assetPath(li.media[0].src)} controls className="mt-4 w-full" />
+                <video
+                  src={assetPath(li.media[0].src)}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  aria-label={li.date}
+                  className="mt-4 max-h-[50vh] w-full bg-black object-contain"
+                />
               )
             ) : null}
           </>

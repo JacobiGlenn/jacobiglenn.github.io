@@ -51,6 +51,15 @@ export function HudNav() {
     }
   }, [ports])
 
+  useEffect(() => {
+    if (!menu) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenu(false)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [menu])
+
   return (
     <header className="sticky top-0 z-40 overflow-visible bg-gradient-to-b from-[var(--color-ground)] via-[color-mix(in_srgb,var(--color-ground)_88%,transparent)] to-transparent px-3 pb-2 pt-3 md:px-5">
       <div className="mx-auto flex max-w-[1400px] items-center gap-4">
@@ -115,14 +124,21 @@ export function HudNav() {
 
         <div className="ml-auto flex items-center gap-2">
           <Clock />
-          <Button type="button" size="sm" className="md:hidden" onClick={() => setMenu((v) => !v)} aria-expanded={menu}>
+          <Button
+            type="button"
+            size="sm"
+            className="md:hidden"
+            onClick={() => setMenu((v) => !v)}
+            aria-expanded={menu}
+            aria-controls="mobile-nav"
+          >
             Menu
           </Button>
         </div>
       </div>
 
       {menu ? (
-        <div className="mobile-sheet mobile-sheet-in md:hidden">
+        <div id="mobile-nav" className="mobile-sheet mobile-sheet-in md:hidden">
           {[
             { to: '/', label: 'Home' },
             { to: '/portfolio/design', label: 'Designer' },

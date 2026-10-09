@@ -84,18 +84,16 @@ FORMAT (each post is one object in the array):
   - If no media, set media: [] and thumb: ''
 
 HOW TO ADD A POST (fast way — CLI):
-  1. Open PowerShell in the project folder
-  2. Run:  npm run add:linkedin
-  3. Answer the prompts:
-       - Date       : press Enter for current month, or type e.g. "Jan 2026"
-       - Text       : paste your full LinkedIn post text (all on one line)
-       - Media type : type "none", "image", or "video"
-           image    : enter the file path  (e.g. assets/linkedin/mypost.jpg)
-           video    : enter the YouTube URL, the script converts it to embed URL
-  4. A new entry is prepended to data/linkedin-posts.js
-  5. If you have images: drop them in assets/linkedin/ first, then run the script
-     (or edit the src path in the file afterwards — search for the id to find it)
-  6. git add . && git commit -m "add linkedin post" && git push
+  1. Copy the post link (feed/update or /posts/…activity-… URL)
+  2. Run:
+       npm run add:linkedin -- https://www.linkedin.com/feed/update/urn:li:activity:ID/
+  3. The script reads the public post (text, date, first image), saves the image
+     under assets/linkedin/, and prepends an entry to data/linkedin-posts.js
+  4. git add . && git commit -m "add linkedin post" && git push
+
+  The post has to be public. Connections-only posts have no public text.
+  LinkedIn native video is not a stable download — drop an mp4 in afterwards.
+  No URL still opens the old prompts: npm run add:linkedin
 
 HOW TO ADD A POST (manual way):
   1. Open data/linkedin-posts.js
@@ -138,21 +136,20 @@ VIEW/LIKE COUNTS (optional):
   4. Paste it into: window.YOUTUBE_API_KEY = 'YOUR_KEY_HERE'; in data/youtube-videos.js
   Stats will appear in the modal automatically. Leave the key empty to skip.
 
-HOW TO ADD A VIDEO (fast way — CLI):
-  1. Open PowerShell in the project folder
-  2. Run:  npm run add:youtube https://youtu.be/VIDEO_ID
-       or  npm run add:youtube "https://www.youtube.com/watch?v=VIDEO_ID"
-  3. The script fetches the real title automatically and prepends a new entry
-  4. Open data/youtube-videos.js and fill in the description field
-  5. git add . && git commit -m "add video: title" && git push
+HOW TO ADD A VIDEO:
+  1. Run:
+       npm run add:youtube -- https://youtu.be/VIDEO_ID
+  2. The script saves the title, description, and publish month.
+     The thumbnail is YouTube's image, loaded from the video id.
+  3. git add . && git commit -m "add video" && git push
 
-HOW TO ADD A VIDEO (manual way):
-  1. Open data/youtube-videos.js
-  2. Copy an existing entry and paste it at the TOP of the array (newest first)
-  3. Update id (unique string), videoId, date, title, description
-  4. git add . && git commit -m "add video" && git push
+HOW TO UNDO THE NEWEST VIDEO OR LINKEDIN POST:
+  npm run explode:youtube
+  npm run explode:linkedin
+  Removes the first object in the data file (newest). LinkedIn also deletes
+  an auto-saved li-<id> image. A photo you named yourself is left in place.
 
-HOW TO DELETE A VIDEO:
+HOW TO DELETE A SPECIFIC VIDEO:
   1. Open data/youtube-videos.js
   2. Remove the object with that id
   3. git add . && git commit -m "remove video" && git push
@@ -179,8 +176,10 @@ BUILD COMMANDS (summary)
   npm run build:experience← rebuild generated/experience.json
   npm run build           ← generators + Vite bundle
 
-  npm run add:youtube <url>  ← auto-add a YouTube entry (fetches title, prepends to data/youtube-videos.js)
-  npm run add:linkedin       ← interactive prompt to add a LinkedIn post to data/linkedin-posts.js
+  npm run add:youtube -- <url>     ← title, description, date into data/youtube-videos.js
+  npm run add:linkedin -- <url>    ← public LinkedIn post into data/linkedin-posts.js
+  npm run explode:youtube          ← delete the newest YouTube entry
+  npm run explode:linkedin         ← delete the newest LinkedIn entry
 
 After any blog/ or project folder change, run the matching build before pushing.
 LinkedIn posts and YouTube videos do NOT require a build step — they are loaded from JS data files directly.
@@ -197,37 +196,12 @@ QUICK REFERENCE: WHAT NEEDS A BUILD?
   work experience    → npm run build:experience  (data/experience.json, optional Positions.csv)
 
 ----------------------------------------------------------------------
-BOOT TERMINAL (first screen, index.html)
+BOOT SPLASH
 ----------------------------------------------------------------------
 
-  Flow:
-    1. Visitor types Initialize (or init, etc.).
-    2. After the boot animation, the terminal enters a "post-init" phase.
-    3. They can run commands (see below) OR type their name and press Enter.
-    4. Typing a name opens the normal loading screen and guest welcome. Anything that
-       is not a reserved command is treated as a name.
-
-  Commands (case-insensitive; also listed in the GUIDEBOOK panel on the boot screen):
-    HELP, GUIDE, ?, COMMANDS  — print the command list
-    ABOUT, BIO                — stable blurb: who/where from, what the site is, pointers to blog,
-                                Work Experience, LinkedIn, and nav About for goals/contact
-                                (termPrintAbout() in index.html)
-    PROJECTS, PORTFOLIO      — dev + design project titles + descriptions (from
-                                generated/projects.json; run build:projects after edits)
-    EXP, EXPERIENCE           — step through work experience blurbs; then N / P / Q
-    SPIN, FASTER              — speed up the ASCII portrait ~10 seconds
-    TIME, DATE                — print local date/time
-    WISDOM                    — random one-liner (handler also accepts fun, joke)
-    ROLL, D20                 — roll a twenty-sided die
-    8BALL, EIGHTBALL, MAGIC8, MAGIC8BALL — Magic 8-Ball (TERMINAL_8BALL_ANSWERS)
-    CLS, CLEAR                — clear the transcript
-
-  To add a new command: edit the termInput keydown handler in index.html (search for
-  termInput.dataset.mode === 'postinit') and mirror the behavior in the GUIDEBOOK HTML
-  so the panel stays accurate.
-
-  Experience order for EXP is defined in TERMINAL_EXP_SNIPPETS in index.html — keep it
-  aligned with the Work Experience section (CLEAN_CONTENT.page3) when you reorder jobs.
+  The command terminal (Initialize, HELP, EXP, and the rest) is gone.
+  What remains is a short visual splash in BootForm, about two seconds,
+  then the normal site. There is no terminal input and no guidebook.
 
 ----------------------------------------------------------------------
 API KEYS (where they live)

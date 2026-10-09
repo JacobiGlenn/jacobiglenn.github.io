@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 const FONTS = [
   '"Big Shoulders Display", sans-serif',
@@ -15,10 +15,23 @@ const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ█▓▒░'
 export function FontCycleName({ text }: { text: string }) {
   const [font, setFont] = useState(0)
   const [shown, setShown] = useState(text)
+  const [scale, setScale] = useState(1)
+  const boxRef = useRef<HTMLHeadingElement>(null)
+  const liveRef = useRef<HTMLSpanElement>(null)
   const holdRef = useRef<number | undefined>(undefined)
   const scrambleRef = useRef<number | undefined>(undefined)
 
+  useLayoutEffect(() => {
+    const box = boxRef.current
+    const live = liveRef.current
+    if (!box || !live) return
+    const need = live.scrollWidth
+    const avail = box.clientWidth
+    setScale(need > 0 && avail > 0 ? Math.min(1, avail / need) : 1)
+  }, [shown, font, text])
+
   useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const clearAll = () => {
       if (holdRef.current) window.clearInterval(holdRef.current)
       if (scrambleRef.current) window.clearInterval(scrambleRef.current)
@@ -37,7 +50,7 @@ export function FontCycleName({ text }: { text: string }) {
             .map((c) => (c === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
             .join(''),
         )
-        if (n > 8) {
+        if (n > 6) {
           if (scrambleRef.current) window.clearInterval(scrambleRef.current)
           scrambleRef.current = undefined
           setFont((f) => (f + 1) % FONTS.length)
@@ -49,7 +62,8 @@ export function FontCycleName({ text }: { text: string }) {
     const start = () => {
       clearAll()
       setShown(text)
-      holdRef.current = window.setInterval(runScramble, 2200)
+      if (reduce) return
+      holdRef.current = window.setInterval(runScramble, 2400)
     }
 
     const onVis = () => {
@@ -71,10 +85,22 @@ export function FontCycleName({ text }: { text: string }) {
 
   return (
     <h1
-      className="name-cycle min-h-[1.05em] text-5xl uppercase leading-[0.9] tracking-wide md:text-8xl"
-      style={{ fontFamily: FONTS[font] }}
+      ref={boxRef}
+      className="name-cycle relative mt-2 block w-full overflow-hidden text-[clamp(2.6rem,12vw,6.5rem)] leading-none uppercase tracking-wide"
     >
-      {shown}
+      <span className="sr-only">{text}</span>
+      <span
+        ref={liveRef}
+        aria-hidden
+        className="absolute top-1/2 left-0 whitespace-nowrap"
+        style={{
+          fontFamily: FONTS[font],
+          transform: `translateY(-50%) scale(${scale})`,
+          transformOrigin: 'left center',
+        }}
+      >
+        {shown}
+      </span>
     </h1>
   )
 }

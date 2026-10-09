@@ -1,9 +1,16 @@
 {
+  "army": [
+    { "kind": "img", "src": "/assets/experience/army/certificate.jpg", "caption": "Honor Graduate certificate from Fort Sill basic training. Delta Battery, 1st Battalion, 31st Field Artillery, 11 June 2026." },
+    { "kind": "img", "src": "/assets/experience/army/chinook.jpg", "caption": "My 15H class in AIT, sitting on a Chinook." },
+    { "kind": "img", "src": "/assets/experience/army/strut.jpg", "caption": "Taking apart a Black Hawk strut." },
+    { "kind": "img", "src": "/assets/experience/army/agpu.jpg", "caption": "Working on the electrical wires on an AGPU." }
+  ],
   "tuhs": [
     { "kind": "img", "src": "/assets/experience/tuhs/team.png", "caption": "The TuHS Broadcasting crew — wearing the apparel I designed for the department." },
     { "kind": "img", "src": "/assets/experience/tuhs/soundtown.png", "caption": "Our SoundTown cart: ATEM Blackmagic full-size board with HDMI inputs feeding individual LCD screens for each camera feed." },
     { "kind": "img", "src": "/assets/experience/tuhs/soundcart.png", "caption": "Soundcraft audio cart controlling output from cameras and microphones placed throughout the gym." },
-    { "kind": "img", "src": "/assets/experience/tuhs/monitors.png", "caption": "Football broadcast setup — left monitor shows current output, primed output, and live stream view. Right monitor is the scoreboard, updated live." }
+    { "kind": "img", "src": "/assets/experience/tuhs/monitors.png", "caption": "Football broadcast setup — left monitor shows current output, primed output, and live stream view. Right monitor is the scoreboard, updated live." },
+    { "kind": "img", "src": "/assets/experience/tuhs/deck.jpg", "caption": "The football deck: where we switched cameras and ran the scoreboard." }
   ],
   "social": [
     { "kind": "img", "src": "/assets/experience/social/news.png", "caption": "Weekly Wolf News: edited every Friday for a Wednesday broadcast to about 2,500 students. School events and weekly highlights." },
@@ -17,14 +24,14 @@
     { "kind": "shapes", "caption": "This is an example of an image: oval, triangle, and square (from the case study)." }
   ],
   "cn": [
-    { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
-    { "kind": "solid", "color": "#faf7ed", "caption": "Example image" },
-    { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
+    { "kind": "img", "src": "/assets/experience/cn/build.jpg", "caption": "A LEGO SPIKE build from robotics class." },
+    { "kind": "img", "src": "/assets/experience/cn/lesson.jpg", "caption": "A student working through a LEGO SPIKE lesson." },
+    { "kind": "img", "src": "/assets/experience/cn/classroom.jpg", "caption": "Robotics class: SPIKE kits on the table and the lesson on screen." }
   ],
   "ctc": [
-    { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
-    { "kind": "solid", "color": "#faf7ed", "caption": "Example image" },
-    { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
+    { "kind": "img", "src": "/assets/experience/ctc/team.jpg", "caption": "2025–2026 Commit the Change team: the developers and designers on Celebrating Life Community Health Center, a nonprofit in Orange County." },
+    { "kind": "img", "src": "/assets/experience/ctc/meeting.jpg", "caption": "The design team in a design meeting." },
+    { "kind": "img", "src": "/assets/experience/ctc/merch.jpg", "caption": "The Celebrating Life project team in Commit the Change merch." }
   ],
   "uci": [
     { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
@@ -32,8 +39,13 @@
     { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
   ],
   "hs": [
-    { "kind": "solid", "color": "#2f855a", "caption": "Images are planned and will be added soon." },
-    { "kind": "solid", "color": "#faf7ed", "caption": "Example image" },
-    { "kind": "solid", "color": "#2f855a", "caption": "Example video" }
+    { "kind": "img", "src": "/assets/experience/hs/valorant.jpg", "caption": "Valorant practice. We placed 4th nationally that year at the HSEL tournament." },
+    { "kind": "img", "src": "/assets/experience/hs/student-month.jpg", "caption": "Student of the Month, January 2025, out of about 2,500 students." },
+    { "kind": "img", "src": "/assets/experience/hs/robots.jpg", "caption": "Team A and Team B robots from the robotics team that won state in 2025." },
+    { "kind": "img", "src": "/assets/experience/hs/nhs.jpg", "caption": "5th highest NHS volunteer hours in the school." },
+    { "kind": "img", "src": "/assets/experience/hs/senator.jpg", "caption": "Rep. Andrea Salinas posting about us coming to talk with her about substance use in Tualatin." },
+    { "kind": "img", "src": "/assets/experience/hs/outdoor-school.jpg", "caption": "Running Dragon's Egg for a group of 6th graders at Outdoor School." },
+    { "kind": "img", "src": "/assets/experience/hs/tennis.jpg", "caption": "Tennis participation award. I was on the team junior and senior year." },
+    { "kind": "img", "src": "/assets/experience/hs/live-match.jpg", "caption": "A live Valorant match on the projector. Students could come watch, and the games were recorded." }
   ]
 }
