@@ -29,6 +29,6 @@ export const YOUTUBE_VIDEOS = [
     videoId: 'puTp9szMQqE',
     date: 'Mar 2026',
     title: 'How I Coded Anime in Minecraft (With Python)',
-    description: 'A deep dive into using Python to render anime-style visuals inside Minecraft. Built with creative use of the Pillow library and block-rendering tricks.'
+    description: 'A selenium script that lets you watch anime while playing the game and see subtitles on screen'
   },
 ];
