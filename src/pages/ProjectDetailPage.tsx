@@ -16,6 +16,14 @@ export function ProjectDetailPage() {
       </div>
     )
   }
+  if (project.wip) {
+    return (
+      <div className="py-6">
+        <StickyBack to={`/portfolio/${project.kind === 'design' ? 'design' : 'dev'}`} />
+        <p className="mt-6 max-w-md text-[var(--color-ink)]">This is a work in progress, come back later.</p>
+      </div>
+    )
+  }
   const hero = project.headerUrl || project.coverUrl
   return (
     <div className="py-6">

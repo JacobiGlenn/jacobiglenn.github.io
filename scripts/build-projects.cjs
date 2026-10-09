@@ -5,6 +5,7 @@
  *
  * Optional frontmatter: featured: true — homepage shows up to 3 dev + 1 design featured.
  * Optional: draft: true — skip publishing (folder stays in repo).
+ * Optional: wip: true — card shows a work-in-progress tag and will not open. Delete the line to publish.
  */
 const fs = require('fs');
 const path = require('path');
@@ -41,7 +42,10 @@ function resolveUrl({ folderName, slug, projectDir, value, fallback }) {
   if (!rel) rel = findDefaultCover(projectDir);
   if (!rel) return '';
   if (/^https?:\/\//i.test(rel)) return rel;
-  if (rel.startsWith('assets/')) return '/' + rel;
+  if (rel.startsWith('/')) return rel;
+  if (rel.startsWith('assets/') || rel.startsWith('designProjects/') || rel.startsWith('devProjects/')) {
+    return '/' + rel.replace(/\\/g, '/');
+  }
   const relPath = `${folderName}/${slug}/${rel}`.replace(/\\/g, '/');
   if (rel.toLowerCase().endsWith('.svg')) {
     const absPath = path.join(ROOT, relPath);
@@ -84,6 +88,9 @@ function loadProject(folderName, categoryKey, slug) {
     galleryId: data.galleryId || '',
     coverUrl: resolveUrl({ folderName, slug, projectDir, value: data.cover }),
     coverSize: data.cover_size || '',
+    coverBg: data.cover_bg || '',
+    cardFit: data.card_fit || '',
+    cardScale: Number(data.card_scale) || 0,
     headerUrl: resolveUrl({
       folderName,
       slug,
@@ -95,6 +102,7 @@ function loadProject(folderName, categoryKey, slug) {
     dateSort: parseDateSort(data.date),
     ongoing: !!data.ongoing,
     featured: !!data.featured,
+    wip: !!data.wip,
     bodyHtml: content.trim(),
   };
 }

@@ -192,6 +192,21 @@ a.island-tab-on, a.island-tab-on:hover { color: var(--color-accent); }
 }
 .site-card:hover::after { width: 4px; }
 
+.wip-tag {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 4;
+  border: 1px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-ground) 88%, transparent);
+  padding: 0.2rem 0.45rem;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
 .media-card {
   clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
   transition: border-color 80ms linear, box-shadow 80ms linear;
@@ -332,8 +347,10 @@ a.island-tab-on, a.island-tab-on:hover { color: var(--color-accent); }
 .prose-html .project-detail-lead { color: var(--color-ink) !important; font-size: 1.05rem; }
 .prose-html img, .prose-html iframe { max-width: 100%; }
 .prose-html .project-video-wrap { position: relative; padding-top: 56.25%; }
-.prose-html .project-video-wrap iframe {
+.prose-html .project-video-wrap iframe,
+.prose-html .project-video-wrap video {
   position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+  background: #111;
 }
 .prose-html .tech-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.25rem; }
 .prose-html .tech-badge,
@@ -356,6 +373,36 @@ a.island-tab-on, a.island-tab-on:hover { color: var(--color-accent); }
   margin-bottom: 1rem;
 }
 .prose-html figure { margin: 0 0 1.25rem; }
+.prose-html figure.project-detail-shot { max-width: 26rem; }
+.prose-html figure.project-detail-shot img { display: block; width: 100%; height: auto; }
+.prose-html figure.project-detail-tall { max-width: 22rem; }
+.prose-html figure.project-detail-tall img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 75vh;
+}
+.prose-html figure.project-detail-wide { max-width: 40rem; }
+.prose-html figure.project-detail-wide img { display: block; width: 100%; height: auto; }
+.prose-html .poster-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0 0 1.25rem;
+}
+.prose-html .poster-grid figure { margin: 0; }
+.prose-html .poster-grid img { display: block; width: 100%; height: auto; }
+.prose-html .poster-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin: 0 0 1.25rem;
+}
+.prose-html .poster-row figure { margin: 0; flex: 1 1 11rem; min-width: 0; }
+.prose-html .poster-row img { display: block; width: 100%; height: auto; }
+@media (max-width: 640px) {
+  .prose-html .poster-grid { grid-template-columns: 1fr; }
+}
 .blog-prose figure { max-width: 36rem; margin-left: auto; margin-right: auto; }
 .blog-prose figure.b-shot img {
   display: block;

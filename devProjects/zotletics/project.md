@@ -8,6 +8,7 @@ header: COVER.svg
 cover_size: contain
 date: "11/2025"
 ongoing: true
+wip: true
 ---
 
 <p class="project-detail-lead"><strong>Zotletics</strong> is a fitness planning web app I am actively building for UCI students. The goal is to generate personalized workout plans that only use equipment available in Mesa Court and Middle Earth housing gyms, so every exercise is actually doable on campus for free. Authentication is working. The rest is in progress, with a target launch in 2027.</p>

@@ -38,6 +38,13 @@ featured: true
 <h2 class="project-detail-h2">What it does</h2>
 <p>Every time you send a prompt to ChatGPT, Claude, Gemini, or Perplexity, PocketZot intercepts it and runs it through a fine-tuned LLM classifier. The classifier scores the prompt on a scale from -3 to +2 based on how much higher-order reasoning you are actually contributing versus offloading entirely to the AI. A score near +2 means you are asking for clarification or validation while keeping the thinking on your end. A score of -3 means the AI is doing all the work for you. That score feeds directly into your anteater's health bar, creating a real-time feedback loop that nudges you toward better habits.</p>
 
+<figure class="project-detail-fig tall-img" style="max-width:720px;">
+  <div class="project-video-wrap">
+    <video src="/devProjects/pocket-zot/official-demo.mp4" controls playsinline preload="metadata" title="PocketZot grading prompts on ChatGPT"></video>
+  </div>
+  <figcaption>Official demo on ChatGPT — a “make me lots of money” prompt scores −3, a tutor prompt for print() heals Johnny, then the hat shop.</figcaption>
+</figure>
+
 <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:1.25rem 0;">
   <figure class="project-detail-fig" style="max-width:260px;flex:1 1 200px;margin:0;">
     <img src="/devProjects/pocket-zot/main-popup.png" alt="PocketZot main popup showing Bobby the anteater, health bar, and ants" loading="lazy" decoding="async">

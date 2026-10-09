@@ -7,11 +7,15 @@ export type Project = {
   galleryId: string
   coverUrl: string
   coverSize: string
+  coverBg: string
+  cardFit: string
+  cardScale: number
   headerUrl: string
   dateLabel: string
   dateSort: number
   ongoing: boolean
   featured: boolean
+  wip: boolean
   bodyHtml: string
 }
 

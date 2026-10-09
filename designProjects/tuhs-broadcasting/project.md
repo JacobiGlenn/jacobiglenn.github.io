@@ -2,8 +2,11 @@
 title: TuHS Broadcasting Logo
 description: "Tualatin High School broadcast crew logo. Worn on the front of the shirts for the team that recorded and livestreamed the games."
 kind: design
-cover: cover.jpg
+cover: logo-white.jpg
 header: banner.jpg
+card_fit: contain
+card_scale: 0.75
+cover_bg: "#fff"
 date: "11/2024"
 ---
 

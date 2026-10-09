@@ -59,8 +59,9 @@ export function HomePage() {
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-muted)]">Uplink</p>
         <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl uppercase">Contact</h2>
         <p className="mt-3 max-w-2xl text-sm text-[var(--color-muted)]">
-          Irvine, California (Pacific time). Email is the most reliable.{`\n`} I am available to take
-          calls between 10am - 2pm on Tuesdays and Thursdays.
+          Irvine, California (Pacific time). Email is the most reliable.
+          <br />
+          I am available to take calls between 10am - 2pm on Tuesdays and Thursdays.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Button asChild>
