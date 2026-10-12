@@ -2,6 +2,8 @@
 title: Commit the Change x CLCHC
 description: "Quota tracking for Celebrating Life Community Health Center. The provider card I designed with Commit the Change at UCI."
 kind: design
+tags:
+  - UI/UX
 cover: wip.svg
 header: sketch-board.jpg
 date: "10/2025"

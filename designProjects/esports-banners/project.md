@@ -2,6 +2,8 @@
 title: Esports Banners
 description: "Tualatin High School esports banners. A colorful one hung for recruitment, then a red-and-white spring banner for the school TVs."
 kind: design
+tags:
+  - Graphic Design
 cover: banner.jpg
 header: banner.jpg
 cover_size: contain

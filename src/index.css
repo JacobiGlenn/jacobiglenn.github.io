@@ -223,7 +223,8 @@ a.island-tab-on, a.island-tab-on:hover { color: var(--color-accent); }
   border-color: var(--color-accent);
   transform: translateX(6px);
 }
-.exp-card:hover .exp-tag {
+.exp-card:hover .exp-tag,
+.site-card:hover .exp-tag {
   border-color: var(--color-accent);
   color: var(--color-accent);
 }

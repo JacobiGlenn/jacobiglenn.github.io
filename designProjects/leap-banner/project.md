@@ -2,6 +2,8 @@
 title: Red Ribbon Week Event Banner
 description: "A coloring banner for LEAP Youth Alliance's Red Ribbon Week. Youth colored it at a city-wide event, then it was hung."
 kind: design
+tags:
+  - Graphic Design
 cover: design.jpg
 header: design.jpg
 cover_size: contain

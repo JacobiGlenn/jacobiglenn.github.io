@@ -16,6 +16,7 @@ export type Project = {
   ongoing: boolean
   featured: boolean
   wip: boolean
+  tags: string[]
   bodyHtml: string
 }
 
@@ -94,4 +95,9 @@ export type Honor = {
   desc: string
   image?: string
   images?: string[]
+  href?: string
+  hrefLabel?: string
+  imageFit?: 'contain' | 'cover'
+  imageBg?: string
+  carousel?: boolean
 }

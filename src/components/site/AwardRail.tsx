@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Lightbox } from '@/components/site/Lightbox'
 import { ButtonCarousel } from './ButtonCarousel'
@@ -11,6 +12,57 @@ function honorImages(h: Honor) {
   return []
 }
 
+function HonorLink({
+  href,
+  label,
+  onClick,
+}: {
+  href: string
+  label: string
+  onClick?: () => void
+}) {
+  const className = 'mt-3 inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent)]'
+  if (href.startsWith('http')) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className} onClick={onClick}>
+        {label}
+      </a>
+    )
+  }
+  return (
+    <Link to={href} className={className} onClick={onClick}>
+      {label}
+    </Link>
+  )
+}
+
+function HonorCarousel({
+  honor,
+  imgs,
+  onOpen,
+}: {
+  honor: Honor
+  imgs: string[]
+  onOpen: (index: number) => void
+}) {
+  return (
+    <div className="mb-3">
+      <button
+        type="button"
+        className="block w-full cursor-pointer"
+        onClick={() => onOpen(0)}
+        aria-label={`Open ${honor.title}`}
+      >
+        <MediaImage
+          src={assetPath(imgs[0])}
+          alt={honor.title}
+          className="h-28 w-full border border-[var(--color-line)] object-cover object-center"
+        />
+      </button>
+    </div>
+  )
+}
+
 export function AwardRail({ honors }: { honors: Honor[] }) {
   const [open, setOpen] = useState<{ honor: Honor; index: number } | null>(null)
   const slides = open ? honorImages(open.honor) : []
@@ -21,7 +73,7 @@ export function AwardRail({ honors }: { honors: Honor[] }) {
         {honors.map((h) => {
           const imgs = honorImages(h)
           return (
-            <article key={h.title} className="exp-card hud-frame w-[min(280px,80vw)] shrink-0 p-4">
+            <article key={h.title} className="exp-card hud-frame w-[min(280px,80vw)] shrink-0 self-start p-4">
               {imgs.length === 1 ? (
                 <button
                   type="button"
@@ -32,11 +84,17 @@ export function AwardRail({ honors }: { honors: Honor[] }) {
                   <MediaImage
                     src={assetPath(imgs[0])}
                     alt={h.title}
-                    className="h-36 w-full border border-[var(--color-line)] bg-white object-contain"
+                    className={
+                      h.imageFit === 'contain'
+                        ? 'h-36 w-full border border-[var(--color-line)] object-contain'
+                        : 'h-28 w-full border border-[var(--color-line)] object-cover object-center'
+                    }
+                    style={h.imageFit === 'contain' ? { background: h.imageBg || '#fff' } : undefined}
                   />
                 </button>
               ) : null}
-              {imgs.length > 1 ? (
+              {h.carousel || imgs.length > 2 ? <HonorCarousel honor={h} imgs={imgs} onOpen={(i) => setOpen({ honor: h, index: i })} /> : null}
+              {!h.carousel && imgs.length === 2 ? (
                 <div className="mb-3 grid grid-cols-2 gap-1">
                   {imgs.map((src, i) => (
                     <button
@@ -59,6 +117,7 @@ export function AwardRail({ honors }: { honors: Honor[] }) {
               <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl uppercase">{h.title}</h3>
               <p className="mt-1 font-mono text-[11px] text-[var(--color-muted)]">{h.issuer}</p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">{h.desc}</p>
+              {h.href ? <HonorLink href={h.href} label={h.hrefLabel || 'Case study'} /> : null}
             </article>
           )
         })}
@@ -77,6 +136,11 @@ export function AwardRail({ honors }: { honors: Honor[] }) {
               Next
             </Button>
           </div>
+        ) : null}
+        {open?.honor.href ? (
+          <p className="mt-4 text-center">
+            <HonorLink href={open.honor.href} label={open.honor.hrefLabel || 'Case study'} onClick={() => setOpen(null)} />
+          </p>
         ) : null}
       </Lightbox>
     </>

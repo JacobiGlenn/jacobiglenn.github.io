@@ -38,6 +38,18 @@ export function SiteCard({ project }: { project: Project }) {
           </p>
         ) : null}
         <p className="text-sm leading-relaxed text-[var(--color-muted)]">{project.description}</p>
+        {project.tags?.length ? (
+          <div className="mt-3 flex flex-wrap gap-1">
+            {project.tags.map((t) => (
+              <span
+                key={t}
+                className="exp-tag border border-[var(--color-line)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--color-ink)]"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        ) : null}
       </div>
     </>
   )

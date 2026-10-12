@@ -2,6 +2,9 @@
 title: Esports Branding
 description: "Tualatin High School esports identity. The wolf logo, the team posters, a red-and-black feed, and cafe drinks with exclusive stickers."
 kind: design
+tags:
+  - Graphic Design
+  - Social Media
 cover: instagram.jpg
 header: eyes-banner.jpg
 cover_size: contain

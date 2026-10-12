@@ -3,6 +3,8 @@ title: PocketZot
 description: "IrvineHacks 2026 winner: a Chrome extension with a Tamagotchi-style anteater mascot that grades your AI prompts in real time."
 github: https://github.com/antsuh1028/PocketZot
 kind: dev
+tags:
+  - JavaScript
 cover: CARD.png
 header: COVER.png
 cover_size: cover

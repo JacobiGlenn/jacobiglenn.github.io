@@ -2,6 +2,8 @@
 title: TuHS Esports Team Posters
 description: "Two phases of Tualatin High School esports posters. Recruitment pieces before there was a logo, then a two-color red set built to be seen from across the hall."
 kind: design
+tags:
+  - Graphic Design
 draft: true
 cover: red-valorant.jpg
 header: red-valorant.jpg

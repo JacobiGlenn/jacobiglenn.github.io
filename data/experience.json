@@ -286,12 +286,24 @@
     {
       "title": "Best Healthcare App",
       "issuer": "ICSSC Webjam 2025 · Nov 2025",
-      "desc": "Built Zotletics (then Anteater Gym Service) — a fitness platform that generates workout plans tailored to UCI campus gyms based on available equipment and student data."
+      "desc": "Figma wireframes, the workout dictionary, hotlinks, and the BMI function for Anteater Gym Service.",
+      "href": "https://devpost.com/software/anteater-gym-service",
+      "hrefLabel": "Devpost",
+      "imageFit": "contain",
+      "imageBg": "#1a1a1a",
+      "image": "assets/experience/honors/anteater-workout.png"
     },
     {
       "title": "Best Presentation",
       "issuer": "codeORcreate 2024 · Sep 2024",
-      "desc": "Oregon's regional programming challenge. Built an accessibility-focused public transit app with a routing algorithm that adapts to the user's disability — judged by a panel of 4 and awarded Best Presentation."
+      "desc": "Oregon's regional programming challenge. Built an accessibility-focused public transit app with a routing algorithm that adapts to the user's disability.",
+      "href": "/portfolio/design/codeorcreate",
+      "hrefLabel": "Tio case study",
+      "carousel": true,
+      "images": [
+        "designProjects/codeorcreate/presenting.jpg",
+        "designProjects/codeorcreate/card.png"
+      ]
     }
   ]
 }

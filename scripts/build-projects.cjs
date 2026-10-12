@@ -6,6 +6,7 @@
  * Optional frontmatter: featured: true — homepage shows up to 3 dev + 1 design featured.
  * Optional: draft: true — skip publishing (folder stays in repo).
  * Optional: wip: true — card shows a work-in-progress tag and will not open. Delete the line to publish.
+ * Optional: tags — list of portfolio filter labels, shown on the card.
  */
 const fs = require('fs');
 const path = require('path');
@@ -103,6 +104,7 @@ function loadProject(folderName, categoryKey, slug) {
     ongoing: !!data.ongoing,
     featured: !!data.featured,
     wip: !!data.wip,
+    tags: Array.isArray(data.tags) ? data.tags.map((t) => String(t).trim()).filter(Boolean) : [],
     bodyHtml: content.trim(),
   };
 }
