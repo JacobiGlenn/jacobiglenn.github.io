@@ -1,16 +1,31 @@
 ---
 title: Commit the Change x CLCHC
-description: "Quota tracking for Celebrating Life Community Health Center. The provider card I designed with Commit the Change at UCI."
+description: "Quota Tracking and Audit Log Menu's for Celebrating Life Community Health Center Staff. Worked as a designer with Commit the Change at UCI."
 kind: design
 tags:
   - UI/UX
 cover: wip.svg
 header: sketch-board.jpg
 date: "10/2025"
-wip: true
+wip: false
 ---
 
-<p class="project-detail-lead">I was a UI/UX designer with <a href="https://ctc-uci.com" target="_blank" rel="noopener noreferrer">Commit the Change</a> at UC Irvine, a student club that builds software for nonprofits. This project is for Celebrating Life Community Health Center in Orange County. Staff were tracking provider appointment quotas by hand. I owned the popup for adding a provider's quota for the day.</p>
+<p class="project-detail-lead">Hello everyone! This is by far the biggest design project I have worked on and I have a loooooottt to go over, so I'd get a snack ;p <br></p>
+
+<h2 class="ctc-history-h2">Background</h2>
+
+<p> Before we get started on what I worked on, let me first introduce you to some things...
+
+<br><br>
+CTC, or Commit the Change, is a club at UCI that partners with non-profit orginizations and builds them software based on their specific needs. 
+
+<br><br>
+Celebrating Life and Community Health Center is a non-profit organization committed to providing high-quality and accessible health care to underserved populations across Orange County through an expanding network of healthcare practitioners, regardless of patients’ ability to pay. 
+
+<br><br>
+The call center at Celebrating Life Community Health Center (CLC) currently relies on a manual and fragmented process to track and manage daily provider appointment goals. This disjointed workflow uses static lists, team messages, and separate documents. The team often faces challenges such as overscheduling, inconsistent real-time communication, and difficulty maintaining accurate records across multiple clinic locations. 
+
+I was a UI/UX designer with <a href="https://ctc-uci.com" target="_blank" rel="noopener noreferrer">Commit the Change</a> at UC Irvine, a student club that builds software for nonprofits. This project is for Celebrating Life Community Health Center in Orange County. Staff were tracking provider appointment quotas by hand. I owned the popup for adding a provider's quota for the day.</p>
 
 <figure class="project-detail-fig" style="max-width:720px;">
   <div class="project-video-wrap">
