@@ -2,6 +2,8 @@
 title: Tigard Esports
 description: "A recruitment poster for Tigard High School esports. Same framed poster style as TuHS, with their tiger and green."
 kind: design
+tags:
+  - Graphic Design
 draft: true
 cover: poster.jpg
 header: poster.jpg

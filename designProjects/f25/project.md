@@ -2,6 +2,8 @@
 title: F25
 description: "Fashion 2025. A Pinterest-style app for rating outfits, shopping brands, and posting what you wore. Senior capstone, and my first time in Figma."
 kind: design
+tags:
+  - UI/UX
 cover: mark.jpg
 header: pattern.jpg
 card_fit: contain

@@ -2,6 +2,8 @@
 title: Esports Logo
 description: "Tualatin High School esports logo. A simpler wolf mark for jerseys, after the school changed its mascot."
 kind: design
+tags:
+  - Graphic Design
 draft: true
 cover: banner.jpg
 header: banner.jpg

@@ -2,6 +2,8 @@
 title: Pack Leader
 description: "Tualatin High School pack leader logo. A paw mark printed on the back of the mentor shirts."
 kind: design
+tags:
+  - Graphic Design
 draft: true
 cover: final.jpg
 header: banner.jpg

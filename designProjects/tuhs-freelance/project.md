@@ -2,6 +2,8 @@
 title: Tualatin High School Freelance
 description: "School work outside the esports identity. Pack leader shirts, the Physics Extravaganza brochure, a LEAP Club kickoff poster, and summer tennis lessons."
 kind: design
+tags:
+  - Graphic Design
 cover: designProjects/pack-leader/final.jpg
 header: brochure-retirement.jpg
 card_fit: contain

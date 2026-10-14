@@ -3,6 +3,9 @@ title: Zotletics
 description: "UCI fitness platform that generates personalized workout plans built around the gym equipment in Mesa Court and Middle Earth housing."
 github: https://github.com/JacobiGlenn/Zotletics
 kind: dev
+tags:
+  - TypeScript
+  - Full Stack
 cover: CARD.svg
 header: COVER.svg
 cover_size: contain

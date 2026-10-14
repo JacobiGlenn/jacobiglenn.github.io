@@ -33,12 +33,24 @@ export function ProjectDetailPage() {
           <MediaImage
             src={assetPath(hero)}
             alt={project.title}
-            className="h-full w-full bg-white"
-            style={{ objectFit: project.coverSize === 'contain' ? 'contain' : 'cover' }}
+            className="h-full w-full"
+            style={{
+              objectFit: project.coverSize === 'contain' ? 'contain' : 'cover',
+              background: project.coverBg || '#fff',
+            }}
           />
         </div>
       ) : null}
       <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl uppercase">{project.title}</h1>
+      {project.tags?.length ? (
+        <div className="mt-3 flex flex-wrap gap-1">
+          {project.tags.map((t) => (
+            <span key={t} className="border border-[var(--color-line)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em]">
+              {t}
+            </span>
+          ))}
+        </div>
+      ) : null}
       {project.github ? (
         <a href={project.github} className="mt-2 inline-block font-mono text-xs uppercase tracking-[0.16em]" target="_blank" rel="noopener noreferrer">
           GitHub ↗

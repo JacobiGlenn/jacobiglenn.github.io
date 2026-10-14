@@ -3,6 +3,8 @@ title: Python Name Font Cycler
 description: "Python script that cycles your name through 30+ fonts with a scramble effect and exports a transparent GIF for GitHub READMEs."
 github: https://github.com/JacobiGlenn/Name_FontCycler
 kind: dev
+tags:
+  - Python
 cover: CARD.png
 header: COVER.svg
 date: "02/2026"
