@@ -13,7 +13,7 @@ cover_bg: "#0C0F14"
 date: "01/2025 - 06/2025"
 ---
 
-<p class="project-detail-lead"><a href="https://www.instagram.com/tualatinboystennis/" target="_blank" rel="noopener noreferrer">@tualatinboystennis</a>.</p>is the Instagram I ran for Tualatin High School boys tennis in spring 2025, January-ish through June. I worked closely with the two head coaches to overhaul how they wanted their identity online to look and what the future branding of the sport would look like. 
+<p class="project-detail-lead"><a href="https://www.instagram.com/tualatinboystennis/" target="_blank" rel="noopener noreferrer">@tualatinboystennis</a> is the Instagram I ran for Tualatin High School boys tennis in spring 2025, January-ish through June. I worked closely with the two head coaches to overhaul how they wanted their identity online to look and what the future branding of the sport would look like. </p>
 
 <h2 class="project-detail-h2">Before</h2>
 <p>The feed before me was preset Canva posts where none of the posts had the same size or style. A match result, an announcement, and a senior night all looked like different accounts. It was hard to tell what was an upcoming game and what had already happened. I wanted to make this distinction clear and make sure to highlight the players instead of using generic graphics.</p>
