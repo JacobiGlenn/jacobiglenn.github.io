@@ -21,8 +21,8 @@
       ],
       "category": "tech",
       "logo": {
-        "bg": "#0b3d2e",
-        "color": "#c5f240",
+        "bg": "#0a2342",
+        "color": "#d6e4f4",
         "letter": "MT",
         "size": "0.7rem"
       },
@@ -210,7 +210,6 @@
         "Figma",
         "Prototyping",
         "UX Research",
-        "Agile Sprints",
         "Slack"
       ],
       "category": "design",
@@ -300,8 +299,8 @@
       "logo": {
         "bg": "#b22222",
         "color": "#d0d0d0",
-        "letter": "THS",
-        "size": "0.62rem"
+        "letter": "TuHS",
+        "size": "0.74rem"
       },
       "galleryId": "tuhs",
       "photos": [

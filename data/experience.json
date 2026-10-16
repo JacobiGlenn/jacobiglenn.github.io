@@ -16,7 +16,7 @@
       ],
       "tags": ["IT Support", "Higher Ed", "Help Desk"],
       "category": "tech",
-      "logo": { "bg": "#0b3d2e", "color": "#c5f240", "letter": "MT", "size": "0.7rem" },
+      "logo": { "bg": "#0a2342", "color": "#d6e4f4", "letter": "MT", "size": "0.7rem" },
       "photos": []
     },
     {
@@ -152,7 +152,7 @@
         "Built an audit-log interface giving staff full traceability into quota changes",
         "Applied Chakra UI and client brand guidelines so designs stayed developer-ready"
       ],
-      "tags": ["Figma", "Prototyping", "UX Research", "Agile Sprints", "Slack"],
+      "tags": ["Figma", "Prototyping", "UX Research", "Slack"],
       "category": "design",
       "logo": { "bg": "#6b21a8", "color": "#fff", "letter": "CTC", "size": "0.6rem" },
       "galleryId": "ctc",
@@ -215,7 +215,7 @@
       ],
       "tags": ["Adobe Premiere Pro", "DaVinci Resolve", "Live Broadcast", "Branding", "Leadership"],
       "category": "broadcast",
-      "logo": { "bg": "#b22222", "color": "#d0d0d0", "letter": "THS", "size": "0.62rem" },
+      "logo": { "bg": "#b22222", "color": "#d0d0d0", "letter": "TuHS", "size": "0.74rem" },
       "galleryId": "tuhs",
       "photos": [
         "assets/experience/tuhs/team.png",
