@@ -1,6 +1,7 @@
 import { SiteCard } from '@/components/site/SiteCard'
 import { MiniGridCard } from '@/components/site/MiniGridCard'
 import { FontCycleName } from '@/components/site/FontCycleName'
+import { requestCrawl } from '@/components/site/DotCrawl'
 import { featuredProjects } from '@/lib/content'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
@@ -13,23 +14,29 @@ export function HomePage() {
       <section id="pitch" className="hero-plate scroll-mt-28">
         <div className="hero-meta">
           <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">ctOS // identity</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-steel)]">Irvine · Pacific</span>
+          <button
+            type="button"
+            onClick={requestCrawl}
+            className="cursor-pointer border-0 bg-transparent p-0 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-steel)] hover:text-[var(--color-accent)]"
+          >
+            Irvine · Pacific
+          </button>
         </div>
         <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
           UC Irine | US Army | Code Ninjas | Merage Tech
         </p>
         <FontCycleName text="Jacobi Glenn" />
         <p className="mt-6 max-w-8xl text-lg leading-relaxed text-[var(--color-muted)]">
-          I'm an aspiring full-stack developer studying Software Engineering and Computer Science at UC Irvine,
-          with a Cybersecurity degree on the side at American Military University. When I'm not coding,
+          I'm an aspiring full-stack developer studying Software Engineering and Computer Science at UC Irvine.
+          When I'm not coding,
           I'm in the Army National Guard fixing aircraft hydraulics and training in UCI's ROTC program.
           At UCI I'm in Commit the Change, a club that builds software for local nonprofits, and AI @ UCI, a club that explores the latest in AI and machine learning.
           I love learning and fill my free time up with reading, writing, language learning, and going to workshops. My hobbies
           are a little more outdoorsy, like hiking, camping, and night runs, but I also enjoy gaming and music production!
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
-          <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">SWE // CS // Cyber</span>
-          <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">UCI // AMU</span>
+          <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">SWE // CS</span>
+          <span className="border border-[var(--color-line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em]">ARNG // ROTC</span>
         </div>
       </section>
 

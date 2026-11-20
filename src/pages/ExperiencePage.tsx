@@ -190,9 +190,9 @@ export function ExperiencePage() {
       </div>
       <div id="education" className="scroll-mt-28">
         <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-muted)]">Education</p>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2">
           {experience.education.map((e) => (
-            <article key={e.school} className="exp-card hud-frame flex items-start gap-3 p-4">
+            <article key={e.school} className="hud-frame flex items-start gap-3 p-4">
               <div className="min-w-0 flex-1">
                 <p className="font-[family-name:var(--font-display)] text-2xl uppercase">{e.school}</p>
                 <p className="mt-1 text-sm">{e.degree}</p>

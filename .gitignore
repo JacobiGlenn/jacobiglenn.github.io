@@ -2,6 +2,12 @@ node_modules/
 dist/
 *.tsbuildinfo
 
+# Personal context brief for other AI tools. Stays local.
+JACOBI_CONTEXT.txt
+
+# Ponytail Cursor rule. Local agent behavior, not part of the site.
+.cursor/
+
 # API keys — never commit real keys
 # The workflow injects them from GitHub secrets at deploy time
 # For local dev, create this file manually from data/api-config.js.example

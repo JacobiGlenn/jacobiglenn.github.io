@@ -21,7 +21,8 @@ function HonorLink({
   label: string
   onClick?: () => void
 }) {
-  const className = 'mt-3 inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent)]'
+  const className =
+    'pointer-events-auto relative z-[3] mt-3 inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent)]'
   if (href.startsWith('http')) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={className} onClick={onClick}>
@@ -49,7 +50,7 @@ function HonorCarousel({
     <div className="mb-3">
       <button
         type="button"
-        className="block w-full cursor-pointer"
+        className="pointer-events-auto relative z-[3] block w-full cursor-pointer"
         onClick={() => onOpen(0)}
         aria-label={`Open ${honor.title}`}
       >
@@ -73,11 +74,20 @@ export function AwardRail({ honors }: { honors: Honor[] }) {
         {honors.map((h) => {
           const imgs = honorImages(h)
           return (
-            <article key={h.title} className="exp-card hud-frame w-[min(280px,80vw)] shrink-0 self-start p-4">
+            <article key={h.title} className="exp-card hud-frame relative w-[min(280px,80vw)] shrink-0 self-start p-4">
+              {imgs.length ? (
+                <button
+                  type="button"
+                  className="absolute inset-0 z-[1] cursor-pointer"
+                  aria-label={`Open ${h.title}`}
+                  onClick={() => setOpen({ honor: h, index: 0 })}
+                />
+              ) : null}
+              <div className="pointer-events-none relative z-[2]">
               {imgs.length === 1 ? (
                 <button
                   type="button"
-                  className="mb-3 block w-full cursor-pointer"
+                  className="pointer-events-auto relative z-[3] mb-3 block w-full cursor-pointer"
                   onClick={() => setOpen({ honor: h, index: 0 })}
                   aria-label={`Open ${h.title}`}
                 >
@@ -100,7 +110,7 @@ export function AwardRail({ honors }: { honors: Honor[] }) {
                     <button
                       key={src}
                       type="button"
-                      className="cursor-pointer"
+                      className="pointer-events-auto relative z-[3] cursor-pointer"
                       onClick={() => setOpen({ honor: h, index: i })}
                       aria-label={`Open ${h.title} photo ${i + 1}`}
                     >
@@ -118,6 +128,7 @@ export function AwardRail({ honors }: { honors: Honor[] }) {
               <p className="mt-1 font-mono text-[11px] text-[var(--color-muted)]">{h.issuer}</p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">{h.desc}</p>
               {h.href ? <HonorLink href={h.href} label={h.hrefLabel || 'Case study'} /> : null}
+              </div>
             </article>
           )
         })}
