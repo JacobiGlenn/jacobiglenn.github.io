@@ -1,4 +1,5 @@
-import { Atmosphere, SideChrome } from '@/components/site/Atmosphere'
+import { Atmosphere } from '@/components/site/Atmosphere'
+import { DotCrawl } from '@/components/site/DotCrawl'
 import { HudNav } from '@/components/site/HudNav'
 import { ScrollMemory } from '@/components/site/ScrollMemory'
 import { Outlet } from 'react-router-dom'
@@ -9,9 +10,9 @@ export function Layout() {
       <ScrollMemory />
       <a className="skip-link" href="#content">Skip to content</a>
       <Atmosphere />
+      <DotCrawl />
       <HudNav />
-      <SideChrome />
-      <main id="content" className="relative z-[1] mx-auto w-full max-w-[1280px] px-4 pb-16 pt-2 md:px-8 xl:px-24">
+      <main id="content" className="relative z-[1] mx-auto w-full max-w-[1280px] px-4 pb-16 pt-2 md:px-8">
         <Outlet />
       </main>
     </div>

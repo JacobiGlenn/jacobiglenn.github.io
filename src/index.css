@@ -744,65 +744,6 @@ a.island-tab-on, a.island-tab-on:hover { color: var(--color-accent); }
   .boot-head-col { display: none; }
   .boot-head-body { grid-template-columns: 1fr; padding: 0.3rem 1rem 0.6rem; }
 }
-.side-label { animation: side-channel 0.7s ease; }
-@keyframes side-channel {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-.side-extra {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transform: translateY(8px);
-  pointer-events: none;
-  transition: opacity 0.75s ease, transform 0.75s ease, max-height 0.75s ease;
-}
-.side-extra.is-on {
-  opacity: 0.75;
-  max-height: 64px;
-  transform: none;
-}
-.side-ping.side-extra.is-on { opacity: 1; max-height: 8px; }
-.side-rail.side-extra { flex: 0 0 auto; min-height: 0; width: 1px; }
-.side-rail.side-extra.is-on { flex: 1 1 auto; min-height: 24px; }
-.side-ping {
-  width: 6px;
-  height: 6px;
-  border: 1px solid var(--color-accent);
-  animation: side-ping 1.8s ease-out infinite;
-}
-.side-hex {
-  font-size: 8px;
-  letter-spacing: 0.16em;
-  color: var(--color-accent);
-  opacity: 0.75;
-}
-.side-scan {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, transparent, var(--color-accent), transparent);
-  animation: side-scan 2.4s linear infinite;
-}
-.side-rail {
-  width: 1px;
-  flex: 1;
-  min-height: 24px;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--color-accent) 0 2px,
-    transparent 2px 8px
-  );
-  opacity: 0.35;
-}
-@keyframes side-ping {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(2.4); opacity: 0; }
-}
-@keyframes side-scan {
-  from { transform: translateY(-24px); opacity: 0; }
-  30% { opacity: 1; }
-  to { transform: translateY(24px); opacity: 0; }
-}
 .boot-hold {
   position: fixed;
   inset: 0;

@@ -1,6 +1,7 @@
 import { SiteCard } from '@/components/site/SiteCard'
 import { MiniGridCard } from '@/components/site/MiniGridCard'
 import { FontCycleName } from '@/components/site/FontCycleName'
+import { requestCrawl } from '@/components/site/DotCrawl'
 import { featuredProjects } from '@/lib/content'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
@@ -13,7 +14,13 @@ export function HomePage() {
       <section id="pitch" className="hero-plate scroll-mt-28">
         <div className="hero-meta">
           <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-accent)]">ctOS // identity</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-steel)]">Irvine · Pacific</span>
+          <button
+            type="button"
+            onClick={requestCrawl}
+            className="cursor-pointer border-0 bg-transparent p-0 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-steel)] hover:text-[var(--color-accent)]"
+          >
+            Irvine · Pacific
+          </button>
         </div>
         <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
           UC Irine | US Army | Code Ninjas | Merage Tech
